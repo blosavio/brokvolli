@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+/* Copyright © 2025 Brad Losavio. */
+/* licensed under the MIT License https://opensource.org/license/MIT */
+/* UUIDv4 c7f963c4-160b-4e02-9207-2c3c657d4553 */
+
+dt {
+    font-weight: bold;
+}
+
+#page-footer {
+    font-size: 100%;
+    opacity: 70%
+}
+
+#uuid {
+    display: none;
+}
+
+.side-by-side-container {
+    display: flex;
+}
+
+.side-by-side {
+    width: 50%;
+    margin-right: 2rem;
+}
+
+.side-by-side code {
+    overflow-x: visible;
+    margin: 0;
+}
+
+.small-caps {
+    font-variant: small-caps;
+}
+
+.centered {
+    text-align: center;
+}
+
+.de-highlight {
+    color: silver;
+    font-weight: lighter;
+}
+
+.highlight {
+    color: black;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.no-display {
+    display: none;
+}
+
+.wide-title {
+    width: 100%;
+}
+
+pre {
+    background-color: whitesmoke;
+}
+
+code {
+    background-color: whitesmoke;
+}
+
+body {
+    width: 50em;
+    max-width: max-content;
+    margin: auto;
+    font-size: 12pt;
+}
+
+.wide-body {
+    width: 80rem;
+}
+
+caption {
+    caption-side: bottom;
+}
+
+td {
+    padding: 0.5rem 0.75rem;
+}
+
+.collapsable {
+    display: none;
+}
+
+hr {
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none;
+    border-width: 1.5px;
+    color: whitesmoke;
+}
+
