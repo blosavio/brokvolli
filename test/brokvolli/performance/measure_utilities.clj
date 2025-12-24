@@ -129,11 +129,13 @@
   of lengths associated to Criterium benchmark results."
   {:UUIDv4 #uuid "1dad5fc0-9590-4e4d-afb7-e076043df8b5"}
   [f max-len thoroughness]
-  (reduce #(assoc %1 %2
-                  (-> (run-one-benchmark f %2 thoroughness)
-                      (assoc :metadata {:date (date)})
-                      (assoc :results ::results-elided)
-                      (dissoc-identifying-metadata)))
+  (reduce #(do
+             (println "function " f " at " %2 " with " thoroughness)
+             (assoc %1 %2
+                    (-> (run-one-benchmark f %2 thoroughness)
+                        (assoc :metadata {:date (date)})
+                        (assoc :results ::results-elided)
+                        (dissoc-identifying-metadata))))
           {}
           (pow-10 max-len)))
 

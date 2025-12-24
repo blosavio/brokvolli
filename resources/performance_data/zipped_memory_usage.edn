@@ -1,7 +1,7 @@
 {"brokvolli.performance.measure_zip/long_array_zippered"
  {1 304, 10 840, 100 6360, 1000 82408, 10000 851328, 100000 8539264},
  "brokvolli.performance.measure_zip/map_indexed_zippered"
- {1 232, 10 232, 100 232, 1000 232, 10000 232, 100000 232},
+ {1 200, 10 736, 100 6448, 1000 84288, 10000 869512, 100000 8721960},
  "brokvolli.performance.measure_zip/long_range_zippered"
  {1 304, 10 840, 100 6360, 1000 82408, 10000 851328, 100000 8539264},
  "brokvolli.performance.measure_zip/mapv_zippered"
@@ -12,7 +12,12 @@
   10000 1171512,
   100000 11739448},
  "brokvolli.performance.measure_zip/pmap_zippered"
- {1 2296968, 10 2297776, 100 1624, 1000 1624, 10000 1624, 100000 1624},
+ {1 152,
+  10 1232,
+  100 12032,
+  1000 140960,
+  10000 1436960,
+  100000 14396960},
  "brokvolli.performance.measure_zip/transduce_zippered"
  {1 304, 10 840, 100 6360, 1000 82408, 10000 851328, 100000 8539264},
  "brokvolli.performance.measure_zip/transient_first_next_zippered"

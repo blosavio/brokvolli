@@ -37,7 +37,7 @@
   "Similar to `mapv-zip`, but uses `pmap`."
   {:UUIDv4 #uuid "3a1f73ec-6a54-4c5b-a914-4d23026d019e"}
   [v]
-  (pmap #(map-entry %1 %2) (range) v))
+  (doall (pmap #(map-entry %1 %2) (range) v)))
 
 
 (defn long-range-zip
