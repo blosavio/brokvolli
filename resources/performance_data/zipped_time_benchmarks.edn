@@ -1,0 +1,6082 @@
+{"brokvolli.performance.measure_zip/long_array_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1004962182
+    1002940076
+    1001171902
+    1000906970
+    1002711932
+    1001929909
+    1003208075
+    1007671951
+    1000468513
+    999256481
+    1000502250
+    1005112483
+    1001226359
+    1005310514
+    1003577670
+    1000710587
+    1000993068
+    1000627008
+    1001045704
+    1000154255
+    1006137014
+    1001017075
+    1001196161
+    1002357753
+    1002030328
+    1002282714
+    1001460700
+    1001216948
+    1000787775
+    1006046396
+    1001267623
+    1001222518
+    1003227967
+    1004540907
+    1003667513
+    1006914493
+    1002611259
+    1002449239
+    1000755062
+    1003321593
+    1001422972
+    1003065092
+    1003507536
+    1000648809
+    1001492365
+    1000520201
+    1003973239
+    1004060456
+    1007377850
+    1020013747
+    1004113042
+    1016769577
+    1004607057
+    1009637305
+    1007505348
+    1014077292
+    1009759941
+    1011400036
+    1017116034
+    1018670558),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [5.133052295080906E-7 (5.127570963109777E-7 5.140953451948602E-7)],
+   :final-gc-time 59855141,
+   :execution-count 1956634,
+   :variance
+   [5.99073725529834E-18 (3.0949489350587E-18 1.0554714682073877E-17)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 4, :high-severe 2},
+   :warmup-time 10262689654,
+   :lower-q
+   [5.111606232949034E-7 (5.107017873552233E-7 5.113428350549976E-7)],
+   :warmup-executions 20065221,
+   :sample-count 60,
+   :upper-q
+   [5.201624790456468E-7 (5.172283371724094E-7 5.213104479427425E-7)],
+   :total-time 60.258737384,
+   :sample-variance [5.9131861784230906E-18 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [5.132857191142204E-7 (5.059906059824171E-7 5.205808322460235E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1005546639
+    1000244189
+    997045166
+    999313907
+    997139397
+    998940712
+    998190066
+    998349306
+    998632700
+    1001967364
+    997572549
+    998750081
+    1003866078
+    1000256117
+    1000193265
+    997729273
+    998211565
+    998030162
+    997348881
+    999272268
+    998073375
+    997854840
+    998009058
+    998576562
+    998335405
+    999984332
+    1000227389
+    999940645
+    998747433
+    999504250
+    999364435
+    999148017
+    1001372827
+    998950949
+    997611172
+    998495165
+    997403454
+    998813158
+    998972773
+    1002147047
+    998289011
+    998237837
+    999049997
+    1003469170
+    998036230
+    998946282
+    998184789
+    998212003
+    998448789
+    998714034
+    997944172
+    997653277
+    998327160
+    1001936354
+    998186839
+    999832544
+    998040061
+    997253504
+    999522085
+    998398451),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.9158754676656317E-6 (1.915128717050867E-6 1.916789716310017E-6)],
+   :final-gc-time 54052736,
+   :execution-count 521473,
+   :variance
+   [1.0602536712734238E-17
+    (5.8664892446458144E-18 1.8426715066203082E-17)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 5, :high-severe 1},
+   :warmup-time 10682100118,
+   :lower-q
+   [1.912159204791044E-6 (1.911978503201508E-6 1.9126686336109445E-6)],
+   :warmup-executions 5372703,
+   :sample-count 60,
+   :upper-q
+   [1.924297461230016E-6 (1.921358064559431E-6 1.9282813089076523E-6)],
+   :total-time 59.94481456,
+   :sample-variance [1.0329194685543773E-17 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.915881057440494E-6
+    (1.9062393380829368E-6 1.9255227767980512E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1001274942
+    1001261408
+    1002399352
+    1002156438
+    1000836506
+    1006287121
+    1005365022
+    1002718763
+    1002018327
+    1005857597
+    1005858259
+    1003383146
+    1004603052
+    1005642219
+    1003434334
+    1002004360
+    1004602525
+    1006053489
+    1005885598
+    1002404231
+    1002769969
+    1001598786
+    1003741931
+    1002066564
+    1001253814
+    1001869811
+    1002037719
+    1002540265
+    1002102504
+    1005493129
+    1004352014
+    1006063235
+    1002661409
+    1001344294
+    1002532762
+    1002921721
+    1006410784
+    1003363604
+    1001444832
+    1001567549
+    1002609374
+    1001394220
+    1001516369
+    1001036881
+    1001167092
+    1001739577
+    1003043924
+    1002270943
+    1003979917
+    1001202688
+    1003011883
+    1001588186
+    1002399556
+    1002052815
+    1002318110
+    1002754693
+    1000345732
+    1002160767
+    1004075745
+    1009799171),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.588083969063188E-5
+    (1.5873841826707412E-5 1.5889804239430453E-5)],
+   :final-gc-time 54889177,
+   :execution-count 63161,
+   :variance
+   [9.020399260299646E-16
+    (5.845365709516236E-16 1.5138348896862879E-15)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888852,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 10239246802,
+   :lower-q
+   [1.584579892655278E-5 (1.5838028720254588E-5 1.585130064596824E-5)],
+   :warmup-executions 646008,
+   :sample-count 60,
+   :upper-q
+   [1.5932096087775685E-5
+    (1.592573895283482E-5 1.5987700812210067E-5)],
+   :total-time 60.182651028,
+   :sample-variance [8.5263236352050575E-16 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.588075210652143E-5
+    (1.5793152498807215E-5 1.5968351714235647E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1004111283
+    1002564566
+    1002753590
+    1003085667
+    1008292315
+    1003527742
+    1006693279
+    1003370259
+    1004976497
+    1002876161
+    1003550336
+    1006535983
+    1005995803
+    1003542730
+    1002654077
+    1004608321
+    1003780470
+    1012759267
+    1010920400
+    1004077008
+    1003144497
+    1003397301
+    1004128804
+    1005060023
+    1004267537
+    1006974516
+    1001603147
+    1005866634
+    1004850651
+    1002969309
+    1006066844
+    1002903480
+    1002771357
+    1002761291
+    1002166496
+    1003885431
+    1005498575
+    1004023471
+    1003676718
+    1003839127
+    1003323322
+    1003768285
+    1008908596
+    1003631157
+    1004004563
+    1004280051
+    1003213125
+    1009115938
+    1001998069
+    1002027303
+    1002590547
+    1001960607
+    1002987535
+    1002172834
+    1002323539
+    1003858233
+    1005977293
+    1006383871
+    1005118111
+    1003764061),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.608285413610889E-4
+    (1.6075395628769684E-4 1.6093571096076863E-4)],
+   :final-gc-time 75822608,
+   :execution-count 6245,
+   :variance
+   [1.2583249800621594E-13
+    (7.1194886428464E-14 2.1952450524965145E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888873,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 1},
+   :warmup-time 10356359154,
+   :lower-q
+   [1.6041484947157728E-4 (1.603848113690953E-4 1.604633178022418E-4)],
+   :warmup-executions 64491,
+   :sample-count 60,
+   :upper-q
+   [1.617237458927142E-4 (1.6135570223779026E-4 1.621712196957566E-4)],
+   :total-time 60.261938003,
+   :sample-variance [1.229128340227049E-13 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.6082716307179077E-4
+    (1.597753952712738E-4 1.6187893087230777E-4)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1000870109
+    1011045180
+    1014787700
+    1015211126
+    1014354094
+    1016870032
+    1012691677
+    1014160838
+    1013356221
+    1011772933
+    1012410170
+    1010753613
+    1012555893
+    1011812870
+    1010975914
+    1012793023
+    1011756750
+    1014353227
+    1013375644
+    1011662632
+    1014352396
+    1013267818
+    1012096623
+    1012065438
+    1017046015
+    1013819133
+    1011467073
+    1010808479
+    1011425353
+    1013001765
+    1013318560
+    1011813594
+    1013224028
+    1017156586
+    1012599041
+    1012004882
+    1011709812
+    1011094898
+    1021354458
+    1012522702
+    1012346242
+    1013562067
+    1012896829
+    1012244392
+    1013652482
+    1012758224
+    1014906249
+    1015466533
+    1013715775
+    1012029699
+    1014361800
+    1013708830
+    1014089203
+    1012156869
+    1013587820
+    1011052513
+    1012845270
+    1015676128
+    1014363832
+    1013303316),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.001677228316804636 (0.0016761754757174394 0.001678098870281457)],
+   :final-gc-time 168767022,
+   :execution-count 604,
+   :variance
+   [1.7291398780430996E-11
+    (6.5326224860768215E-12 3.895261646159577E-11)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888748,
+   :outliers
+   {:low-severe 1, :low-mild 0, :high-mild 0, :high-severe 1},
+   :warmup-time 10321924188,
+   :lower-q
+   [0.0016734331341059603
+    (0.0016570697168874172 0.0016738556545529803)],
+   :warmup-executions 6211,
+   :sample-count 60,
+   :upper-q
+   [0.0016838510182119206
+    (0.0016812359817880795 0.001690984201986755)],
+   :total-time 60.782442373,
+   :sample-variance [1.632373110528711E-11 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.0016772197122792497
+    (0.0016650989210531132 0.001689340503505386)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1000755996
+    1074731465
+    987003888
+    1120303173
+    1113844799
+    1117394524
+    1129922501
+    1139603326
+    1152880574
+    1286309939
+    1139011783
+    1128235986
+    923534564
+    1117351045
+    891497178
+    1115555012
+    883295626
+    850187939
+    866976823
+    874235894
+    1073287702
+    804567754
+    809941201
+    814209551
+    800797915
+    801659834
+    835899836
+    784041494
+    830204761
+    792910956
+    836740795
+    788401964
+    829144654
+    795649141
+    833957203
+    1130842961
+    753859286
+    739694539
+    715257116
+    728025982
+    752078865
+    729281406
+    756721772
+    730890791
+    745475458
+    709599301
+    733335820
+    719896400
+    746778009
+    738282134
+    737209499
+    731125472
+    744143783
+    717475689
+    734205600
+    750555724
+    732209642
+    738325822
+    737590371
+    742411470),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.022929037270614037 (0.02198050961535088 0.024101716973684212)],
+   :final-gc-time 1258945066,
+   :execution-count 38,
+   :variance
+   [1.82245178464643E-5 (1.3362707893480579E-5 2.4822042398788182E-5)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.893914876628256,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+   :warmup-time 11241829523,
+   :lower-q
+   [0.01882255568421053 (0.018673665815789477 0.019046261880263163)],
+   :warmup-executions 411,
+   :sample-count 60,
+   :upper-q
+   [0.030165602586184215 (0.02973480265789474 0.033850261552631586)],
+   :total-time 52.139319708,
+   :sample-variance [1.7729251688409618E-5 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.022868122678947368 (0.010236287293870244 0.0354999580640245)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/map_indexed_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (968166899
+    971956117
+    970221608
+    968508402
+    968497133
+    967677205
+    966945783
+    969346225
+    967290712
+    966686279
+    967312503
+    968302059
+    968382164
+    969734244
+    969584105
+    969073632
+    968354734
+    968358024
+    967871203
+    972681019
+    966657889
+    968011593
+    966956054
+    967993727
+    966966701
+    970201335
+    967899320
+    967158734
+    968709456
+    967399846
+    968078411
+    970689300
+    972426767
+    972134805
+    966265206
+    967950146
+    968400446
+    968904483
+    968236108
+    967643523
+    972730514
+    969871851
+    968725625
+    967773210
+    969080586
+    967936423
+    968576742
+    967440737
+    968482084
+    968376254
+    967812613
+    967535961
+    967759170
+    967823754
+    966865696
+    968130587
+    967036015
+    967415771
+    970994335
+    967531946),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [4.172758113978475E-8 (4.17127446308438E-8 4.1746557992493476E-8)],
+   :final-gc-time 63196273,
+   :execution-count 23211096,
+   :variance
+   [4.456414384640451E-21
+    (2.767317187334806E-21 6.735041666457404E-21)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888873,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 5, :high-severe 0},
+   :warmup-time 10011810232,
+   :lower-q
+   [4.164636986551605E-8 (4.1629451965559925E-8 4.165696171025272E-8)],
+   :warmup-executions 231470453,
+   :sample-count 60,
+   :upper-q
+   [4.190066032642319E-8 (4.18549503457312E-8 4.190799581372633E-8)],
+   :total-time 58.111533774,
+   :sample-variance [4.360533790252832E-21 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [4.1726834566536624E-8 (4.152873155264669E-8 4.192493758042656E-8)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (961938515
+    962709491
+    962087461
+    966015593
+    962266650
+    962202424
+    963019499
+    962963199
+    963511662
+    963151635
+    963321170
+    966008202
+    966282447
+    962543985
+    964318829
+    961729628
+    964233697
+    962124255
+    964246378
+    962164307
+    961641131
+    961614199
+    962256002
+    961312884
+    960923339
+    961310461
+    960792453
+    971090639
+    970740382
+    966678812
+    962465012
+    964582699
+    963384750
+    966804263
+    962598688
+    961300603
+    960031621
+    961602898
+    963874477
+    967792533
+    960076104
+    962879084
+    962193675
+    961096875
+    962962519
+    961220790
+    962283902
+    961649528
+    962895348
+    967673078
+    963280633
+    963139788
+    964373982
+    963568539
+    962244703
+    961600668
+    962095830
+    963308759
+    964353363
+    962438399),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [5.381136449215784E-8 (5.3784386130921447E-8 5.384968770528248E-8)],
+   :final-gc-time 63660470,
+   :execution-count 17901146,
+   :variance
+   [1.640699499206404E-20 (9.076426719190068E-21 2.8066656985293E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 2},
+   :warmup-time 10407410897,
+   :lower-q
+   [5.363210288324557E-8 (5.36296179585374E-8 5.368403612818977E-8)],
+   :warmup-executions 186482986,
+   :sample-count 60,
+   :upper-q
+   [5.414644473599623E-8 (5.400462483100244E-8 5.424740064127738E-8)],
+   :total-time 57.79497244,
+   :sample-variance [1.5764122697926176E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [5.380937849826299E-8 (5.343271272561922E-8 5.418604427090677E-8)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (972329966
+    970533930
+    969821939
+    968844795
+    969838570
+    969607780
+    970954244
+    968488581
+    969322220
+    969370192
+    969536121
+    969292859
+    968973171
+    968395875
+    972805448
+    969851178
+    968726679
+    967672337
+    970334360
+    968788769
+    974055198
+    972317553
+    969712649
+    967702832
+    968118282
+    969303007
+    970037244
+    969310316
+    968231630
+    968066270
+    969796974
+    968251828
+    968751843
+    967776364
+    968132026
+    968327073
+    975059852
+    970127001
+    969900307
+    969821428
+    970001922
+    970243132
+    970354449
+    969370586
+    970073925
+    970309384
+    970065324
+    969681540
+    969496547
+    968851132
+    970086350
+    971909542
+    969491716
+    970054172
+    969422972
+    973138063
+    973160904
+    973464444
+    970393137
+    970260989),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [6.586597278259658E-8 (6.584077429321983E-8 6.589493395669258E-8)],
+   :final-gc-time 62573803,
+   :execution-count 14726019,
+   :variance
+   [1.2106197090362301E-20
+    (7.231915433228975E-21 1.8521766454407346E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888845,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 5, :high-severe 1},
+   :warmup-time 10274372687,
+   :lower-q
+   [6.571381118006163E-8 (6.571174035562497E-8 6.573849116994893E-8)],
+   :warmup-executions 151222286,
+   :sample-count 60,
+   :upper-q
+   [6.611633519894277E-8 (6.605683565429326E-8 6.62134044509925E-8)],
+   :total-time 58.196118921,
+   :sample-variance [1.1776941890591822E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [6.586541246143986E-8 (6.553984760305472E-8 6.619097731982499E-8)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (980822141
+    976725839
+    977822728
+    976193609
+    976543461
+    976924359
+    975058489
+    974899287
+    975187234
+    974611571
+    975266193
+    974851793
+    976734901
+    975258165
+    974815999
+    975633856
+    974307007
+    974138935
+    975992357
+    973937085
+    974799691
+    974893161
+    980883603
+    974147736
+    974183488
+    973096979
+    974333624
+    973212751
+    974571723
+    973779808
+    974589866
+    974688102
+    973147645
+    975929516
+    974693333
+    974192582
+    974412634
+    975707541
+    974247610
+    973050178
+    973271339
+    973493186
+    973500792
+    974533950
+    974712444
+    973419755
+    975767281
+    979207971
+    978036631
+    974792355
+    974142294
+    975905746
+    975577659
+    975803838
+    975484899
+    974566240
+    973874536
+    973935098
+    974095212
+    974458468),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [7.779730053691514E-8 (7.776736854095097E-8 7.783300119171749E-8)],
+   :final-gc-time 66789848,
+   :execution-count 12534011,
+   :variance
+   [1.7367158854698342E-20
+    (9.447602199931318E-21 3.0112295351257977E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 2},
+   :warmup-time 10360206611,
+   :lower-q
+   [7.763651866908367E-8 (7.763278474863314E-8 7.764797560014907E-8)],
+   :warmup-executions 129699636,
+   :sample-count 60,
+   :upper-q
+   [7.814729249479676E-8 (7.797232746763985E-8 7.825775827067649E-8)],
+   :total-time 58.506866274,
+   :sample-variance [1.7106247847191213E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [7.779747743160589E-8 (7.740510486550994E-8 7.818984999770185E-8)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (978224025
+    976021036
+    977990060
+    977942849
+    976914427
+    976813982
+    976787900
+    977054729
+    983272679
+    976627698
+    976375699
+    976649066
+    976734942
+    976679556
+    975901773
+    981086262
+    976436051
+    976507181
+    975742867
+    976567244
+    979045671
+    978362635
+    981512250
+    976768134
+    975924599
+    976845838
+    979000686
+    978112906
+    979592159
+    981419554
+    977917557
+    979038588
+    978435024
+    979486190
+    981228725
+    981024696
+    978868274
+    978764091
+    977926084
+    977659892
+    977377983
+    978004239
+    976291320
+    976126668
+    976832846
+    976561257
+    982252759
+    977674372
+    976324349
+    978881294
+    978104171
+    976592401
+    978507937
+    976855764
+    977026814
+    976140749
+    978243122
+    975910009
+    977719338
+    976809544),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [8.975030912487661E-8 (8.971257822962859E-8 8.979579037918175E-8)],
+   :final-gc-time 58620738,
+   :execution-count 10895435,
+   :variance
+   [2.5963080470171492E-20
+    (1.623783724566094E-20 4.160255824169912E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10515965319,
+   :lower-q
+   [8.956978523574323E-8 (8.955520059547875E-8 8.958068969022347E-8)],
+   :warmup-executions 114612049,
+   :sample-count 60,
+   :upper-q
+   [9.01163640208032E-8 (9.004562571388843E-8 9.024629847270898E-8)],
+   :total-time 58.671500515,
+   :sample-variance [2.5320366582079315E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [8.974936217935921E-8 (8.927199094097266E-8 9.022673341774577E-8)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (981311520
+    981838158
+    981224907
+    985949374
+    982613352
+    985995566
+    982650500
+    982618839
+    984021308
+    986452227
+    984240453
+    982999167
+    983421650
+    986773502
+    983360280
+    982750151
+    982363917
+    982025390
+    983080877
+    984916365
+    983029478
+    984652010
+    983151462
+    985302808
+    985027468
+    983632682
+    982997676
+    983219452
+    981928742
+    982290403
+    982695568
+    982558675
+    983910697
+    989762693
+    992251031
+    987150622
+    983053865
+    982786218
+    982375911
+    985578047
+    984155495
+    983922970
+    985818615
+    982409556
+    984399821
+    983243810
+    982911603
+    984789532
+    982267525
+    984740356
+    982334440
+    982374509
+    982353297
+    982956415
+    983007318
+    982498514
+    983219762
+    982407769
+    981077778
+    985767585),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.0180603204005293E-7
+    (1.0176129261601044E-7 1.0186553923628752E-7)],
+   :final-gc-time 66405277,
+   :execution-count 9662947,
+   :variance
+   [4.505449791251739E-20
+    (2.343883081243896E-20 8.588847144689357E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 1},
+   :warmup-time 10189163848,
+   :lower-q
+   [1.0154136263502223E-7
+    (1.0152987261546607E-7 1.0160856289494292E-7)],
+   :warmup-executions 98223646,
+   :sample-count 60,
+   :upper-q
+   [1.0228171874222224E-7
+    (1.0205491774921254E-7 1.0268617130984989E-7)],
+   :total-time 59.024619681,
+   :sample-variance [4.1740249353099903E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.0180575981116321E-7
+    (1.0119284689387568E-7 1.0241867272845073E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/long_range_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (996809024
+    993161145
+    991919162
+    992295022
+    992310058
+    996484242
+    992188755
+    997111924
+    992208513
+    993157953
+    991806580
+    991525595
+    993056741
+    992443303
+    991889165
+    991265200
+    991520531
+    992422260
+    993013127
+    1000769037
+    993013382
+    993216672
+    993442147
+    991914815
+    993604746
+    991812273
+    992218769
+    992700221
+    1004086243
+    998671690
+    992579693
+    992061166
+    992241978
+    992054271
+    992159361
+    993605909
+    993984492
+    992650679
+    992045566
+    993800148
+    992400920
+    994741804
+    992789449
+    993011282
+    992795121
+    998257621
+    993053525
+    993018532
+    994834611
+    994406683
+    992866411
+    995442344
+    997606077
+    994035596
+    992731708
+    993424877
+    991496211
+    993808409
+    997136982
+    993759937),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [7.172938950254043E-7 (7.169211177416918E-7 7.178393971986499E-7)],
+   :final-gc-time 50762415,
+   :execution-count 1385332,
+   :variance
+   [3.109873051558044E-18
+    (1.5722084262294387E-18 6.2934353653238216E-18)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.0163888888888886,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 7, :high-severe 2},
+   :warmup-time 10178081859,
+   :lower-q
+   [7.157101770550309E-7 (7.155434220822157E-7 7.158277314571526E-7)],
+   :warmup-executions 13949548,
+   :sample-count 60,
+   :upper-q
+   [7.215426442181369E-7 (7.197819598478921E-7 7.24798274348676E-7)],
+   :total-time 59.620839658,
+   :sample-variance [3.012324451574507E-18 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [7.172870192608464E-7 (7.120802044893982E-7 7.224938340322944E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (999040141
+    996510692
+    996523421
+    1006172823
+    996699663
+    996194605
+    998979544
+    1000354979
+    1004381426
+    1001126909
+    1001558855
+    1000568768
+    998438777
+    996765052
+    999817878
+    999115644
+    1001981793
+    1002400247
+    1001184147
+    995985326
+    996508526
+    996701239
+    998000698
+    998191666
+    996630723
+    995957665
+    996007084
+    995052986
+    998422232
+    997236001
+    997140024
+    996351147
+    998636700
+    996940923
+    997773780
+    996667481
+    996375145
+    997198341
+    998905359
+    998086036
+    996682560
+    996001471
+    996955020
+    996835553
+    997080533
+    997066050
+    999494015
+    1000155975
+    999332432
+    995992808
+    999206571
+    997373410
+    999916131
+    997725089
+    999708602
+    998815907
+    996147810
+    996257337
+    996157742
+    995179637),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.0913680667610254E-6 (3.08994195369014E-6 3.0933182988368336E-6)],
+   :final-gc-time 61890952,
+   :execution-count 322883,
+   :variance
+   [4.989889200875139E-17
+    (3.17281740559768E-17 9.011955075235308E-17)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10459951380,
+   :lower-q
+   [3.0821679586723366E-6
+    (3.0817757082286776E-6 3.0846742626586104E-6)],
+   :warmup-executions 3314276,
+   :sample-count 60,
+   :upper-q
+   [3.1071366418331104E-6 (3.101289571299821E-6 3.116214923052623E-6)],
+   :total-time 59.888669099,
+   :sample-variance [4.744550947546687E-17 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.0913503807364695E-6
+    (3.070686170485913E-6 3.1120145909870257E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1000125262
+    997924243
+    998273676
+    996803612
+    1003401896
+    998771698
+    997741927
+    995041985
+    996326950
+    998701280
+    997830602
+    996762290
+    995949447
+    995845393
+    996804855
+    1001607670
+    996765196
+    1002063450
+    996286907
+    998138375
+    997128271
+    1013577890
+    1010958427
+    1006200159
+    1005974660
+    1002751657
+    1010169162
+    1012985006
+    1015989270
+    1003102598
+    997460233
+    996072299
+    1002748567
+    998429810
+    999685922
+    996827498
+    997177735
+    998310925
+    996849963
+    996871918
+    996377768
+    996430228
+    998717762
+    997128975
+    996363886
+    999097240
+    1000393412
+    997658823
+    999354734
+    996934164
+    997376328
+    1001393874
+    998157650
+    1003743496
+    996658975
+    998186503
+    997984434
+    998705089
+    1002025468
+    998993439),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [2.8098294192777857E-5
+    (2.8070114674722498E-5 2.813623995972086E-5)],
+   :final-gc-time 54768045,
+   :execution-count 35585,
+   :variance
+   [1.7630242983630407E-14
+    (9.303053473652105E-15 2.8865798110388797E-14)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 4, :high-severe 1},
+   :warmup-time 10563862064,
+   :lower-q
+   [2.798497661936209E-5 (2.7962399466067163E-5 2.799421772657018E-5)],
+   :warmup-executions 372823,
+   :sample-count 60,
+   :upper-q
+   [2.8466629366306027E-5
+    (2.827596343965154E-5 2.8551054376844175E-5)],
+   :total-time 59.992120932,
+   :sample-variance [1.725478507214481E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [2.809803799915695E-5
+    (2.7703965587474397E-5 2.8492110410839503E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1002112086
+    1004732496
+    1003411108
+    1008292703
+    1003626731
+    1011815773
+    1003779347
+    1004402885
+    1003097048
+    1004124162
+    1002995966
+    1003257968
+    1004206989
+    1003804651
+    1002066320
+    1004217426
+    1004466783
+    1005469494
+    1003891067
+    1006315633
+    1005921732
+    1004299949
+    1004742913
+    1004279356
+    1003810651
+    1005472323
+    1005513191
+    1004968547
+    1002501301
+    1003541982
+    1003583926
+    1004371858
+    1003556271
+    1003835084
+    1002836100
+    1003360534
+    1003220113
+    1003654865
+    1010304647
+    1002966702
+    1002515227
+    1002893970
+    1002669364
+    1003676741
+    1003284525
+    1006148477
+    1002451356
+    1003378769
+    1004556463
+    1007762156
+    1004730637
+    1005560408
+    1004339290
+    1007947969
+    1009937279
+    1004039085
+    1003799110
+    1003837823
+    1006862363
+    1005345197),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [2.792764737327402E-4 (2.791650551663423E-4 2.794439381150959E-4)],
+   :final-gc-time 65864221,
+   :execution-count 3597,
+   :variance
+   [3.1178501111400514E-13
+    (1.7346385876652534E-13 5.499076488338429E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 4, :high-severe 1},
+   :warmup-time 11235491806,
+   :lower-q
+   [2.785966321934946E-4 (2.785839088128996E-4 2.787066766333055E-4)],
+   :warmup-executions 40105,
+   :sample-count 60,
+   :upper-q
+   [2.8077210981373367E-4
+    (2.801260193216569E-4 2.8129434890186266E-4)],
+   :total-time 60.27256489,
+   :sample-variance [2.992784241274396E-13 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [2.7927237925122787E-4
+    (2.7763118888532055E-4 2.809135696171352E-4)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1004222468
+    1015147319
+    1014121649
+    1014325722
+    1010353109
+    1011056103
+    1010144206
+    1012092097
+    1014295547
+    1010367217
+    1014790175
+    1014591256
+    1022004247
+    1013156675
+    1012539701
+    1011955406
+    1009554966
+    1011358923
+    1007873377
+    1008706586
+    1010443898
+    1015158541
+    1015494883
+    1012636691
+    1019685475
+    1012149109
+    1012468861
+    1011364005
+    1009848439
+    1012980895
+    1008098576
+    1018450431
+    1014961981
+    1015972133
+    1013656799
+    1012521906
+    1012904759
+    1009560434
+    1009613589
+    1009343565
+    1009457524
+    1012682076
+    1021810556
+    1016130971
+    1012486276
+    1014584233
+    1012275231
+    1012966861
+    1010399542
+    1013022315
+    1010791993
+    1010764081
+    1017446270
+    1019687087
+    1015475137
+    1022335096
+    1016926579
+    1017486134
+    1008974292
+    1011925562),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.0029536596534985426
+    (0.0029512201908649177 0.0029564021663265306)],
+   :final-gc-time 174184881,
+   :execution-count 343,
+   :variance
+   [1.1409885918232408E-10
+    (7.755027902188192E-11 1.6600335564360545E-10)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10160580066,
+   :lower-q
+   [0.0029384063469387756
+    (0.0029277622973760934 0.002941206257580175)],
+   :warmup-executions 3455,
+   :sample-count 60,
+   :upper-q
+   [0.0029790395218658896 (0.002969800683163266 0.002980568793002916)],
+   :total-time 60.787599535,
+   :sample-variance [1.1090020839457213E-10 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.0029537220376579204
+    (0.0029221292872940925 0.0029853147880217483)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (996640308
+    1018693654
+    1105790526
+    1021850404
+    1128273362
+    1132437734
+    1022937209
+    1139903118
+    1160598186
+    1179064000
+    1199111596
+    999062980
+    1159911530
+    964873709
+    1173729607
+    919943690
+    932252775
+    933485409
+    1174010189
+    852669028
+    859842720
+    944526608
+    866965218
+    860283745
+    938524870
+    875351806
+    850355877
+    915849171
+    906248426
+    857209355
+    1244041522
+    808001743
+    849710622
+    829051225
+    807975776
+    843308171
+    807004253
+    857640123
+    823513987
+    817083374
+    833934913
+    812768961
+    849634096
+    819957478
+    816329849
+    826998130
+    815931822
+    854011175
+    812729763
+    824638766
+    820187289
+    1490360705
+    790918411
+    791053155
+    773466044
+    796220476
+    788218117
+    770691856
+    787313998
+    785829863),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.03868285135694445 (0.03722535314375001 0.04046580168263889)],
+   :final-gc-time 1881630785,
+   :execution-count 24,
+   :variance
+   [4.1791931233149275E-5
+    (2.7680269482800735E-5 6.838310217990119E-5)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.8760578385897224,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 12186547766,
+   :lower-q
+   [0.03222775183333334 (0.03211216066666667 0.03282264393854167)],
+   :warmup-executions 281,
+   :sample-count 60,
+   :upper-q
+   [0.05054904996041667 (0.04890540029166667 0.06209836270833334)],
+   :total-time 55.638922473,
+   :sample-variance [4.074278212967667E-5 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.03863814060625 (0.019489118720861443 0.057787162491638566)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/mapv_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1007294007
+    1011471999
+    1020547909
+    1018436492
+    1020602714
+    1010512218
+    1011365085
+    1000476678
+    1001861787
+    1001037197
+    1001413230
+    1000491674
+    1003656110
+    1008879823
+    1004399497
+    1004510891
+    1007749137
+    1005931475
+    1013586530
+    1003585539
+    1001175773
+    1003679611
+    1000331882
+    1002277585
+    999336545
+    1029065188
+    1011743021
+    1016402943
+    1033765537
+    1004982058
+    1017674245
+    1016374446
+    1010666721
+    1025695069
+    1016319066
+    1023644454
+    1006231761
+    1008467323
+    1006622732
+    1003864678
+    1006773094
+    1022727662
+    1004180471
+    1000770159
+    1002528079
+    1003877069
+    1002760887
+    1002369313
+    999203848
+    1000215669
+    1000941465
+    1000488475
+    1001844548
+    1004717244
+    1011628332
+    1002833372
+    1000620331
+    1000488978
+    1000804207
+    1001450204),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.4041766538240655E-7
+    (3.3980925467203516E-7 3.4122024088855895E-7)],
+   :final-gc-time 52062415,
+   :execution-count 2960719,
+   :variance
+   [7.94549751613359E-18
+    (5.2411499341050234E-18 1.242861440642883E-17)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10002497508,
+   :lower-q
+   [3.3753170935843627E-7
+    (3.3748689017768997E-7 3.3789112040014604E-7)],
+   :warmup-executions 27665360,
+   :sample-count 60,
+   :upper-q
+   [3.467030607599032E-7 (3.450912807665976E-7 3.4916030092690324E-7)],
+   :total-time 60.467354037,
+   :sample-variance [7.691888179273373E-18 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.403866540357258E-7 (3.320663779818042E-7 3.4870693008964736E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1001286422
+    1000971791
+    1008808010
+    1027529287
+    1033512794
+    1027591488
+    1019017659
+    1008826474
+    1003810347
+    1002588433
+    1011220210
+    1027783925
+    1013783917
+    1010213563
+    1030880152
+    1044185959
+    1035559860
+    1022772246
+    1030756776
+    1019822163
+    1001645144
+    1023142874
+    1033630248
+    1039304419
+    1088716474
+    1103150719
+    1034905276
+    1026679085
+    1027891164
+    1021089311
+    1048648376
+    1065480284
+    1048868979
+    1004637738
+    1002792515
+    1001992127
+    1002129251
+    1000073239
+    999873359
+    1001752152
+    1000836787
+    1009468124
+    1004057837
+    1001311750
+    999080807
+    1000277723
+    1002052333
+    999816717
+    1001499922
+    1006786869
+    1001764680
+    1001839822
+    1001514495
+    999634211
+    1000502694
+    999495771
+    1001472633
+    1011776243
+    1023399984
+    1037375500),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.7989840507515586E-6
+    (1.7899477521877502E-6 1.8098908674176953E-6)],
+   :final-gc-time 51826752,
+   :execution-count 565802,
+   :variance
+   [1.53923414426399E-15
+    (8.345493229170554E-16 2.8822578910506866E-15)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.09452456392349329,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10224121310,
+   :lower-q
+   [1.76639595521048E-6 (1.7657781467721925E-6 1.7671263479980631E-6)],
+   :warmup-executions 5657222,
+   :sample-count 60,
+   :upper-q
+   [1.904141188083464E-6 (1.845539599409334E-6 1.9497115934549543E-6)],
+   :total-time 61.061289112,
+   :sample-variance [1.474441867868809E-15 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.7986648189060249E-6 (1.683469433534825E-6 1.913860204277225E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1008295587
+    1009137627
+    1043256114
+    1027290264
+    1003338319
+    1034350220
+    1019355334
+    1012754399
+    1017144642
+    983501097
+    973528554
+    973170706
+    980029055
+    976951827
+    985023838
+    1010470121
+    997442122
+    995737143
+    1018838025
+    1019294664
+    1036017855
+    977162233
+    971491914
+    973408785
+    972729787
+    970294606
+    971698277
+    972869112
+    971378745
+    973968197
+    972936675
+    976250324
+    971495203
+    972691544
+    973296466
+    973984866
+    971726985
+    971527924
+    971465802
+    970622357
+    976138491
+    971589048
+    971153766
+    971655532
+    976141465
+    971715601
+    970497192
+    970164510
+    970479783
+    973618854
+    972644522
+    970744942
+    974572071
+    968825111
+    970218771
+    973571641
+    970056085
+    970956466
+    969812871
+    972863888),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.6190804134996105E-5
+    (1.6116978983087098E-5 1.6285523132670857E-5)],
+   :final-gc-time 49020831,
+   :execution-count 60782,
+   :variance
+   [1.1441930238307827E-13
+    (7.166443036845387E-14 1.7185639401556882E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.09403368308588961,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 7, :high-severe 0},
+   :warmup-time 11011208242,
+   :lower-q
+   [1.595559328419598E-5
+    (1.5939342420453426E-5 1.5961802572718897E-5)],
+   :warmup-executions 677112,
+   :sample-count 60,
+   :upper-q
+   [1.7017377184034748E-5
+    (1.676967957619032E-5 1.7163899081965058E-5)],
+   :total-time 59.043347925,
+   :sample-variance [1.1323274045383261E-13 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.6189921337731565E-5
+    (1.5180419151461276E-5 1.7199423524001855E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (999383200
+    1001511825
+    993897734
+    991790076
+    985510548
+    981313604
+    997527331
+    983144440
+    978317584
+    985230967
+    990124425
+    983991427
+    976623418
+    986151199
+    984594188
+    977599428
+    979154901
+    986127994
+    976535235
+    982819470
+    984943384
+    983542013
+    984036017
+    979004292
+    985831149
+    985307578
+    983775378
+    989633048
+    1009245447
+    989043332
+    994936015
+    979941059
+    976896799
+    978678146
+    981203376
+    976667394
+    976216687
+    978674921
+    974846462
+    976568979
+    974164511
+    976817649
+    977729022
+    977448287
+    976121038
+    975915384
+    974750715
+    985328463
+    974526494
+    976415797
+    974924871
+    974266796
+    976338895
+    975799540
+    997119136
+    983299063
+    980598396
+    978880552
+    993099872
+    994882156),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.620020641374197E-4
+    (1.6172181597737134E-4 1.6236635174383482E-4)],
+   :final-gc-time 62096277,
+   :execution-count 6069,
+   :variance
+   [1.7455046324427163E-12
+    (1.1413203064700412E-12 2.7475811450151343E-12)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 11876412191,
+   :lower-q
+   [1.605316849563355E-4 (1.6051483127368596E-4 1.60611421156698E-4)],
+   :warmup-executions 73645,
+   :sample-count 60,
+   :upper-q
+   [1.6470904438128193E-4
+    (1.6398253181743288E-4 1.6629517993079588E-4)],
+   :total-time 58.988767107,
+   :sample-variance [1.6775390342469915E-12 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.6199474681990447E-4 (1.581091514590591E-4 1.658803421807498E-4)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (984921850
+    1000715481
+    1022129257
+    1008663043
+    1025381821
+    1014175919
+    1004904028
+    1008818693
+    1005879163
+    1015921980
+    1000023727
+    1001389685
+    1006840529
+    1010159715
+    999657164
+    1023750195
+    1007406747
+    1000665253
+    1004248816
+    1005122482
+    1003524388
+    1002242867
+    1003455658
+    999890055
+    1003837328
+    1000809717
+    1006065879
+    1001490638
+    1004449317
+    1016679568
+    1009523599
+    1005192742
+    1015580481
+    1011195109
+    1015389822
+    1015901166
+    1040309141
+    1038615697
+    1029457359
+    1022277520
+    1001697926
+    1015334096
+    1004510731
+    1016487753
+    1018483929
+    1005727455
+    1002966273
+    1006283242
+    1021537981
+    1024422773
+    1022411934
+    1009710876
+    1003874228
+    1021471690
+    1011760426
+    1003376875
+    1002020218
+    1001593413
+    1004979433
+    1003561027),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.00174435231755901 (0.001740017063154865 0.0017490938641911342)],
+   :final-gc-time 217905373,
+   :execution-count 579,
+   :variance
+   [3.1046632636584914E-10
+    (2.0060501390021834E-10 4.963681624813066E-10)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888896,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10295751169,
+   :lower-q
+   [0.001726523599309154 (0.001701074006908463 0.001727682991105354)],
+   :warmup-executions 5976,
+   :sample-count 60,
+   :upper-q
+   [0.0017862961769430053
+    (0.0017687449023316062 0.0017967342677029363)],
+   :total-time 60.598875878,
+   :sample-variance [3.0248464683172207E-10 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.0017443545157743237
+    (0.0016921782585160121 0.001796530773032635)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1164528429
+    1149035600
+    1158251929
+    1271632860
+    1348773017
+    1346468722
+    1305027012
+    1363274721
+    1352743652
+    1155542575
+    1079578451
+    1102828810
+    850593698
+    826190542
+    1088877878
+    770384975
+    811260690
+    807318583
+    1093910877
+    759580237
+    793256706
+    726620933
+    795965205
+    729988897
+    789952733
+    763466388
+    780785187
+    1172380781
+    698264146
+    702359457
+    721489403
+    681754081
+    699711546
+    701675843
+    711841986
+    708563755
+    691712939
+    712603881
+    700071169
+    706063125
+    732589028
+    715658760
+    697052348
+    732604483
+    690076226
+    707332248
+    1562428601
+    647419175
+    669041938
+    641215931
+    667086361
+    652615647
+    654045596
+    655322691
+    634619464
+    667341519
+    646468426
+    646214040
+    661997429
+    673809807),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.025127125048039215 (0.02354934683872549 0.027146071293137255)],
+   :final-gc-time 2389426477,
+   :execution-count 34,
+   :variance
+   [5.2903840639899906E-5 (3.61100476960913E-5 7.483163463855844E-5)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.9637625058426801,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+   :warmup-time 11844785974,
+   :lower-q
+   [0.018859292088235294 (0.018665278352941177 0.019027059758088233)],
+   :warmup-executions 355,
+   :sample-count 60,
+   :upper-q
+   [0.03989371798823529 (0.038383147411764705 0.04595378238235294)],
+   :total-time 51.149271137,
+   :sample-variance [5.2166010220449326E-5 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.02507317212598039 (0.0034053597771519107 0.04674098447480887)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/pmap_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1178133394
+    1048004571
+    1055960670
+    1039392133
+    1017469807
+    1016433797
+    1011606440
+    1025940958
+    1040500512
+    1041253937
+    1060815088
+    1056604833
+    1057593865
+    1055687942
+    1053799193
+    1057524225
+    1054834759
+    1048248818
+    1046072050
+    1051007269
+    1044085233
+    1037525811
+    1041813695
+    1040551291
+    1035025300
+    1038145412
+    1038236288
+    1027435784
+    1020064212
+    1012706763
+    1011952639
+    1014032238
+    1012853822
+    1016089756
+    1010702021
+    1015465077
+    1013809083
+    1025708355
+    1021765354
+    1014145755
+    1013552302
+    1014668146
+    1010310299
+    1010282474
+    1012669241
+    1011015127
+    1011256845
+    1010099428
+    1012361243
+    1014873943
+    1015986310
+    1013896630
+    1011100484
+    1011031443
+    1011993017
+    1011997944
+    1013466836
+    1012632772
+    1129803508
+    1028465930),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [6.128620502181115E-6 (6.091986070864941E-6 6.1846116972299945E-6)],
+   :final-gc-time 67412035,
+   :execution-count 168339,
+   :variance
+   [3.029572115738897E-14
+    (1.047960495511457E-14 7.521698225350565E-14)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.15769836022548211,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 1},
+   :warmup-time 10030187619,
+   :lower-q
+   [6.0009836801038385E-6 (6.000388668104242E-6 6.003968307997553E-6)],
+   :warmup-executions 1543795,
+   :sample-count 60,
+   :upper-q
+   [6.507725052275467E-6 (6.276649100921355E-6 6.998576645934692E-6)],
+   :total-time 61.890462072,
+   :sample-variance [2.918085902853765E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [6.127562247607507E-6 (5.615090071526855E-6 6.640034423688159E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1064275359
+    1026066014
+    1008737119
+    1003172118
+    998394047
+    1003437704
+    1005171106
+    1011580933
+    1003070372
+    1003894290
+    1027691558
+    1020695465
+    1015635038
+    1005764585
+    1010256840
+    1020393528
+    1016340481
+    1026412916
+    1019292044
+    1020541803
+    1021498877
+    1015300877
+    1002283887
+    1013280170
+    1035906746
+    1008094779
+    1008858973
+    1025476274
+    1058822423
+    1025061403
+    1026980017
+    1006885961
+    1009472176
+    1028017518
+    1017031903
+    1007124850
+    1004612250
+    1010753769
+    1007749992
+    1005286595
+    1008696989
+    1003761283
+    1006461276
+    1006081254
+    1009902370
+    1016485684
+    1007011927
+    1018329544
+    1010938528
+    1007315868
+    1008510984
+    1022515610
+    1006202999
+    1006507783
+    1005430523
+    1008181746
+    1002955321
+    1010199233
+    1011654329
+    1030735218),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.0757553346343258E-5 (1.0727733147553039E-5 1.07944952116057E-5)],
+   :final-gc-time 50973339,
+   :execution-count 94287,
+   :variance
+   [1.7496732285633003E-14
+    (8.667987763159342E-15 3.572994484165924E-14)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888856,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 1},
+   :warmup-time 10001447548,
+   :lower-q
+   [1.063013869356327E-5
+    (1.0588883377347885E-5 1.0639559196920042E-5)],
+   :warmup-executions 878601,
+   :sample-count 60,
+   :upper-q
+   [1.1088283651245666E-5
+    (1.0901425297230797E-5 1.1287615037067677E-5)],
+   :total-time 60.857201229,
+   :sample-variance [1.6994656425750177E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.0757439383478105E-5
+    (1.0366348719013007E-5 1.1148530047943204E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1071382890
+    1023224565
+    1030802784
+    1027771745
+    1028022720
+    1017341789
+    1036995406
+    1018595452
+    1018898282
+    1018752594
+    1022157781
+    1021862698
+    1030823259
+    1027749758
+    1034524344
+    1030212191
+    1023802467
+    1029285920
+    1031134418
+    1032410436
+    1027011208
+    1028668862
+    1025724775
+    1034563867
+    1035077315
+    1037300935
+    1029977064
+    1034787543
+    1024041745
+    1027912961
+    1026670372
+    1027671461
+    1008185975
+    1033386825
+    1028228404
+    1033718724
+    1034626418
+    1037349145
+    1037136496
+    1041385073
+    1069701787
+    1063938898
+    1060280566
+    1057565530
+    1070851069
+    1074800723
+    1058642992
+    1065120951
+    1064193504
+    1054042492
+    1048321175
+    1052242486
+    1050415788
+    1053450280
+    1058402563
+    1066348747
+    1052059617
+    1119810976
+    957636374
+    955212947),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.087459178425165E-5
+    (1.0804483953755732E-5 1.0938589330516885E-5)],
+   :final-gc-time 61253639,
+   :execution-count 95392,
+   :variance
+   [6.835798340609326E-14
+    (3.9511289861952284E-14 1.3289646418789228E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.11053471053958878,
+   :outliers
+   {:low-severe 0, :low-mild 2, :high-mild 1, :high-severe 0},
+   :warmup-time 10090903576,
+   :lower-q
+   [1.0038958969305602E-5
+    (1.0013554040171084E-5 1.0664854379822209E-5)],
+   :warmup-executions 904788,
+   :sample-count 60,
+   :upper-q
+   [1.1247532679365147E-5
+    (1.1190937289290508E-5 1.1739044951358605E-5)],
+   :total-time 62.242216132,
+   :sample-variance [6.603974802093504E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.0874814123476463E-5
+    (1.0103868125245448E-5 1.1645760121707478E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1136215618
+    1018262209
+    1013167823
+    1017692690
+    1011105496
+    1009142893
+    1013852150
+    1013005359
+    1016930759
+    1019099488
+    1016726084
+    1012854520
+    1016153588
+    1015965315
+    1011367146
+    1007543807
+    1008295844
+    1008733912
+    1012553186
+    1009155840
+    1009420662
+    1008538433
+    1009792210
+    1010463133
+    1009158641
+    1014921864
+    1014877953
+    1011051903
+    1006788928
+    1007975972
+    1006756232
+    1007636908
+    1007402827
+    1006012159
+    1006712364
+    1014166289
+    1017200378
+    1030783285
+    1019929253
+    1008915176
+    1012086038
+    1008805835
+    1015044409
+    1012490703
+    1009432673
+    1011095894
+    1007257979
+    1011964932
+    1014090983
+    1013390338
+    1009129533
+    1008115332
+    1004519229
+    1002929192
+    1007152336
+    1007448884
+    1006454044
+    1008706286
+    1010069504
+    1000844898),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.0830081455306269E-5
+    (1.0799923168981482E-5 1.0935777350961539E-5)],
+   :final-gc-time 56051305,
+   :execution-count 93600,
+   :variance
+   [3.289728920856571E-14
+    (2.2379627345873422E-15 1.655740502936945E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.06254009311062197,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 1},
+   :warmup-time 10149972466,
+   :lower-q
+   [1.0715055470085471E-5
+    (1.0692787371794873E-5 1.0751769163194444E-5)],
+   :warmup-executions 923457,
+   :sample-count 60,
+   :upper-q
+   [1.0953349160523504E-5
+    (1.087348118883547E-5 1.2139055747863249E-5)],
+   :total-time 60.797357319,
+   :sample-variance [3.233698338000308E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.0825740263354701E-5
+    (1.0286265657446297E-5 1.1365214869263106E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1104712933
+    1017191193
+    1008525038
+    1008840453
+    1009166852
+    1012062077
+    1010476347
+    1008214597
+    1007353621
+    1010499215
+    1011483696
+    1009503802
+    1009037895
+    1006103621
+    1015730709
+    1020321865
+    1023473758
+    1017386853
+    1007094008
+    1007989679
+    1016966114
+    1023365180
+    1010725142
+    1013628645
+    1003041048
+    979180031
+    969569037
+    969966441
+    973257164
+    969110778
+    967108661
+    971767369
+    968229679
+    971261547
+    978650717
+    983813724
+    979304974
+    978627520
+    980130117
+    980539458
+    999041098
+    1006078706
+    1042526394
+    1035081453
+    996243825
+    1005889519
+    985418967
+    983429592
+    997816399
+    988254982
+    987747091
+    964931760
+    968815700
+    968115623
+    959818086
+    966816688
+    962733666
+    966749869
+    971956562
+    966853171),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.0916300103048708E-5
+    (1.0856617422357186E-5 1.0997716353500915E-5)],
+   :final-gc-time 70106291,
+   :execution-count 91219,
+   :variance
+   [8.500382869841391E-14
+    (5.1296004101349384E-14 1.8692365946242524E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.14178582900660078,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 10097211111,
+   :lower-q
+   [1.0554091428320855E-5
+    (1.052212900821101E-5 1.0598467512524803E-5)],
+   :warmup-executions 874617,
+   :sample-count 60,
+   :upper-q
+   [1.1390061796610354E-5
+    (1.1202924888181191E-5 1.2110557372915731E-5)],
+   :total-time 59.737730709,
+   :sample-variance [7.779065826677633E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.0914709053486665E-5
+    (1.0077979751740282E-5 1.1751438355233046E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1073669168
+    978360346
+    980351322
+    975971939
+    973852499
+    966574300
+    962733793
+    964481934
+    967752819
+    965663587
+    964574544
+    971496620
+    976658208
+    971020570
+    975066910
+    975602731
+    970681369
+    965490966
+    965281879
+    972515226
+    973418657
+    975147816
+    975761758
+    973994234
+    978811822
+    973842944
+    973109729
+    973365393
+    974818734
+    975397485
+    970696137
+    968611995
+    975098354
+    976221314
+    973456965
+    974418416
+    978284019
+    974192545
+    977670452
+    975070887
+    974101925
+    972775978
+    973914409
+    975611792
+    973397330
+    971083393
+    974046893
+    972839866
+    969117449
+    966260690
+    965031684
+    966529385
+    967598921
+    967243563
+    976207509
+    974565482
+    972044050
+    970684896
+    965946492
+    962171376),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.0647103933444114E-5
+    (1.0622049925113696E-5 1.0731687087487611E-5)],
+   :final-gc-time 82581906,
+   :execution-count 91472,
+   :variance
+   [2.30166669946496E-14
+    (2.11779744523007E-15 1.1649159908683658E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888873,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 1},
+   :warmup-time 10872325250,
+   :lower-q
+   [1.0524901532709464E-5
+    (1.0518753017316775E-5 1.0547399045609586E-5)],
+   :warmup-executions 997206,
+   :sample-count 60,
+   :upper-q
+   [1.0707162939478747E-5
+    (1.0688193676753542E-5 1.173768112646493E-5)],
+   :total-time 58.420363469,
+   :sample-variance [2.2901133959605506E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.0644489291622938E-5
+    (1.0190495673125443E-5 1.1098482910120433E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/transduce_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (971833031
+    973946509
+    971722583
+    974258210
+    974592134
+    973770582
+    973774135
+    979130046
+    974437697
+    975813596
+    972973781
+    972523639
+    972623406
+    971861043
+    971770122
+    971655196
+    970525872
+    971855477
+    971518176
+    971463183
+    978352165
+    971280014
+    971388739
+    975108293
+    971543759
+    973451219
+    972142337
+    971838539
+    974617100
+    973496837
+    976514664
+    972335510
+    972644657
+    973074707
+    971262148
+    976038320
+    975571213
+    977363950
+    973676329
+    973548851
+    973288862
+    973591681
+    974708607
+    973166688
+    971193805
+    972064693
+    976046132
+    972283697
+    972864465
+    974475319
+    974731113
+    978233144
+    972189829
+    976514575
+    973707568
+    973021960
+    973546245
+    972740751
+    975533986
+    972839293),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [6.714308759952846E-8 (6.711171389527202E-8 6.718018698339224E-8)],
+   :final-gc-time 64765654,
+   :execution-count 14500040,
+   :variance
+   [1.8269934954767667E-20
+    (1.238547357192035E-20 2.6563088015617855E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 10037921735,
+   :lower-q
+   [6.697869833462529E-8 (6.69326341168714E-8 6.698820543770914E-8)],
+   :warmup-executions 144184620,
+   :sample-count 60,
+   :upper-q
+   [6.746847801971582E-8 (6.734564697752559E-8 6.75260237902792E-8)],
+   :total-time 58.414040182,
+   :sample-variance [1.79077679914382E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [6.71423897014537E-8 (6.674092997505148E-8 6.754384942785592E-8)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1001148624
+    998234510
+    997915751
+    998307899
+    1003160964
+    998853810
+    998050905
+    1000939438
+    1000644742
+    1001827620
+    997642037
+    997630168
+    998341700
+    996833316
+    1002441533
+    997711058
+    996854811
+    999224501
+    998354678
+    998600046
+    998004110
+    997890557
+    996950880
+    997240408
+    997413054
+    1000216277
+    1002611041
+    997858964
+    996270715
+    996919553
+    997609683
+    998717908
+    996768013
+    997098172
+    999149683
+    997562105
+    998187449
+    1003334022
+    997477474
+    996857158
+    996298318
+    998392968
+    996458007
+    996360248
+    997194944
+    997402339
+    1001013987
+    1001798547
+    1000293317
+    996868546
+    996780785
+    999676996
+    1001338408
+    997896237
+    998659944
+    998255979
+    997524304
+    998069399
+    998045093
+    997609122),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.6114998289292563E-7
+    (3.610095850491645E-7 3.6134460030689056E-7)],
+   :final-gc-time 61297540,
+   :execution-count 2764938,
+   :variance
+   [4.40298985403963E-19
+    (2.897288294943155E-19 6.024907690384635E-19)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888873,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 4, :high-severe 0},
+   :warmup-time 11257712435,
+   :lower-q
+   [3.6033296876819664E-7 (3.60322985542533E-7 3.60425689373505E-7)],
+   :warmup-executions 30976327,
+   :sample-count 60,
+   :upper-q
+   [3.626914000512851E-7 (3.623222462854502E-7 3.628775842351619E-7)],
+   :total-time 59.912792825,
+   :sample-variance [4.370504867584094E-19 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.6114608974354344E-7
+    (3.5916279592244034E-7 3.631293835646465E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (998431012
+    1001800630
+    1000150332
+    998118867
+    999591217
+    1005438089
+    1005412709
+    999061637
+    998522794
+    998799852
+    998940476
+    999408389
+    1001943330
+    1000745842
+    998874800
+    998682064
+    999725129
+    998066193
+    1001088641
+    998684229
+    997934443
+    1000699940
+    997244026
+    999322357
+    1003991616
+    1000967003
+    998135233
+    998666961
+    998392132
+    998782810
+    998379145
+    999244105
+    998707679
+    999078906
+    999352747
+    996621474
+    1000739928
+    999788326
+    998238827
+    1001376670
+    998887693
+    1000231319
+    1000378567
+    999273389
+    999111188
+    999590306
+    999063709
+    998253112
+    999133220
+    999333064
+    999949108
+    999984055
+    1001677318
+    998919925
+    999946398
+    998486780
+    997792836
+    998617121
+    999437508
+    997360583),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.3816812536158093E-6
+    (3.3803785463122415E-6 3.3831249861006327E-6)],
+   :final-gc-time 64190723,
+   :execution-count 295577,
+   :variance
+   [3.331012029200786E-17
+    (1.8090872063412798E-17 6.050446534986933E-17)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 2},
+   :warmup-time 10113469503,
+   :lower-q
+   [3.3738891253378986E-6
+    (3.3717828992106964E-6 3.3759734327264978E-6)],
+   :warmup-executions 2985845,
+   :sample-count 60,
+   :upper-q
+   [3.399241787503764E-6 (3.389106922392473E-6 3.4016113872188975E-6)],
+   :total-time 59.972577759,
+   :sample-variance [3.2270161840466955E-17 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.3816669180957925E-6
+    (3.3646248684372506E-6 3.3987089677543343E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (997522237
+    999060766
+    998249453
+    997604986
+    998495177
+    997910178
+    996442357
+    997557500
+    998908517
+    996645407
+    1001074394
+    1010872791
+    999210712
+    1003474905
+    998987069
+    1000086646
+    999591541
+    998326434
+    998733323
+    1001741619
+    1000691078
+    1004911460
+    1004076780
+    999217248
+    997906766
+    997737244
+    1003901064
+    1000737707
+    1000987523
+    998402196
+    998962713
+    998165106
+    997724725
+    998383594
+    998029266
+    997803391
+    998671414
+    1002054466
+    1008473117
+    1007038173
+    1000109363
+    1001849468
+    998310431
+    999404692
+    1001925206
+    999848374
+    998915911
+    997735043
+    998566940
+    999639366
+    999369653
+    999618996
+    999473919
+    1002026518
+    999101845
+    997840270
+    997992161
+    996737515
+    1000398111
+    1000633630),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.627285151152386E-5 (3.625094745036156E-5 3.6299944944255004E-5)],
+   :final-gc-time 75724297,
+   :execution-count 27566,
+   :variance
+   [1.0450895066356771E-14
+    (5.343695702551245E-15 1.885351110953517E-14)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888885,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 1},
+   :warmup-time 10695512421,
+   :lower-q
+   [3.615487945294929E-5 (3.614751349488501E-5 3.6187295469963E-5)],
+   :warmup-executions 295912,
+   :sample-count 60,
+   :upper-q
+   [3.653189338315317E-5 (3.6418089820793736E-5 3.667100018138287E-5)],
+   :total-time 59.993868455,
+   :sample-variance [1.0192846048324883E-14 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.627286539880046E-5
+    (3.5969986521301675E-5 3.6575744276299244E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (988973035
+    999803002
+    998647426
+    1000164363
+    1002026212
+    999389291
+    998445741
+    998112567
+    998814279
+    1000511345
+    998234984
+    1001166740
+    999995167
+    1001975044
+    1001002008
+    1002544088
+    998607829
+    999593360
+    1000438639
+    998672538
+    998469546
+    1001097766
+    1000645974
+    999412479
+    1002453068
+    1002336290
+    1002096422
+    998254940
+    1000261833
+    1005259391
+    1000158002
+    998631948
+    998706669
+    1000456106
+    1000975740
+    998680727
+    999505230
+    999762683
+    1007522489
+    1003700812
+    1006740623
+    999859654
+    1000086632
+    1001477248
+    1001011531
+    1001368244
+    999370889
+    998534014
+    1001613732
+    1000042709
+    1001164264
+    999205796
+    1000318011
+    1000817555
+    1000844976
+    1000169394
+    1007583907
+    1002573689
+    1000757690
+    999322927),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [4.040668861470113E-4 (4.037946764606893E-4 4.0431619698438345E-4)],
+   :final-gc-time 172130221,
+   :execution-count 2476,
+   :variance
+   [1.1857594625371574E-12
+    (6.023334751383496E-13 2.9697238470731553E-12)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 1, :low-mild 0, :high-mild 2, :high-severe 2},
+   :warmup-time 11519135732,
+   :lower-q
+   [4.0120433759087236E-4
+    (3.994236813408724E-4 4.0320480354402266E-4)],
+   :warmup-executions 28816,
+   :sample-count 60,
+   :upper-q
+   [4.0676538879240714E-4
+    (4.0515566582189017E-4 4.0694018861066236E-4)],
+   :total-time 60.028369258,
+   :sample-variance [1.0906267635898502E-12 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [4.0406818294291873E-4
+    (4.0093519062369597E-4 4.0720117526214144E-4)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1132859190
+    1149038705
+    1243041742
+    1152967807
+    1263398026
+    1151684188
+    1274817616
+    1281757084
+    1296790370
+    1319624102
+    1134298923
+    1112330537
+    1089467383
+    1043136452
+    870161860
+    1070883462
+    841640529
+    830288471
+    846078714
+    1035661271
+    782366104
+    763528917
+    783951976
+    771338490
+    758869560
+    770728383
+    770495031
+    766459901
+    782258919
+    784042970
+    775549007
+    769716115
+    773448225
+    1045398171
+    653888755
+    637203827
+    645356885
+    688624195
+    695446106
+    688941077
+    659345596
+    676173076
+    659950755
+    665090443
+    646554769
+    644652992
+    649706506
+    634374560
+    701043263
+    681469212
+    693406847
+    681489786
+    655159758
+    670375051
+    655265082
+    658312677
+    639991475
+    640469313
+    1369861685
+    609889483),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.006607312330490956 (0.006171131089793282 0.0070755212164082685)],
+   :final-gc-time 1273375015,
+   :execution-count 129,
+   :variance
+   [3.172379670154421E-6 (2.2895591975276085E-6 4.056222842880353E-6)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.9467656985066415,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+   :warmup-time 10053934264,
+   :lower-q
+   [0.004917632248062016 (0.0047278254496124035 0.004962933705813953)],
+   :warmup-executions 1156,
+   :sample-count 60,
+   :upper-q
+   [0.010090211383333332 (0.009765302913565891 0.010619082829457366)],
+   :total-time 51.140121375,
+   :sample-variance [3.138135170553476E-6 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.0066072508236434116 (0.0012928160902986425 0.01192168555698818)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/transient_first_next_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1001421859
+    999953560
+    1002247678
+    1003279485
+    1004894231
+    1005713104
+    1000080342
+    998986011
+    1002764896
+    1002725997
+    1002843537
+    1000462841
+    1001272128
+    999745042
+    999288350
+    1000128661
+    1000775099
+    999505598
+    999681145
+    1000452844
+    1007764766
+    999875679
+    1005432695
+    1000768456
+    999585216
+    1001114431
+    999561845
+    1002733690
+    1000797861
+    1000807923
+    1001320943
+    999741918
+    1001288716
+    1000364928
+    1002672934
+    1000003414
+    1000004934
+    1000403275
+    1000380003
+    999752773
+    1000677034
+    1001073749
+    1000237663
+    1003254020
+    1002623556
+    1004375991
+    1001182647
+    1002941040
+    1001187895
+    1000191295
+    1001380128
+    1001656896
+    1001834494
+    1001995373
+    998970069
+    1000993104
+    1001096661
+    1002083614
+    999991782
+    1000853089),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.240423133823303E-7
+    (1.2399150094372618E-7 1.2410975696212255E-7)],
+   :final-gc-time 60537830,
+   :execution-count 8072610,
+   :variance
+   [5.0561242299842803E-20
+    (2.9420597318942927E-20 9.817191953628125E-20)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 0},
+   :warmup-time 10107344279,
+   :lower-q
+   [1.2375006484891505E-7
+    (1.237480900229294E-7 1.2381773866506622E-7)],
+   :warmup-executions 81290094,
+   :sample-count 60,
+   :upper-q
+   [1.2456688849393196E-7
+    (1.2428192183197257E-7 1.248375390363216E-7)],
+   :total-time 60.079198908,
+   :sample-variance [4.6724897546877795E-20 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.2403918705350562E-7 (1.23390708774824E-7 1.2468766533218728E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (997806647
+    998259437
+    998208715
+    998347825
+    1000096289
+    997660724
+    1002332246
+    1004686821
+    998209016
+    1000319261
+    1000878162
+    997104316
+    999504696
+    1000745177
+    1000174377
+    998592204
+    999119980
+    998796145
+    1001224040
+    998365123
+    997512944
+    998185363
+    998214537
+    999232697
+    1002694436
+    997046022
+    999936120
+    997186298
+    1000453392
+    998989602
+    996374982
+    997684726
+    998204133
+    1003486858
+    1001972260
+    999415052
+    998091085
+    1002715554
+    999389101
+    997872303
+    996801360
+    998076842
+    998640045
+    999058065
+    1002896061
+    1001998556
+    1001472818
+    997897737
+    1003078962
+    996385986
+    996235921
+    998173945
+    997737962
+    998609500
+    999135315
+    996632994
+    998658882
+    996777320
+    997849117
+    996679664),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [4.523934645006387E-7 (4.521689825681781E-7 4.5263771214733674E-7)],
+   :final-gc-time 60344686,
+   :execution-count 2208528,
+   :variance
+   [8.540254415819886E-19
+    (5.876404448882553E-19 1.2494881779880836E-18)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 10716501856,
+   :lower-q
+   [4.5114890189302556E-7 (4.510859364246231E-7 4.512757647854136E-7)],
+   :warmup-executions 23581001,
+   :sample-count 60,
+   :upper-q
+   [4.542420242917454E-7 (4.539374111172691E-7 4.549124217578405E-7)],
+   :total-time 59.947885718,
+   :sample-variance [8.275409464149043E-19 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [4.523969941215748E-7
+    (4.4966791579405573E-7 4.5512607244909387E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1000352515
+    1001790501
+    1002029589
+    1002211007
+    1000816287
+    1006006832
+    999945513
+    1000326772
+    1000077601
+    1008478541
+    1003574976
+    1002612224
+    1001539628
+    1003739770
+    1001303118
+    1002556365
+    1003395746
+    1003458713
+    999936135
+    1002395461
+    999255976
+    1000189064
+    1000907409
+    999253229
+    998898120
+    998805454
+    998073399
+    999426164
+    1000131380
+    998914349
+    998514900
+    999259241
+    1000568694
+    999609135
+    1006699718
+    999712806
+    1007243641
+    999099535
+    999301409
+    1003530446
+    1000476777
+    1005679260
+    1003151805
+    1002227491
+    998731594
+    1002767760
+    998806661
+    1002325724
+    999906485
+    1001015174
+    1000859462
+    999365109
+    1000857363
+    1006183051
+    1000988405
+    1000592520
+    1000303212
+    1001294910
+    1005182153
+    1000792415),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.6122260271749136E-6
+    (3.6103267375075602E-6 3.6147586518588526E-6)],
+   :final-gc-time 61112727,
+   :execution-count 277241,
+   :variance
+   [7.47335502974011E-17
+    (4.9136587085615687E-17 1.136344094983342E-16)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10228579306,
+   :lower-q
+   [3.6016133977297737E-6 (3.600020916819663E-6 3.602665770935757E-6)],
+   :warmup-executions 2831090,
+   :sample-count 60,
+   :upper-q
+   [3.63128058530304E-6 (3.6272236410740123E-6 3.6375519529939664E-6)],
+   :total-time 60.085448694,
+   :sample-variance [7.327890567666051E-17 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.612106957123947E-6 (3.586426027407717E-6 3.6377878868401767E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (998561091
+    1005378519
+    998749375
+    999530220
+    998779339
+    1000751712
+    1000265218
+    1000991511
+    1000041830
+    1004112402
+    1002489389
+    1004262354
+    1005413773
+    999877204
+    999647893
+    1000643530
+    1004511645
+    999770754
+    999691082
+    1000728799
+    998611278
+    1004869279
+    1000670649
+    1004087756
+    998083094
+    999156252
+    1000217533
+    1007096010
+    1000195146
+    1000122280
+    997731930
+    998512004
+    998599363
+    998278009
+    998554915
+    998186528
+    998560029
+    998901227
+    998567328
+    1000476598
+    1006586320
+    998006314
+    997931129
+    999243936
+    999330149
+    998388442
+    998924884
+    998450270
+    998980121
+    1002928883
+    1000281466
+    998920410
+    1001402389
+    1000460905
+    1000052343
+    1000780716
+    1000146877
+    999954868
+    999558890
+    1000852713),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.6554229377984024E-5
+    (3.653532451281302E-5 3.6580179764079706E-5)],
+   :final-gc-time 76910094,
+   :execution-count 27368,
+   :variance
+   [7.21751697984937E-15
+    (4.517218256194124E-15 1.0893586111174702E-14)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 8, :high-severe 1},
+   :warmup-time 10742908583,
+   :lower-q
+   [3.6463429150833095E-5 (3.64561506138556E-5 3.6470777007819354E-5)],
+   :warmup-executions 294247,
+   :sample-count 60,
+   :upper-q
+   [3.675871874177872E-5 (3.670640856566063E-5 3.6798304954691615E-5)],
+   :total-time 60.024856873,
+   :sample-variance [7.06108293635738E-15 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.655416110847219E-5 (3.630207035809206E-5 3.6806251858852316E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (987398267
+    1001160462
+    998475511
+    1009863053
+    1003970220
+    1002579431
+    1008734336
+    1008249385
+    1001376458
+    1003060073
+    1005278017
+    999143823
+    1003135234
+    1001672150
+    999050192
+    1003116851
+    1000838464
+    999929488
+    1000120086
+    998295269
+    1000927560
+    1001805642
+    998645775
+    1002649253
+    1010737188
+    998606395
+    999927051
+    1000491597
+    998716114
+    1001156120
+    1000094678
+    1003973421
+    1000799850
+    1001302094
+    1000121021
+    1000019011
+    1005734135
+    999971561
+    1000203527
+    1002159280
+    1001019786
+    1000643971
+    1001957418
+    1002506201
+    1001484414
+    1001717579
+    1001947457
+    999088131
+    1000778358
+    1002298726
+    999897296
+    1000734950
+    1001619392
+    998919257
+    1002868741
+    1002780097
+    1001641256
+    1001885341
+    1001288709
+    998430949),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [4.0122146738114323E-4 (4.008922169070513E-4 4.015102970953526E-4)],
+   :final-gc-time 224426710,
+   :execution-count 2496,
+   :variance
+   [1.7980520200877004E-12
+    (9.404504329823304E-13 3.811632318233987E-12)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 1, :low-mild 0, :high-mild 3, :high-severe 1},
+   :warmup-time 10006254406,
+   :lower-q
+   [3.9995804046474365E-4
+    (3.955922544070513E-4 4.0005516061698723E-4)],
+   :warmup-executions 25256,
+   :sample-count 60,
+   :upper-q
+   [4.042854810496795E-4 (4.0285155406650646E-4 4.049427836538462E-4)],
+   :total-time 60.086996072,
+   :sample-variance [1.670875699332097E-12 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [4.0122192889957266E-4
+    (3.973440581830597E-4 4.0509979961608566E-4)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (961231141
+    1104029184
+    1239416211
+    1144676616
+    1263540636
+    1314438389
+    1354041594
+    1314656257
+    975184988
+    1162467535
+    954142636
+    940138614
+    963259145
+    687358698
+    949301131
+    641910704
+    673797156
+    965891215
+    625448454
+    611585582
+    614402173
+    620044359
+    632088661
+    620328130
+    624045191
+    620065146
+    995488163
+    552413638
+    573305012
+    554251478
+    559977969
+    560404845
+    577202025
+    557934375
+    577390341
+    562374835
+    567643775
+    558391236
+    570421707
+    550681182
+    574008770
+    552077829
+    567597053
+    577374822
+    552622211
+    568615802
+    1346184548
+    525136871
+    501372453
+    509371253
+    516175910
+    493312686
+    533527722
+    501701175
+    501687854
+    524857262
+    490106546
+    511511277
+    510023787
+    496507845),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.006431303013541666 (0.005824883451339285 0.007043262119345238)],
+   :final-gc-time 2430709416,
+   :execution-count 112,
+   :variance
+   [5.735028029492165E-6 (3.7827607678761524E-6 7.869628151128266E-6)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.9815172628603788,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+   :warmup-time 14894908673,
+   :lower-q
+   [0.004404577553571428 (0.004375951303571429 0.0044778773970982145)],
+   :warmup-executions 1591,
+   :sample-count 60,
+   :upper-q
+   [0.011884867164955355 (0.011017106495758926 0.012089657089285714)],
+   :total-time 43.249143803,
+   :sample-variance [5.672981042157861E-6 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.0064358844944940475 (-7.09521678665092E-4 0.013581290667653186)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/transient_loop_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1000925945
+    998222757
+    1000295849
+    1001727659
+    1000445867
+    999674645
+    1003465756
+    999821763
+    999648529
+    999220179
+    999976626
+    999928051
+    999915583
+    998735986
+    1002752902
+    1005671148
+    1000357157
+    1000413376
+    998880525
+    1001044628
+    1000180101
+    998603483
+    998719826
+    999415649
+    1000683150
+    1000779579
+    1000251477
+    999011676
+    1000196824
+    998938150
+    999758409
+    999622336
+    999781625
+    999454521
+    998963515
+    999502471
+    998498251
+    999827777
+    1005259235
+    1000067851
+    999820380
+    1000147245
+    1004151189
+    1000202235
+    1005701823
+    999179776
+    998904940
+    999688468
+    1003678799
+    999780563
+    1004805193
+    998604813
+    999975911
+    1004202106
+    1003133798
+    1001780954
+    999895361
+    999910105
+    1000836793
+    1000630343),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [2.8153448619451654E-7
+    (2.8141555854942773E-7 2.8167780395071067E-7)],
+   :final-gc-time 64275219,
+   :execution-count 3553926,
+   :variance
+   [2.781642974858734E-19
+    (1.6268064694765299E-19 4.12996067290334E-19)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 5, :high-severe 4},
+   :warmup-time 10360167515,
+   :lower-q
+   [2.8095639892333156E-7
+    (2.808788807082646E-7 2.8100175529119066E-7)],
+   :warmup-executions 36657770,
+   :sample-count 60,
+   :upper-q
+   [2.828589619972391E-7
+    (2.8255201724093297E-7 2.8298333251733435E-7)],
+   :total-time 60.033671632,
+   :sample-variance [2.7713456502539864E-19 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [2.815368676406506E-7 (2.799575604871087E-7 2.8311617479419244E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (997786704
+    1006564895
+    1001674799
+    999537617
+    998767284
+    997748179
+    999647225
+    1003245472
+    1001573301
+    999971660
+    998673951
+    999918377
+    999010927
+    1000153423
+    998558775
+    999097428
+    1004439227
+    1001280159
+    999139417
+    1001633675
+    1009527405
+    1008243826
+    1004045920
+    1001179218
+    999132950
+    999072517
+    998408455
+    1002243155
+    1001294428
+    999088273
+    999567617
+    1000786674
+    1000619158
+    1000860065
+    999746456
+    1007492857
+    1003047956
+    1011083740
+    1004093162
+    1000546060
+    1002563336
+    1004126066
+    999914461
+    998927591
+    998627746
+    1000168199
+    1005247051
+    1004203771
+    1004429044
+    1003731727
+    998867856
+    1001305360
+    998099010
+    1002655130
+    1000263819
+    999659722
+    997926900
+    998657413
+    999795716
+    1001566074),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.5193678398630331E-6
+    (1.5183679773862995E-6 1.5206342940994982E-6)],
+   :final-gc-time 66521488,
+   :execution-count 659040,
+   :variance
+   [2.1327941947121368E-17
+    (1.3543585391048041E-17 3.400852335137032E-17)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 11332085985,
+   :lower-q
+   [1.514000218499636E-6
+    (1.5139417622602573E-6 1.5146063955905561E-6)],
+   :warmup-executions 7460310,
+   :sample-count 60,
+   :upper-q
+   [1.5303486809601847E-6
+    (1.5257878166727364E-6 1.5341765901917942E-6)],
+   :total-time 60.079238379,
+   :sample-variance [2.0286254286815586E-17 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.5193624660870358E-6
+    (1.505850386728871E-6 1.5328745454452006E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1002947400
+    1002009874
+    1001669882
+    1005160151
+    1004747619
+    1002642101
+    1003159578
+    1001802050
+    1002478350
+    1001624999
+    1001106200
+    1004361324
+    1001973839
+    1002919900
+    1003864928
+    1005566602
+    1003115969
+    1007316886
+    1006935596
+    1005500894
+    1001748191
+    1001579496
+    1003657225
+    1005607442
+    1007174835
+    1002796940
+    1007958447
+    1001536180
+    1001752850
+    1000943761
+    1000570974
+    1004641011
+    1001854571
+    1002168759
+    1004797735
+    1006295267
+    1005976698
+    1001970297
+    1005969441
+    1002380221
+    1001574375
+    1002303595
+    1001854592
+    1001904136
+    1001181116
+    1002484696
+    1001442338
+    1000922842
+    1003804590
+    1000842507
+    1002045607
+    1002317229
+    1000895153
+    1003790884
+    1003463635
+    1001943408
+    1002638238
+    1001369092
+    1008844400
+    1001634815),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [4.00335236431479E-5 (4.001467861095592E-5 4.005552363516642E-5)],
+   :final-gc-time 63756243,
+   :execution-count 25058,
+   :variance
+   [6.512629634721399E-15
+    (4.512286985515124E-15 9.440434321361315E-15)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 10979670061,
+   :lower-q
+   [3.994103707398835E-5 (3.993020089392609E-5 3.994507785936627E-5)],
+   :warmup-executions 274477,
+   :sample-count 60,
+   :upper-q
+   [4.021016167690957E-5 (4.016601961249901E-5 4.0260371937105915E-5)],
+   :total-time 60.189541731,
+   :sample-variance [6.445031426975287E-15 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [4.0033483472344165E-5 (3.979264061311272E-5 4.027432633157561E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1002387756
+    1003781890
+    1006641494
+    1003018255
+    1004356607
+    1003780677
+    1002184303
+    1004823139
+    1003889250
+    1005732311
+    1005388032
+    1007515600
+    1002153359
+    1005787345
+    1003783678
+    1003737779
+    1001835325
+    1003837210
+    1008447038
+    1011466254
+    1004771384
+    1016541351
+    1005386222
+    1003879391
+    1012938317
+    1004331649
+    1005569563
+    1004392606
+    1007240251
+    1012108994
+    1003286152
+    1020582245
+    1002510755
+    1006933378
+    1004965795
+    1005672048
+    1001181674
+    1004499273
+    1004690980
+    1006572035
+    1002814607
+    1003711538
+    1002387698
+    1009548087
+    1003352032
+    1002067015
+    1003489929
+    1002916900
+    1003363606
+    1002947420
+    1003461711
+    1002716419
+    1003599030
+    1002419711
+    1003549666
+    1001531910
+    1003552743
+    1002985345
+    1002349192
+    1005926098),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.0032844937184640524
+    (0.0032820577378540306 0.0032880693289215686)],
+   :final-gc-time 73623925,
+   :execution-count 306,
+   :variance
+   [1.481865411512168E-10
+    (7.233162075830419E-11 2.834784029368988E-10)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 2},
+   :warmup-time 10742882343,
+   :lower-q
+   [0.003272980098039216 (0.0032718355359477127 0.003274910871895425)],
+   :warmup-executions 3276,
+   :sample-count 60,
+   :upper-q
+   [0.0033164376138888887
+    (0.0033024677276960786 0.003335236094771242)],
+   :total-time 60.301292022,
+   :sample-variance [1.3411366421155396E-10 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.003284384097058824 (0.0032496418608339637 0.003319126333283684)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1277979465
+    1278476621
+    1277669548
+    1278915978
+    1277989005
+    1297060511
+    1279439720
+    1283079562
+    1282003336
+    1279500481
+    1278362575
+    1289041781
+    1291486813
+    1283478307
+    1281147723
+    1285649365
+    1282101710
+    1279654622
+    1282815202
+    1287039585
+    1281416059
+    1280671371
+    1286604250
+    1283955249
+    1281295680
+    1281526328
+    1282630229
+    1280429587
+    1283349427
+    1283380255
+    1289694857
+    1282142801
+    1281317195
+    1282202364
+    1285497810
+    1290794114
+    1283547943
+    1283402668
+    1292210504
+    1283230968
+    1282125265
+    1283225753
+    1290054377
+    1287989125
+    1287831971
+    1283276411
+    1383947189
+    1287116923
+    1280992051
+    1280398930
+    1279894398
+    1290966569
+    1287660245
+    1281245236
+    1282150131
+    1281213556
+    1283557403
+    1280889776
+    1281190957
+    1297057477),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean [0.3214182627125 (0.3208443925791667 0.3239017773041667)],
+   :final-gc-time 274393538,
+   :execution-count 4,
+   :variance
+   [1.1815016073210469E-5 (1.068086164143798E-6 6.657547485252356E-5)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.01638888888888889,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 1},
+   :warmup-time 11872276605,
+   :lower-q [0.31945532251875003 (0.319417387 0.3196041867125)],
+   :warmup-executions 37,
+   :sample-count 60,
+   :upper-q [0.32426436925 (0.322809924275 0.34598679725000003)],
+   :total-time 77.124975312,
+   :sample-variance [1.1671596184074926E-5 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.32135406380000003 (0.3111049484402885 0.33160317915971155)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (31033532276
+    31094302052
+    31060093574
+    31082031984
+    31119599261
+    31120543545
+    31071722151
+    31106347023
+    31084336724
+    31104239313
+    31110006937
+    31092011926
+    31075725424
+    31082737299
+    31155698892
+    31094727534
+    31133102564
+    33671725232
+    32770934017
+    32228233377
+    30582875481
+    30489604097
+    30580308982
+    30560393599
+    30809319909
+    31126581022
+    30644447891
+    30579312670
+    30634612611
+    30586653486
+    30588995556
+    29980154027
+    30000302560
+    29992400380
+    30041247641
+    29975193969
+    29959136574
+    29981540412
+    30021845703
+    29962580074
+    29988296959
+    29968128771
+    30118763242
+    30000639255
+    30044184960
+    29987057586
+    30024748214
+    30007745226
+    30056430684
+    29993445012
+    30049217705
+    29981200133
+    30698275357
+    30125682685
+    30163860307
+    30074285021
+    30064725948
+    30097606289
+    30119765277
+    30063564296),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean [30.605223194316668 (30.459046170183335 30.832617120833334)],
+   :final-gc-time 1188138959,
+   :execution-count 1,
+   :variance
+   [0.5353869078629294 (0.2899084183413307 1.105562684470279)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.11046532428184194,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 124078813170,
+   :lower-q [29.962580074 (29.959136574000002 29.975193969000003)],
+   :warmup-executions 4,
+   :sample-count 60,
+   :upper-q [32.4766127205 (31.130004831550004 33.671725232)],
+   :total-time 1836.016780676,
+   :sample-variance [0.5171436434608188 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [30.600279677933337 (28.442898675155345 32.75766068071133)],
+   :results :brokvolli.performance.measure-utilities/results-elided}},
+ "brokvolli.performance.measure_zip/mapv_entry_zippered"
+ {1
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (995334253
+    994132646
+    995559197
+    995032176
+    995273945
+    1006218443
+    994073861
+    997213757
+    993897972
+    1011749065
+    1004827900
+    1006961750
+    1007177634
+    999913350
+    999049731
+    999124912
+    999015491
+    1020184237
+    1017434061
+    1010155646
+    1005178127
+    1001562274
+    1007969410
+    1003762068
+    1002012319
+    1003673058
+    1005294691
+    1001092397
+    1001232784
+    1002761646
+    1003632033
+    1007133214
+    1006413228
+    995958173
+    996257068
+    994380762
+    995169701
+    995276463
+    996718330
+    992028117
+    992186961
+    997894779
+    993556289
+    1001197263
+    998152279
+    996573454
+    998472235
+    998378150
+    999923682
+    997026550
+    998460335
+    997436824
+    996447913
+    997595516
+    993503337
+    1000177483
+    994577457
+    996022608
+    994383569
+    995056697),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [3.5003194973053346E-7
+    (3.495399664206703E-7 3.5057313715462586E-7)],
+   :final-gc-time 52859206,
+   :execution-count 2856817,
+   :variance
+   [4.398872097903311E-18
+    (2.8456174754514976E-18 7.361799445760916E-18)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 2, :high-severe 0},
+   :warmup-time 10025465694,
+   :lower-q
+   [3.473050464905523E-7 (3.472494447491737E-7 3.478704221166424E-7)],
+   :warmup-executions 28361611,
+   :sample-count 60,
+   :upper-q
+   [3.54932364892466E-7 (3.5269788593389076E-7 3.5710521079929167E-7)],
+   :total-time 59.996859271,
+   :sample-variance [4.315724148278655E-18 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [3.5002159904420436E-7
+    (3.4378930273108604E-7 3.562538953573226E-7)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1017990005
+    998190035
+    996896736
+    997258320
+    995481462
+    997715039
+    996876338
+    998693590
+    995395381
+    996921609
+    994490442
+    994166500
+    993307527
+    994097780
+    995027609
+    995060858
+    995118111
+    995524062
+    994904474
+    1014549769
+    1018476827
+    1004266642
+    1001720465
+    1010560001
+    1001844227
+    1010553449
+    995635920
+    995781792
+    995099492
+    994909177
+    998470343
+    997460796
+    996730407
+    995187457
+    995703992
+    996105526
+    998010473
+    993643186
+    994862887
+    995435027
+    998832683
+    996519949
+    995307812
+    995701660
+    994294684
+    994655393
+    994671024
+    995898271
+    997120808
+    1002572994
+    998397398
+    998471824
+    997136179
+    995255442
+    997517074
+    996338193
+    994953005
+    994834560
+    1003649657
+    1003809884),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.7549604314561074E-6
+    (1.7528511527412987E-6 1.7576090678389223E-6)],
+   :final-gc-time 56185813,
+   :execution-count 568818,
+   :variance
+   [1.0102093214784918E-16
+    (4.917196786798732E-17 1.7732756770655961E-16)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 5},
+   :warmup-time 10986025126,
+   :lower-q
+   [1.746856087535908E-6
+    (1.7462659884180882E-6 1.7478831320387192E-6)],
+   :warmup-executions 6251895,
+   :sample-count 60,
+   :upper-q
+   [1.7839033480832185E-6
+    (1.7713349712473938E-6 1.7905144123427881E-6)],
+   :total-time 59.894062227,
+   :sample-variance [9.708498998069973E-17 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.7549275347299138E-6
+    (1.7253680200210033E-6 1.7844870494388242E-6)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1014009753
+    1004193754
+    996356291
+    996035927
+    995750973
+    1004391390
+    998812301
+    996179478
+    1002445312
+    999616429
+    997693753
+    999216962
+    996879745
+    998373683
+    1003920046
+    1022653699
+    1001757217
+    999742353
+    997391551
+    997769336
+    998803161
+    996844277
+    997001293
+    997809317
+    994998550
+    997745954
+    998771934
+    1000049692
+    996844183
+    1000535094
+    996833214
+    998989120
+    996698791
+    995982338
+    1015495543
+    1017122064
+    1006612181
+    1010391336
+    1006294615
+    1004631628
+    1004010636
+    1002206310
+    999340364
+    998559326
+    999288320
+    999123237
+    1007237800
+    999605065
+    1002344022
+    1002392991
+    1007675142
+    1004766606
+    999636701
+    995693810
+    996697487
+    998029802
+    998173530
+    997922655
+    995735590
+    994557182),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.5840595419297662E-5 (1.58208362230768E-5 1.5867472366498387E-5)],
+   :final-gc-time 54709470,
+   :execution-count 63189,
+   :variance
+   [8.353910513640628E-15
+    (4.5573458553405676E-15 1.495329752037319E-14)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 1},
+   :warmup-time 10645182464,
+   :lower-q
+   [1.574638861194195E-5 (1.573940372533194E-5 1.575816830342306E-5)],
+   :warmup-executions 670094,
+   :sample-count 60,
+   :upper-q
+   [1.6073109501258128E-5
+    (1.594700251626074E-5 1.6184046258051242E-5)],
+   :total-time 60.054640814,
+   :sample-variance [8.169674144105915E-15 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.583995126103172E-5
+    (1.5568792511777795E-5 1.6111110010285646E-5)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  1000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (999984796
+    1001660960
+    1005101864
+    1003140702
+    1002600297
+    1001310762
+    1001321756
+    1002341648
+    1002816816
+    1001742919
+    1001705235
+    1000700338
+    1001743156
+    1008843941
+    1012635279
+    1014576797
+    1005799119
+    1009583562
+    1003098145
+    1001012141
+    1007729745
+    1003933073
+    1001875042
+    1001103665
+    1005461831
+    1003345996
+    1001555156
+    1002250345
+    1002239605
+    1001069704
+    1003778929
+    1001061680
+    1003931887
+    1009516070
+    1006984244
+    1009226616
+    1002668956
+    1001923631
+    1001147459
+    1002284164
+    1001797279
+    1001330209
+    1001840323
+    1002612489
+    1000881212
+    1002729934
+    1002717931
+    1008850702
+    1007238590
+    1003877049
+    1002022733
+    1004254923
+    1001344483
+    1003407198
+    999993218
+    1003187807
+    1001203622
+    1012987756
+    1002975345
+    1002134877),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [1.5747403370201864E-4 (1.573617427361155E-4 1.576332585372869E-4)],
+   :final-gc-time 62744537,
+   :execution-count 6374,
+   :variance
+   [2.8185305472617973E-13
+    (1.7403104808614425E-13 4.36426121241175E-13)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888887,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 5, :high-severe 3},
+   :warmup-time 10292302510,
+   :lower-q
+   [1.5688629086915595E-4
+    (1.5688496956385315E-4 1.5703536292359586E-4)],
+   :warmup-executions 65396,
+   :sample-count 60,
+   :upper-q
+   [1.5889870245136493E-4
+    (1.5833628074992157E-4 1.5917427000313776E-4)],
+   :total-time 60.222195711,
+   :sample-variance [2.705780095435425E-13 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [1.574683498352683E-4
+    (1.5590783643068252E-4 1.5902886323985408E-4)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  10000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (1002665395
+    1022307765
+    1024940654
+    1014696590
+    1011766714
+    1008869808
+    1021549079
+    1026377778
+    1030595276
+    1018816708
+    1025301874
+    1027014467
+    1023786004
+    1020673259
+    1014883666
+    1019364998
+    1029739670
+    1043282576
+    1050507309
+    1020283197
+    1018764731
+    1016237429
+    1031689524
+    1021632875
+    1018485584
+    1011346558
+    1040295025
+    1036954276
+    1064051818
+    1062874214
+    1044386102
+    1024115177
+    1014648276
+    1014651458
+    1014181217
+    1013882060
+    1037269462
+    1044915869
+    1032734251
+    1013977516
+    1011398310
+    1019583399
+    1022940491
+    1016686848
+    1025812716
+    1022618864
+    1061902485
+    1040552823
+    1026137578
+    1044948109
+    1049392071
+    1085204452
+    1064628211
+    1094960935
+    1086156360
+    1071467383
+    1067134896
+    1070620522
+    1075197436
+    1075702055),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.0016795374697510825
+    (0.0016710609073051948 0.0016901846591991345)],
+   :final-gc-time 165850118,
+   :execution-count 616,
+   :variance
+   [1.3564741408689224E-9
+    (9.421943448410066E-10 1.9003415242807434E-9)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.09458452380615473,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 3, :high-severe 0},
+   :warmup-time 10691294208,
+   :lower-q
+   [0.0016377756623376625
+    (0.0016277035633116884 0.0016421644511363637)],
+   :warmup-executions 6541,
+   :sample-count 60,
+   :upper-q
+   [0.0017616955389610392
+    (0.0017419211068993507 0.0017775339853896106)],
+   :total-time 62.067562153,
+   :sample-variance [1.3433539851156096E-9 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.0016793171578192642 (0.00156936177656832 0.0017892725390702086)],
+   :results :brokvolli.performance.measure-utilities/results-elided},
+  100000
+  {:overhead 2.040686002872524E-9,
+   :samples
+   (961391674
+    973099851
+    1098148748
+    1102171006
+    981352329
+    1133254705
+    1156217924
+    1123648821
+    1106279008
+    1136169615
+    1138394324
+    1163245962
+    1126175758
+    1107015321
+    902015361
+    856681952
+    882125703
+    1068357473
+    827491987
+    806201496
+    811960630
+    822795479
+    834108489
+    827075136
+    838539307
+    856693964
+    1166002804
+    774694622
+    774117936
+    751083033
+    761853527
+    789382591
+    843237735
+    850323627
+    830317780
+    814568870
+    830413212
+    810954459
+    802862934
+    801732380
+    746402901
+    757405497
+    782079520
+    762587480
+    786111662
+    1369651631
+    712751925
+    703154009
+    726270594
+    710934480
+    732252730
+    731273604
+    700595806
+    728315147
+    709189968
+    732287882
+    699461870
+    708393891
+    724217383
+    717065330),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :clojure-version-string "1.12.4",
+    :java-version "11.0.29",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Ubuntu",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 4, :qualifier nil},
+    :spec-version "11",
+    :sun-arch-data-model "64"},
+   :mean
+   [0.022418299064529915 (0.02140561857094017 0.02355662339871795)],
+   :final-gc-time 1234826866,
+   :execution-count 39,
+   :variance
+   [1.8292568536239002E-5
+    (1.3012121270440149E-5 2.5862109542231867E-5)],
+   :os-details
+   {:arch "amd64",
+    :available-processors 1,
+    :name "Linux",
+    :version "5.15.0-164-generic"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.8942045866011967,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+   :warmup-time 13297930094,
+   :lower-q
+   [0.017963995025641027 (0.017934919743589746 0.018184358153846156)],
+   :warmup-executions 489,
+   :sample-count 60,
+   :upper-q
+   [0.02982681953846154 (0.029162502236538462 0.035119272589743594)],
+   :total-time 52.482560843,
+   :sample-variance [1.7905633053489708E-5 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 10000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 2.040686002872524E-9},
+   :metadata {:date {:year 2025, :month 12, :day 24}},
+   :sample-mean
+   [0.022428444804700857 (0.00973393034051565 0.03512295926888606)],
+   :results :brokvolli.performance.measure-utilities/results-elided}}}

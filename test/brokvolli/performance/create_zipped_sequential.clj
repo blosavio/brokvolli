@@ -12,7 +12,7 @@
 
 
 (defn mapv-zip
-  "Naive, base case using `mapv`."
+  "Naive, base case using `mapv`. `v` is a sequential providing the values."
   {:UUIDv4 #uuid "934b494a-f7fa-4711-bf44-058f1d8524fb"}
   [v]
   (mapv #(vector %1 %2) (range) v))
@@ -62,7 +62,7 @@
   "Uses plain `map-indexed`."
   {:UUIDv4 #uuid "71b5faee-e304-41d9-b16d-960c2132d8ac"}
   [v]
-  (map-indexed #(map-entry %1 %2) v))
+  (doall (map-indexed #(map-entry %1 %2) v)))
 
 
 (defn transduce-zip
@@ -82,8 +82,9 @@
     (loop [i 0
            tv (transient [])]
       (if (< i stop)
-        (recur (inc i) (conj! tv (map-entry i (.nth v i))))
+        (recur (inc i) (conj! tv (map-entry i (nth v i))))
         (persistent! tv)))))
+
 
 ;; `get` versus `nth` versus `.nth`
 ;; Obs: `clojure.lang.APersistentVector/get` (line 180) delegates to `.nth`

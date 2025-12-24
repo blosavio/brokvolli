@@ -18,8 +18,8 @@
 
 
 (defn measure-memory-one
-  "Given function `f` that constructs a data structure and length 10^`n`,
-  returns the memory size in bytes."
+  "Given function `f` that constructs a data structure of length 10^`n`, returns
+  the memory size in bytes."
   {:UUIDv4 #uuid "d8dcea29-a86b-459a-a7fe-d15776504f51"}
   [f n]
   (mm/measure (f n) :bytes true :shallow false))
