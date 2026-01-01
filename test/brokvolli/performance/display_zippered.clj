@@ -44,7 +44,7 @@
                      arrange-timing-data))
 
 
-;;(load-file "resources/subsections/zippered_subsections.clj")
+(load-file "resources/subsections/zippered_subsections.clj")
 
 
 (defn generate-html
@@ -59,11 +59,11 @@
                page-uuid
                (conj [:body
                       [:h1 page-title]
-                      ;;page-abstract
-                      ;;memory-subsection-preamble
+                      page-abstract
+                      memory-subsection-preamble
                       (memory-chart memory-data memory-chart-filename)
                       (memory-table memory-data max-length-pow-10)
-                      ;;benchmark-subsection-preamble
+                      benchmark-subsection-preamble
                       (timings-chart timing-data timing-chart-filename)
                       (timings-table timing-data max-length-pow-10)])
                page-copyright-holder
@@ -81,11 +81,11 @@
           (h2/html
            (vec (-> [:body
                      [:h1 page-title]
-                     ;;page-abstract
-                     ;;memory-subsection-preamble
+                     page-abstract
+                     memory-subsection-preamble
                      (memory-chart memory-data memory-chart-filename)
                      (memory-table memory-data max-length-pow-10)
-                     ;;benchmark-subsection-preamble
+                     benchmark-subsection-preamble
                      (timings-chart timing-data timing-chart-filename)
                      (timings-table timing-data max-length-pow-10)]
                     (conj [:p#page-footer

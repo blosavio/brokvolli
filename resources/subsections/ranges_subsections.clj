@@ -10,10 +10,11 @@
  uncertain. So let's make some quick measurements."]
 
    [:p "The utility tests the memory size and processing times for constructing
- a sequential of integers of lengths one, ten, ..., one million. Eight "
+ a sequential of integers of lengths one, ten, ..., one million. I considered
+ seven  "
     [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/create_range.clj"}
      "tactics"]
-    " were considered."]
+    "."]
 
    [:ul
     [:li [:p [:code "long-range"]
@@ -74,8 +75,12 @@
  space-efficient by about half an order of magnitude. All the variants that
  produce a vector are indistinguishable, as we should expect."]
 
-   [:p "Note: The memory profiler failed to descend below the root of
- `long-range`. Those memory measurements are therefore spurious."]])
+   [:p "Note: The memory profiler "
+    [:a {:href "https://github.com/clojure-goes-fast/clj-memory-meter/issues/13"}
+     "failed"]
+    " to descend below the root of "
+    [:code "long-range"]
+    ". Those memory measurements are therefore spurious."]])
 
 
 (def benchmark-subsection-preamble

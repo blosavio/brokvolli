@@ -69,12 +69,6 @@
                    transient-first-next-zippered])
 
 
-;; Need to alter `measure-memory-seq` -> `measure-memory-fn` to accept an arg
-;; to insert instead of `pow-10`, so that input range can be pre-computed and
-;; not included in memory and/or benchmark measurements.
-
-
-
 #_(do-memory-measurements zippered-fns max-length-pow-10 memory-filename)
 #_(do-benchmarks zippered-fns max-length-pow-10 time-filename :lightning)
 

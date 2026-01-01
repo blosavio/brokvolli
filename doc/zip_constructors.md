@@ -2,7 +2,75 @@
   <body>
     <h1>
       Memory and timing measurements of various zippers
-    </h1><img alt="Memory usage vs ranged sequential lengths, comparing different construction tactics." src="img/zip_memory.svg">
+    </h1>
+    <div>
+      <h3>
+        <em>What are the memory and processing trade-offs for different tactics of constructing a &apos;zippered&apos; structure of indexes and a vector&apos;s
+        elements?</em>
+      </h3>
+      <p>
+        One strategy for implementing a <code>transduce-kv</code> involves feeding a &apos;zippered&apos; thingy, a sequential consisting of 2-tuples of
+        index+elements. I considered nine tactics for generating such a zippered thing.
+      </p>
+      <ul>
+        <li>
+          <p>
+            <code>mapv-zip</code> is the naive, base case, merely globbing an index onto each element and stuffing it into a two-element vector.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>mapv-entry-zip</code> is similar, but tests if using a <code>MapEntry</code> causes measurably different performance.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>pmap-zip</code> is similar to the base case, but uses <code>pmap</code>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>long-range-zip</code> uses a primitive vector of <code>long</code>s to supply the indexes.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>long-array-zip</code> uses a Java array of <code>long</code>s.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>map-indexed-zip</code> uses the index supplied by <code>map-indexed</code>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>transduce-zip</code> transduces with <code>map-indexed</code>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>transient-loop-zip</code> conjoins onto a transient vector in a loop, avoiding creation of a secondary sequential to supply the indexes.
+          </p>
+        </li>
+        <li>
+          <p>
+            <code>transient-first-next-zip</code> conjoins onto a transient vector using a recursive <code>first/next</code> idiom, avoiding creation of a
+            secondary sequential.
+          </p>
+        </li>
+      </ul>
+      <p>
+        From a high-level view, all tactics use a similar amount of memory. Performance-wise, the transducer, first/next transient, and map-indexed tactics
+        provide the best performance, followed by the two mapv variants.
+      </p>
+    </div>
+    <div>
+      <h2>
+        Memory usage
+      </h2>
+      <p></p>
+    </div><img alt="Memory usage vs ranged sequential lengths, comparing different construction tactics." src="img/zip_memory.svg">
     <table>
       <caption>
         size in bytes
@@ -243,7 +311,13 @@
           8539264
         </td>
       </tr>
-    </table><img alt="XY chart of benchmark timings vs sequential lengths." src="img/zip_timings.svg">
+    </table>
+    <div>
+      <h2>
+        Benchmark timings
+      </h2>
+      <p></p>
+    </div><img alt="XY chart of benchmark timings vs sequential lengths." src="img/zip_timings.svg">
     <table>
       <caption>
         times in seconds, <em>mean±std</em>
@@ -486,8 +560,8 @@
       </tr>
     </table>
     <p id="page-footer">
-      Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 December 24 .<span id="uuid"><br>
+      Copyright © 2024–2026 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 January 01 .<span id="uuid"><br>
       e378c649-434d-4237-a25d-cbdc0759e798</span>
     </p>
   </body>
