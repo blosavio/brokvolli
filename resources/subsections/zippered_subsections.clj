@@ -27,7 +27,7 @@
  and stuffing it into a two-element vector."]]
 
     [:li [:p [:code "mapv-entry-zip"]
-          " is similar, but tests if using a "
+          " is similar, but investigates if using a "
           [:code "MapEntry"]
           " causes measurably different performance."]]
 
@@ -150,9 +150,8 @@
            "pmap-zippered"]]]]
 
    [:p "The transduce, transient-first/next, and map-indexed zipper variants
- demonstrate the fastest performance on these tests. Considering memory
- consumption, transient-first/next and map-indexed provide a bit more efficiency
- than the transduce variant."]
+ demonstrate the fastest performance on these tests. The transduce variant and
+ map-indexed provide a bit more memory efficiency than transient-first/next."]
 
    [:p "The map-indexed tactic has the strong benefit that it requires no
  implementation cleverness; it's built-in and idiomatic."]])

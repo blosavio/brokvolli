@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2026-01-02 14:39:44" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2026-01-02 16:10:23" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       Memory and timing measurements of various zippers
@@ -37,7 +37,7 @@
         </li>
         <li>
           <p>
-            <code>mapv-entry-zip</code> is similar, but tests if using a <code>MapEntry</code> causes measurably different performance.
+            <code>mapv-entry-zip</code> is similar, but investigates if using a <code>MapEntry</code> causes measurably different performance.
           </p>
         </li>
         <li>
@@ -657,8 +657,8 @@
         </tr>
       </table>
       <p>
-        The transduce, transient-first/next, and map-indexed zipper variants demonstrate the fastest performance on these tests. Considering memory
-        consumption, transient-first/next and map-indexed provide a bit more efficiency than the transduce variant.
+        The transduce, transient-first/next, and map-indexed zipper variants demonstrate the fastest performance on these tests. The transduce variant and
+        map-indexed provide a bit more memory efficiency than transient-first/next.
       </p>
       <p>
         The map-indexed tactic has the strong benefit that it requires no implementation cleverness; it's built-in and idiomatic.

@@ -9,16 +9,16 @@
  optimizations and the non-determinism of the OS environment make it even more
  uncertain. So let's make some quick measurements."]
 
-   [:p "The utility tests the memory size and processing times for constructing
- a sequential of integers of lengths one, ten, ..., one million. Let's consider
- seven  "
+   [:p "We will measure the memory size and processing times for constructing a
+ sequential of integers of lengths one, ten, ..., one million. Let's consider
+ seven "
     [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/create_range.clj"}
      "tactics"]
     "."]
 
    [:ul
     [:li [:p [:code "long-range"]
-          " fully realizes a "
+          " creates a "
           [:code "clojure.lang.LongRange"]
           ". The naive, base case."]]
 
@@ -37,16 +37,14 @@
           "."]]
 
     [:li [:p [:code "transducer-range"]
-          ", a transducer variant of "
+          " is a transducer variant of "
           [:code "into"]
           ", analogous to "
           [:code "vector-range-1"]
           "."]]
 
     [:li [:p [:code "transient-range"]
-          " "
-          [:cond "conj"]
-          "-es onto a transient vector."]]
+          " conjoins onto a transient vector."]]
 
     [:li [:p [:code "long-array-range"]
           " returns a Java array of longs constructed with "
@@ -90,9 +88,9 @@
   [:div
    [:h2 "Benchmark timings"]
 
-   [:p "Realizing a "
+   [:p "Creating a "
     [:code "LongRange"]
-    " appears to be the consistently fastest variant, closely followed by the
+    " appears to consistently be the fastest variant, closely followed by the
  transducer and transient variants. The Java array of longs is nearly two
  orders of magnitude slower."]])
 
@@ -152,9 +150,11 @@
    [:p "Instances of Clojure "
     [:code "LongRange"]
     ", vector ranges, and the transducer and transient variants demonstrate
- the best performance on these tests along with tolerable memory consumption."]
+ the best performance on these tests, while offering tolerable memory
+ consumption."]
 
-   [:p "Opinion: Consume additional memory (within reason) to gain speed."]
+   [:p "Opinion for this application: Consume additional memory (within reason)
+ to gain speed."]
 
    [:p "Additionally, an instance of "
     [:code "LongRange"]

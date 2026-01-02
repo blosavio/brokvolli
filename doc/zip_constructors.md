@@ -29,7 +29,7 @@
         </li>
         <li>
           <p>
-            <code>mapv-entry-zip</code> is similar, but tests if using a <code>MapEntry</code> causes measurably different performance.
+            <code>mapv-entry-zip</code> is similar, but investigates if using a <code>MapEntry</code> causes measurably different performance.
           </p>
         </li>
         <li>
@@ -649,8 +649,8 @@
         </tr>
       </table>
       <p>
-        The transduce, transient-first/next, and map-indexed zipper variants demonstrate the fastest performance on these tests. Considering memory
-        consumption, transient-first/next and map-indexed provide a bit more efficiency than the transduce variant.
+        The transduce, transient-first/next, and map-indexed zipper variants demonstrate the fastest performance on these tests. The transduce variant and
+        map-indexed provide a bit more memory efficiency than transient-first/next.
       </p>
       <p>
         The map-indexed tactic has the strong benefit that it requires no implementation cleverness; it&apos;s built-in and idiomatic.

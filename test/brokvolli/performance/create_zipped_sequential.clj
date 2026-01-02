@@ -77,13 +77,11 @@
   sequential for the indexes."
   {:UUIDv4 #uuid "92dd0dd1-5180-44d8-ba4d-3b2a40945b73"}
   [v]
-  (let [stop (count v)
-        f nth]
-    (loop [i 0
-           tv (transient [])]
-      (if (< i stop)
-        (recur (inc i) (conj! tv (map-entry i (nth v i))))
-        (persistent! tv)))))
+  (loop [i 0
+         tv (transient [])]
+    (if (< i (count v))
+      (recur (inc i) (conj! tv (map-entry i (nth v i))))
+      (persistent! tv))))
 
 
 ;; `get` versus `nth` versus `.nth`
@@ -102,7 +100,7 @@
          i 0
          v2 (transient [])]
     (if (seq v1)
-      (recur (next v1) (inc i) (conj! v2 [i (first v1)]))
+      (recur (next v1) (inc i) (conj! v2 (map-entry i (first v1))))
       (persistent! v2))))
 
 
