@@ -5,12 +5,12 @@
  constructing a sequential of "
      [:code "1-n"] "?"]]
 
-   [:p "I can only guess, and the unpredictability of the JVM's dynamic
+   [:p "We could merely guess, and the unpredictability of the JVM's dynamic
  optimizations and the non-determinism of the OS environment make it even more
  uncertain. So let's make some quick measurements."]
 
    [:p "The utility tests the memory size and processing times for constructing
- a sequential of integers of lengths one, ten, ..., one million. I considered
+ a sequential of integers of lengths one, ten, ..., one million. Let's consider
  seven  "
     [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/create_range.clj"}
      "tactics"]
@@ -59,28 +59,31 @@
           "."]]]
 
    [:p "Don't read too much into the data, just get a sense for the general
- trends. Overall, the Java arrays of longs and vectors-of-primitives are the
- most memory-efficient, while the transducer, transient, and range tactics
- are the most time efficient."]
+ trends. Overall, long ranges, Java arrays of longs, and vectors-of-primitives
+ are the most memory-efficient, while the transducer, transient, and range
+ tactics are the most time efficient."]
 
-   [:p "The Clojure vector-of-primitives may offer the best combination of
- memory efficiency and performance."]])
+   [:p "A long-range seems to offer the best combination of memory efficiency
+ and performance."]])
 
 
 (def memory-subsection-preamble
   [:div
    [:h2 "Memory usage"]
 
-   [:p "The Java long array and the Clojure primitive vector are the most
- space-efficient by about half an order of magnitude. All the variants that
- produce a vector are indistinguishable, as we should expect."]
-
-   [:p "Note: The memory profiler "
+   [:p "An instance of "
+    [:code "clojure.lang.LongRange"]
+    " is an "
+    [:a {:href "https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/LongRange.java"}
+     "efficient, special case"]
+    ", which allows it consume a fixed, "
     [:a {:href "https://github.com/clojure-goes-fast/clj-memory-meter/issues/13"}
-     "failed"]
-    " to descend below the root of "
-    [:code "long-range"]
-    ". Those memory measurements are therefore spurious."]])
+     "relatively-small"]
+    " amount of memory."]
+
+   [:p "Beyond that, the Java long array and the Clojure primitive vector are
+ the most space-efficient by about half an order of magnitude. All the variants
+ that produce a vector are indistinguishable, as we should expect."]])
 
 
 (def benchmark-subsection-preamble
@@ -92,4 +95,69 @@
     " appears to be the consistently fastest variant, closely followed by the
  transducer and transient variants. The Java array of longs is nearly two
  orders of magnitude slower."]])
+
+
+(def commentary-subsection
+  [:div
+   [:h2 "Commentary"]
+
+   [:p "Let's eye-ball the observations into coarse tiers."]
+
+   [:table
+    [:tr
+     [:th "tier"]
+     [:th "memory"]
+     [:th "performance"]]
+
+    [:tr
+     [:td "0"]
+     [:td [:div
+           [:strong "long-range"]]]
+     [:td ""]]
+
+    [:tr
+     [:td "1"]
+     [:td [:div
+           "long-array-range"
+           [:br]
+           "vec-range"]]
+     [:td [:div
+           [:strong "long-range"]
+           [:br]
+           [:strong "vector-range-1"]
+           [:br]
+           [:strong "transducer-range"]
+           [:br]
+           [:strong "transient-range"]
+           [:br]]]]
+
+    [:tr
+     [:td "2"]
+     [:td [:div
+           [:strong "vector-range-1"] " & 2"
+           [:br]
+           [:strong "transducer-range"]
+           [:br]
+           [:strong "transient-range"]]]
+     [:td [:div
+           "vector-range-2"
+           [:br]
+           "vec-range"]]]
+
+    [:tr
+     [:td "3"]
+     [:td ""]
+     [:td "long-array-range"]]]
+
+   [:p "Instances of Clojure "
+    [:code "LongRange"]
+    ", vector ranges, and the transducer and transient variants demonstrate
+ the best performance on these tests along with tolerable memory consumption."]
+
+   [:p "Opinion: Consume additional memory (within reason) to gain speed."]
+
+   [:p "Additionally, an instance of "
+    [:code "LongRange"]
+    " has the happy trait that it requires no additional cleverness to
+ implement; it's built-in and idiomatic."]])
 

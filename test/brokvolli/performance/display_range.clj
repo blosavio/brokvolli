@@ -65,7 +65,8 @@
                       (memory-table memory-data max-length-pow-10)
                       benchmark-subsection-preamble
                       (timings-chart timing-data timing-chart-filename)
-                      (timings-table timing-data max-length-pow-10)])
+                      (timings-table timing-data max-length-pow-10)
+                      commentary-subsection])
                page-copyright-holder
                [:a {:href "https://github.com/blosavio/ReadMoi"} "ReadMoi"])))
     (tidy-html-document fname)))
@@ -87,7 +88,8 @@
                      (memory-table memory-data max-length-pow-10)
                      benchmark-subsection-preamble
                      (timings-chart timing-data timing-chart-filename)
-                     (timings-table timing-data max-length-pow-10)]
+                     (timings-table timing-data max-length-pow-10)
+                     commentary-subsection]
                     (conj [:p#page-footer
                            (copyright page-copyright-holder)
                            [:br]

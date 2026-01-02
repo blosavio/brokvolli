@@ -36,6 +36,7 @@
 
 
 (def range-fns [long-range
+                ;; range-range ;; runs out of Java heap space with `n` 1E6
                 vector-range-1
                 vector-range-2
                 transducer-range

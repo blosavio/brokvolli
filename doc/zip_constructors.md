@@ -9,8 +9,17 @@
         elements?</em>
       </h3>
       <p>
-        One strategy for implementing a <code>transduce-kv</code> involves feeding a &apos;zippered&apos; thingy, a sequential consisting of 2-tuples of
-        index+elements. I considered nine tactics for generating such a zippered thing.
+        One strategy for implementing <code>transduce-kv</code> involves feeding a &apos;zippered&apos; thingy, a sequential consisting of 2-tuples of
+        index+elements. For example, a vector like this...
+      </p>
+      <pre><code>[97 98 99]</code></pre>
+      <p>
+        ...gets &apos;zippered&apos; into this.
+      </p>
+      <pre><code>[[0 97] [1 98] [2 99]</code></pre>
+      <p>
+        Let&apos;s consider nine <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/create_zipped_sequential.clj">tactics</a>
+        for generating such a zippered thing.
       </p>
       <ul>
         <li>
@@ -62,14 +71,17 @@
       </ul>
       <p>
         From a high-level view, all tactics use a similar amount of memory. Performance-wise, the transducer, first/next transient, and map-indexed tactics
-        provide the best performance, followed by the two mapv variants.
+        provide the best performance.
       </p>
     </div>
     <div>
       <h2>
         Memory usage
       </h2>
-      <p></p>
+      <p>
+        All nine tactics consume memory within a factor of two or three. long-range zippers, mapv-entry zippers, transient and transducer zippers, and
+        mapv-indexed zippers form a cluster of lower-tier memory usage, while pmap zippers, transient-first/next and mapv zippers comprise a higher-tier.
+      </p>
     </div><img alt="Memory usage vs ranged sequential lengths, comparing different construction tactics." src="img/zip_memory.svg">
     <table>
       <caption>
@@ -316,7 +328,10 @@
       <h2>
         Benchmark timings
       </h2>
-      <p></p>
+      <p>
+        The performance measurements could be grouped into roughly three tiers. The fastest tier contains transduce zippers, transient first/next zippers, and
+        map-indexed zippers. pmap zippers perform consistently worse, and transient loop zippers show supra-exponential slow-downs on these tests..
+      </p>
     </div><img alt="XY chart of benchmark timings vs sequential lengths." src="img/zip_timings.svg">
     <table>
       <caption>
@@ -559,9 +574,91 @@
         </td>
       </tr>
     </table>
+    <div>
+      <h2>
+        Commentary
+      </h2>
+      <p>
+        Let&apos;s assemble a summary table.
+      </p>
+      <table>
+        <tr>
+          <th>
+            tier
+          </th>
+          <th>
+            memory
+          </th>
+          <th>
+            performance
+          </th>
+        </tr>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            <div>
+              long-range-zippered<br>
+              mapv-entry-zippered<br>
+              transient-loop-zippered<br>
+              <strong>transduce-zippered</strong><br>
+              <strong>map-indexed-zippered</strong><br>
+              long-array-zippered
+            </div>
+          </td>
+          <td>
+            <div>
+              <strong>transduce-zippered</strong><br>
+              <strong>map-indexed-zippered</strong><br>
+              <strong>transient-first-next-zippered</strong><br>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            2
+          </td>
+          <td>
+            <div>
+              pmap-zippered<br>
+              mapv-zippered<br>
+              <strong>transient-first-next-zippered</strong>
+            </div>
+          </td>
+          <td>
+            <div>
+              mapv-entry-zippered<br>
+              mapv-zippered<br>
+              long-array-zippered<br>
+              long-range-zippered
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            3
+          </td>
+          <td></td>
+          <td>
+            <div>
+              transient-loop-zippered<br>
+              pmap-zippered
+            </div>
+          </td>
+        </tr>
+      </table>
+      <p>
+        The transduce, transient-first/next, and map-indexed zipper variants demonstrate the fastest performance on these tests. Considering memory
+        consumption, transient-first/next and map-indexed provide a bit more efficiency than the transduce variant.
+      </p>
+      <p>
+        The map-indexed tactic has the strong benefit that it requires no implementation cleverness; it&apos;s built-in and idiomatic.
+      </p>
+    </div>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 January 01 .<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 January 02 .<span id="uuid"><br>
       e378c649-434d-4237-a25d-cbdc0759e798</span>
     </p>
   </body>

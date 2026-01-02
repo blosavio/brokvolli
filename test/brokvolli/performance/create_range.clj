@@ -18,6 +18,13 @@
   (doall (range n)))
 
 
+(defn range-range
+  "Returns a `clojure.lang.Range` from zero to `n`."
+  {:UUIDv4 #uuid "e00c9dd8-cb28-4c5e-9cc7-96746521e2e6"}
+  [n]
+  (doall (range 0.0 n 1.0)))
+
+
 (defn vector-range-1
   "Returns a `clojure.lang.PersistentVector` from zero to `n`. Constructed with
   `into`."
