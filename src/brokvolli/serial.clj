@@ -1,14 +1,60 @@
 (ns brokvolli.serial
-  "Provides a 'kv' variant of `clojure.core/transduce`, analogous how
+  "Provides a 'kv' variant of `clojure.core/transduce`, analogous to the way
   `reduce-kv` relates to `reduce`.")
 
 
 (defn transduce-kv
-  "The '-kv' variant of `transduce`. The analogy is
-  `transduce`:`reduce`::`transduce`:`transduce-kv`.
+  "A '-kv' variant of `transduce`, reducing with a transformation. The analogy
+  is `reduce`:`reduce-kv`::`transduce`:`transduce-kv`.
 
-  Like `reduce-kv`, `xform` and `f` are functions of zero, two, or three
-  arguments."
+  As with `transduce`, `xform` and `f` are functions of zero, one, and two
+  arguments. Works with all the `clojure.core` transducers, excepting the
+  `...-indexed` variants.
+
+  `xform` is most straightforwardly composed with [[comp-kv]], a utility that
+  composes a series of transducer functions and automatically adds an additional
+  arity that accepts the accumulating value, the key/index, and the next
+  element. While the transducer stack is walked as with `transduce`, `comp-kv`
+  makes the key/index available via [[*keydex*]],.
+
+  Example, not using the key/index:
+  ```clojure
+  (transduce-kv (comp-kv (map inc)) conj [11 22 33 44 55 66 77])
+  ;; => [12 23 34 45 56 67 78]
+
+  (transduce-kv (comp-kv (map inc)
+                         (filter even?)) conj [11 22 33 44 55 66 77])
+  ;; => [12 34 56 78]
+
+  (transduce-kv (comp-kv (map inc)
+                         (filter even?)
+                         (take 3)) conj [11 22 33 44 55 66 77])
+  ;; => [12 34 56]
+  ```
+
+  Example, using the key/index by consulting `*keydex*`:
+  ```clojure
+  (transduce-kv (comp-kv (map #(+ % (inc *keydex*)))) conj [11 22 33])
+  ;; => [12 24 36]
+
+  ;; value  *keydex*  (+ value (inc *keydex*))  eval  result
+  ;; 11     0         (+ 11 (inc 0))            12    [12]
+  ;; 22     1         (+ 22 (inc 1))            24    [12 24]
+  ;; 33     2         (+ 33 (inc 2))            36    [12 24 36]
+  ```
+
+  Another example, using the key/index by consulting `*keydex*`:
+  ```clojure
+  (transduce-kv (comp-kv (filter (fn [_] (<= *keydex* 2)))) conj [11 22 33 44 55])
+  ;; [11 22 33]
+
+  ;; value  *keydex*  (<= *keydex* 2)  result
+  ;; 11     0         true             [11]
+  ;; 22     1         true             [11 22]
+  ;; 33     2         true             [11 22 33]
+  ;; 44     3         false            [11 22 33]
+  ;; 55     4         false            [11 22 33]
+  ```"
   {:UUIDv4 #uuid "7357eed9-67ea-4269-bd65-7ec23e125328"}
   ([xform f coll] (transduce-kv xform f (f) coll))
   ([xform f init coll]
@@ -21,82 +67,54 @@
      (f ret))))
 
 
-(defn kv-ify
-  "Given a transducer function `f` of the standard three arities (zero, one, and
-  two) returns a 'kv-ified' transducer with a fourth arrity of
-  accumulation, keydex, and value that accepts the arguments from `reduce-kv`.
+(def ^{:no-doc true} *keydex*-docstring
+  "Dynamically bound to the 'current' key/index within a transducer stack
+ composed with [[comp-kv]].")
 
-  Useful to adjust the outer ('top') transducer function of a compostion. See
-  [[comp-kv]] for a utility that composes transducers while automatically
-  applying `kv-ify`.
 
-  Note: Does not preserve varargs arities, e.g., `map` transducer.
+(def ^{:dynamic true
+       :doc *keydex*-docstring}
+  *keydex*)
 
-  Example:
+
+(defn comp-kv
+  "Returns a composition of transducers, suitable for use with [[transduce-kv]].
+
+  Given a series of transducer functions `fns`, returns a composition of those
+  functions which
+
+  1. Diverts the key/index provided by `transduce-kv`, passing only the
+  accumulated value and the next element to the outer/top transducer, and
+  2. Establishes a binding context where the key/index is available from
+  `*keydex*` at any layer of the transducer stack.
+
+  Example with `comp-kv`:
   ```clojure
-  (kv-ify (filter #(even? (%1))))
-  ```"
-  {:UUIDv4 #uuid "5706173d-d907-4df1-8bb0-8c140e22a9bc"}
-  [f]
+  (comp-kv (map inc)
+           (filter (fn [_] #(<= *keydex* 2)))
+           (take 3))
+  ```
+  ...returns a 'kv' transducer that
+
+  1. Increments each element,
+  2. Retains all elements with an index less than or equal to two, and
+  3. Takes the first three elements, if available.
+
+  Note: Some transducer functions may not involve the actual value, e.g.,
+  filtering based on the index. In those cases, the `#(...)` anonymous function
+  shorthand may be problematic because an argument will be be passed, but the
+  `%` doesn't appear, thus the compiler assumes a zero arity. Instead, use the
+  `(fn [_] (...))` idiom to discard the argument. See the `filter` expression in
+  the middle line of the example above."
+  {:UUIDv4 #uuid "29baf051-d192-4688-a978-139a8f886721"}
+  [& fns]
   (fn [rf]
-    (let [g (f rf)]
+    (let [g ((apply comp fns) rf)]
       (fn
         ([] (g))
         ([result] (g result))
         ([result input] (g result input))
-        ([acc k v] (g acc [k v]))))))
-
-
-(defn comp-kv
-  "Returns a compostion of transducers, suitable for use with [[transduce-kv]].
-
-  Given a series of transducer functions `fns` returns a composition of those
-  functions with
-  1. The outer/top transducer [[kv-ify]]-ed, ready to accept the initial
-  discrete key+values supplied by `transduce-kv`, and
-  2. A final transducer appended that removes the in-band keydexes.
-
-  `(comp-kv)` returns `identity`.
-
-  Example with `comp-kv`:
-  ```clojure
-  (transduce-kv (comp-kv
-                 (map #(vector (% 0) (inc (% 1))))
-                 (filter #(even? (% 0)))
-                 (take 3))
-                conj
-                [11 22 33 44 55 66 77 88 99])
-  ;; => [12 34 56]
-  ```
-
-  Is equivalent to this example with `clojure.core/comp`:
-
-  ```clojure
-  (transduce-kv (comp
-                 (kv-ify (map #(vector (% 0) (inc (% 1)))))
-                 (filter #(even? (% 0)))
-                 (take 3)
-                 (map second))
-                conj
-                [11 22 33 44 55 66 77 88 99])
-  ;; => [12 34 56]
-  ```
-
-  To retain the final keydex+value 2-tuple, explicitly add a trailing transducer
-  `(map #(vector :ignored (% 0) (% 1)))`.
-
-  Example:
-  ```clojure
-  (transduce-kv (comp-kv
-                 (map #(vector (% 0) (% 1)))
-                 (map #(vector :foo [(% 0) (% 1)])))
-                conj
-                [11 22 33])
-  ;; => [[0 11] [1 22] [2 33]]
-  ```"
-  {:UUIDv4 #uuid "29baf051-d192-4688-a978-139a8f886721"
-   :implementation "`fns` is a clojure.core.ArraySeq, conj-ing onto the head."}
-  [& fns]
-  (let [appended-args (conj (vec fns) (map second))]
-    (apply comp (kv-ify (first appended-args)) (next appended-args))))
+        ([acc k v]
+         (binding [*keydex* k]
+           (g acc v)))))))
 
