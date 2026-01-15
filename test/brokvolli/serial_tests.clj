@@ -75,6 +75,43 @@
       (comp-kv (map inc)
                (filter (fn [_] (even? *keydex*)))
                (take-while (fn [_] (<= *keydex* 5))))
+      [12 34 56]))
+
+  (testing "transducing a hashmap, comparing `transduce` and `transduce-kv`"
+    (are [x y] (= x y)
+      (transduce (comp (map #(update % 1 inc))
+                       (filter #(even? (second %))))
+                 (completing
+                  (fn
+                    ([] {})
+                    ([result [k v]] (assoc result k v))))
+                 {:a 11 :b 22 :c 33 :d 44 :e 55})
+
+      (transduce-kv (comp-kv (map inc)
+                             (filter even?))
+                    (completing
+                     (fn
+                       ([] {})
+                       ([result value] (assoc result *keydex* value))))
+                    {:a 11 :b 22 :c 33 :d 44 :e 55})))
+
+  (testing "nested `comp-kv`"
+    (are [x y] (= x y)
+      (transduce-kv (comp-kv
+                     (comp-kv (map inc)
+                              (filter even?))
+                     (take 3))
+                    conj
+                    [11 22 33 44 55 66 77 88 99])
+      [12 34 56]
+
+      (transduce-kv (comp-kv
+                     (map inc)
+                     (comp-kv
+                      (filter even?)
+                      (comp-kv (take 3))))
+                    conj
+                    [11 22 33 44 55 66 77 88 99])
       [12 34 56])))
 
 

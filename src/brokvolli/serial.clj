@@ -14,8 +14,10 @@
   `xform` is most straightforwardly composed with [[comp-kv]], a utility that
   composes a series of transducer functions and automatically adds an additional
   arity that accepts the accumulating value, the key/index, and the next
-  element. While the transducer stack is walked as with `transduce`, `comp-kv`
-  makes the key/index available via [[*keydex*]],.
+  element. While the transducer stack is walked, similarly to `transduce`,
+  `comp-kv` makes the key/index available via [[*keydex*]].
+
+  `coll` must implement `clojure.lang.IKVReduce`.
 
   Example, not using the key/index:
   ```clojure
@@ -54,6 +56,20 @@
   ;; 33     2         true             [11 22 33]
   ;; 44     3         false            [11 22 33]
   ;; 55     4         false            [11 22 33]
+  ```
+
+  `*keydex*` always refers to the element's location within the input
+  collection, regardless of any elements 'removed' from or 'added' to the
+  output.
+
+  Example, illustrating how `*keydex*` refers to original location after an
+  element is removed:
+  ```clojure
+  (transduce-kv (comp-kv (remove (fn [_] (= *keydex* 1)))
+                         (map #(vector *keydex* %)))
+                conj
+                [:foo :bar :baz])
+  ;; => [[0 :foo] [2 :baz]]
   ```"
   {:UUIDv4 #uuid "7357eed9-67ea-4269-bd65-7ec23e125328"}
   ([xform f coll] (transduce-kv xform f (f) coll))
@@ -69,7 +85,7 @@
 
 (def ^{:no-doc true} *keydex*-docstring
   "Dynamically bound to the 'current' key/index within a transducer stack
- composed with [[comp-kv]].")
+ composed with [[comp-kv]]. Do not manually re-bind.")
 
 
 (def ^{:dynamic true
