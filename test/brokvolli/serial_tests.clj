@@ -109,10 +109,27 @@
                      (map inc)
                      (comp-kv
                       (filter even?)
-                      (comp-kv (take 3))))
+                      (comp-kv
+                       (take 3))))
                     conj
                     [11 22 33 44 55 66 77 88 99])
-      [12 34 56])))
+      [12 34 56]))
+
+  (testing "`*keydex*` properly propagated when expanding and contracting"
+    (are [x y] (= x y)
+      (transduce-kv (comp-kv (remove (fn [_] (= *keydex* 1)))
+                             (map #(vector *keydex* %)))
+                    conj
+                    [11 22 33])
+      [[0 11] [2 33]]
+
+      (transduce-kv (comp-kv (mapcat #(repeat 3 %))
+                             (map #(vector *keydex* %)))
+                    conj
+                    [11 22 33])
+      [[0 11] [0 11] [0 11]
+       [1 22] [1 22] [1 22]
+       [2 33] [2 33] [2 33]])))
 
 
 #_(run-tests)

@@ -15,16 +15,17 @@
 
 
 (ns brokvolli.serial-property-tests-amiller
-  (:require [brokvolli.serial :refer [comp-kv
-                                      *keydex*
-                                      transduce-kv]]
-            [clojure.pprint :as pp]
-            [clojure.string :as s]
-            [clojure.test :refer :all]
-            [clojure.test.check :as chk]
-            [clojure.test.check.generators :as gen]
-            [clojure.test.check.properties :as prop]
-            [clojure.test.check.clojure-test :as ctest]))
+  (:require
+   [brokvolli.serial :refer [comp-kv
+                             *keydex*
+                             transduce-kv]]
+   [clojure.pprint :as pp]
+   [clojure.string :as s]
+   [clojure.test :refer :all]
+   [clojure.test.check :as chk]
+   [clojure.test.check.generators :as gen]
+   [clojure.test.check.properties :as prop]
+   [clojure.test.check.clojure-test :as ctest]))
 
 (defmacro fbind [source-gen f]
   `(gen/fmap
@@ -218,10 +219,8 @@
     (is (== 5050
             ;;(transduce mapinc + arange)
 
-            ;; `transduce-kv` requires input
-            ;; collection to implement
-            ;; `clojure.lang.IKVReduce`, so skip
-            ;; `transduce` tests that involve
+            ;; `transduce-kv` requires input collection to implement
+            ;; `clojure.lang.IKVReduce`, so skip `transduce` tests that involve
             ;; collections that do not
 
             (transduce-kv mapinc + avec)
