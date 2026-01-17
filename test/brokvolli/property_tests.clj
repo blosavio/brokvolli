@@ -70,13 +70,18 @@
 (def round-trip-casing
   (prop/for-all
    [s str-gen]
-   (= s (serial/transduce-kv (serial/comp-kv (map str/upper-case)
-                                             (map str/lower-case))
-                             conj
-                             s))))
+   (= s
+      (serial/transduce-kv (serial/comp-kv (map str/upper-case)
+                                           (map str/lower-case))
+                           conj
+                           s)
+      (->> s
+           (serial/transduce-kv (serial/comp-kv (map str/upper-case)) conj)
+           (serial/transduce-kv (serial/comp-kv (map str/lower-case)) conj)))))
 
 
 (clj-test/defspec test-round-trip-casing n-checks round-trip-casing)
+
 
 
 (comment ;; demonstrate incrementing, then decrementing
@@ -93,9 +98,13 @@
 (def round-trip-incrementing
   (prop/for-all
    [i int-gen]
-   (= i (serial/transduce-kv (serial/comp-kv (map inc)
-                                             (map dec))
-                             conj i))))
+   (= i
+      (serial/transduce-kv (serial/comp-kv (map inc)
+                                           (map dec))
+                           conj i)
+      (->> i
+           (serial/transduce-kv (serial/comp-kv (map inc)) conj)
+           (serial/transduce-kv (serial/comp-kv (map dec)) conj)))))
 
 
 (clj-test/defspec test-round-trip-incrementing n-checks round-trip-incrementing)
@@ -139,6 +148,22 @@
 
 
 (clj-test/defspec test-shorten-with-take n-checks shorten-with-take)
+
+
+(comment ;; demontrate expanding 3X
+  (serial/transduce-kv (serial/comp-kv (mapcat #(repeat 3 %))) conj [11 22 33])
+  )
+
+
+(def expand-with-mapcat
+  (prop/for-all
+   [v (gen/vector gen/simple-type)
+    x gen/nat]
+   (= (* x (count v))
+      (count (serial/transduce-kv (serial/comp-kv (mapcat #(repeat x %))) conj v)))))
+
+
+(clj-test/defspec test-expand-with-mapcat 1000 expand-with-mapcat)
 
 
 ;;;; Part 3: Oracle tests
@@ -203,6 +228,12 @@
 (def max-xforms 8)
 
 
+;; Rejected using `(gen/let [i gen/small-integer] (take i))` pattern, because
+;; don't want to whittle coll away if `i` gets too large after repeated
+;; `take`-ing and `remove`-ing. Analogous idea applies regarding `n` within the
+;; the `mapcat`'s `repeat`: don't want the length to explode.
+
+
 (def gen-vec-xforms
   (gen/let
       [element-type (gen/elements [:nums
@@ -211,10 +242,10 @@
        v (case element-type
            :nums (gen/vector gen/nat size)
            :strings (gen/vector gen/string-ascii size))
-       xforms-shortening (gen-vec-ele [(take (int (* 0.9 size))) ;; would prefer to make `n` inside `take` and `drop` an integer generator, but...
-                                       (drop (int (* 0.1 size)))] ;; ... evaling the form swallows the generator, masking it from `prop/for-all`
+       xforms-shortening (gen-vec-ele [(take (int (* 0.9 size)))
+                                       (drop (int (* 0.1 size)))]
                                       0 max-shortening-xforms)
-       xforms-expanding (gen-vec-ele [(mapcat #(repeat 3 %))] ;; ... same as above for `n` within `repeat` expression
+       xforms-expanding (gen-vec-ele [(mapcat #(repeat 3 %))]
                                      0 max-xforms)
        xforms-altering (case element-type
                          :nums (gen-vec-ele (concat
