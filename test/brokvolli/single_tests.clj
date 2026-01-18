@@ -1,6 +1,6 @@
-(ns brokvolli.serial-tests
+(ns brokvolli.single-tests
   (:require
-   [brokvolli.serial :refer [comp-kv
+   [brokvolli.single :refer [comp-kv
                              *keydex*
                              transduce-kv]]
    [clojure.test :refer [are

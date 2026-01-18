@@ -1,6 +1,6 @@
-(ns brokvolli.serial
-  "Provides a 'kv' variant of `clojure.core/transduce`, analogous to the way
-  `reduce-kv` relates to `reduce`.")
+(ns brokvolli.single
+  "Provides a single-threaded 'kv' variant of `clojure.core/transduce`,
+  analogous to the way `reduce-kv` relates to `reduce`.")
 
 
 (defn transduce-kv

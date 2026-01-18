@@ -14,9 +14,9 @@
 ;; downloaded on 2026Jan15
 
 
-(ns brokvolli.serial-property-tests-amiller
+(ns brokvolli.property-tests-amiller
   (:require
-   [brokvolli.serial :refer [comp-kv
+   [brokvolli.single :refer [comp-kv
                              *keydex*
                              transduce-kv]]
    [clojure.pprint :as pp]
