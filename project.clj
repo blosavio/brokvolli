@@ -4,7 +4,8 @@
   :license {:name "MIT License"
             :url "https://opensource.org/license/mit"
             :distribution :repo}
-  :dependencies [[org.clojure/clojure "1.12.4"]]
+  :dependencies [[org.clojure/clojure "1.12.4"]
+                 [com.sagevisuals/extended-extend-protocol "0"]]
   :repl-options {:init-ns brokvolli.core}
   :main brokvolli.core
   :plugins []
