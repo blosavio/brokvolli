@@ -16,9 +16,9 @@
 
 (ns brokvolli.property-tests-amiller
   (:require
-   [brokvolli.single :refer [comp-kv
-                             *keydex*
-                             transduce-kv]]
+   [brokvolli.core :refer [comp-kv
+                           *keydex*]]
+   [brokvolli.single :as single]
    [clojure.pprint :as pp]
    [clojure.string :as s]
    [clojure.test :refer :all]
@@ -147,7 +147,7 @@
 
 (defn apply-as-xf-transduce-kv
   [coll actions]
-  (transduce-kv (apply comp-kv (map :xf actions)) conj coll))
+  (single/transduce-kv (apply comp-kv (map :xf actions)) conj coll))
 
 (defmacro return-exc [& forms]
   `(try ~@forms (catch Throwable e# e#)))
@@ -219,11 +219,11 @@
     (is (== 5050
             ;;(transduce mapinc + arange)
 
-            ;; `transduce-kv` requires input collection to implement
+            ;; `single/transduce-kv` requires input collection to implement
             ;; `clojure.lang.IKVReduce`, so skip `transduce` tests that involve
             ;; collections that do not
 
-            (transduce-kv mapinc + avec)
+            (single/transduce-kv mapinc + avec)
             ;;(transduce mapinc + alist)
             ;;(transduce mapinc + obj-array)
             ;;(transduce mapinc + int-array)
@@ -232,16 +232,16 @@
             ;;(transduce mapinclong + char-array)
             ;;(transduce mapinc + double-array)
             ;;(transduce mapinclong + byte-array)
-            ;;(transduce-kv mapinc + int-vec)
-            ;;(transduce-kv mapinc + long-vec)
-            ;;(transduce-kv mapinc + float-vec)
-            ;;(transduce-kv mapinclong + char-vec)
-            ;;(transduce-kv mapinc + double-vec)
-            ;;(transduce-kv mapinclong + byte-vec)
+            ;;(single/transduce-kv mapinc + int-vec)
+            ;;(single/transduce-kv mapinc + long-vec)
+            ;;(single/transduce-kv mapinc + float-vec)
+            ;;(single/transduce-kv mapinclong + char-vec)
+            ;;(single/transduce-kv mapinc + double-vec)
+            ;;(single/transduce-kv mapinclong + byte-vec)
             ))
     (is (== 5051
             ;;(transduce mapinc + 1 arange)
-            (transduce-kv mapinc + 1 avec)
+            (single/transduce-kv mapinc + 1 avec)
             ;;(transduce mapinc + 1 alist)
             ;;(transduce mapinc + 1 obj-array)
             ;;(transduce mapinc + 1 int-array)
@@ -260,7 +260,7 @@
 
 
 (deftest test-dedupe
-  (are [x y] (= (transduce-kv (comp-kv (dedupe)) conj x) y)
+  (are [x y] (= (single/transduce-kv (comp-kv (dedupe)) conj x) y)
     [] []
     [1] [1]
     [1 2 3] [1 2 3]
@@ -280,7 +280,7 @@
     [0.5 0.5] [0.5]))
 
 (deftest test-cat
-  (are [x y] (= (transduce-kv (comp-kv cat) conj x) y)
+  (are [x y] (= (single/transduce-kv (comp-kv cat) conj x) y)
     [] []
     [[1 2]] [1 2]
     [[1 2] [3 4]] [1 2 3 4]
@@ -290,7 +290,7 @@
     [[1 2] [3 4] [5 6]] [1 2 3 4 5 6]))
 
 (deftest test-partition-all
-  (are [n coll y] (= (transduce-kv (comp-kv (partition-all n)) conj coll) y)
+  (are [n coll y] (= (single/transduce-kv (comp-kv (partition-all n)) conj coll) y)
     2 [1 2 3] '((1 2) (3))
     2 [1 2 3 4] '((1 2) (3 4))
     2 [] ()
@@ -299,7 +299,7 @@
     5 [1 2 3] '((1 2 3))))
 
 (deftest test-take
-  (are [n y] (= (transduce-kv (comp-kv (take n)) conj [1 2 3 4 5]) y)
+  (are [n y] (= (single/transduce-kv (comp-kv (take n)) conj [1 2 3 4 5]) y)
     1 '(1)
     3 '(1 2 3)
     5 '(1 2 3 4 5)
@@ -309,7 +309,7 @@
     -2 ()))
 
 (deftest test-drop
-  (are [n y] (= (transduce-kv (comp-kv (drop n)) conj [1 2 3 4 5]) y)
+  (are [n y] (= (single/transduce-kv (comp-kv (drop n)) conj [1 2 3 4 5]) y)
     1 '(2 3 4 5)
     3 '(4 5)
     5 ()
@@ -319,7 +319,7 @@
     -2 '(1 2 3 4 5)))
 
 (deftest test-take-nth
-  (are [n y] (= (transduce-kv (comp-kv (take-nth n)) conj [1 2 3 4 5]) y)
+  (are [n y] (= (single/transduce-kv (comp-kv (take-nth n)) conj [1 2 3 4 5]) y)
     1 '(1 2 3 4 5)
     2 '(1 3 5)
     3 '(1 4)
@@ -328,7 +328,7 @@
     9 '(1)))
 
 (deftest test-take-while
-  (are [coll y] (= (transduce-kv (comp-kv (take-while pos?)) conj coll) y)
+  (are [coll y] (= (single/transduce-kv (comp-kv (take-while pos?)) conj coll) y)
     [] ()
     [1 2 3 4] '(1 2 3 4)
     [1 2 3 -1] '(1 2 3)
@@ -337,7 +337,7 @@
     [-1 -2 -3] ()))
 
 (deftest test-drop-while
-  (are [coll y] (= (transduce-kv (comp-kv (drop-while pos?)) conj coll) y)
+  (are [coll y] (= (single/transduce-kv (comp-kv (drop-while pos?)) conj coll) y)
     [] ()
     [1 2 3 4] ()
     [1 2 3 -1] '(-1)
@@ -346,15 +346,15 @@
     [-1 -2 -3] '(-1 -2 -3)))
 
 (deftest test-re-reduced
-  (is (= [:a] (transduce-kv (comp-kv (take 1)) conj [:a])))
-  (is (= [:a] (transduce-kv (comp-kv (take 1) (take 1)) conj [:a])))
-  (is (= [:a] (transduce-kv (comp-kv (take 1) (take 1) (take 1)) conj [:a])))
-  (is (= [:a] (transduce-kv (comp-kv (take 1) (take 1) (take 1) (take 1)) conj [:a])))
-  (is (= [[:a]] (transduce-kv (comp-kv (partition-by keyword?) (take 1)) conj [] [:a])))
+  (is (= [:a] (single/transduce-kv (comp-kv (take 1)) conj [:a])))
+  (is (= [:a] (single/transduce-kv (comp-kv (take 1) (take 1)) conj [:a])))
+  (is (= [:a] (single/transduce-kv (comp-kv (take 1) (take 1) (take 1)) conj [:a])))
+  (is (= [:a] (single/transduce-kv (comp-kv (take 1) (take 1) (take 1) (take 1)) conj [:a])))
+  (is (= [[:a]] (single/transduce-kv (comp-kv (partition-by keyword?) (take 1)) conj [] [:a])))
   ;;(is (= [[:a]] (sequence (comp (partition-by keyword?) (take 1)) [:a])))
   ;;(is (= [[[:a]]] (sequence (comp (partition-by keyword?) (take 1)  (partition-by keyword?) (take 1)) [:a])))
-  (is (= [[0]] (transduce-kv (comp-kv (take 1) (partition-all 3) (take 1)) conj [] (vec (range 15)))))
-  (is (= [1] (transduce-kv (comp-kv (take 1)) conj (vec (seq (long-array [1 2 3 4])))))))
+  (is (= [[0]] (single/transduce-kv (comp-kv (take 1) (partition-all 3) (take 1)) conj [] (vec (range 15)))))
+  (is (= [1] (single/transduce-kv (comp-kv (take 1)) conj (vec (seq (long-array [1 2 3 4])))))))
 
 #_(run-tests)
 

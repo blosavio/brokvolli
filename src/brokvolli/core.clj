@@ -1,103 +1,54 @@
 (ns brokvolli.core)
 
 
-(defn -main
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(def ^{:no-doc true} *keydex*-docstring
+  "Dynamically bound to the 'current' key/index within a transducer stack
+ composed with [[comp-kv]]. Do not manually re-bind.")
 
 
-(defn reduce-kv-offset
-  "Like `reduce-kv`, but applies `offset` to idx, the second arg of `f`."
-  {:UUIDv4 #uuid "a7804734-5134-45e6-81fc-5fae835fd1b3"}
-  [f init coll offset]
-  (let [f-mod (fn [acc idx vl] (f acc (+ offset idx) vl))]
-    (reduce-kv f-mod init coll)))
+(def ^{:dynamic true
+       :doc *keydex*-docstring}
+  *keydex*)
 
 
-(comment
-  (reduce-kv-offset #(+ %1 %2 %3) 900 [1 2 3] 10)
-  (reduce-kv-offset #(+ %1 %2 %3) 900 [10 20 30] 10)
-  )
+(defn comp-kv
+  "Returns a composition of transducers, suitable for use with [[transduce-kv]].
 
+  Given a series of transducer functions `fns`, returns a composition of those
+  functions which
 
-(defrecord TestRec [field-1 field-2])
-(defstruct TestStruct :field-1 :field-2)
+  1. Diverts the key/index provided by `transduce-kv`, passing only the
+  accumulated value and the next element to the outer/top transducer, and
+  2. Establishes a binding context where the key/index is available from
+  [[*keydex*]] at any layer of the transducer stack.
 
+  Example:
+  ```clojure
+  (comp-kv (map inc)
+           (filter (fn [_] #(<= *keydex* 2)))
+           (take 3))
+  ```
+  ...returns a 'kv' transducer that
 
-(defn create-ArraySeq
-  "Returns a `clojure.lang.ArraySeq"
-  {:UUIDv4 #uuid "2bea61f3-6e22-4752-8036-f4ae7bb88330"}
-  [& args]
-  args)
+  1. Increments each element,
+  2. Retains all elements with an index less than or equal to two, and
+  3. Takes the first three elements, if available.
 
-
-
-(reduce #(assoc %1
-                (str (type %2))
-                {:IReduceInit? (instance? clojure.lang.IReduceInit %2)
-                 :IReduce? (instance? clojure.lang.IReduce %2)})
-        (sorted-map)
-        [(vector)
-         (list)
-         (list 1 2 3)
-         (array-map)
-         (seq (array-map :a 11))
-         (hash-map :a 11)
-         (hash-set)
-         (sorted-set)
-         (lazy-seq [])
-         (cycle [1 2 3])
-         (iterate inc 0)
-         (repeat 99)
-         "abc"
-         (seq "abc")
-         (range 0 3)
-         (range 0.0 3.0)
-         (first {:a 11})
-         (->TestRec 11 22)
-         (struct-map TestStruct :field-1 11 :field-2 22)
-         (create-ArraySeq 99)])
-
-{"class brokvolli.core.TestRec"                {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.ArraySeq"                 {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.Cycle"                    {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.Iterate"                  {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.LazySeq"                  {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.LongRange"                {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.MapEntry"                 {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.PersistentArrayMap"       {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.PersistentArrayMap$Seq"   {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.PersistentHashSet"        {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.PersistentList"           {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.PersistentList$EmptyList" {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.PersistentStructMap"      {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.PersistentTreeSet"        {:IReduceInit? false, :IReduce? false},
- "class clojure.lang.PersistentVector"         {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.Range"                    {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.Repeat"                   {:IReduceInit? true, :IReduce? true},
- "class clojure.lang.StringSeq"                {:IReduceInit? true, :IReduce? false},
- "class java.lang.String"                      {:IReduceInit? false, :IReduce? false}}
-
-
-
-(reduce #(assoc %1
-                (str (type %2))
-                (instance? clojure.lang.IKVReduce %2))
-        (sorted-map)
-        [(vector)
-         (array-map)
-         (hash-map :a 11)
-         (sorted-map :a 11)
-         (hash-set)
-         (sorted-set)
-         (list 11)])
-
-{"class clojure.lang.PersistentArrayMap" true,
- "class clojure.lang.PersistentHashMap" true,
- "class clojure.lang.PersistentHashSet" false,
- "class clojure.lang.PersistentList" false,
- "class clojure.lang.PersistentTreeMap" true,
- "class clojure.lang.PersistentTreeSet" false,
- "class clojure.lang.PersistentVector" true}
+  Note: Some transducer functions may not involve the actual value, e.g.,
+  filtering based on the index. In those cases, the `#(...)` anonymous function
+  shorthand may be problematic because an argument will be be passed, but the
+  `%` doesn't appear, thus the compiler assumes a zero arity. Instead, use the
+  `(fn [_] (...))` idiom to discard the argument. See the `filter` expression in
+  the middle line of the example above."
+  {:UUIDv4 #uuid "29baf051-d192-4688-a978-139a8f886721"}
+  [& fns]
+  (fn [rf]
+    (let [g ((apply comp fns) rf)]
+      (fn
+        ([] (g))
+        ([result] (g result))
+        ([result input] (g result input))
+        ([acc k v]
+         (binding [*keydex* k]
+           (g acc v)))))))
 

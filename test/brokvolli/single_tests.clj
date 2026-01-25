@@ -1,8 +1,8 @@
 (ns brokvolli.single-tests
   (:require
-   [brokvolli.single :refer [comp-kv
-                             *keydex*
-                             transduce-kv]]
+   [brokvolli.core :refer [comp-kv
+                           *keydex*]]
+   [brokvolli.single :refer [transduce-kv]]
    [clojure.test :refer [are
                          deftest
                          is
