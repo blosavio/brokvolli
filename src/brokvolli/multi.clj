@@ -3,43 +3,10 @@
   and [[transduce-kv]]."
   (:refer-clojure :exclude [transduce])
   (:require
-   [brokvolli.core :refer [comp-kv
-                           *keydex*]]
+   [brokvolli.core]
    [brokvolli.single :as single]
    [clojure.core.reducers :as r]
    [extended-extend-protocol.core :refer [multi-extend-protocol]]))
-
-
-(def multi-threaded-capable #{map
-                              cat
-                              filter
-                              mapcat
-                              remove
-                              take-while
-                              drop-while
-                              keep
-                              #_distinct
-                              #_dedupe
-                              #_random-sample})
-
-
-;; Considerations around using `concat`:
-;; https://stuartsierra.com/2015/04/26/clojure-donts-concat/
-;; https://groups.google.com/g/clojure-dev/c/ewBuyloeiFs
-
-
-(defn concatv
-  "Concatenates vectors `v1` and `v2`, efficiently and fastly.
-
-  TODO: Objectively evaluate different implementations for speed/efficiency."
-  {:UUIDv4 #uuid "571ca334-1e9d-4e72-926c-f154c47a8663"}
-  ([] [])
-  ([v] v)
-  ([v1 v2]
-   #_(vec (concat v1 v2)) ;; beware: `concat` is lazy, and returns a sequence
-   #_(into v1 v2)         ;; compare to transducer variant (below)
-   #_(r/cat v1 v2) ;; returns an instance of `clojure.core.reducers.Cat`
-   (into v1 conj v2)))
 
 
 (defn split-vector
@@ -172,16 +139,6 @@
              (combine (f1) (fjjoin t2)))))))))
 
 
-(defn transduce-kv-offset
-  "Like `brokvolli.single/transduce-kv`, but applies `offset` to integer idx,
-  the second arg of `f`. `coll` must be sequential."
-  {:UUIDv4 #uuid "62a22afa-fe08-4e01-ae4d-a5b544e447d7"}
-  ([f init coll]
-   (transduce-kv-offset f init coll 0))
-  ([f init coll offset]
-   (brokvolli.single/transduce-kv (f offset) init coll)))
-
-
 (defn transduce-kv-
   "Constructs a function to reduce a collection, possibly in parallel with
   multiple threads. `xduce-fn` is a transducing function, `splitter-fn` is a
@@ -201,7 +158,7 @@
     (combine
      (cond
        (empty-pred coll) (combine)
-       (<= (count coll) n) (transduce-kv-offset xform f coll offset)
+       (<= (count coll) n) (brokvolli.single/transduce-kv xform f init coll offset)
        :else
        (let [[c1 c2 split] (splitter-fn coll)
              fc (fn [child delta] #(tduce n xform f init combine child delta))]
@@ -241,7 +198,8 @@
 
 
 (defn transduce
-  "TODO...Like `clojure.core/transduce`, but potentially parallel.
+  "TODO: docstring expansion/edits.
+  Like `clojure.core/transduce`, but potentially parallel.
 
   `combine` defaults to `f`, `n` defaults to 512.
 
@@ -263,22 +221,6 @@
   ([xform f coll] (transduce xform f f coll))
   ([xform f combine coll] (transduce 512 xform f combine coll))
   ([n xform f combine coll] (ptransduce coll n xform f (f) combine)))
-
-
-(defn comp-kv-offset
-  "Like `comp-kv`, but consumes an integer offset when invoked with `transduce-kv-offset`."
-  {:UUIDv4 #uuid "66698ff3-6e41-46ac-b63c-6d0f7d22cfb6"}
-  [& fns]
-  (fn [offset]
-    (fn [rf]
-      (let [g ((apply comp fns) rf)]
-        (fn
-          ([] (g))
-          ([result] (g result))
-          ([result input] (g result input))
-          ([acc k v]
-           (binding [brokvolli.core/*keydex* (if offset (+ offset k) k)]
-             (g acc v))))))))
 
 
 (defn transduce-kv

@@ -11,44 +11,21 @@
   *keydex*)
 
 
-(defn comp-kv
-  "Returns a composition of transducers, suitable for use with [[transduce-kv]].
+;; Considerations around using `concat`:
+;; https://stuartsierra.com/2015/04/26/clojure-donts-concat/
+;; https://groups.google.com/g/clojure-dev/c/ewBuyloeiFs
 
-  Given a series of transducer functions `fns`, returns a composition of those
-  functions which
 
-  1. Diverts the key/index provided by `transduce-kv`, passing only the
-  accumulated value and the next element to the outer/top transducer, and
-  2. Establishes a binding context where the key/index is available from
-  [[*keydex*]] at any layer of the transducer stack.
+(defn concatv
+  "Concatenates vectors `v1` and `v2`, efficiently and fastly.
 
-  Example:
-  ```clojure
-  (comp-kv (map inc)
-           (filter (fn [_] #(<= *keydex* 2)))
-           (take 3))
-  ```
-  ...returns a 'kv' transducer that
-
-  1. Increments each element,
-  2. Retains all elements with an index less than or equal to two, and
-  3. Takes the first three elements, if available.
-
-  Note: Some transducer functions may not involve the actual value, e.g.,
-  filtering based on the index. In those cases, the `#(...)` anonymous function
-  shorthand may be problematic because an argument will be be passed, but the
-  `%` doesn't appear, thus the compiler assumes a zero arity. Instead, use the
-  `(fn [_] (...))` idiom to discard the argument. See the `filter` expression in
-  the middle line of the example above."
-  {:UUIDv4 #uuid "29baf051-d192-4688-a978-139a8f886721"}
-  [& fns]
-  (fn [rf]
-    (let [g ((apply comp fns) rf)]
-      (fn
-        ([] (g))
-        ([result] (g result))
-        ([result input] (g result input))
-        ([acc k v]
-         (binding [*keydex* k]
-           (g acc v)))))))
+  TODO: Objectively evaluate different implementations for speed/efficiency."
+  {:UUIDv4 #uuid "571ca334-1e9d-4e72-926c-f154c47a8663"}
+  ([] [])
+  ([v] v)
+  ([v1 v2]
+   #_(vec (concat v1 v2)) ;; beware: `concat` is lazy, and returns a sequence
+   #_(into v1 v2)         ;; compare to transducer variant (below)
+   #_(r/cat v1 v2) ;; returns an instance of `clojure.core.reducers.Cat`
+   (into v1 conj v2)))
 

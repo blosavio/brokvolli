@@ -95,3 +95,53 @@
  "class clojure.lang.PersistentTreeSet" false,
  "class clojure.lang.PersistentVector" true}
 
+
+
+
+;;;; explore accumulating functions
+
+
+(defn roll
+  "Given one or more numbers, returns a function that accumulates one or more
+  numbers, or exits with a conj-ed sequence of all accumulations."
+  {:UUIDv4 #uuid "d3b3ca8b-53bd-4702-918e-f1b0896bc444"}
+  ([[x :as all]] (if (nil? x)
+                   all
+                   #(comp all (roll %&)))))
+
+
+(transduce #_((roll (map inc)
+                  (filter even?)) nil)
+           (comp (map inc)
+                 (filter even?))
+           conj
+           []
+           [11 22 33 44 55 66 88 99 99])
+
+
+((roll 1 2 3) nil)
+
+
+((roll
+  (roll
+   (roll 1 2 3 4)
+   5 6 7 8)
+  9 11 12)
+ nil)
+
+
+(defn example-bar
+  [x] x)
+
+(reduce #(conj %1 {:f %2
+                   :ifn? (ifn? %2)
+                   :fn? (fn? %2)})
+        []
+        [#(%1)
+         (fn example-foo [x] x)
+         example-bar])
+;; [{:f #function[brokvolli.scratch/eval16016/fn--16019], :ifn? true, :fn? true}
+;;  {:f #function[brokvolli.scratch/eval16016/example-foo--16021], :ifn? true, :fn? true}
+;;  {:f #function[brokvolli.scratch/example-bar], :ifn? true, :fn? true}]
+
+(type #())

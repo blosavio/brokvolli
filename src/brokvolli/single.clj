@@ -3,8 +3,58 @@
   analogous to the way `reduce-kv` relates to `reduce`.")
 
 
+(defn kv-ize
+  "TODO: edit docstring...
+  Given a composition of functions `composition` (an xform stack), returns an
+  equivalent transformer stack that also accepts *result*, *key/index*, and
+  *value*.
+
+  Returns a composition of transducers, suitable for use with [[transduce-kv]].
+
+  Given a series of transducer functions `fns`, returns a composition of those
+  functions which
+
+  1. Diverts the key/index provided by `transduce-kv`, passing only the
+  accumulated value and the next element to the outer/top transducer, and
+  2. Establishes a binding context where the key/index is available from
+  [[*keydex*]] at any layer of the transducer stack.
+
+  Example:
+  ```clojure
+  (comp-kv (map inc)
+           (filter (fn [_] #(<= *keydex* 2)))
+           (take 3))
+  ```
+  ...returns a 'kv' transducer that
+
+  1. Increments each element,
+  2. Retains all elements with an index less than or equal to two, and
+  3. Takes the first three elements, if available.
+
+  Note: Some transducer functions may not involve the actual value, e.g.,
+  filtering based on the index. In those cases, the `#(...)` anonymous function
+  shorthand may be problematic because an argument will be be passed, but the
+  `%` doesn't appear, thus the compiler assumes a zero arity. Instead, use the
+  `(fn [_] (...))` idiom to discard the argument. See the `filter` expression in
+  the middle line of the example above."
+  {:UUIDv4 #uuid "66698ff3-6e41-46ac-b63c-6d0f7d22cfb6"
+   :no-doc true}
+  [composition]
+  (fn [rf offset]
+    (let [g (composition rf)]
+      (fn
+        ([] (g))
+        ([result] (g result))
+        ([result input] (g result input))
+        ([acc k v]
+         (binding [brokvolli.core/*keydex* (if offset (+ offset k) k)]
+           (g acc v)))))))
+
+
 (defn transduce-kv
-  "A '-kv' variant of `transduce`, reducing with a transformation. The analogy
+  "TODO: edit for updates that removed `comp-kv`.
+
+  A '-kv' variant of `transduce`, reducing with a transformation. The analogy
   is `reduce`:`reduce-kv`::`transduce`:`transduce-kv`.
 
   As with `transduce`, `xform` and `f` are functions of zero, one, and two
@@ -73,8 +123,9 @@
   ```"
   {:UUIDv4 #uuid "7357eed9-67ea-4269-bd65-7ec23e125328"}
   ([xform f coll] (transduce-kv xform f (f) coll))
-  ([xform f init coll]
-   (let [f (xform f)
+  ([xform f init coll] (transduce-kv xform f init coll nil))
+  ([xform f init coll offset]
+   (let [f ((kv-ize xform) f offset)
          err #(throw (Exception.
                       (str "`coll` must implement `clojure.lang.IKVReduce`; `coll` is "(type %) " ")))
          ret (if (instance? clojure.lang.IKVReduce coll)

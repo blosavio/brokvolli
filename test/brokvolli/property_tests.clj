@@ -8,9 +8,9 @@
   See also `brokvolli.property-tests-amiller` for adaptations of Alex Miller's
   transducers property tests."
   (:require
-   [brokvolli.core :refer [comp-kv
-                           *keydex*]]
+   [brokvolli.core :as core]
    [brokvolli.single :as single]
+   [brokvolli.multi :as multi]
    [clojure.string :as str]
    [clojure.test :refer [run-test
                          run-tests]]
@@ -42,7 +42,7 @@
   (completing
    (fn
      ([] {})
-     ([result value] (assoc result *keydex* value)))))
+     ([result value] (assoc result core/*keydex* value)))))
 
 (def step
   (completing
@@ -55,8 +55,8 @@
 
 
 (comment ;; demonstrate upper-, then lower-casing
-  (single/transduce-kv (comp-kv (map str/upper-case)
-                                (map str/lower-case))
+  (single/transduce-kv (comp (map str/upper-case)
+                             (map str/lower-case))
                        conj
                        ["a" "bc" "def"])
   )
@@ -73,21 +73,21 @@
   (prop/for-all
    [s str-gen]
    (= s
-      (single/transduce-kv (comp-kv (map str/upper-case)
-                                    (map str/lower-case))
+      (single/transduce-kv (comp (map str/upper-case)
+                                 (map str/lower-case))
                            conj
                            s)
       (->> s
-           (single/transduce-kv (comp-kv (map str/upper-case)) conj)
-           (single/transduce-kv (comp-kv (map str/lower-case)) conj)))))
+           (single/transduce-kv (comp (map str/upper-case)) conj)
+           (single/transduce-kv (comp (map str/lower-case)) conj)))))
 
 
 (clj-test/defspec test-round-trip-casing n-checks round-trip-casing)
 
 
 (comment ;; demonstrate incrementing, then decrementing
-  (single/transduce-kv (comp-kv (map inc)
-                                (map dec))
+  (single/transduce-kv (comp (map inc)
+                             (map dec))
                        conj
                        [11 22 33])
   )
@@ -100,12 +100,12 @@
   (prop/for-all
    [i int-gen]
    (= i
-      (single/transduce-kv (comp-kv (map inc)
-                                    (map dec))
+      (single/transduce-kv (comp (map inc)
+                                 (map dec))
                            conj i)
       (->> i
-           (single/transduce-kv (comp-kv (map inc)) conj)
-           (single/transduce-kv (comp-kv (map dec)) conj)))))
+           (single/transduce-kv (comp (map inc)) conj)
+           (single/transduce-kv (comp (map dec)) conj)))))
 
 
 (clj-test/defspec test-round-trip-incrementing n-checks round-trip-incrementing)
@@ -115,7 +115,7 @@
 
 
 (comment ;; demonstrate filtering to keep keys that are even integers
-  (keys (single/transduce-kv (comp-kv (filter (fn [_] (even? *keydex*))))
+  (keys (single/transduce-kv (comp (filter (fn [_] (even? core/*keydex*))))
                              step-kv
                              {0 :foo, 1 :bar, 2 :baz, 3 :qux}))
   )
@@ -127,14 +127,14 @@
 (def filter-by-keys
   (prop/for-all
    [m hashmap-int-int-gen]
-   (every? even? (keys (single/transduce-kv (comp-kv (filter (fn [_] (even? *keydex*)))) step-kv m)))))
+   (every? even? (keys (single/transduce-kv (comp (filter (fn [_] (even? core/*keydex*)))) step-kv m)))))
 
 
 (clj-test/defspec test-filter-by-keys n-checks filter-by-keys)
 
 
 (comment ;; demonstrate 'take'-ing three elements
-  (single/transduce-kv (comp-kv (take 3))
+  (single/transduce-kv (comp (take 3))
                        conj
                        [11 22 33 44 55])
   )
@@ -145,14 +145,14 @@
    [v (gen/vector gen/simple-type)
     tk gen/nat]
    (= (min tk (count v))
-      (count (single/transduce-kv (comp-kv (take tk)) conj v)))))
+      (count (single/transduce-kv (comp (take tk)) conj v)))))
 
 
 (clj-test/defspec test-shorten-with-take n-checks shorten-with-take)
 
 
-(comment ;; demontrate expanding 3X
-  (single/transduce-kv (comp-kv (mapcat #(repeat 3 %))) conj [11 22 33])
+(comment ;; demonstrate expanding 3X
+  (single/transduce-kv (comp (mapcat #(repeat 3 %))) conj [11 22 33])
   )
 
 
@@ -161,7 +161,7 @@
    [v (gen/vector gen/simple-type)
     x gen/nat]
    (= (* x (count v))
-      (count (single/transduce-kv (comp-kv (mapcat #(repeat x %))) conj v)))))
+      (count (single/transduce-kv (comp (mapcat #(repeat x %))) conj v)))))
 
 
 (clj-test/defspec test-expand-with-mapcat 1000 expand-with-mapcat)
@@ -172,22 +172,22 @@
 
 (comment ;; sketch property tests of transducing over sequential collections
   ;; ops on numbers
-  (single/transduce-kv (comp-kv (map inc)) conj [11 22 33])
+  (single/transduce-kv (comp (map inc)) conj [11 22 33])
   (transduce (map inc) conj [11 22 33])
 
   ;; ops on strings
-  (single/transduce-kv (comp-kv (map str/upper-case)) conj ["a" "bc" "def"])
+  (single/transduce-kv (comp (map str/upper-case)) conj ["a" "bc" "def"])
   (transduce (map str/upper-case) conj ["a" "bc" "def"])
 
   ;; get shorter: filter, remove, take, drop
-  (single/transduce-kv (comp-kv (filter odd?)) conj [11 22 33])
+  (single/transduce-kv (comp (filter odd?)) conj [11 22 33])
   (transduce (filter odd?) conj [11 22 33])
 
-  (single/transduce-kv (comp-kv (take 3)) conj [11 22 33 44 55])
+  (single/transduce-kv (comp (take 3)) conj [11 22 33 44 55])
   (transduce (take 3) conj [11 22 33 44 55])
 
   ;; expand
-  (single/transduce-kv (comp-kv (mapcat #(repeat 3 %))) conj [11 22 33])
+  (single/transduce-kv (comp (mapcat #(repeat 3 %))) conj [11 22 33])
   (transduce (mapcat #(repeat 3 %)) conj [11 22 33])
   )
 
@@ -272,7 +272,7 @@
                        v :v
                        xforms :xforms} info]
                   (= (transduce (apply comp xforms) conj v)
-                     (single/transduce-kv (apply comp-kv xforms) conj v)))))
+                     (single/transduce-kv (apply comp xforms) conj v)))))
 
 
 (clj-test/defspec test-seq-props n-checks sequential-properties)
@@ -286,7 +286,7 @@
          v :v
          xforms :xforms} (gen/generate gen-vec-xforms)]
     (= (transduce (apply comp xforms) conj v)
-       (single/transduce-kv (apply comp-kv xforms) conj v)))
+       (single/transduce-kv (apply comp xforms) conj v)))
 
   (chk/quick-check n-checks sequential-properties)
   )
@@ -295,19 +295,19 @@
 (comment ;; Sketch property tests of transducing over associative colls
 
   ;; ops on numbers: inc, dec, -
-  (single/transduce-kv (comp-kv (map inc)) step-kv {:a 11 :b 22 :c 33})
+  (single/transduce-kv (comp (map inc)) step-kv {:a 11 :b 22 :c 33})
   (transduce (comp (map #(update % 1 inc))) step {:a 11 :b 22 :c 33})
 
   ;; ops on strings: upper-case, lower-case, capitalize
-  (single/transduce-kv (comp-kv (map str/upper-case)) step-kv {:a "a" :b "bc" :c "def"})
+  (single/transduce-kv (comp (map str/upper-case)) step-kv {:a "a" :b "bc" :c "def"})
   (transduce (comp (map #(update % 1 str/upper-case))) step {:a "a" :b "bc" :c "def"})
 
 
   ;; get shorter: filter, remove, take, drop
-  (single/transduce-kv (comp-kv (filter (fn [_] (even? *keydex*)))) step-kv {0 11, 1 22, 2 33})
+  (single/transduce-kv (comp (filter (fn [_] (even? core/*keydex*)))) step-kv {0 11, 1 22, 2 33})
   (transduce (comp (filter #(even? (% 0)))) step {0 11, 1 22, 2 33})
 
-  (single/transduce-kv (comp-kv (filter (fn [_] (< *keydex* 3)))) step-kv {0 "a", 1 "bc", 2 "def", 3 "ghij", 4 "klmno"})
+  (single/transduce-kv (comp (filter (fn [_] (< core/*keydex* 3)))) step-kv {0 "a", 1 "bc", 2 "def", 3 "ghij", 4 "klmno"})
   (transduce (comp (filter #(< (% 0) 3))) step {0 "a", 1 "bc", 2 "def", 3 "ghij", 4 "klmno"})
   )
 
@@ -322,7 +322,7 @@
    :no-doc true}
   [xducer s]
   (map #(hash-map :core (xducer (fn [[k v]] (% k)))
-                  :brokvolli (xducer (fn [_] (% *keydex*))))
+                  :brokvolli (xducer (fn [_] (% core/*keydex*))))
        s))
 
 
@@ -368,7 +368,7 @@
           m :m
           xforms :xforms} info]
      (= (transduce (apply comp (map :core xforms)) step m)
-        (single/transduce-kv (apply comp-kv (map :brokvolli xforms)) step-kv m)))))
+        (single/transduce-kv (apply comp (map :brokvolli xforms)) step-kv m)))))
 
 
 (comment
@@ -378,7 +378,7 @@
         x (last g)
         xforms (x :xforms)
         m (x :m)]
-    (= (single/transduce-kv (apply comp-kv (map :brokvolli xforms)) step-kv m)
+    (= (single/transduce-kv (apply comp (map :brokvolli xforms)) step-kv m)
        (transduce (apply comp (map :core xforms)) step m)))
 
   (chk/quick-check n-checks associative-properties)

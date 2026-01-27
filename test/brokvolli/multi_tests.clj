@@ -1,7 +1,7 @@
 (ns brokvolli.multi-tests
   (:refer-clojure :exclude [transduce])
   (:require
-   [brokvolli.core :refer [*keydex*]]
+   [brokvolli.core :as core]
    [brokvolli.multi :refer :all]
    [clojure.test :refer [are
                          deftest
@@ -9,17 +9,6 @@
                          run-test
                          run-tests
                          testing]]))
-
-
-(deftest concatv-tests
-  (are [x y] (= x y)
-    (concatv) []
-    (concatv [] []) []
-    (concatv [11 22 33]) [11 22 33]
-    (concatv [11 22 33] []) [11 22 33]
-    (concatv [] [11 22 33]) [11 22 33]
-    (concatv [11 22 33] [44 55 66]) [11 22 33 44 55 66]
-    (type (concatv [11 22 33] [44 55 66])) clojure.lang.PersistentVector))
 
 
 (deftest split-vector-tests
@@ -65,10 +54,10 @@
       [11 22 33 44 55]
       (clojure.core/transduce (map identity) conj [11 22 33 44 55])
       (transduce (map identity) conj [11 22 33 44 55])
-      (transduce 2 (map identity) conj concatv [11 22 33 44 55])))
+      (transduce 2 (map identity) conj core/concatv [11 22 33 44 55])))
 
   (testing "equivalency of different sized sub-reductions"
-    (are [n] (= (transduce n (map identity) + + (vec (range 1E3))))
+    (are [n] (= 499500 (transduce n (map identity) + + (vec (range 1E3))))
       2 4 8 16 32 64 128 256 512 1032))
 
   (testing "sum numbers in a vector"
@@ -85,7 +74,7 @@
       (transduce (filter number?) + + [11 :foo 22 :bar 33])
 
       (clojure.core/transduce (map inc) conj [11 22 33 44 55 66 77 88 99])
-      (transduce 3 (map inc) conj concatv [11 22 33 44 55 66 77 88 99])
+      (transduce 3 (map inc) conj core/concatv [11 22 33 44 55 66 77 88 99])
 
       (reduce #(assoc %1 (key %2) (inc (val %2))) {} {:a 11 :b 22 :c 33 :d 44 :e 55})
       (clojure.core/transduce (map #(update % 1 inc)) conj {} {:a 11 :b 22 :c 33 :d 44 :e 55})))
@@ -96,7 +85,7 @@
                        (filter even?)
                        (remove #(< 70 %)))
                  conj
-                 concatv
+                 core/concatv
                  [11 22 33 44 55 66 77 88 99])
       [12 34 56]
 
@@ -115,7 +104,7 @@
                        (filter even?)
                        (remove #(< 70 %)))
                  conj
-                 concatv
+                 core/concatv
                  (range 11 99 11))
       [12 34 56])))
 
@@ -129,31 +118,40 @@
     (are [x] (= ::bar x)
       (transduce-kv (constantly ::foo) + (constantly ::bar) [])))
 
+  (testing "identity formulations"
+    (are [x] (= [11 22 33 44 55] x)
+      (transduce-kv (comp (map identity)) conj core/concatv [11 22 33 44 55])
+      (transduce-kv 2 (comp (map identity)) conj core/concatv [11 22 33 44 55])))
+
+  (testing "equivalency of different sized sub-reductions"
+    (are [n] (= 499500 (transduce-kv n (comp (map identity)) + + (vec (range 1E3))))
+      2 4 8 16 32 64 128 256 512 1032))
+
   (testing "basic examples"
     (testing "vector `coll`"
       (are [x y] (= x y)
         (transduce-kv 3
-                      (comp-kv-offset (map #(vector *keydex* %)))
+                      (comp (map #(vector core/*keydex* %)))
                       conj
-                      concatv
+                      core/concatv
                       [11 22 33 44 55])
         [[0 11] [1 22] [2 33] [3 44] [4 55]]
 
-        (transduce-kv (comp-kv-offset (map #(vector *keydex* %)))
+        (transduce-kv (comp (map #(vector core/*keydex* %)))
                       conj
-                      concatv
+                      core/concatv
                       [11 22 33 44 55])
         [[0 11] [1 22] [2 33] [3 44] [4 55]]))
 
     (testing "hashmaps `coll`"
       (are [x y] (= x y)
         (transduce-kv 3
-                      (comp-kv-offset (map #(array-map :key *keydex*
-                                                       :value (+ 100 %))))
+                      (comp (map #(array-map :key core/*keydex*
+                                             :value (+ 100 %))))
                       (completing
                        (fn
                          ([] {})
-                         ([result val] (assoc result *keydex* val))))
+                         ([result val] (assoc result core/*keydex* val))))
                       merge
                       (hash-map :a 11 :b 22 :c 33 :d 44 :e 55))
         {:a {:key :a :value 111}
@@ -162,12 +160,12 @@
          :d {:key :d :value 144}
          :e {:key :e :value 155}}
 
-        (transduce-kv (comp-kv-offset (map #(array-map :key *keydex*
-                                                       :value (+ 100 %))))
+        (transduce-kv (comp (map #(array-map :key core/*keydex*
+                                             :value (+ 100 %))))
                       (completing
                        (fn
                          ([] {})
-                         ([result val] (assoc result *keydex* val))))
+                         ([result val] (assoc result core/*keydex* val))))
                       merge
                       (hash-map :a 11 :b 22 :c 33 :d 44 :e 55))
         {:a {:key :a :value 111}
@@ -178,10 +176,10 @@
 
 
         (transduce-kv 3
-                      (comp-kv-offset (map #(array-map :key *keydex*
-                                                       :value (+ 100 %))))
+                      (comp (map #(array-map :key core/*keydex*
+                                             :value (+ 100 %))))
                       conj
-                      concatv
+                      core/concatv
                       (sorted-map :a 11 :b 22 :c 33 :d 44 :e 55))
         [{:key :a :value 111}
          {:key :b :value 122}
@@ -192,12 +190,12 @@
   (testing "stacked `xform`"
     (are [x y] (= x y)
       (transduce-kv 3
-                    (comp-kv-offset (map inc)
-                                    (filter (fn [_] (even? *keydex*)))
-                                    (remove (fn [_] (= *keydex* 2)))
-                                    (map #(array-map :idx *keydex* :value %)))
+                    (comp (map inc)
+                          (filter (fn [_] (even? core/*keydex*)))
+                          (remove (fn [_] (= core/*keydex* 2)))
+                          (map #(array-map :idx core/*keydex* :value %)))
                     conj
-                    concatv
+                    core/concatv
                     [11 22 33 44 55 66 77 88 99])
       [{:idx 0 :value 12}
        {:idx 4 :value 56}
