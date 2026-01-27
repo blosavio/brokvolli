@@ -69,17 +69,28 @@
     (gen/vector (gen/fmap f gen/string-alphanumeric))))
 
 
+(def xduce-gen (gen/elements [clojure.core/transduce
+                              single/transduce-kv
+                              multi/transduce
+                              multi/transduce-kv]))
+
+
+(def xduce-kv-gen (gen/elements [single/transduce-kv
+                                 multi/transduce-kv]))
+
+
 (def round-trip-casing
   (prop/for-all
-   [s str-gen]
+   [s str-gen
+    xduce xduce-gen]
    (= s
-      (single/transduce-kv (comp (map str/upper-case)
-                                 (map str/lower-case))
-                           conj
-                           s)
+      (xduce (comp (map str/upper-case)
+                   (map str/lower-case))
+             conj
+             s)
       (->> s
-           (single/transduce-kv (comp (map str/upper-case)) conj)
-           (single/transduce-kv (comp (map str/lower-case)) conj)))))
+           (xduce (comp (map str/upper-case)) conj)
+           (xduce (comp (map str/lower-case)) conj)))))
 
 
 (clj-test/defspec test-round-trip-casing n-checks round-trip-casing)
@@ -98,14 +109,15 @@
 
 (def round-trip-incrementing
   (prop/for-all
-   [i int-gen]
+   [i int-gen
+    xduce xduce-gen]
    (= i
-      (single/transduce-kv (comp (map inc)
-                                 (map dec))
-                           conj i)
+      (xduce (comp (map inc)
+                   (map dec))
+             conj i)
       (->> i
-           (single/transduce-kv (comp (map inc)) conj)
-           (single/transduce-kv (comp (map dec)) conj)))))
+           (xduce (comp (map inc)) conj)
+           (xduce (comp (map dec)) conj)))))
 
 
 (clj-test/defspec test-round-trip-incrementing n-checks round-trip-incrementing)
@@ -126,8 +138,9 @@
 
 (def filter-by-keys
   (prop/for-all
-   [m hashmap-int-int-gen]
-   (every? even? (keys (single/transduce-kv (comp (filter (fn [_] (even? core/*keydex*)))) step-kv m)))))
+   [m hashmap-int-int-gen
+    xduce-kv xduce-kv-gen]
+   (every? even? (keys (xduce-kv (comp (filter (fn [_] (even? core/*keydex*)))) step-kv m)))))
 
 
 (clj-test/defspec test-filter-by-keys n-checks filter-by-keys)
@@ -143,9 +156,10 @@
 (def shorten-with-take
   (prop/for-all
    [v (gen/vector gen/simple-type)
-    tk gen/nat]
+    tk gen/nat
+    xduce xduce-gen]
    (= (min tk (count v))
-      (count (single/transduce-kv (comp (take tk)) conj v)))))
+      (count (xduce (comp (take tk)) conj v)))))
 
 
 (clj-test/defspec test-shorten-with-take n-checks shorten-with-take)
@@ -159,9 +173,10 @@
 (def expand-with-mapcat
   (prop/for-all
    [v (gen/vector gen/simple-type)
-    x gen/nat]
+    x gen/nat
+    xduce xduce-gen]
    (= (* x (count v))
-      (count (single/transduce-kv (comp (mapcat #(repeat x %))) conj v)))))
+      (count (xduce (comp (mapcat #(repeat x %))) conj v)))))
 
 
 (clj-test/defspec test-expand-with-mapcat 1000 expand-with-mapcat)
@@ -271,8 +286,10 @@
                 (let [{element-type :type
                        v :v
                        xforms :xforms} info]
-                  (= (transduce (apply comp xforms) conj v)
-                     (single/transduce-kv (apply comp xforms) conj v)))))
+                  (= (transduce           (apply comp xforms) conj v)
+                     (single/transduce-kv (apply comp xforms) conj v)
+                     (multi/transduce     (apply comp xforms) conj v)
+                     (multi/transduce-kv  (apply comp xforms) conj v)))))
 
 
 (clj-test/defspec test-seq-props n-checks sequential-properties)
@@ -367,8 +384,10 @@
    (let [{element-type :type
           m :m
           xforms :xforms} info]
-     (= (transduce (apply comp (map :core xforms)) step m)
-        (single/transduce-kv (apply comp (map :brokvolli xforms)) step-kv m)))))
+     (= (transduce           (apply comp (map :core xforms))      step    m)
+        (multi/transduce     (apply comp (map :core xforms))      step    m)
+        (single/transduce-kv (apply comp (map :brokvolli xforms)) step-kv m)
+        (multi/transduce-kv  (apply comp (map :brokvolli xforms)) step-kv m)))))
 
 
 (comment

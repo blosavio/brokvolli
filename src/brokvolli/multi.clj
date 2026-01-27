@@ -1,6 +1,8 @@
 (ns brokvolli.multi
   "Multi-threaded variants of [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
-  and [[transduce-kv]]."
+  and [[transduce-kv]].
+
+  Warning: Use stateful transducers only with utmost care."
   (:refer-clojure :exclude [transduce])
   (:require
    [brokvolli.core]
