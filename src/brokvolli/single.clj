@@ -4,39 +4,16 @@
 
 
 (defn kv-ize
-  "TODO: edit docstring...
-  Given a composition of functions `composition` (an xform stack), returns an
+  " Given a composition of functions `composition` (an xform stack), returns an
   equivalent transformer stack that also accepts *result*, *key/index*, and
-  *value*.
+  *value*, suitable for use with [[transduce-kv]].
 
-  Returns a composition of transducers, suitable for use with [[transduce-kv]].
-
-  Given a series of transducer functions `fns`, returns a composition of those
-  functions which
+  The composition returned adds two capabilities.
 
   1. Diverts the key/index provided by `transduce-kv`, passing only the
   accumulated value and the next element to the outer/top transducer, and
   2. Establishes a binding context where the key/index is available from
-  [[*keydex*]] at any layer of the transducer stack.
-
-  Example:
-  ```clojure
-  (comp-kv (map inc)
-           (filter (fn [_] #(<= *keydex* 2)))
-           (take 3))
-  ```
-  ...returns a 'kv' transducer that
-
-  1. Increments each element,
-  2. Retains all elements with an index less than or equal to two, and
-  3. Takes the first three elements, if available.
-
-  Note: Some transducer functions may not involve the actual value, e.g.,
-  filtering based on the index. In those cases, the `#(...)` anonymous function
-  shorthand may be problematic because an argument will be be passed, but the
-  `%` doesn't appear, thus the compiler assumes a zero arity. Instead, use the
-  `(fn [_] (...))` idiom to discard the argument. See the `filter` expression in
-  the middle line of the example above."
+  [[*keydex*]] at any layer of the transducer stack."
   {:UUIDv4 #uuid "66698ff3-6e41-46ac-b63c-6d0f7d22cfb6"
    :no-doc true}
   [composition]
@@ -52,41 +29,40 @@
 
 
 (defn transduce-kv
-  "TODO: edit for updates that removed `comp-kv`.
+  "A '-kv' variant of `transduce`, reducing with a transformation. The analogy
+  is
 
-  A '-kv' variant of `transduce`, reducing with a transformation. The analogy
-  is `reduce`:`reduce-kv`::`transduce`:`transduce-kv`.
+ `reduce:reduce-kv::transduce:transduce-kv`.
 
   As with `transduce`, `xform` and `f` are functions of zero, one, and two
   arguments. Works with all the `clojure.core` transducers, excepting the
   `...-indexed` variants.
 
-  `xform` is most straightforwardly composed with [[comp-kv]], a utility that
-  composes a series of transducer functions and automatically adds an additional
-  arity that accepts the accumulating value, the key/index, and the next
-  element. While the transducer stack is walked, similarly to `transduce`,
-  `comp-kv` makes the key/index available via [[*keydex*]].
+  `xform` is most straightforwardly composed with `comp`. While `transduce-kv`
+  descends into the transducer stack, the key/index available via [[*keydex*]].
 
   `coll` must implement `clojure.lang.IKVReduce`.
 
-  Example, not using the key/index:
+  Examples, not using the key/index:
   ```clojure
-  (transduce-kv (comp-kv (map inc)) conj [11 22 33 44 55 66 77])
+  (transduce-kv (map inc) conj [11 22 33 44 55 66 77])
   ;; => [12 23 34 45 56 67 78]
 
-  (transduce-kv (comp-kv (map inc)
-                         (filter even?)) conj [11 22 33 44 55 66 77])
+  (transduce-kv (comp (map inc)
+                      (filter even?)) conj [11 22 33 44 55 66 77])
   ;; => [12 34 56 78]
 
-  (transduce-kv (comp-kv (map inc)
-                         (filter even?)
-                         (take 3)) conj [11 22 33 44 55 66 77])
+  (transduce-kv (comp (map inc)
+                      (filter even?)
+                      (take 3)) conj [11 22 33 44 55 66 77])
   ;; => [12 34 56]
   ```
 
   Example, using the key/index by consulting `*keydex*`:
   ```clojure
-  (transduce-kv (comp-kv (map #(+ % (inc *keydex*)))) conj [11 22 33])
+  (require '[brokvolli.core :refer [*keydex*]])
+
+  (transduce-kv (map #(+ % (inc *keydex*))) conj [11 22 33])
   ;; => [12 24 36]
 
   ;; value  *keydex*  (+ value (inc *keydex*))  eval  result
@@ -97,7 +73,7 @@
 
   Another example, using the key/index by consulting `*keydex*`:
   ```clojure
-  (transduce-kv (comp-kv (filter (fn [_] (<= *keydex* 2)))) conj [11 22 33 44 55])
+  (transduce-kv (filter (fn [_] (<= *keydex* 2))) conj [11 22 33 44 55])
   ;; [11 22 33]
 
   ;; value  *keydex*  (<= *keydex* 2)  result
@@ -115,12 +91,20 @@
   Example, illustrating how `*keydex*` refers to original location after an
   element is removed:
   ```clojure
-  (transduce-kv (comp-kv (remove (fn [_] (= *keydex* 1)))
-                         (map #(vector *keydex* %)))
+  (transduce-kv (comp (remove (fn [_] (= *keydex* 1)))
+                      (map #(vector *keydex* %)))
                 conj
                 [:foo :bar :baz])
   ;; => [[0 :foo] [2 :baz]]
-  ```"
+  ```
+
+  Note: Some transducer functions may not involve the actual value, e.g.,
+  `filter`-ing based on the index. In those cases, the `#(...)` anonymous
+  function shorthand may be problematic because the value is always passed as an
+  argument, but the expression won't contain a `%`. Without a `%`, the compiler
+  assumes the function receives zero arguments, not one. Instead, use the
+  `(fn [_] (...))` idiom to discard the argument. See the `remove` expression in
+  the example above."
   {:UUIDv4 #uuid "7357eed9-67ea-4269-bd65-7ec23e125328"}
   ([xform f coll] (transduce-kv xform f (f) coll))
   ([xform f init coll] (transduce-kv xform f init coll nil))

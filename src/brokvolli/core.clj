@@ -1,9 +1,11 @@
-(ns brokvolli.core)
+(ns brokvolli.core
+  "Vars used from all namespaces, plus helper functions.")
 
 
 (def ^{:no-doc true} *keydex*-docstring
   "Dynamically bound to the 'current' key/index within a transducer stack
- composed with [[comp-kv]]. Do not manually re-bind.")
+ consumed with [[brokvolli.single/transduce-kv]] and
+ [[brokvolli.multi/transduce-kv]]. Do not manually re-bind.")
 
 
 (def ^{:dynamic true

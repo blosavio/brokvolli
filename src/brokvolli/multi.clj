@@ -1,6 +1,6 @@
 (ns brokvolli.multi
   "Multi-threaded variants of [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
-  and [[transduce-kv]].
+  and [[brokvolli.single/transduce-kv]].
 
   Warning: Use stateful transducers only with utmost care."
   (:refer-clojure :exclude [transduce])
@@ -13,7 +13,8 @@
 
 (defn split-vector
   "Given vector `v`, returns a 3-ple of two subvectors and the split index."
-  {:UUIDv4 #uuid "377dc05e-0195-4133-b05d-cdf4a6aa1e45"}
+  {:UUIDv4 #uuid "377dc05e-0195-4133-b05d-cdf4a6aa1e45"
+   :no-doc true}
   [v]
   (let [split (quot (count v) 2)]
     [(subvec v 0 split) (subvec v split (count v)) split]))
@@ -21,7 +22,8 @@
 
 (defn split-hashmap
   "Given hashmap `m`, returns a 3-ple of two sub-hashmaps and `nil`."
-  {:UUIDv4 #uuid "f2d0e8ce-b953-4d81-8c40-1ecc80efaca8"}
+  {:UUIDv4 #uuid "f2d0e8ce-b953-4d81-8c40-1ecc80efaca8"
+   :no-doc true}
   [m]
   (let [ks (keys m)
         split (quot (count ks) 2)
@@ -34,7 +36,8 @@
 (defn split-seq
   "Given sequence `s`, returns a 3-ple of two sub-sequences and the split
   index."
-  {:UUIDv4 #uuid "b1a7033c-a13b-4244-82a7-53e866115525"}
+  {:UUIDv4 #uuid "b1a7033c-a13b-4244-82a7-53e866115525"
+   :no-doc true}
   [s]
   (let [split (quot (count s) 2)]
     [(take split s) (drop split s) split]))
@@ -57,9 +60,9 @@
 ;; You must not remove this notice, or any other, from this software.
 
 
-(def pool (delay (java.util.concurrent.ForkJoinPool.)))
+(def ^:no-doc pool (delay (java.util.concurrent.ForkJoinPool.)))
 
-(defn fjtask [^Callable f]
+(defn ^:no-doc fjtask [^Callable f]
   (java.util.concurrent.ForkJoinTask/adapt f))
 
 (defn- fjinvoke [f]
@@ -171,7 +174,7 @@
              (combine (f1) (fjjoin t2)))))))))
 
 
-(defprotocol PTransduce
+(defprotocol ^:no-doc PTransduce
   (ptransduce [coll n xform f init combine])
 
   (ptransduce-kv [coll n xform f init combine]))
@@ -200,25 +203,82 @@
 
 
 (defn transduce
-  "TODO: docstring expansion/edits.
-  Like `clojure.core/transduce`, but potentially parallel.
-
-  `combine` defaults to `f`, `n` defaults to 512.
-
-  `xform` and `f` like `clojure.core/transduce`.
-  `xform` is a composed transformer 'stack'.
+  "Like `clojure.core/transduce`, but potentially multi-threaded. `xform` is a
+  composed transformer 'stack' and `f` is a reducing function, each analogous to
+  their [`clojure.core/transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
+  counterparts. This variant of `transduce` does not accept an explicit 'init'
+  parameter; it must be provided by the arity-0 of `f`. Returns `(combine)` when
+  `coll` is empty or `nil`.
 
   `xform` has three arities:
-  1. zero args provides the 'init' value of the sub-reduction
-  2. one arg provides the 'completing' action on the sub-collection
-  3. two args is the step function, applying the function to the accumulating
+
+  1. Zero args provides the 'init' value of the sub-reduction.
+  2. One arg provides the 'completing' action on the sub-collection.
+  3. Two args is the step function, applying the function to the accumulating
   value and the next element.
 
+  **Warning:** Use stateful transducers with extreme caution.
+
   `combine` is a function of three arities that governs how to gather the
-  results of the sub-reductions.
-  1. zero args provides the output if `coll` is emtpy.
-  2. one arg is the 'completing' action applied just before the final value
-  3. two args combines the 'left' and 'right' sub-reduction results"
+  results of the sub-reductions:
+
+  1. Zero args provides the output if `coll` is empty.
+  2. One arg is the 'completing' action applied just before the final value.
+  3. Two args combines the 'left' and 'right' sub-reduction results.
+
+  `combine` defaults to `f`.
+
+  `n` is size at which `coll` is partitioned for multi-threaded processing,
+  defaulting to 512. When `n` does not divide evenly into `(size coll)`, the
+  locations of the partition boundaries are an implementation detail.
+
+  Example, `f` also provides `combine`:
+  ```clojure
+  (transduce (map identity) + [1 2 3]) ;; => 6
+  ```
+
+  Example,
+
+    1. Partition `coll`,
+    2. Compute on different threads, and
+    3. Combine:
+  ```clojure
+  (transduce 2 (map inc) conj concatv [11 22 33]) ;; => [12 23 34]
+  ```
+  See [[concatv]] for a helper function that concatenates eagerly and
+  efficiently.
+
+  Example, 'stack of xforms':
+  ```clojure
+  (transduce 3
+             (comp (map inc)
+                   (filter even?)
+                   (remove #(< 70 %)))
+             conj
+             concatv
+             [11 22 33 44 55 66 77 88])
+  ;; => [12 34 56]
+  ```
+
+  Like [clojure.core/reduce](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/reduce),
+  elements of hash-maps are peeled off as *map entries*, 2-tuples of *key* and
+  *value*.
+
+  Example, working with an associative collection (i.e., a hash-map):
+  ```clojure
+  (transduce (comp (map #(update % 1 inc))
+                         (filter #(even? (second %)))
+                         (remove #(< 70 (second %))))
+                   (completing
+                    (fn
+                      ([] {})
+                      ([result value] (conj result value))))
+                   merge
+                   {:a 11 :b 22 :c 33 :d 44 :e 55 :f 66 :g 77 :h 88 :i 99})
+  ;; => {:e 56, :c 34, :a 12}
+  ```
+  See [[transduce-kv]] for a variant that behaves like
+  [reduce-kv](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/reduce-kv)."
   {:UUIDv4 #uuid "6ec6c582-e6f2-4320-ac0d-4fb69e3b6c0e"}
   ([xform f coll] (transduce xform f f coll))
   ([xform f combine coll] (transduce 512 xform f combine coll))
@@ -226,7 +286,34 @@
 
 
 (defn transduce-kv
-  "Multi-threaded variant of [[brokvolli.single/transduce-kv]]."
+  "Multi-threaded variant of [[brokvolli.single/transduce-kv]]. `xform`, `f`,
+  and `combine` are the same as with [[transduce]]. The key/index is available
+  as [[*keydex*]] at any 'level' within the transducer stack; it may be ignored
+  to suit.
+
+  `n` is size at which `coll` is partitioned for multi-threaded processing,
+  defaulting to 512. When `n` does not divide evenly into `(size coll)`, the
+  locations of the partition boundaries are an implementation detail.
+
+  **Warning:** Use stateful transducers with extreme caution.
+
+  Examples:
+  ```clojure
+  (require '[brokvolli.core :refer [*keydex*]])
+
+  (transduce-kv (map #(+ % (inc *keydex*))) conj [11 22 33]) ;; => [12 24 36]
+
+  ;; same result, but with explicit splitting into threads
+  (transduce-kv 2 (map #(+ % (inc *keydex*))) conj concatv [11 22 33]) ;; => [12 24 36]
+
+  ;; value  *keydex*  (+ value (inc *keydex*))  eval  result
+  ;; 11     0         (+ 11 (inc 0))            12    [12]
+  ;; 22     1         (+ 22 (inc 1))            24    [12 24]
+  ;; 33     2         (+ 33 (inc 2))            36    [12 24 36]
+  ```
+
+  See [[brokvolli.single/transduce-kv]] and [[brokvolli.multi/transduce]] for
+  more."
   {:UUIDv4 #uuid "e9a2bb27-5d14-48e7-9bd9-ffa1f2ffb7d9"}
   ([xform f coll] (transduce-kv xform f f coll))
   ([xform f combine coll] (transduce-kv 512 xform f combine coll))
