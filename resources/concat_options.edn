@@ -10,7 +10,7 @@
  :preferred-version-info :lein
 
  :benchmarks {'brokvolli.performance.concatenating #{'measure-tactics}}
- 
+
  ;; output directories and filenames
  :html-directory "doc/"
  :html-filename "concat_performance.html"
@@ -40,7 +40,7 @@
  concatenating two vectors, so let's run some benchmarks to see if any
  particular tactic performs objectively faster than the others. Benchmarks are
  defined "
-             [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/concatenating.vlj"}
+             [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/concatenating.clj"}
               "here"]
              "."]
 
@@ -51,7 +51,7 @@
              " tactics (closely related to each other), perform the best. Since
  they perform the best, and their implementation is straightforward, those are
  used in the "
-             [:a {:href "https://example.com/https://github.com/blosavio/brokvolli"}
+             [:a {:href "https://blosavio.github.io/brokvolli/brokvolli.core.html#var-concatv"}
               "concatv"]
              " core utility."]]
 
@@ -59,12 +59,13 @@
  {"Concatenation tactics"
   [:div
    [:p "We'll consider five concatenation tactics."
-    
+
     [:table
      [:tr [:td "realized concat"] [:td [:code "(doall (concat v1 v2))"]]]
      [:tr [:td "vectored concat"] [:td [:code "(vec (concat v1 v2))"]]]
      [:tr [:td "basic into"] [:td [:code "(into v1 v2)"]]]
-     [:tr [:td "transient cat"]  [:td [:a {:href "https://example.com/https://github.com/blosavio/brokvolli"} "implementation here"]]]
+     [:tr [:td "transient cat"]  [:td [:a {:href "https://github.com/blosavio/brokvolli/blob/c768e31f158f6baf95927ca15012128fdc2be64e/test/brokvolli/performance/concatenating.clj#L33-L43"}
+                                       "implementation here"]]]
      [:tr [:td "transducer cat"] [:td [:code "(into v1 conj v2)"]]]]
     [:p "For each of those five tactics, we'll feed a pair of vectors, "
      [:code "v1"]

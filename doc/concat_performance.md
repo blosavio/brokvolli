@@ -11,12 +11,12 @@
         <a href="https://clojuredocs.org/clojure.core/concat"><code>clojure.core/concat</code></a> is lazy, so it&apos;s perhaps not the best suited for
         <code>transduce</code> tasks, which are eager. There are a handful of tactics for concatenating two vectors, so let&apos;s run some benchmarks to see
         if any particular tactic performs objectively faster than the others. Benchmarks are defined <a href=
-        "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/concatenating.vlj">here</a>.
+        "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/concatenating.clj">here</a>.
       </p>
       <p>
         Overall, we observe that the <em>into</em> and <em>transducer</em> tactics (closely related to each other), perform the best. Since they perform the
         best, and their implementation is straightforward, those are used in the <a href=
-        "https://example.com/https://github.com/blosavio/brokvolli">concatv</a> core utility.
+        "https://blosavio.github.io/brokvolli/brokvolli.core.html#var-concatv">concatv</a> core utility.
       </p>
     </div>
     <section>
@@ -57,7 +57,9 @@
               transient cat
             </td>
             <td>
-              <a href="https://example.com/https://github.com/blosavio/brokvolli">implementation here</a>
+              <a href=
+              "https://github.com/blosavio/brokvolli/blob/c768e31f158f6baf95927ca15012128fdc2be64e/test/brokvolli/performance/concatenating.clj#L33-L43">implementation
+              here</a>
             </td>
           </tr>
           <tr>

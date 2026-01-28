@@ -21,7 +21,7 @@
 (defn concatv
   "Concatenates vectors `v1` and `v2` eagerly and efficiently.
 
-  See [benchmarking and analysis](http://example.com)."
+  See [benchmarking and analysis](https://blosavio.github.io/brokvolli/concat_performance.html)."
   {:UUIDv4 #uuid "571ca334-1e9d-4e72-926c-f154c47a8663"}
   ([] [])
   ([v] v)
