@@ -128,7 +128,31 @@
                     [11 22 33])
       [[0 11] [0 11] [0 11]
        [1 22] [1 22] [1 22]
-       [2 33] [2 33] [2 33]])))
+       [2 33] [2 33] [2 33]]))
+
+  (testing "`coll` implementation requirements: `clojure.lang.IKVReduce`"
+    (testing "sequential collections"
+      (are [coll-type coll] (and
+                             (instance? coll-type coll)
+                             (instance? clojure.lang.IKVReduce coll)
+                             (= [12 23 34]
+                                (transduce-kv (map inc) conj coll)))
+        clojure.lang.PersistentVector (vector 11 22 33)))
+    (testing "associative collections"
+      (are [coll-type coll] (and
+                             (instance? coll-type coll)
+                             (instance? clojure.lang.IKVReduce coll)
+                             (= {:a 12, :b 23, :c 34}
+                                (transduce-kv (map #(inc %))
+                                              (completing
+                                               (fn
+                                                 ([] {})
+                                                 ([result value]
+                                                  (assoc result core/*keydex* value))))
+                                              coll)))
+        clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33)
+        clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33)
+        clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33)))))
 
 
 #_(run-tests)

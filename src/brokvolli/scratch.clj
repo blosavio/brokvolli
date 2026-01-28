@@ -1,4 +1,8 @@
-(ns brokvolli.scratch)
+(ns brokvolli.scratch
+  "`clojure.core/transduce` requires coll implement clojure.lang.IReduceInit.
+  `clojure.core/reduce-kv` delegates to `clojure.core.protocols/kv-reduce`
+  `clojure.core.protocols/kv-reduce` is declared by `IKVReduce` in protocols
+")
 
 
 (defrecord TestRec [field-1 field-2])
@@ -63,7 +67,8 @@
 
 (reduce #(assoc %1
                 (str (type %2))
-                (instance? clojure.lang.IKVReduce %2))
+                {:clojure-lang-IKReduce? (instance? clojure.lang.IKVReduce %2)
+                 :clojure-core-protocols-IKVReduce? (instance? clojure.core.protocols.IKVReduce %2)})
         (sorted-map)
         [(vector)
          (array-map)
@@ -73,11 +78,11 @@
          (sorted-set)
          (list 11)])
 
-{"class clojure.lang.PersistentArrayMap" true,
- "class clojure.lang.PersistentHashMap" true,
- "class clojure.lang.PersistentHashSet" false,
- "class clojure.lang.PersistentList" false,
- "class clojure.lang.PersistentTreeMap" true,
- "class clojure.lang.PersistentTreeSet" false,
- "class clojure.lang.PersistentVector" true}
+{"class clojure.lang.PersistentArrayMap" {:clojure-lang-IKReduce? true,  :clojure-core-protocols-IKVReduce? false},
+ "class clojure.lang.PersistentHashMap"  {:clojure-lang-IKReduce? true,  :clojure-core-protocols-IKVReduce? false},
+ "class clojure.lang.PersistentHashSet"  {:clojure-lang-IKReduce? false, :clojure-core-protocols-IKVReduce? false},
+ "class clojure.lang.PersistentList"     {:clojure-lang-IKReduce? false, :clojure-core-protocols-IKVReduce? false},
+ "class clojure.lang.PersistentTreeMap"  {:clojure-lang-IKReduce? true,  :clojure-core-protocols-IKVReduce? false},
+ "class clojure.lang.PersistentTreeSet"  {:clojure-lang-IKReduce? false, :clojure-core-protocols-IKVReduce? false},
+ "class clojure.lang.PersistentVector"   {:clojure-lang-IKReduce? true,  :clojure-core-protocols-IKVReduce? false}}
 

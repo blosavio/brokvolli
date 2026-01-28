@@ -3,6 +3,7 @@
   (:require
    [brokvolli.core :as core]
    [brokvolli.multi :refer :all]
+   [clojure.string :as str]
    [clojure.test :refer [are
                          deftest
                          is
@@ -38,6 +39,14 @@
     (split-seq (range 1 4)) [[1] [2 3] 1]
     (split-seq (range 1 5)) [[1 2] [3 4] 2]
     (split-seq (range 1 6)) [[1 2] [3 4 5] 2]))
+
+
+(defn- array-seq
+  "Returns a `clojure.lang.ArraySeq"
+  {:UUIDv4 #uuid "2bea61f3-6e22-4752-8036-f4ae7bb88330"
+   :no-doc true}
+  [& args]
+  args)
 
 
 (deftest transduce-tests
@@ -106,7 +115,35 @@
                  conj
                  core/concatv
                  (range 11 99 11))
-      [12 34 56])))
+      [12 34 56]))
+
+  (testing "`coll` implementation requirements"
+    (testing "sequential collections of numbers"
+      (are [coll-type coll] (and (instance? coll-type coll)
+                                 (instance? clojure.lang.IReduceInit coll)
+                                 (= 66
+                                    (transduce (map int) + coll)))
+        clojure.lang.PersistentVector [11 22 33]
+        clojure.lang.LongRange (range 11 44 11)
+        clojure.lang.Range (range 11.0 44.0 11.0)
+        clojure.lang.Repeat (repeat 3 22)
+        clojure.lang.PersistentList (list 11 22 33)
+        clojure.lang.ArraySeq (array-seq 11 22 33)))
+    (testing "sequential collections of chars"
+      (are [coll-type coll] (and (instance? coll-type coll)
+                                 (instance? clojure.lang.IReduceInit coll)
+                                 (= ["A" "B" "C"]
+                                    (transduce (map str/upper-case) conj coll)))
+        clojure.lang.StringSeq (seq "abc")))
+    (testing "associative collections"
+      (are [coll-type coll] (and (instance? coll-type coll)
+                                 #_(instance? clojure.core.protocols.CollReduce coll) ;; unsure exactly how map collections implement `reduce`
+                                 #_(instance? clojure.lang.IReduceInit coll) ;; expected it'd be either of these two
+                                 (= 66
+                                    (transduce (map #(second %)) + coll)))
+        clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33)
+        clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33)
+        clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33)))))
 
 
 (deftest transduce-kv-tests
@@ -200,7 +237,31 @@
       [{:idx 0 :value 12}
        {:idx 4 :value 56}
        {:idx 6 :value 78}
-       {:idx 8 :value 100}])))
+       {:idx 8 :value 100}]))
+
+  (testing "`coll` implementation requirements: `clojure.lang.IKVReduce`"
+    (testing "sequential collections"
+      (are [coll-type coll] (and
+                             (instance? coll-type coll)
+                             (instance? clojure.lang.IKVReduce coll)
+                             (= [12 23 34]
+                                (transduce-kv (map inc) conj coll)))
+        clojure.lang.PersistentVector (vector 11 22 33)))
+    (testing "associative collections"
+      (are [coll-type coll] (and
+                             (instance? coll-type coll)
+                             (instance? clojure.lang.IKVReduce coll)
+                             (= {:a 12, :b 23, :c 34}
+                                (transduce-kv (map #(inc %))
+                                              (completing
+                                               (fn
+                                                 ([] {})
+                                                 ([result value]
+                                                  (assoc result core/*keydex* value))))
+                                              coll)))
+        clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33)
+        clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33)
+        clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33)))))
 
 
 #_(run-tests)

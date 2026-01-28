@@ -2,7 +2,7 @@
   "Multi-threaded variants of [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
   and [[brokvolli.single/transduce-kv]].
 
-  Warning: Use stateful transducers only with utmost care."
+  **Warning:** Use stateful transducers only with utmost care."
   (:refer-clojure :exclude [transduce])
   (:require
    [brokvolli.core]
@@ -192,9 +192,14 @@
  (ptransduce [m n xform f init combine] ((transduce- split-hashmap empty?) n xform f init combine m))
  (ptransduce-kv [m n xform f init combine] ((transduce-kv- split-hashmap empty?) n xform f init combine m nil))
 
- clojure.lang.PersistentList$EmptyList
+ clojure.lang.ArraySeq
+ clojure.lang.Cycle
  clojure.lang.LongRange
+ clojure.lang.PersistentList
+ clojure.lang.PersistentList$EmptyList
  clojure.lang.Range
+ clojure.lang.Repeat
+ clojure.lang.StringSeq
  (ptransduce [s n xform f init combine] ((transduce- split-seq #(not (seq %))) n xform f init combine s))
 
  nil
@@ -228,9 +233,10 @@
 
   `combine` defaults to `f`.
 
-  `n` is size at which `coll` is partitioned for multi-threaded processing,
-  defaulting to 512. When `n` does not divide evenly into `(size coll)`, the
-  locations of the partition boundaries are an implementation detail.
+  `coll` must implement `clojure.lang.IReduceInit`. `n` is size at which `coll`
+  is partitioned for multi-threaded processing, defaulting to 512. When `n` does
+  not divide evenly into `(size coll)`, the locations of the partition
+  boundaries are an implementation detail.
 
   Example, `f` also provides `combine`:
   ```clojure
@@ -290,6 +296,8 @@
   and `combine` are the same as with [[transduce]]. The key/index is available
   as [[*keydex*]] at any 'level' within the transducer stack; it may be ignored
   to suit.
+
+  `coll` must implement `clojure.lang.IKVReduce`.
 
   `n` is size at which `coll` is partitioned for multi-threaded processing,
   defaulting to 512. When `n` does not divide evenly into `(size coll)`, the
