@@ -19,15 +19,12 @@
 
 
 (defn concatv
-  "Concatenates vectors `v1` and `v2`, efficiently and fastly.
+  "Concatenates vectors `v1` and `v2` eagerly and efficiently.
 
-  TODO: Objectively evaluate different implementations for speed/efficiency."
+  See [benchmarking and analysis](http://example.com)."
   {:UUIDv4 #uuid "571ca334-1e9d-4e72-926c-f154c47a8663"}
   ([] [])
   ([v] v)
   ([v1 v2]
-   #_(vec (concat v1 v2)) ;; beware: `concat` is lazy, and returns a sequence
-   #_(into v1 v2)         ;; compare to transducer variant (below)
-   #_(r/cat v1 v2) ;; returns an instance of `clojure.core.reducers.Cat`
    (into v1 conj v2)))
 

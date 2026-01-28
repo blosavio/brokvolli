@@ -1,0 +1,93 @@
+{:title "Vector concatenation benchmarks"
+
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+
+ :copyright-holder "Brad Losavio"
+
+ :fastester-UUID #uuid "1b5101d1-6b60-4868-830b-09d396f19bf3"
+
+ :preferred-version-info :lein
+
+ :benchmarks {'brokvolli.performance.concatenating #{'measure-tactics}}
+ 
+ ;; output directories and filenames
+ :html-directory "doc/"
+ :html-filename "concat_performance.html"
+ :img-subdirectory "concat_img/"
+
+ :markdown-directory "doc/"
+ :markdown-filename "concat_performance.md"
+
+ :results-url "https://github.com/blosavio/brokvolli/blob/main/"
+ :results-directory "resources/concat_performance/"
+
+ :verbose? true
+ :testing-thoroughness :default
+ :parallel? false
+ :save-benchmark-fn-results? false
+
+ :sort-comparator compare #_#(> (Integer/parseInt %1) (Integer/parseInt %2))
+
+ :tidy-html? true
+
+ :preamble [:div
+            [:p [:a {:href "https://clojuredocs.org/clojure.core/concat"}
+                 [:code "clojure.core/concat"]]
+             " is lazy, so it's perhaps not the best suited for "
+             [:code "transduce"]
+             " tasks, which are eager. There are a handful of tactics for
+ concatenating two vectors, so let's run some benchmarks to see if any
+ particular tactic performs objectively faster than the others. Benchmarks are
+ defined "
+             [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/concatenating.vlj"}
+              "here"]
+             "."]
+
+            [:p "Overall, we observe that the "
+             [:em "into"]
+             " and "
+             [:em "transducer"]
+             " tactics (closely related to each other), perform the best. Since
+ they perform the best, and their implementation is straightforward, those are
+ used in the "
+             [:a {:href "https://example.com/https://github.com/blosavio/brokvolli"}
+              "concatv"]
+             " core utility."]]
+
+ :comments
+ {"Concatenation tactics"
+  [:div
+   [:p "We'll consider five concatenation tactics."
+    
+    [:table
+     [:tr [:td "realized concat"] [:td [:code "(doall (concat v1 v2))"]]]
+     [:tr [:td "vectored concat"] [:td [:code "(vec (concat v1 v2))"]]]
+     [:tr [:td "basic into"] [:td [:code "(into v1 v2)"]]]
+     [:tr [:td "transient cat"]  [:td [:a {:href "https://example.com/https://github.com/blosavio/brokvolli"} "implementation here"]]]
+     [:tr [:td "transducer cat"] [:td [:code "(into v1 conj v2)"]]]]
+    [:p "For each of those five tactics, we'll feed a pair of vectors, "
+     [:code "v1"]
+     " and "
+     [:code "v2"]
+     ", with lengths, "
+     [:code "n"]
+     ", ranging from one to a million, increasing by decade. We'll use "
+     [:a {:href "https://github.com/hugoduncan/criterium"}
+      "Criterium"]
+     " to measure the execution times. Each data point is the mean±std of sixty
+ measurements."]]
+
+   [:h3 "Observations"]
+
+   [:p "Execution times increase with vector length. The looping transient
+ tactic is substantially slower (i.e., higher times in seconds). The two "
+    [:code "into"]
+    " tactics performed the best for all lengths of vectors, with the transducer
+ tactic slightly better."]]}
+
+ :chart-settings
+ {"(fn [n] ((tactics (project-version-lein)) (get-in vecs [n :left]) (get-in vecs [n :right])))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}}}
+

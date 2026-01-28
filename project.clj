@@ -13,6 +13,7 @@
                                   [com.clojure-goes-fast/clj-memory-meter "0.4.0"]
                                   [com.hypirion/clj-xchart "0.2.0"]
                                   [com.sagevisuals/chlog "5"]
+                                  [com.sagevisuals/fastester "1-SNAPSHOT0"]
                                   [com.sagevisuals/readmoi "6"]
                                   [criterium "0.4.6"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]

@@ -1,0 +1,121 @@
+{:overhead 1.1993835880693752E-8,
+ :samples
+ (1031387848
+  990574881
+  988264811
+  995233760
+  993193549
+  984543042
+  988750154
+  987600611
+  983710067
+  988399801
+  984634197
+  983082084
+  984648159
+  984766460
+  986635049
+  985572857
+  990242838
+  997981649
+  984093910
+  994049783
+  985150762
+  995955075
+  988662718
+  982401013
+  989815805
+  998010115
+  999711245
+  1008151650
+  999307473
+  997116896
+  997513722
+  1001229842
+  1009423609
+  1007529968
+  1001391204
+  1003760280
+  1010626780
+  1008908450
+  1022050207
+  1016557550
+  1025700995
+  1020693400
+  1012762535
+  1016731662
+  1012069042
+  1024911870
+  994617526
+  1009051172
+  1006783510
+  992561761
+  1002431066
+  1002875199
+  989611748
+  982982795
+  982849461
+  981090514
+  993474271
+  988052411
+  994621751
+  991954038),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.29",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.2164760359305777E-4 (1.2130576614437264E-4 1.2205607877088161E-4)],
+ :final-gc-time 112686351,
+ :execution-count 8201,
+ :variance
+ [2.4136875678311845E-12
+  (1.6870868213895006E-12 3.3940299192512343E-12)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 4,
+  :name "Linux",
+  :version "5.15.0-164-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.016388888888888876,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 11246956550,
+ :lower-q
+ [1.1979039300085356E-4 (1.1963059553712963E-4 1.1986708416961348E-4)],
+ :warmup-executions 91441,
+ :sample-count 60,
+ :upper-q
+ [1.2497401170588954E-4 (1.2397654700646265E-4 1.257636688208755E-4)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] ((tactics (project-version-lein)) (get-in vecs [n :left]) (get-in vecs [n :right])))",
+  :date {:year 2026, :month "January", :day 28},
+  :group "Concatenation tactics",
+  :index 1,
+  :ns "brokvolli.performance.concatenating",
+  :UUIDv4 #uuid "219dde33-5aac-471e-b769-3a50fcb43365",
+  :name "measure-tactics",
+  :testing-thoroughness :default,
+  :arg 10,
+  :version "transducer-cat",
+  :parallel? false},
+ :total-time 59.856466601,
+ :sample-variance [2.382384398270721E-12 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 60,
+  :target-execution-time 1000000000,
+  :warmup-jit-period 10000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 1000,
+  :overhead 1.1993835880693752E-8},
+ :sample-mean
+ [1.2164465024793724E-4 (1.1701415787838986E-4 1.2627514261748463E-4)],
+ :results :fastester/benchmark-fn-results-elided}
