@@ -163,15 +163,15 @@
   additional arity-3 of *result*, *keydex*, and *value*."
   {:UUIDv4 #uuid "d93028d6-c324-42c3-a144-5d68b623484b"}
   [smap]
-  (map (fn repl
-         ([_ x] (repl x))
-         ([x] (if-let [e (find smap x)]
-                (val e)
-                x)))))
+  (map-kv (fn repl
+            ([_ x] (repl x))
+            ([x] (if-let [e (find smap x)]
+                   (val e)
+                   x)))))
 
 
 (defn take-kv
-  "Returns a take-ing transducer like `clojure.core/take`, but with an
+  "Returns a stateful take-ing transducer like `clojure.core/take`, but with an
   additional arity-3 of *result*, *keydex*, and *value*."
   {:UUIDv4 #uuid "efc87b4d-227f-4224-9342-d3e3203bd5fb"}
   [n]
@@ -190,4 +190,233 @@
              (ensure-reduced result)
              result)))
         ([result keydex input] (tk result input))))))
+
+
+(defn ^:private preserving-reduced
+  [rf]
+  #(let [ret (rf %1 %2)]
+     (if (reduced? ret)
+       (reduced ret)
+       ret)))
+
+
+(defn cat-kv
+  "Returns a concatenating transducer like `clojure.core/cat`, but with an
+  additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "3097982a-c233-4616-8391-2e4f06d10653"}
+  [rf]
+  (let [rrf (preserving-reduced rf)]
+    (fn ct
+      ([] (rf))
+      ([result] (rf result))
+      ([result input]
+       (reduce rrf result input))
+      ([result keydex input] (ct result input)))))
+
+
+(defn mapcat-kv
+  "Returns a mapcatting transducer like `clojure.core/mapcat`, but with an
+  additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "7d837294-dda6-4579-b27c-9a67b23410c3"}
+  [f]
+  (comp (map-kv f) cat-kv))
+
+
+(defn take-while-kv
+  "Returns a taking-while transducer like `clojure.core/take-while`, but with an
+  additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "f21b3d1f-fd72-45c0-8740-8a74023a5bfd"}
+  [pred]
+  (fn [rf]
+    (fn
+      ([] (rf))
+      ([result] (rf result))
+      ([result input]
+       (if (pred input)
+         (rf result input)
+         (reduced result)))
+      ([result keydex input]
+       (if (pred keydex input)
+         (rf result keydex input)
+         result)))))
+
+
+(defn take-nth-kv
+  "Returns a stateful take-ing transducer like `clojure.core/take-nth`, but with
+  an additional arity-3 of *result*, *keydex*, and *value*."
+  [n]
+  (fn [rf]
+    (let [iv (volatile! -1)]
+      (fn tknth
+        ([] (rf))
+        ([result] (rf result))
+        ([result input]
+         (let [i (vswap! iv inc)]
+           (if (zero? (rem i n))
+             (rf result input)
+             result)))
+        ([result keydex input] (tknth result input))))))
+
+
+(defn drop-kv
+  "Returns a stateful dropping transducer like `clojure.core/drop`, but with
+  an additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "19a1de1d-af07-4042-b9c7-2acebd94074b"}
+  [n]
+  (fn [rf]
+    (let [nv (volatile! n)]
+      (fn drp
+        ([] (rf))
+        ([result] (rf result))
+        ([result input]
+         (let [n @nv]
+           (vswap! nv dec)
+           (if (pos? n)
+             result
+             (rf result input))))
+        ([result keydex input] (drp result input))))))
+
+
+(defn drop-while-kv
+  "Returns a stateful dropping transducer like `clojure.core/drop-while`, but
+  with an additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "bc4da8d5-acc9-4dea-a343-cbd6c0382fd6"}
+  [pred]
+  (fn [rf]
+    (let [dv (volatile! true)]
+      (fn drpw
+        ([] (rf))
+        ([result] (rf result))
+        ([result input]
+         (let [drop? @dv]
+           (if (and drop? (pred input))
+             result
+             (do
+               (vreset! dv nil)
+               (rf result input)))))
+        ([result keydex input]
+         (let [drop? @dv]
+           (if (and drop? (pred keydex input))
+             result
+             (do
+               (vreset! dv nil)
+               (rf result keydex input)))))))))
+
+
+(defn remove-kv
+  "Returns a remove-ing transducer like `clojure.core/remove`, but
+  with an additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "136792f2-c9d5-45be-ba7d-afc49cbaf91e"}
+  [pred]
+  (filter-kv (complement pred)))
+
+
+;; skip `partition-by` and `partition-all`
+
+
+(defn keep-kv
+  "Returns a keeping transducer like `clojure.core/keep`, but with an
+  additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "c8f980bb-af95-40e0-9f06-7883a5770518"}
+  [f]
+  (fn [rf]
+    (fn
+      ([] (rf))
+      ([result] (rf result))
+      ([result input]
+       (let [v (f input)]
+         (if (nil? v)
+           result
+           (rf result v))))
+      ([result keydex input]
+       (let [v (f keydex input)]
+         (if (nil? v)
+           result
+           (rf result keydex v)))))))
+
+
+(defn distinct-kv
+  "Returns a stateful distinct-ing transducer like `clojure.core/distinct`, but
+  with an additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "aa1df4b5-6712-4861-bf1b-48d0ccc7f6fc"}
+  []
+  (fn [rf]
+    (let [seen (volatile! #{})]
+      (fn
+        ([] (rf))
+        ([result] (rf result))
+        ([result input]
+         (if (contains? @seen input)
+           result
+           (do (vswap! seen conj input)
+               (rf result input))))
+        ([result keydex input]
+         (if (contains? @seen input)
+           result
+           (do (vswap! seen conj input)
+               (rf result keydex input))))))))
+
+
+(defn interpose-kv
+  "Returns a stateful interpose-ing transducer like `clojure.core/interpose`,
+  but with an additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "f619fb00-2a23-45db-a663-7ba6a94b5f5b"}
+  [sep]
+  (fn [rf]
+    (let [started (volatile! false)]
+      (fn intps
+        ([] (rf))
+        ([result] (rf result))
+        ([result input]
+         (if @started
+           (let [sepr (rf result sep)]
+             (if (reduced? sepr)
+               sepr
+               (rf sepr input)))
+           (do
+             (vreset! started true)
+             (rf result input))))
+        ([result keydex input] (intps result input))))))
+
+
+(defn dedupe-kv
+  "Returns a stateful dedupe-ing transducer like `clojure.core/dedupe`, but with
+  an additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "62bac909-756d-4d1b-af31-e7c81fb149b2"}
+  []
+  (fn [rf]
+    (let [pv (volatile! ::none)]
+      (fn
+        ([] (rf))
+        ([result] (rf result))
+        ([result input]
+         (let [prior @pv]
+           (vreset! pv input)
+           (if (= prior input)
+             result
+             (rf result input))))
+        ([result keydex input]
+         (let [prior @pv]
+           (vreset! pv input)
+           (if (= prior input)
+             result
+             (rf result keydex input))))))))
+
+
+(defn random-sample-kv
+  "Returns a dedupe-ing transducer like `clojure.core/dedupe`, but with an
+  additional arity-3 of *result*, *keydex*, and *value*."
+  {:UUIDv4 #uuid "a8987e4f-eb0a-4ee4-af27-30e1b8504b50"}
+  [prob]
+  (filter-kv (fn [_ _] (< (rand) prob))))
+
+
+(comment ;; not straightforwardly unit-testable
+  (transduce-kv (random-sample-kv 0.5)
+                  (fn
+                    ([] [])
+                    ([x] x)
+                    ([x _ z] (conj x z)))
+                  [11 22 33 44 55])
+  )
 
