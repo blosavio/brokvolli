@@ -120,10 +120,10 @@
             (combine (f1) (fjjoin t2)))))))))
 
 
-;; General principle: Everytime a transducer passes a result down the stack, it must also pass down the keydex, too.
+;; General principle: Every time a transducer passes a result down the stack, it must also pass down the keydex, too.
 
 ;; Strategies for 'kv-izing' transducers:
-;;   New arity-3, with most instances of `(rf result input)` expanded to `(rf result keydex input)`.
+;;   New arity-3, with _most_ instances of `(rf result input)` expanded to `(rf result keydex input)`.
 ;;   Certain instances do not get expanded (?), such as in `interpose`.
 ;;   Instances of `(pred input)` expand to `(pred keydex input)`.
 ;;   Composed transducers, like `mapcat`, must use 'kv-ized' components.
@@ -348,7 +348,85 @@
   (filter-kv (complement pred)))
 
 
-;; skip `partition-by` and `partition-all`
+(defn partition-by-kv
+  "..."
+  {:UUIDv4 #uuid "fed3dc2e-9bf4-4bd4-9cfa-985d8aa2860e"}
+  [f]
+  (fn [rf]
+    (let [a (java.util.ArrayList.)
+          pv (volatile! ::none)]
+      (fn
+        ([] (rf))
+        ([result]
+         (let [result (if (.isEmpty a)
+                        result
+                        (let [v (vec (.toArray a))]
+                          ;;clear first!
+                          (.clear a)
+                          (unreduced (rf result v))))]
+           (rf result)))
+        ([result input]
+         (let [pval @pv
+               val (f input)]
+           (vreset! pv val)
+           (if (or (identical? pval ::none)
+                   (= val pval))
+             (do
+               (.add a input)
+               result)
+             (let [v (vec (.toArray a))]
+               (.clear a)
+               (let [ret (rf result v)]
+                 (when-not (reduced? ret)
+                   (.add a input))
+                 ret)))))
+        ([result keydex input]
+         (let [pval @pv
+               val (f keydex input)]
+           (vreset! pv val)
+           (if (or (identical? pval ::none)
+                   (= val pval))
+             (do
+               (.add a input)
+               result)
+             (let [v (vec (.toArray a))]
+               (.clear a)
+               (let [ret (rf result keydex v)]
+                 (when-not (reduced? ret)
+                   (.add a input))
+                 ret)))))))))
+
+
+(defn partition-all-kv
+  "..."
+  {:UUIDv4 #uuid "911fa6bc-8102-4a05-a891-3fb21bf0fa07"}
+  [^long n]
+  (fn [rf]
+    (let [a (java.util.ArrayList. n)]
+      (fn
+        ([] (rf))
+        ([result]
+         (let [result (if (.isEmpty a)
+                        result
+                        (let [v (vec (.toArray a))]
+                          ;;clear first!
+                          (.clear a)
+                          (unreduced (rf result v))))]
+           (rf result)))
+        ([result input]
+         (.add a input)
+         (if (= n (.size a))
+           (let [v (vec (.toArray a))]
+             (.clear a)
+             (rf result v))
+           result))
+        ([result keydex input]
+         (.add a input)
+         (if (= n (.size a))
+           (let [v (vec (.toArray a))]
+             (.clear a)
+             (rf result keydex v))
+           result))))))
 
 
 (defn keep-kv
@@ -460,10 +538,10 @@
 
 (comment ;; not straightforwardly unit-testable
   (transduce-kv (random-sample-kv 0.5)
-                  (fn
-                    ([] [])
-                    ([x] x)
-                    ([x _ z] (conj x z)))
-                  [11 22 33 44 55])
+                (fn
+                  ([] [])
+                  ([x] x)
+                  ([x _ z] (conj x z)))
+                [11 22 33 44 55])
   )
 

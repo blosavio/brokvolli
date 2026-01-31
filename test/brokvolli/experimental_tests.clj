@@ -177,6 +177,8 @@
     (transduce-kv (drop-while-kv (fn [keydex _] (<= keydex 2))) tconj [22 44 66 11 22 33 44]) [11 22 33 44]
     (transduce-kv (remove-kv (fn [_ x] (even? x))) tconj [11 22 33 44 55]) [11 33 55]
     (transduce-kv (remove-kv (fn [keydex _] (even? keydex))) tconj [11 22 33 44 55]) [22 44]
+    (transduce-kv (partition-by-kv (fn [keydex _] (= 0 (rem keydex 3)))) tconj [11 22 33 44 55 66 77 88 99 111]) [[11] [22 33] [44] [55 66] [77] [88 99] [111]]
+    (transduce-kv (partition-all-kv 3) tconj [11 22 33 44 55 66 77 88 99 111]) [[11 22 33] [44 55 66] [77 88 99] [111]]
     (transduce-kv (keep-kv (fn [_ x] (even? x))) tconj [11 22 33 44 55]) [false true false true false]
     (transduce-kv (keep-kv (fn [keydex _] (even? keydex))) tconj [11 22 33 44 55]) [true false true false true]
     (transduce-kv (distinct-kv) tconj [11 22 22 33 33 33 44 44 44 44]) [11 22 33 44]
