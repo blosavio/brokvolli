@@ -120,6 +120,18 @@
             (combine (f1) (fjjoin t2)))))))))
 
 
+;; General principle: Everytime a transducer passes a result down the stack, it must also pass down the keydex, too.
+
+;; Strategies for 'kv-izing' transducers:
+;;   New arity-3, with most instances of `(rf result input)` expanded to `(rf result keydex input)`.
+;;   Certain instances do not get expanded (?), such as in `interpose`.
+;;   Instances of `(pred input)` expand to `(pred keydex input)`.
+;;   Composed transducers, like `mapcat`, must use 'kv-ized' components.
+;;   Helper functions, like `preserving-reduced` must be adapated to also handle functions of three args.
+
+;; Instead of macro-ing away the arity-1/2/3 of these core transducers, for now, repeat them so that they're easier to eyeball check.
+
+
 (defn map-kv
   "Returns a mapping transducer like `clojure.core/map`, but with an additional
   arity-3 of *result*, *keydex*, and *value*. The bottom-level reducing function
@@ -150,12 +162,14 @@
     (fn
       ([] (rf))
       ([result] (rf result))
-      ([result input] (if (pred input)
-                        (rf result input)
-                        result))
-      ([result keydex input] (if (pred keydex input)
-                               (rf result keydex input)
-                               result)))))
+      ([result input]
+       (if (pred input)
+         (rf result input)
+         result))
+      ([result keydex input]
+       (if (pred keydex input)
+         (rf result keydex input)
+         result)))))
 
 
 (defn replace-kv
@@ -189,15 +203,28 @@
            (if (not (pos? nn))
              (ensure-reduced result)
              result)))
-        ([result keydex input] (tk result input))))))
+        ([result keydex input]
+         (let [n @nv
+               nn (vswap! nv dec)
+               result (if (pos? n)
+                        (rf result keydex input)
+                        result)]
+           (if (not (pos? nn))
+             (ensure-reduced result)
+             result)))))))
 
 
 (defn ^:private preserving-reduced
   [rf]
-  #(let [ret (rf %1 %2)]
-     (if (reduced? ret)
-       (reduced ret)
-       ret)))
+  (fn
+    ([x y] (let [ret (rf x y)]
+             (if (reduced? ret)
+               (reduced ret)
+               ret)))
+    ([x y z] (let [ret (rf x y z)]
+               (if (reduced? ret)
+                 (reduced ret)
+                 ret)))))
 
 
 (defn cat-kv
@@ -211,7 +238,8 @@
       ([result] (rf result))
       ([result input]
        (reduce rrf result input))
-      ([result keydex input] (ct result input)))))
+      ([result keydex input]
+       (reduce #(rrf %1 keydex %2) result input)))))
 
 
 (defn mapcat-kv
@@ -255,7 +283,11 @@
            (if (zero? (rem i n))
              (rf result input)
              result)))
-        ([result keydex input] (tknth result input))))))
+        ([result keydex input]
+         (let [i (vswap! iv inc)]
+           (if (zero? (rem i n))
+             (rf result keydex input)
+             result)))))))
 
 
 (defn drop-kv
@@ -274,7 +306,12 @@
            (if (pos? n)
              result
              (rf result input))))
-        ([result keydex input] (drp result input))))))
+        ([result keydex input]
+         (let [n @nv]
+           (vswap! nv dec)
+           (if (pos? n)
+             result
+             (rf result keydex input))))))))
 
 
 (defn drop-while-kv
@@ -359,7 +396,9 @@
 
 (defn interpose-kv
   "Returns a stateful interpose-ing transducer like `clojure.core/interpose`,
-  but with an additional arity-3 of *result*, *keydex*, and *value*."
+  but with an additional arity-3 of *result*, *keydex*, and *value*.
+
+  Note: A bit iffy on 'kv-ized', arity-3 branch..."
   {:UUIDv4 #uuid "f619fb00-2a23-45db-a663-7ba6a94b5f5b"}
   [sep]
   (fn [rf]
@@ -376,7 +415,15 @@
            (do
              (vreset! started true)
              (rf result input))))
-        ([result keydex input] (intps result input))))))
+        ([result keydex input]
+         (if @started
+           (let [sepr (rf result sep)]
+             (if (reduced? sepr)
+               sepr
+               (rf sepr keydex input)))
+           (do
+             (vreset! started true)
+             (rf result keydex input))))))))
 
 
 (defn dedupe-kv
