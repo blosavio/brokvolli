@@ -2,6 +2,8 @@
   (:require
    [brokvolli.core :refer [concatv]]
    [brokvolli.experimental :refer :all]
+   [brokvolli.transducers-kv :refer :all]
+   [brokvolli.stateful-transducers-kv :refer :all]
    [clojure.test :refer [are
                          deftest
                          is
@@ -184,6 +186,22 @@
     (transduce-kv (distinct-kv) tconj [11 22 22 33 33 33 44 44 44 44]) [11 22 33 44]
     (transduce-kv (interpose-kv :foo) tconj [11 22 33 44 55]) [11 :foo 22 :foo 33 :foo 44 :foo 55]
     (transduce-kv (dedupe-kv) tconj [11 22 22 33 33 33 44 44 44 44]) [11 22 33 44]))
+
+
+(deftest composed-transducer-kv-tests
+  (are [x y] (= x y)
+    (transduce-kv (comp (map-kv (fn [_ x] (inc x)))
+                        (filter-kv (fn [idx _] (even? idx)))
+                        (remove-kv (fn [_ x] (= 100 x)))
+                        (replace-kv {34 :foo})
+                        (take-kv 3)
+                        (map-kv (fn [idx x] (vector idx x)))
+                        cat-kv
+                        (mapcat-kv (fn [_ x] (repeat 3 x))) ;; note: keydexes refer to their 'position' in the original collection
+                        (take-while-kv (fn [idx _] (<= idx 3))))
+                  tconj
+                  [11 22 33 44 55 66 77 88 99])
+    [0 0 0 12 12 12 2 2 2 :foo :foo :foo]))
 
 
 #_(run-tests)

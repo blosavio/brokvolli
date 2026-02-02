@@ -1,8 +1,13 @@
 (ns brokvolli.multi-tests
   (:refer-clojure :exclude [transduce])
   (:require
-   [brokvolli.core :as core]
+   [brokvolli.core :refer [concatv
+                           *keydex*
+                           kv-ize
+                           tassoc
+                           tconj]]
    [brokvolli.multi :refer :all]
+   [brokvolli.transducers-kv :refer :all]
    [clojure.string :as str]
    [clojure.test :refer [are
                          deftest
@@ -63,7 +68,7 @@
       [11 22 33 44 55]
       (clojure.core/transduce (map identity) conj [11 22 33 44 55])
       (transduce (map identity) conj [11 22 33 44 55])
-      (transduce 2 (map identity) conj core/concatv [11 22 33 44 55])))
+      (transduce 2 (map identity) conj concatv [11 22 33 44 55])))
 
   (testing "equivalency of different sized sub-reductions"
     (are [n] (= 499500 (transduce n (map identity) + + (vec (range 1E3))))
@@ -83,7 +88,7 @@
       (transduce (filter number?) + + [11 :foo 22 :bar 33])
 
       (clojure.core/transduce (map inc) conj [11 22 33 44 55 66 77 88 99])
-      (transduce 3 (map inc) conj core/concatv [11 22 33 44 55 66 77 88 99])
+      (transduce 3 (map inc) conj concatv [11 22 33 44 55 66 77 88 99])
 
       (reduce #(assoc %1 (key %2) (inc (val %2))) {} {:a 11 :b 22 :c 33 :d 44 :e 55})
       (clojure.core/transduce (map #(update % 1 inc)) conj {} {:a 11 :b 22 :c 33 :d 44 :e 55})))
@@ -94,7 +99,7 @@
                        (filter even?)
                        (remove #(< 70 %)))
                  conj
-                 core/concatv
+                 concatv
                  [11 22 33 44 55 66 77 88 99])
       [12 34 56]
 
@@ -113,7 +118,7 @@
                        (filter even?)
                        (remove #(< 70 %)))
                  conj
-                 core/concatv
+                 concatv
                  (range 11 99 11))
       [12 34 56]))
 
@@ -157,38 +162,62 @@
 
   (testing "identity formulations"
     (are [x] (= [11 22 33 44 55] x)
-      (transduce-kv (comp (map identity)) conj core/concatv [11 22 33 44 55])
-      (transduce-kv 2 (comp (map identity)) conj core/concatv [11 22 33 44 55])))
+      (transduce-kv (kv-ize (map identity)) conj concatv [11 22 33 44 55])
+      (transduce-kv (map-kv (fn [_ x] (identity x))) tconj concatv [11 22 33 44 55])
+      (transduce-kv 2 (kv-ize (map identity)) conj concatv [11 22 33 44 55])
+      (transduce-kv 2 (map-kv (fn [_ x] (identity x))) tconj concatv [11 22 33 44 55])))
 
   (testing "equivalency of different sized sub-reductions"
-    (are [n] (= 499500 (transduce-kv n (comp (map identity)) + + (vec (range 1E3))))
+    (are [n] (= 499500
+                (clojure.core/transduce (map identity) + (vec (range 1E3)))
+                (transduce (map identity) + (vec (range 1E3)))
+                (transduce-kv n (kv-ize (map identity)) + + (vec (range 1E3)))
+                (transduce-kv n (map-kv (fn [_ x] (identity x)))
+                              (fn
+                                ([] 0)
+                                ([x] x)
+                                ([x _ z] (+ x z)))
+                              +
+                              (vec (range 1E3))))
       2 4 8 16 32 64 128 256 512 1032))
 
   (testing "basic examples"
     (testing "vector `coll`"
-      (are [x y] (= x y)
+      (are [x y z] (= x y z)
         (transduce-kv 3
-                      (comp (map #(vector core/*keydex* %)))
+                      (kv-ize (map #(vector *keydex* %)))
                       conj
-                      core/concatv
+                      concatv
+                      [11 22 33 44 55])
+        (transduce-kv 3
+                      (map-kv (fn [keydex x] (vector keydex x)))
+                      tconj
+                      concatv
                       [11 22 33 44 55])
         [[0 11] [1 22] [2 33] [3 44] [4 55]]
 
-        (transduce-kv (comp (map #(vector core/*keydex* %)))
+        (transduce-kv (kv-ize (map #(vector *keydex* %)))
                       conj
-                      core/concatv
+                      concatv
+                      [11 22 33 44 55])
+        (transduce-kv (map-kv (fn [keydex x] (vector keydex x)))
+                      tconj
+                      concatv
                       [11 22 33 44 55])
         [[0 11] [1 22] [2 33] [3 44] [4 55]]))
 
     (testing "hashmaps `coll`"
-      (are [x y] (= x y)
+      (are [x y z] (= x y z)
         (transduce-kv 3
-                      (comp (map #(array-map :key core/*keydex*
-                                             :value (+ 100 %))))
-                      (completing
-                       (fn
-                         ([] {})
-                         ([result val] (assoc result core/*keydex* val))))
+                      (kv-ize (map #(array-map :key *keydex*
+                                               :value (+ 100 %))))
+                      tassoc
+                      merge
+                      (hash-map :a 11 :b 22 :c 33 :d 44 :e 55))
+        (transduce-kv 3
+                      (map-kv (fn [keydex x] (array-map :key keydex
+                                                        :value (+ 100 x))))
+                      tassoc
                       merge
                       (hash-map :a 11 :b 22 :c 33 :d 44 :e 55))
         {:a {:key :a :value 111}
@@ -197,12 +226,14 @@
          :d {:key :d :value 144}
          :e {:key :e :value 155}}
 
-        (transduce-kv (comp (map #(array-map :key core/*keydex*
-                                             :value (+ 100 %))))
-                      (completing
-                       (fn
-                         ([] {})
-                         ([result val] (assoc result core/*keydex* val))))
+        (transduce-kv (kv-ize (map #(array-map :key *keydex*
+                                               :value (+ 100 %))))
+                      tassoc
+                      merge
+                      (hash-map :a 11 :b 22 :c 33 :d 44 :e 55))
+        (transduce-kv (map-kv (fn [keydex x] (array-map :key keydex
+                                                        :value (+ 100 x))))
+                      tassoc
                       merge
                       (hash-map :a 11 :b 22 :c 33 :d 44 :e 55))
         {:a {:key :a :value 111}
@@ -211,12 +242,17 @@
          :d {:key :d :value 144}
          :e {:key :e :value 155}}
 
-
         (transduce-kv 3
-                      (comp (map #(array-map :key core/*keydex*
-                                             :value (+ 100 %))))
+                      (kv-ize (map #(array-map :key *keydex*
+                                               :value (+ 100 %))))
                       conj
-                      core/concatv
+                      concatv
+                      (sorted-map :a 11 :b 22 :c 33 :d 44 :e 55))
+        (transduce-kv 3
+                      (map-kv (fn [keydex x] (array-map :key keydex
+                                                        :value (+ 100 x))))
+                      tconj
+                      concatv
                       (sorted-map :a 11 :b 22 :c 33 :d 44 :e 55))
         [{:key :a :value 111}
          {:key :b :value 122}
@@ -225,14 +261,26 @@
          {:key :e :value 155}])))
 
   (testing "stacked `xform`"
-    (are [x y] (= x y)
+    (are [x y z] (= x y z)
       (transduce-kv 3
-                    (comp (map inc)
-                          (filter (fn [_] (even? core/*keydex*)))
-                          (remove (fn [_] (= core/*keydex* 2)))
-                          (map #(array-map :idx core/*keydex* :value %)))
+                    (kv-ize
+                     (comp
+                      (map inc)
+                      (filter (fn [_] (even? *keydex*)))
+                      (remove (fn [_] (= *keydex* 2)))
+                      (map #(array-map :idx *keydex* :value %))))
                     conj
-                    core/concatv
+                    concatv
+                    [11 22 33 44 55 66 77 88 99])
+      (transduce-kv 3
+                    (comp
+                     (map-kv (fn [_ x] (inc x)))
+                     (filter-kv (fn [keydex _] (even? keydex)))
+                     (remove-kv (fn [keydex _] (= keydex 2)))
+                     (map-kv (fn [keydex x] (array-map :idx keydex
+                                                       :value x))))
+                    tconj
+                    concatv
                     [11 22 33 44 55 66 77 88 99])
       [{:idx 0 :value 12}
        {:idx 4 :value 56}
@@ -245,19 +293,19 @@
                              (instance? coll-type coll)
                              (instance? clojure.lang.IKVReduce coll)
                              (= [12 23 34]
-                                (transduce-kv (map inc) conj coll)))
+                                (transduce-kv (kv-ize (map inc)) conj coll)
+                                (transduce-kv (map-kv (fn [_ x] (inc x))) tconj coll)))
         clojure.lang.PersistentVector (vector 11 22 33)))
     (testing "associative collections"
       (are [coll-type coll] (and
                              (instance? coll-type coll)
                              (instance? clojure.lang.IKVReduce coll)
                              (= {:a 12, :b 23, :c 34}
-                                (transduce-kv (map #(inc %))
-                                              (completing
-                                               (fn
-                                                 ([] {})
-                                                 ([result value]
-                                                  (assoc result core/*keydex* value))))
+                                (transduce-kv (kv-ize (map inc))
+                                              tassoc
+                                              coll)
+                                (transduce-kv (map-kv (fn [_ x] (inc x)))
+                                              tassoc
                                               coll)))
         clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33)
         clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33)

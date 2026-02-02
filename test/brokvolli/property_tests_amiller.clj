@@ -148,7 +148,7 @@
 
 (defn apply-as-xf-transduce-kv
   [coll actions]
-  (single/transduce-kv (apply comp (map :xf actions)) conj coll))
+  (single/transduce-kv (core/kv-ize (apply comp (map :xf actions))) conj coll))
 
 (defn apply-as-xf-multi-transduce
   [coll actions]
@@ -156,7 +156,7 @@
 
 (defn apply-as-xf-multi-transduce-kv
   [coll actions]
-  (multi/transduce-kv (apply comp (map :xf actions)) conj coll))
+  (multi/transduce-kv (core/kv-ize (apply comp (map :xf actions))) conj coll))
 
 (defmacro return-exc [& forms]
   `(try ~@forms (catch Throwable e# e#)))
@@ -237,7 +237,7 @@
             ;; `clojure.lang.IKVReduce`, so skip `transduce` tests that involve
             ;; collections that do not
 
-            (single/transduce-kv mapinc + avec)
+            (single/transduce-kv (core/kv-ize mapinc) + avec)
             ;;(transduce mapinc + alist)
             ;;(transduce mapinc + obj-array)
             ;;(transduce mapinc + int-array)
@@ -255,7 +255,7 @@
             ))
     (is (== 5051
             ;;(transduce mapinc + 1 arange)
-            (single/transduce-kv mapinc + 1 avec)
+            (single/transduce-kv (core/kv-ize mapinc) + 1 avec)
             ;;(transduce mapinc + 1 alist)
             ;;(transduce mapinc + 1 obj-array)
             ;;(transduce mapinc + 1 int-array)
@@ -276,8 +276,8 @@
 (deftest test-dedupe
   (are [x y] (= (transduce (comp (dedupe)) conj x)
                 (multi/transduce (comp (dedupe)) conj x) ;; `n` is 512, so we don't go down multi-threaded branch
-                (single/transduce-kv (comp (dedupe)) conj x)
-                (multi/transduce-kv (comp (dedupe)) conj x)
+                (single/transduce-kv (core/kv-ize (dedupe)) conj x)
+                (multi/transduce-kv (core/kv-ize (dedupe)) conj x)
                 y)
     [] []
     [1] [1]
@@ -300,8 +300,8 @@
 (deftest test-cat
   (are [x y] (= (transduce (comp cat) conj x)
                 (multi/transduce (comp cat) conj x)
-                (single/transduce-kv (comp cat) conj x)
-                (multi/transduce-kv (comp cat) conj x)
+                (single/transduce-kv (core/kv-ize cat) conj x)
+                (multi/transduce-kv (core/kv-ize cat) conj x)
                 y)
     [] []
     [[1 2]] [1 2]
@@ -314,8 +314,8 @@
 (deftest test-partition-all
   (are [n coll y] (= (transduce (comp (partition-all n)) conj coll)
                      (multi/transduce (comp (partition-all n)) conj coll)
-                     (single/transduce-kv (comp (partition-all n)) conj coll)
-                     (multi/transduce-kv (comp (partition-all n)) conj coll)
+                     (single/transduce-kv (core/kv-ize (partition-all n)) conj coll)
+                     (multi/transduce-kv (core/kv-ize (partition-all n)) conj coll)
                      y)
     2 [1 2 3] '((1 2) (3))
     2 [1 2 3 4] '((1 2) (3 4))
@@ -327,8 +327,8 @@
 (deftest test-take
   (are [n y] (= (transduce (comp (take n)) conj [1 2 3 4 5])
                 (multi/transduce (comp (take n)) conj [1 2 3 4 5])
-                (single/transduce-kv (comp (take n)) conj [1 2 3 4 5])
-                (multi/transduce-kv (comp (take n)) conj [1 2 3 4 5])
+                (single/transduce-kv (core/kv-ize (take n)) conj [1 2 3 4 5])
+                (multi/transduce-kv (core/kv-ize (take n)) conj [1 2 3 4 5])
                 y)
     1 '(1)
     3 '(1 2 3)
@@ -341,8 +341,8 @@
 (deftest test-drop
   (are [n y] (= (transduce (comp (drop n)) conj [1 2 3 4 5])
                 (multi/transduce (comp (drop n)) conj [1 2 3 4 5])
-                (single/transduce-kv (comp (drop n)) conj [1 2 3 4 5])
-                (multi/transduce-kv (comp (drop n)) conj [1 2 3 4 5])
+                (single/transduce-kv (core/kv-ize (drop n)) conj [1 2 3 4 5])
+                (multi/transduce-kv (core/kv-ize (drop n)) conj [1 2 3 4 5])
                 y)
     1 '(2 3 4 5)
     3 '(4 5)
@@ -355,8 +355,8 @@
 (deftest test-take-nth
   (are [n y] (= (transduce (comp (take-nth n)) conj [1 2 3 4 5])
                 (multi/transduce (comp (take-nth n)) conj [1 2 3 4 5])
-                (single/transduce-kv (comp (take-nth n)) conj [1 2 3 4 5])
-                (multi/transduce-kv (comp (take-nth n)) conj [1 2 3 4 5])
+                (single/transduce-kv (core/kv-ize (take-nth n)) conj [1 2 3 4 5])
+                (multi/transduce-kv (core/kv-ize (take-nth n)) conj [1 2 3 4 5])
                 y)
     1 '(1 2 3 4 5)
     2 '(1 3 5)
@@ -368,8 +368,8 @@
 (deftest test-take-while
   (are [coll y] (= (transduce (comp (take-while pos?)) conj coll)
                    (multi/transduce (comp (take-while pos?)) conj coll)
-                   (single/transduce-kv (comp (take-while pos?)) conj coll)
-                   (multi/transduce-kv (comp (take-while pos?)) conj coll)
+                   (single/transduce-kv (core/kv-ize (take-while pos?)) conj coll)
+                   (multi/transduce-kv (core/kv-ize (take-while pos?)) conj coll)
                    y)
     [] ()
     [1 2 3 4] '(1 2 3 4)
@@ -381,8 +381,8 @@
 (deftest test-drop-while
   (are [coll y] (= (transduce (comp (drop-while pos?)) conj coll)
                    (multi/transduce (comp (drop-while pos?)) conj coll)
-                   (single/transduce-kv (comp (drop-while pos?)) conj coll)
-                   (multi/transduce-kv (comp (drop-while pos?)) conj coll)
+                   (single/transduce-kv (core/kv-ize (drop-while pos?)) conj coll)
+                   (multi/transduce-kv (core/kv-ize (drop-while pos?)) conj coll)
                    y)
     [] ()
     [1 2 3 4] ()
@@ -395,41 +395,42 @@
   (is (= [:a]
          (transduce (comp (take 1)) conj [:a])
          (multi/transduce (comp (take 1)) conj [:a])
-         (single/transduce-kv (comp (take 1)) conj [:a])
-         (multi/transduce-kv (comp (take 1)) conj [:a])))
+         (single/transduce-kv (core/kv-ize (take 1)) conj [:a])
+         (multi/transduce-kv (core/kv-ize (take 1)) conj [:a])))
 
   (is (= [:a]
          (transduce (comp (take 1) (take 1)) conj [:a])
          (multi/transduce (comp (take 1) (take 1)) conj [:a])
-         (single/transduce-kv (comp (take 1) (take 1)) conj [:a])
-         (multi/transduce-kv (comp (take 1) (take 1)) conj [:a])))
+         (single/transduce-kv (core/kv-ize (comp  (take 1) (take 1))) conj [:a])
+         (multi/transduce-kv (core/kv-ize (comp (take 1) (take 1))) conj [:a])))
 
   (is (= [:a]
          (transduce (comp (take 1) (take 1) (take 1)) conj [:a])
          (multi/transduce (comp (take 1) (take 1) (take 1)) conj [:a])
-         (single/transduce-kv (comp (take 1) (take 1) (take 1)) conj [:a])
-         (multi/transduce-kv (comp (take 1) (take 1) (take 1)) conj [:a])))
+         (single/transduce-kv (core/kv-ize (comp (take 1) (take 1) (take 1))) conj [:a])
+         (multi/transduce-kv (core/kv-ize (comp (take 1) (take 1) (take 1))) conj [:a])))
 
   (is (= [:a]
          (transduce (comp (take 1) (take 1) (take 1) (take 1)) conj [:a])
          (multi/transduce (comp (take 1) (take 1) (take 1) (take 1)) conj [:a])
-         (single/transduce-kv (comp (take 1) (take 1) (take 1) (take 1)) conj [:a])
-         (multi/transduce-kv (comp (take 1) (take 1) (take 1) (take 1)) conj [:a])))
+         (single/transduce-kv (core/kv-ize (comp (take 1) (take 1) (take 1) (take 1))) conj [:a])
+         (multi/transduce-kv (core/kv-ize (comp (take 1) (take 1) (take 1) (take 1))) conj [:a])))
 
   (is (= [[:a]] ;; oughtn't use stateful transducers with multi-threaded variants
          (transduce (comp (partition-by keyword?) (take 1)) conj [] [:a])
-         (single/transduce-kv (comp (partition-by keyword?) (take 1)) conj [] [:a])))
+         (single/transduce-kv (core/kv-ize (comp (partition-by keyword?) (take 1))) conj [] [:a])))
 
   ;;(is (= [[:a]] (sequence (comp (partition-by keyword?) (take 1)) [:a])))
   ;;(is (= [[[:a]]] (sequence (comp (partition-by keyword?) (take 1)  (partition-by keyword?) (take 1)) [:a])))
 
   (is (= [[0]]
          (transduce (comp (take 1) (partition-all 3) (take 1)) conj [] (vec (range 15)))
-         (single/transduce-kv (comp (take 1) (partition-all 3) (take 1)) conj [] (vec (range 15)))))
+         (single/transduce-kv (core/kv-ize (comp (take 1) (partition-all 3) (take 1))) conj [] (vec (range 15)))))
 
   (is (= [1]
          (transduce (comp (take 1)) conj (seq (long-array [1 2 3 4])))
-         (single/transduce-kv (comp (take 1)) conj (vec (seq (long-array [1 2 3 4])))))))
+         (single/transduce-kv (core/kv-ize (take 1)) conj (vec (seq (long-array [1 2 3 4])))))))
+
 
 #_(run-tests)
 

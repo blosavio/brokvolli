@@ -3,36 +3,26 @@
   analogous to the way `reduce-kv` relates to `reduce`.")
 
 
-(defn kv-ize
-  " Given a composition of functions `composition` (an xform stack), returns an
-  equivalent transformer stack that also accepts *result*, *key/index*, and
-  *value*, suitable for use with [[transduce-kv]].
-
-  The composition returned adds two capabilities.
-
-  1. Diverts the key/index provided by `transduce-kv`, passing only the
-  accumulated value and the next element to the outer/top transducer, and
-  2. Establishes a binding context where the key/index is available from
-  [[*keydex*]] at any layer of the transducer stack."
-  {:UUIDv4 #uuid "66698ff3-6e41-46ac-b63c-6d0f7d22cfb6"
+(defn transduce-kv*
+  "Performs the reduction, with an offset."
+  {:UUIDv4 #uuid "7357eed9-67ea-4269-bd65-7ec23e125328"
    :no-doc true}
-  [composition]
-  (fn [rf offset]
-    (let [g (composition rf)]
-      (fn
-        ([] (g))
-        ([result] (g result))
-        ([result input] (g result input))
-        ([acc k v]
-         (binding [brokvolli.core/*keydex* (if offset (+ offset k) k)]
-           (g acc v)))))))
+  ([offset xform f init coll]
+   (let [f (xform f)
+         f-off (fn [f] (fn [acc keydex x] (f acc (if offset (+ offset keydex) keydex) x)))
+         err #(throw (Exception.
+                      (str "`coll` must implement `clojure.lang.IKVReduce`; `coll` is "(type %) " ")))
+         ret (if (instance? clojure.lang.IKVReduce coll)
+               (.kvreduce ^clojure.lang.IKVReduce coll (f-off f) init)
+               (err coll))]
+     (f ret))))
 
 
 (defn transduce-kv
   "A '-kv' variant of `transduce`, reducing with a transformation. The analogy
   is
 
- `reduce:reduce-kv::transduce:transduce-kv`.
+  `reduce:reduce-kv::transduce:transduce-kv`.
 
   As with `transduce`, `xform` and `f` are functions of zero, one, and two
   arguments. Works with all the `clojure.core` transducers, excepting the
@@ -105,15 +95,7 @@
   assumes the function receives zero arguments, not one. Instead, use the
   `(fn [_] (...))` idiom to discard the argument. See the `remove` expression in
   the example above."
-  {:UUIDv4 #uuid "7357eed9-67ea-4269-bd65-7ec23e125328"}
+  {:UUIDv4 #uuid "4c782821-725a-4cd7-a0a2-2d33cd381d0f"}
   ([xform f coll] (transduce-kv xform f (f) coll))
-  ([xform f init coll] (transduce-kv xform f init coll nil))
-  ([xform f init coll offset]
-   (let [f ((kv-ize xform) f offset)
-         err #(throw (Exception.
-                      (str "`coll` must implement `clojure.lang.IKVReduce`; `coll` is "(type %) " ")))
-         ret (if (instance? clojure.lang.IKVReduce coll)
-               (.kvreduce ^clojure.lang.IKVReduce coll f init)
-               (err coll))]
-     (f ret))))
+  ([xform f init coll] (transduce-kv* nil xform f init coll)))
 

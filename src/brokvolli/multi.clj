@@ -7,7 +7,6 @@
   (:require
    [brokvolli.core]
    [brokvolli.single :as single]
-   [clojure.core.reducers :as r]
    [extended-extend-protocol.core :refer [multi-extend-protocol]]))
 
 
@@ -159,14 +158,14 @@
    :no-doc true}
   [splitter-fn empty-pred]
   (fn tduce
-    [n xform f init combine coll offset]
+    [offset n xform f init combine coll]
     (combine
      (cond
        (empty-pred coll) (combine)
-       (<= (count coll) n) (brokvolli.single/transduce-kv xform f init coll offset)
+       (<= (count coll) n) (brokvolli.single/transduce-kv* offset xform f init coll)
        :else
        (let [[c1 c2 split] (splitter-fn coll)
-             fc (fn [child delta] #(tduce n xform f init combine child delta))]
+             fc (fn [child delta] #(tduce delta n xform f init combine child))]
          (fjinvoke
           #(let [f1 (fc c1 offset)
                  t2 (fjtask (fc c2 (if offset (+ offset split) offset)))]
@@ -184,13 +183,13 @@
  PTransduce
  clojure.lang.PersistentVector
  (ptransduce [v n xform f init combine] ((transduce- split-vector empty?) n xform f init combine v))
- (ptransduce-kv [v n xform f init combine] ((transduce-kv- split-vector empty?) n xform f init combine v 0))
+ (ptransduce-kv [v n xform f init combine] ((transduce-kv- split-vector empty?) 0 n xform f init combine v))
 
  clojure.lang.PersistentArrayMap
  clojure.lang.PersistentHashMap
  clojure.lang.PersistentTreeMap
  (ptransduce [m n xform f init combine] ((transduce- split-hashmap empty?) n xform f init combine m))
- (ptransduce-kv [m n xform f init combine] ((transduce-kv- split-hashmap empty?) n xform f init combine m nil))
+ (ptransduce-kv [m n xform f init combine] ((transduce-kv- split-hashmap empty?) nil n xform f init combine m))
 
  clojure.lang.ArraySeq
  clojure.lang.Cycle
@@ -307,7 +306,7 @@
 
   Examples:
   ```clojure
-  (require '[brokvolli.core :refer [*keydex*]])
+  (require '[brokvolli.core :refer [*keydex* concatv]])
 
   (transduce-kv (map #(+ % (inc *keydex*))) conj [11 22 33]) ;; => [12 24 36]
 
