@@ -143,6 +143,11 @@
              (combine (f1) (fjjoin t2)))))))))
 
 
+;; `transduce-` above and `transduce-kv-` below share quite a bit of structure,
+;; but parametrizing their difference would obscure the mechanics. For now,
+;; let's tolerate this repetition.
+
+
 (defn transduce-kv-
   "Constructs a function to reduce a collection, possibly in parallel with
   multiple threads. `xduce-fn` is a transducing function, `splitter-fn` is a
@@ -208,7 +213,7 @@
 
 (defn transduce
   "Like `clojure.core/transduce`, but potentially multi-threaded. `xform` is a
-  composed transformer 'stack' and `f` is a reducing function, each analogous to
+  composed transducer 'stack' and `f` is a reducing function, each analogous to
   their [`clojure.core/transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
   counterparts. This variant of `transduce` does not accept an explicit 'init'
   parameter; it must be provided by the arity-0 of `f`. Returns `(combine)` when
@@ -226,7 +231,7 @@
   `combine` is a function of three arities that governs how to gather the
   results of the sub-reductions:
 
-  1. Zero args provides the output if `coll` is empty.
+  1. Zero args provides the output if `coll` is empty or `nil`.
   2. One arg is the 'completing' action applied just before the final value.
   3. Two args combines the 'left' and 'right' sub-reduction results.
 
@@ -242,11 +247,11 @@
   (transduce (map identity) + [1 2 3]) ;; => 6
   ```
 
-  Example,
+  Example with explicit partitioning,
 
-    1. Partition `coll`,
-    2. Compute on different threads, and
-    3. Combine:
+    1. Partition `coll` into partitions with max of two elements,
+    2. Compute (increment) on different threads, and
+    3. Combine (concatenate):
   ```clojure
   (transduce 2 (map inc) conj concatv [11 22 33]) ;; => [12 23 34]
   ```
@@ -282,7 +287,7 @@
                    {:a 11 :b 22 :c 33 :d 44 :e 55 :f 66 :g 77 :h 88 :i 99})
   ;; => {:e 56, :c 34, :a 12}
   ```
-  See [[transduce-kv]] for a variant that behaves like
+  See [[transduce-kv]] for a `transduce` variant that behaves like
   [reduce-kv](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/reduce-kv)."
   {:UUIDv4 #uuid "6ec6c582-e6f2-4320-ac0d-4fb69e3b6c0e"}
   ([xform f coll] (transduce xform f f coll))
@@ -291,10 +296,14 @@
 
 
 (defn transduce-kv
-  "Multi-threaded variant of [[brokvolli.single/transduce-kv]]. `xform`, `f`,
-  and `combine` are the same as with [[transduce]]. The key/index is available
-  as [[*keydex*]] at any 'level' within the transducer stack; it may be ignored
-  to suit.
+  "Multi-threaded variant of [[single/transduce-kv]]. `xform`, `f`, and
+  `combine` are the similar to [[transduce]]. `xform` is a transducer stack,
+  `f` is a function of the accumulated value, the key/index, and the next
+  element of `coll`.
+
+  As with [[single/transduce-kv]], when used with a transducer stack adapted
+  with [[kv-ize]], the key/index is available as [[*keydex*]] at any \"layer\"
+  within the transducer stack; it may be ignored to suit.
 
   `coll` must implement `clojure.lang.IKVReduce`.
 
@@ -306,21 +315,23 @@
 
   Examples:
   ```clojure
-  (require '[brokvolli.core :refer [*keydex* concatv]])
+  (require '[brokvolli.core :refer [concatv tconj]]
+           '[brokvolli.transducers-kv :refer [map-kv]])
 
-  (transduce-kv (map #(+ % (inc *keydex*))) conj [11 22 33]) ;; => [12 24 36]
+  (transduce-kv (map-kv (fn [keydex x] (+ x (inc keydex)))) tconj [11 22 33])
+  ;; => [12 24 36]
 
-  ;; same result, but with explicit splitting into threads
-  (transduce-kv 2 (map #(+ % (inc *keydex*))) conj concatv [11 22 33]) ;; => [12 24 36]
+  ;; same result, but with explicit splitting into threads (must use a dedicated combining function, `concatv`)
+  (transduce-kv 2 (map-kv (fn [keydex x] (+ x (inc keydex)))) tconj concatv [11 22 33])
+  ;; => [12 24 36]
 
-  ;; value  *keydex*  (+ value (inc *keydex*))  eval  result
-  ;; 11     0         (+ 11 (inc 0))            12    [12]
-  ;; 22     1         (+ 22 (inc 1))            24    [12 24]
-  ;; 33     2         (+ 33 (inc 2))            36    [12 24 36]
+  ;; value  keydex  (+ value (inc keydex))  eval  result
+  ;; 11     0       (+ 11 (inc 0))          12    [12]
+  ;; 22     1       (+ 22 (inc 1))          24    [12 24]
+  ;; 33     2       (+ 33 (inc 2))          36    [12 24 36]
   ```
 
-  See [[brokvolli.single/transduce-kv]] and [[brokvolli.multi/transduce]] for
-  more."
+  See also [[single/transduce-kv]] and [[multi/transduce]]."
   {:UUIDv4 #uuid "e9a2bb27-5d14-48e7-9bd9-ffa1f2ffb7d9"}
   ([xform f coll] (transduce-kv xform f f coll))
   ([xform f combine coll] (transduce-kv 512 xform f combine coll))

@@ -1,15 +1,26 @@
 (ns brokvolli.stateful-transducers-kv
-  "Statefull, 'kv-ified' transducers. Not recommended for use with
+  "Stateful, 'kv-ified' transducers. Not recommended for use with
   multi-threaded [[brokvolli.multi/transduce-kv]].
 
   Safe to use with single-threaded [[brokvolli.single/transduce-kv]].
+
+  Each returns a transducer like their `clojure.core` namesakes, but with an
+  additional arity-3 of *result*, *keydex*, and *value*. The bottom-level
+  reducing function must also handle those three args.
 
   See also [[brokvolli.transducers-kv]].")
 
 
 (defn take-kv
-  "Returns a stateful take-ing transducer like `clojure.core/take`, but with an
-  additional arity-3 of *result*, *keydex*, and *value*."
+  "Retains the first `n` elements, similar to
+  [`take`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/take)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (take-kv 3) tconj [11 22 33 44 55])
+  ;; => [11 22 33]
+  ```"
   {:UUIDv4 #uuid "efc87b4d-227f-4224-9342-d3e3203bd5fb"}
   [n]
   (fn [rf]
@@ -38,8 +49,18 @@
 
 
 (defn take-while-kv
-  "Returns a taking-while transducer like `clojure.core/take-while`, but with an
-  additional arity-3 of *result*, *keydex*, and *value*."
+  "Retains elements while `(pred keydex element)` is truthy, similar to
+  [`take-while`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/take-while)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (take-while-kv (fn [keydex x] (and (<= keydex 5)
+                                                   (even? x))))
+                tconj
+                [11 22 33 44 55 66 77 88])
+  ;; => [22 44 66]
+  ```"
   {:UUIDv4 #uuid "f21b3d1f-fd72-45c0-8740-8a74023a5bfd"}
   [pred]
   (fn [rf]
@@ -57,8 +78,18 @@
 
 
 (defn take-nth-kv
-  "Returns a stateful take-ing transducer like `clojure.core/take-nth`, but with
-  an additional arity-3 of *result*, *keydex*, and *value*."
+  "Retains every `n`th element, similar to
+  [`take-nth`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/take-nth)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (take-while-kv (fn [keydex x] (and (<= keydex 5)
+                                                   (even? x))))
+                tconj
+                [11 22 33 44 55 66 77])
+  ;; => [22 44 66]
+  ```"
   [n]
   (fn [rf]
     (let [iv (volatile! -1)]
@@ -78,8 +109,15 @@
 
 
 (defn drop-kv
-  "Returns a stateful dropping transducer like `clojure.core/drop`, but with
-  an additional arity-3 of *result*, *keydex*, and *value*."
+  "Discards first `n` elements, similar to
+  [`drop`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/drop)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (drop-kv 3) tconj [11 22 33 44 55])
+  ;; => [44 55]
+  ```"
   {:UUIDv4 #uuid "19a1de1d-af07-4042-b9c7-2acebd94074b"}
   [n]
   (fn [rf]
@@ -102,8 +140,15 @@
 
 
 (defn drop-while-kv
-  "Returns a stateful dropping transducer like `clojure.core/drop-while`, but
-  with an additional arity-3 of *result*, *keydex*, and *value*."
+  "Discards elements while `(pred keydex element)` returns truthy, similar to
+  [`drop-while`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/drop-while)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (drop-while-kv (fn [keydex _] (<= keydex 2))) tconj [11 22 33 44 55])
+  ;; => [44 55]
+  ```"
   {:UUIDv4 #uuid "bc4da8d5-acc9-4dea-a343-cbd6c0382fd6"}
   [pred]
   (fn [rf]
@@ -128,7 +173,15 @@
 
 
 (defn partition-by-kv
-  "..."
+  "Splits each time `(f keydex element)` returns a new value, similar to
+  [`partition-by`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/partition-by)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (partition-by-kv (fn [_ x] (even? x))) tconj [11 33 22 44 66 55 77 99 88])
+  ;; => [[11 33] [22 44 66] [55 77 99] [88]]
+  ```"
   {:UUIDv4 #uuid "fed3dc2e-9bf4-4bd4-9cfa-985d8aa2860e"}
   [f]
   (fn [rf]
@@ -177,7 +230,16 @@
 
 
 (defn partition-all-kv
-  "..."
+  "Split into lists of `n` items each, may include fewer items than `n` at the
+  end, similar to
+  [`partition-all-kv`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/partition-all)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (partition-all-kv 3) tconj [11 22 33 44 55 66 77 88])
+  ;; => [[11 22 33] [44 55 66] [77 88]]
+  ```"
   {:UUIDv4 #uuid "911fa6bc-8102-4a05-a891-3fb21bf0fa07"}
   [^long n]
   (fn [rf]
@@ -209,8 +271,15 @@
 
 
 (defn distinct-kv
-  "Returns a stateful distinct-ing transducer like `clojure.core/distinct`, but
-  with an additional arity-3 of *result*, *keydex*, and *value*."
+  "Returns elements with duplicates removed, similar to
+  [`distinct`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/distinct)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (distinct-kv) tconj [11 22 11 33 22 44 33 55 44])
+  ;; => [11 22 33 44 55]
+  ```"
   {:UUIDv4 #uuid "aa1df4b5-6712-4861-bf1b-48d0ccc7f6fc"}
   []
   (fn [rf]
@@ -231,11 +300,17 @@
 
 
 (defn interpose-kv
-  "Returns a stateful interpose-ing transducer like `clojure.core/interpose`,
-  but with an additional arity-3 of *result*, *keydex*, and *value*.
+  "Returns elements separated by `sep`, similar to
+  [`interpose`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/interpose)
+  .
 
-  Note: A bit iffy on 'kv-ized', arity-3 branch..."
-  {:UUIDv4 #uuid "f619fb00-2a23-45db-a663-7ba6a94b5f5b"}
+  Example:
+  ```clojure
+  (transduce-kv (interpose-kv :foo) tconj [11 22 33])
+  ;; => [11 :foo 22 :foo 33]
+  ```"
+  {:UUIDv4 #uuid "f619fb00-2a23-45db-a663-7ba6a94b5f5b"
+   :note "Note: A bit iffy on 'kv-ized', arity-3 branch..."}
   [sep]
   (fn [rf]
     (let [started (volatile! false)]
@@ -263,8 +338,15 @@
 
 
 (defn dedupe-kv
-  "Returns a stateful dedupe-ing transducer like `clojure.core/dedupe`, but with
-  an additional arity-3 of *result*, *keydex*, and *value*."
+  "Removes consecutive duplicates, similar to
+  [`dedupe`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/dedupe)
+  .
+
+  Example:
+  ```clojure
+  (transduce-kv (dedupe-kv) tconj [11 11 22 22 22 33 33 33 33])
+  ;; => [11 22 33]
+  ```"
   {:UUIDv4 #uuid "62bac909-756d-4d1b-af31-e7c81fb149b2"}
   []
   (fn [rf]
