@@ -29,13 +29,14 @@
 ;; contexts (`transduce`, `into`, etc.)  and the transducers themselves (`map`,
 ;; `filter`, etc.). When something went wrong, they needed detailed information
 ;; about whether the transducer or the context was the problem. Brokvolli only
-;; introduces new contexts, not new transducers, so let's see if we can get away
-;; with simpler property tests.
+;; introduces new contexts and merely _adapted_ transducers, so let's see if we
+;; can get away with simpler property tests.
 
 ;; Only numbers and strings have interesting operations (`inc`, `upper-case`,
-;; etc.), so only generate collections containing those scalar types. Don't
-;; exercise every off-the-shelf transducer, perhaps only `map`, `filter`,
-;; `remove`, `take`, `drop`, and `mapcat`.
+;; etc.), so only generate collections containing those scalar types. When
+;; testing the transducing contexts, don't exercise every off-the-shelf
+;; transducer, perhaps only `map`, `filter`, `remove`, `take`, `drop`, and
+;; `mapcat`. When testing the transducers, stick with a basic vector of numbers.
 
 
 (def n-checks 1000)
@@ -845,7 +846,7 @@
    [v (gen/vector gen/small-integer)
     n gen/nat]
    (= (drop n v)
-      (transduce (drop n) conj v)
+      (transduce           (drop    n)  conj v)
       (single/transduce-kv (drop-kv n) tconj v))))
 
 
@@ -863,7 +864,7 @@
              ([i] (<= i limit))
              ([_ i] (lim i)))]
      (= (drop-while f v)
-        (transduce (drop-while f) conj v)
+        (transduce           (drop-while    f)  conj v)
         (single/transduce-kv (drop-while-kv f) tconj v)))))
 
 
@@ -878,7 +879,7 @@
    [v (gen/vector gen/small-integer)
     kw gen/keyword-ns]
    (= (interpose kw v)
-      (transduce (interpose kw) conj v)
+      (transduce           (interpose    kw)  conj v)
       (single/transduce-kv (interpose-kv kw) tconj v))))
 
 
@@ -893,7 +894,7 @@
    [v (gen/vector gen/small-integer)
     n (gen/such-that #(not= % 0) gen/nat)]
    (= (partition-all n v)
-      (transduce (partition-all n) conj v)
+      (transduce           (partition-all    n ) conj v)
       (single/transduce-kv (partition-all-kv n) tconj v))))
 
 
@@ -910,7 +911,7 @@
              ([x] (even? x))
              ([_ x] (ev? x)))]
      (= (partition-by f v)
-        (transduce (partition-by f) conj v)
+        (transduce           (partition-by    f)  conj v)
         (single/transduce-kv (partition-by-kv f) tconj v)))))
 
 
@@ -925,7 +926,7 @@
    [v (gen/vector gen/small-integer)
     n gen/nat]
    (= (take n v)
-      (transduce (take n) conj v)
+      (transduce           (take    n)  conj v)
       (single/transduce-kv (take-kv n) tconj v))))
 
 
@@ -940,7 +941,7 @@
    [v (gen/vector gen/small-integer)
     n (gen/choose 1 8)]
    (= (take-nth n v)
-      (transduce (take-nth n) conj v)
+      (transduce           (take-nth    n)  conj v)
       (single/transduce-kv (take-nth-kv n) tconj v))))
 
 
@@ -958,7 +959,7 @@
              ([x] (<= x limit))
              ([_ x] (lim x)))]
      (= (take-while f v)
-        (transduce (take-while f) conj v)
+        (transduce           (take-while    f)  conj v)
         (single/transduce-kv (take-while-kv f) tconj v)))))
 
 
