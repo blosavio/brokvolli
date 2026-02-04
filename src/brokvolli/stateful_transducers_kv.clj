@@ -74,7 +74,7 @@
       ([result keydex input]
        (if (pred keydex input)
          (rf result keydex input)
-         result)))))
+         (reduced result))))))
 
 
 (defn take-nth-kv

@@ -510,32 +510,462 @@
   associative-properties)
 
 
-(comment ;; sketch property tests for reduce-kv type processes
+;;;; sketch property tests for reduce-kv type processes; stick with non-stateful transducers
 
-  ;; mapping (reduce+conj)
-  (reduce-kv (fn [acc k v] (conj acc (inc v))) [] [11 22 33])
-  (single/transduce-kv (map-kv (fn [_ x] (inc x))) tconj [11 22 33])
-
-  ;; filtering
-  (reduce-kv (fn [acc k v] (if (= 0 (rem v 3)) (conj acc v) acc)) [] [11 22 33 44 55 66 77 88 99])
-  (single/transduce-kv (filter-kv (fn [_ x] (= 0 (rem x 3)))) tconj [11 22 33 44 55 66 77 88 99])
-
-  ;; remove-ing
-  (reduce-kv (fn [acc k v] (if (not= k 5) (conj acc v) acc)) [] [11 22 33 44 55 66 77 88 99])
-  (single/transduce-kv (remove-kv (fn [keydex _] (= keydex 5))) tconj [11 22 33 44 55 66 77 88 99])
+;; `map` increment, decrement, and identity
 
 
-  (defn mappers
-    [f coll]
-    {:reduce-kv (reduce-kv (fn [acc k v] (conj acc (f v))) [] coll)
-     :multi-transduce (multi/transduce (map inc) conj coll)
-     :single-transduce-kv (single/transduce-kv (map-kv (fn [_ x] (f x))) tconj coll)
-     :multi-transduce-kv (multi/transduce-kv 3 (map-kv (fn [_ x] (f x))) tconj core/concatv coll)})
+(defn er-er
+  "Given a function of one argument `f`, returns a function that replicates
+  that arity, with an additional 2-arg arity that ignores the first arg."
+  {:UUIDv4 #uuid "6b71093c-4f3f-457c-ba9d-b5875a20c985"
+   :no-doc true}
+  [f]
+  (fn
+    ([x] (f x))
+    ([_ x] (f x))))
 
-  (mappers inc [11 22 33])
 
-  )
+(def inc-er (er-er inc))
+(def dec-er (er-er dec))
+(def ident-er (er-er identity))
 
+
+#_(let [f inc-er #_dec-er #_ident-er]
+    (=
+     (transduce           (map-kv f)  conj [11 22 33])
+     (single/transduce-kv (map-kv f) tconj [11 22 33])
+     (multi/transduce     (map-kv f)  conj [11 22 33])
+     (multi/transduce     (map-kv f) tconj [11 22 33])))
+
+
+;; `filter` and `remove` odds and evens
+
+
+(def even?-er (er-er even?))
+(def odd?-er (er-er odd?))
+(def any?-er (er-er any?))
+
+#_(let [f #_even?-er #_odd?-er any?-er
+        xducer #_remove-kv filter-kv]
+    (=
+     (transduce           (xducer even?-er)  conj [11 22 33 44 55 66])
+     (single/transduce-kv (xducer even?-er) tconj [11 22 33 44 55 66])
+     (multi/transduce     (xducer even?-er)  conj [11 22 33 44 55 66])
+     (multi/transduce-kv  (xducer even?-er) tconj [11 22 33 44 55 66])))
+
+
+;; replace elements
+
+
+#_(let [replacer {11 :foo
+                  33 :bar
+                  55 :baz}]
+    (=
+     (transduce           (replace-kv replacer)  conj [11 22 33 44 55])
+     (single/transduce-kv (replace-kv replacer) tconj [11 22 33 44 55])
+     (multi/transduce    2 (replace-kv replacer) tconj concatv [11 22 33 44 55])
+     (multi/transduce-kv 2 (replace-kv replacer) tconj concatv [11 22 33 44 55])))
+
+
+;; vary:
+;; * length of `coll`
+;; * number and order of transducers in stack
+;; * `map-kv` with inc, dec, ident
+;; * `filter-kv`/`remove-kv` with `even?`, `odd?`, `any?`
+;; * `replace-kv` with various replacements (extract a few elements at random from coll)
+;; * `n`-sized partitions for the multi-threaded variants
+
+
+
+;; Integrated property tests of `transduce` variants, kv transducer variants,
+;; and multi-threading equivalence
+
+
+(def integrated-tests-gen
+  (gen/let
+      [size gen/nat
+       n (gen/choose 2 (max 2 size))
+       v (gen/vector gen/small-integer size)
+       xform (gen/vector
+              (gen/elements [(map-kv inc-er)
+                             (map-kv dec-er)
+                             (map-kv ident-er)
+                             (filter-kv even?-er)
+                             (filter-kv odd?-er)
+                             (filter-kv any?-er)
+                             (remove-kv even?-er)
+                             (remove-kv odd?-er)
+                             (remove-kv any?-er)
+                             (replace-kv
+                              (if (empty? v)
+                                {}
+                                (gen/map (gen/elements v) gen/small-integer)))])
+              min-xforms max-xforms)]
+    {:size size
+     :v v
+     :n n
+     :xform xform}))
+
+
+#_(gen/sample integrated-tests-gen)
+
+
+(def integrated-props
+  (prop/for-all
+   [info integrated-tests-gen]
+   (let [{v :v
+          n :n
+          xform :xform} info]
+     (= (transduce             (apply comp xform)  conj         v)
+        (single/transduce-kv   (apply comp xform) tconj         v)
+        (multi/transduce     n (apply comp xform) tconj concatv v)
+        (multi/transduce-kv  n (apply comp xform) tconj concatv v)))))
+
+
+#_(chk/quick-check n-checks integrated-props)
+
+
+(clj-test/defspec
+  test-integrated
+  n-checks
+  integrated-props)
+
+
+
+;;;; stateless transducers-kv properties
+
+
+(let [v [11 22 33]]
+  (=
+   (map inc v)
+   (transduce (map inc) conj v)))
+
+
+(def gen-vec-and-splits
+  (gen/let
+      [v (gen/vector gen/small-integer)
+       n (gen/choose 2 (max 2 (count v)))
+       replacements (if (empty? v)
+                      (gen/hash-map)
+                      (gen/map
+                       (gen/elements v)
+                       gen/small-integer {:min-elements 0
+                                          :max-elements 8}))]
+    {:v v
+     :n n
+     :replacements replacements}))
+
+
+(def map-kv-properties
+  (prop/for-all
+   [info gen-vec-and-splits]
+   (let [{v :v
+          n :n} info]
+     (= (mapv inc v)
+        (transduce             (map    inc)     conj         v)
+        (single/transduce-kv   (map-kv inc-er) tconj         v)
+        (multi/transduce     n (map-kv inc-er) tconj concatv v)
+        (multi/transduce-kv  n (map-kv inc-er) tconj concatv v)))))
+
+
+(clj-test/defspec
+  test-map-kv
+  n-checks
+  map-kv-properties)
+
+
+(def filter-kv-properties
+  (prop/for-all
+   [info gen-vec-and-splits]
+   (let [{v :v
+          n :n} info]
+     (= (filterv even? v)
+        (transduce             (filter               even?)      conj         v)
+        (single/transduce-kv   (filter-kv (fn [_ x] (even? x))) tconj         v)
+        (multi/transduce     n (filter-kv            even?)     tconj concatv v)
+        (multi/transduce-kv  n (filter-kv (fn [_ x] (even? x))) tconj concatv v)))))
+
+
+(clj-test/defspec
+  test-filter-kv
+  n-checks
+  filter-kv-properties)
+
+
+(def gen-vec-of-vecs-and-splits
+  (gen/let
+      [vv (gen/vector (gen/vector gen/small-integer))
+       n (gen/choose 2 (max 2 (count vv)))]
+    {:vv vv
+     :n n}))
+
+
+(def cat-kv-properties
+  (prop/for-all
+   [info gen-vec-of-vecs-and-splits]
+   (let [{vv :vv
+          n :n} info]
+     (= (apply concat vv)
+        (transduce             cat     conj         vv)
+        (single/transduce-kv   cat-kv tconj         vv)
+        (multi/transduce     n cat-kv tconj concatv vv)
+        (multi/transduce-kv  n cat-kv tconj concatv vv)))))
+
+
+(clj-test/defspec
+  test-cat-kv
+  n-checks
+  cat-kv-properties)
+
+
+(def keep-kv-properties
+  (prop/for-all
+   [info gen-vec-and-splits]
+   (let [{v :v
+          n :n} info]
+     (= (keep even? v)
+        (transduce             (keep               even?)      conj         v)
+        (single/transduce-kv   (keep-kv (fn [_ x] (even? x))) tconj         v)
+        (multi/transduce     n (keep-kv            even?)     tconj concatv v)
+        (multi/transduce-kv  n (keep-kv (fn [_ x] (even? x))) tconj concatv v)))))
+
+
+(clj-test/defspec
+  test-keep-kv
+  n-checks
+  keep-kv-properties)
+
+
+(def mapcat-kv-properties
+  (prop/for-all
+   [info gen-vec-of-vecs-and-splits]
+   (let [{vv :vv
+          n :n} info]
+     (= (mapcat reverse vv)
+        (transduce             (mapcat               reverse)      conj         vv)
+        (single/transduce-kv   (mapcat-kv (fn [_ v] (reverse v))) tconj         vv)
+        (multi/transduce     n (mapcat-kv            reverse)     tconj concatv vv)
+        (multi/transduce-kv  n (mapcat-kv (fn [_ v] (reverse v))) tconj concatv vv)))))
+
+
+(clj-test/defspec
+  test-mapcat-kv
+  n-checks
+  mapcat-kv-properties)
+
+
+;; punt `random-sample-kv` property tests
+
+
+(def remove-kv-properties
+  (prop/for-all
+   [info gen-vec-and-splits]
+   (let [{v :v
+          n :n} info]
+     (= (remove even? v)
+        (transduce             (remove               even?)      conj         v)
+        (single/transduce-kv   (remove-kv (fn [_ x] (even? x))) tconj         v)
+        (multi/transduce     n (remove-kv            even?)     tconj concatv v)
+        (multi/transduce-kv  n (remove-kv (fn [_ x] (even? x))) tconj concatv v)))))
+
+
+(clj-test/defspec
+  test-remove-kv
+  n-checks
+  remove-kv-properties)
+
+
+(def replace-kv-properties
+  (prop/for-all
+   [info gen-vec-and-splits]
+   (let [{v :v
+          n :n
+          replacements :replacements} info]
+     (= (replace replacements v)
+        (transduce             (replace    replacements)  conj         v)
+        (single/transduce-kv   (replace-kv replacements) tconj         v)
+        (multi/transduce     n (replace-kv replacements) tconj concatv v)
+        (multi/transduce-kv  n (replace-kv replacements) tconj concatv v)))))
+
+
+(clj-test/defspec
+  test-replace-kv
+  n-checks
+  replace-kv-properties)
+
+
+
+;;;; stateful transducers-kv
+
+
+(def dupe-gen
+  (gen/let [n gen/nat]
+    (gen/fmap #(repeat n %) gen/small-integer)))
+
+
+(def gen-vec-of-dupes
+  (gen/fmap (fn [s] (-> s flatten vec)) (gen/vector dupe-gen)))
+
+
+(def dedupe-kv-properties
+  (prop/for-all
+   [v gen-vec-of-dupes]
+   (= (dedupe v)
+      (transduce           (dedupe)     conj v)
+      (single/transduce-kv (dedupe-kv) tconj v))))
+
+
+(clj-test/defspec
+  test-dedupe-kv
+  n-checks
+  dedupe-kv-properties)
+
+
+(def non-distinct-gen
+  (gen/fmap shuffle gen-vec-of-dupes))
+
+
+(def distinct-kv-properties
+  (prop/for-all
+   [v non-distinct-gen]
+   (= (distinct v)
+      (transduce           (distinct)     conj v)
+      (single/transduce-kv (distinct-kv) tconj v))))
+
+
+(clj-test/defspec
+  test-distinct-kv
+  n-checks
+  distinct-kv-properties)
+
+
+(def drop-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    n gen/nat]
+   (= (drop n v)
+      (transduce (drop n) conj v)
+      (single/transduce-kv (drop-kv n) tconj v))))
+
+
+(clj-test/defspec
+  test-drop-kv
+  n-checks
+  drop-kv-properties)
+
+
+(def drop-while-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    limit gen/nat]
+   (let [f (fn lim
+             ([i] (<= i limit))
+             ([_ i] (lim i)))]
+     (= (drop-while f v)
+        (transduce (drop-while f) conj v)
+        (single/transduce-kv (drop-while-kv f) tconj v)))))
+
+
+(clj-test/defspec
+  test-drop-while
+  n-checks
+  drop-while-kv-properties)
+
+
+(def interpose-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    kw gen/keyword-ns]
+   (= (interpose kw v)
+      (transduce (interpose kw) conj v)
+      (single/transduce-kv (interpose-kv kw) tconj v))))
+
+
+(clj-test/defspec
+  test-interpose-kv
+  n-checks
+  interpose-kv-properties)
+
+
+(def partition-all-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    n (gen/such-that #(not= % 0) gen/nat)]
+   (= (partition-all n v)
+      (transduce (partition-all n) conj v)
+      (single/transduce-kv (partition-all-kv n) tconj v))))
+
+
+(clj-test/defspec
+  test-partition-all-kv
+  n-checks
+  partition-all-kv-properties)
+
+
+(def partition-by-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)]
+   (let [f (fn ev?
+             ([x] (even? x))
+             ([_ x] (ev? x)))]
+     (= (partition-by f v)
+        (transduce (partition-by f) conj v)
+        (single/transduce-kv (partition-by-kv f) tconj v)))))
+
+
+(clj-test/defspec
+  test-partition-by-kv
+  n-checks
+  partition-by-kv-properties)
+
+
+(def take-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    n gen/nat]
+   (= (take n v)
+      (transduce (take n) conj v)
+      (single/transduce-kv (take-kv n) tconj v))))
+
+
+(clj-test/defspec
+  test-take-kv
+  n-checks
+  take-kv-properties)
+
+
+(def take-nth-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    n (gen/choose 1 8)]
+   (= (take-nth n v)
+      (transduce (take-nth n) conj v)
+      (single/transduce-kv (take-nth-kv n) tconj v))))
+
+
+(clj-test/defspec
+  test-take-nth-kv
+  n-checks
+  take-nth-kv-properties)
+
+
+(def take-while-kv-properties
+  (prop/for-all
+   [v (gen/vector gen/small-integer)
+    limit gen/nat]
+   (let [f (fn lim
+             ([x] (<= x limit))
+             ([_ x] (lim x)))]
+     (= (take-while f v)
+        (transduce (take-while f) conj v)
+        (single/transduce-kv (take-while-kv f) tconj v)))))
+
+
+(clj-test/defspec
+  test-take-while-kv
+  n-checks
+  take-while-kv-properties)
 
 
 #_(run-tests)
