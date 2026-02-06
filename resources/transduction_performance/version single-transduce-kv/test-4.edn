@@ -1,0 +1,120 @@
+{:overhead 7.0811316724863884E-9,
+ :samples
+ (1009703837
+  1008509181
+  1033157904
+  1029634890
+  1011068027
+  1002106191
+  1002004514
+  1007536047
+  1015529018
+  1012627003
+  1007291526
+  1020484589
+  1004981275
+  1007816310
+  1013268629
+  999396725
+  1005465358
+  1012102239
+  1000737898
+  1009336417
+  1017446348
+  1004925195
+  1005118432
+  1013955180
+  1014418427
+  1017615078
+  1020845505
+  1003783089
+  1012188235
+  1021235749
+  999654015
+  1004872122
+  1008396170
+  1015048775
+  1037742999
+  1002394355
+  1007281950
+  1003642427
+  1003351641
+  1013550722
+  1004161760
+  1012378345
+  1010623590
+  1008446462
+  1007776980
+  1010641421
+  1003090749
+  1006931167
+  1006713430
+  1009635746
+  1002410270
+  1007271195
+  1009011986
+  1009359147
+  1000347020
+  987312223
+  1016784764
+  1003120841
+  1000323217
+  1011260148),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.00190830201868305 (0.0019044578047574042 0.001912317836830498)],
+ :final-gc-time 131490895,
+ :execution-count 529,
+ :variance
+ [2.528782447823716E-10
+  (1.4834356865299832E-10 4.305997508392634E-10)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-168-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.01638888888888889,
+ :outliers {:low-severe 0, :low-mild 1, :high-mild 3, :high-severe 0},
+ :warmup-time 11688049858,
+ :lower-q
+ [0.0018892187618147452 (0.0018663747126654068 0.0018909915376654066)],
+ :warmup-executions 6145,
+ :sample-count 60,
+ :upper-q
+ [0.0019468847925330816 (0.0019272512859640834 0.0019617069924385637)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-4 (project-version-lein)) (vecs n)))",
+  :date {:year 2026, :month "February", :day 6},
+  :group "12 transforms: Transduce with `map`+`filter`+`remove`, 4X",
+  :index 4,
+  :ns "brokvolli.performance.transductions",
+  :UUIDv4 #uuid "aa9e525f-b622-4c0e-9afd-98facd8571e8",
+  :name "transductions-4",
+  :testing-thoroughness :default,
+  :arg 10000,
+  :version "single-transduce-kv",
+  :parallel? false},
+ :total-time 60.567824453,
+ :sample-variance [2.4331519499012387E-10 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 60,
+  :target-execution-time 1000000000,
+  :warmup-jit-period 10000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 1000,
+  :overhead 7.0811316724863884E-9},
+ :sample-mean
+ [0.0019082490375866418 (0.0018614533459589812 0.001955044729214302)],
+ :results :fastester/benchmark-fn-results-elided}

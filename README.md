@@ -1,0 +1,309 @@
+
+  <body>
+    <a href="https://clojars.org/com.sagevisuals/brokvolli"><img src="https://img.shields.io/clojars/v/com.sagevisuals/brokvolli.svg"></a><br>
+    <a href="#setup">Setup</a><br>
+    <a href="https://github.com/blosavio/brokvolli/blob/main/changelog.md">Changelog</a><br>
+    <a href="#quick">Quick reference</a><br>
+    <a href="#alternatives">Alternatives</a><br>
+    <a href="#glossary">Glossary</a><br>
+    <a href="https://github.com/blosavio">Contact</a><br>
+    <h1>
+      Brokvolli
+    </h1><em>A Clojure library exploring parallel transduce and transduce-kv</em><br>
+    <section id="setup">
+      <h2>
+        Setup
+      </h2>
+      <h3>
+        Leiningen/Boot
+      </h3>
+      <pre><code>[com.sagevisuals/brokvolli &quot;multi-transduce&quot;]</code></pre>
+      <h3>
+        Clojure CLI/deps.edn
+      </h3>
+      <pre><code>com.sagevisuals/brokvolli {:mvn/version &quot;multi-transduce&quot;}</code></pre>
+      <h3>
+        Require
+      </h3>
+      <pre><code>(require &apos;[brokvolli.core :refer [concatv tassoc]]
+&nbsp;        &apos;[brokvolli.single :refer [transduce-kv]]
+&nbsp;        &apos;[brokvolli.transducers-kv :refer [map-kv filter-kv replace-kv]])</code></pre>
+    </section>
+    <section id="quick">
+      <h2>
+        Quick reference
+      </h2>
+      <table>
+        <tr>
+          <td></td>
+          <td></td>
+          <th colspan="2">
+            execution model
+          </th>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+          <th>
+            single-threaded
+          </th>
+          <th>
+            multi-threaded
+          </th>
+        </tr>
+        <tr>
+          <th rowspan="2">
+            style
+          </th>
+          <td>
+            <code>reduce</code>
+          </td>
+          <td>
+            <code>clojure.core/transduce</code>
+          </td>
+          <td>
+            <code>brokvolli.multi/transduce</code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>reduce-kv</code>
+          </td>
+          <td>
+            <code>brokvolli.single/transduce-kv</code>
+          </td>
+          <td>
+            <code>brokvolli.multi/transduce-kv</code>
+          </td>
+        </tr>
+      </table>
+      <h3>
+        Function signatures
+      </h3>
+      <table>
+        <tr>
+          <td>
+            <pre><code>clojure.core/transduce</code></pre>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;coll]</code>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;init&nbsp;coll]</code>
+          </td>
+          <td>
+            <code></code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <pre><code>brokvolli.single/transduce-kv</code></pre>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;coll]</code>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;init&nbsp;coll]</code>
+          </td>
+          <td>
+            <code></code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <pre><code>brokvolli.multi/transduce</code></pre>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;coll]</code>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;combine&nbsp;coll]</code>
+          </td>
+          <td>
+            <code>[n&nbsp;xform&nbsp;f&nbsp;combine&nbsp;coll]</code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <pre><code>brokvolli.multi/transduce-kv</code></pre>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;coll]</code>
+          </td>
+          <td>
+            <code>[xform&nbsp;f&nbsp;combine&nbsp;coll]</code>
+          </td>
+          <td>
+            <code>[n&nbsp;xform&nbsp;f&nbsp;combine&nbsp;coll]</code>
+          </td>
+        </tr>
+      </table>
+      <p>
+        TODO: consider changing signature to match `r/fold`.
+      </p>
+      <p>
+        Mnemonic: sig grows from right to left, roughly in order of importance.
+      </p>
+      <pre><code>[          xform f coll]</code><br><code>[  combine xform f coll]</code><br><code>[n combine xform f coll]</code></pre>
+    </section>
+    <section id="alternatives">
+      <h2>
+        Alternatives
+      </h2>
+      <ul>
+        <li>
+          <p>
+            Clojure&apos;s <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/reduce"><code>reduce</code></a>, <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/reduce-kv"><code>reduce-kv</code></a>, <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce"><code>transduce</code></a>, and <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core.reducers/fold"><code>clojure.core.reducers/fold</code></a>
+          </p>
+          <p>
+            No additional dependencies, proven in-the-wild.
+          </p><br>
+        </li>
+        <li>
+          <p>
+            Sebastian Fedrau&apos;s <a href="https://github.com/20centaurifux/pold">pold</a>
+          </p>
+          <p>
+            A Clojure library for efficiently dividing data into any number of partitions and accumulating them into a result.
+          </p><br>
+        </li>
+        <li>
+          <p>
+            Kyle Kingsbury&apos;s <a href="https://github.com/aphyr/tesser">Tesser</a>
+          </p>
+          <p>
+            A Clojure library for concurrent &amp; commutative folds.
+          </p><br>
+        </li>
+        <li>
+          <p>
+            Christophe Grand&apos;s <a href="https://github.com/cgrand/xforms">xforms</a>
+          </p>
+          <p>
+            More transducers and reducing functions for Clojure(script).
+          </p><br>
+        </li>
+      </ul>
+    </section>
+    <section id="glossary">
+      <h2>
+        Glossary
+      </h2>
+      <dl>
+        <dt id="accumulator">
+          accumulator
+        </dt>
+        <dd>
+          <p>
+            Synonym: <em>accumulating value</em>. The on-going value that is produced by evaluating the <a href="#reducing-function">reducing function</a> with
+            all the previous elements. The <code>acc</code> in a reducing function&apos;s signatures, <code>(fn [acc element] ...)</code>.
+          </p>
+        </dd>
+        <dt id="combine">
+          combine
+        </dt>
+        <dd>
+          <p>
+            Gather the results after <a href="#reduce">reducing</a> two or more partitions of the input collection. Often a concatenation (for sequentials) or
+            merging (for associatives), but need not be. A <em>combining function</em> is a function that implements this operation.
+          </p>
+        </dd>
+        <dt id="element">
+          element
+        </dt>
+        <dd>
+          <p>
+            A member of a collection. Within a <a href="#reduce"><code>reduce</code></a>-style operation, the next &quot;thing&quot; <code>reduce</code> peels
+            off the collection and sends to its <a href="#reducing-function">reducing function</a>.
+          </p>
+        </dd>
+        <dt id="keydex">
+          keydex
+        </dt>
+        <dd>
+          <p>
+            Short-hand for <em>key/index</em>. A key &quot;locates&quot; an element contained in an associative collection, while an integer index do so within
+            a sequential collection.
+          </p>
+        </dd>
+        <dt id="reducing-function">
+          reducing function
+        </dt>
+        <dd>
+          <p>
+            A function that does the work in a <a href="#reduce">reduce</a> operation, <em>i.e.,</em> <code>f</code> in <code>(reduce f coll)</code>. The
+            ultimate function at the &quot;bottom&quot; of the transducing <a href="#stack">stack</a>.
+          </p>
+          <p>
+            In a <code>reduce</code>-style operation, <code>f</code>&apos;s signature is <code>(fn [acc element] ...)</code>. In a <code>reduce-kv</code>-style
+            operation, <code>f</code>&apos;s signature is <code>(fn [acc keydex element] ...)</code>.
+          </p>
+        </dd>
+        <dt id="reduce">
+          reduce
+        </dt>
+        <dd>
+          <p>
+            The process of consuming an <a href="#accumulator">accumulating value</a> and the next <a href="#element">element</a>, producing a new accumulating
+            value. Note: A reduce operation may result in fewer, equal, or more elements than the original input.
+          </p>
+        </dd>
+        <dt id="stack">
+          stack
+        </dt>
+        <dd>
+          <p>
+            A composition of one or more <a href="#transducer">transducing functions</a>, often made with <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/comp"><code>comp</code></a>. The <code>xform</code> in <code>(transduce xform
+            f coll)</code>. When discussing the mechanical execution of a transduction, may refer to <code>(xform f)</code>.
+          </p>
+        </dd>
+        <dt id="transducer">
+          transducer
+        </dt>
+        <dd>
+          <p>
+            Synonym: <em>transducing function</em>. A function that modifies (<em>i.e.,</em> <a href="#transform">&quot;transforms&quot;</a>) a reducing
+            function or another transducer. Practically, a sequence function&apos;s <code>coll</code>-omitted arity, e.g., <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/map">(map f)</a>, <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/filter">(filter pred)</a>, <a href=
+            "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/take">(take n)</a>, etc.
+          </p>
+        </dd>
+        <dt id="transduce">
+          transduce
+        </dt>
+        <dd>
+          <p>
+            To eagerly reduce over a concrete collection with a transducing stack serving as the reducing function. One of Clojure&apos;s off-the-shelf
+            transducing contexts.
+          </p>
+        </dd>
+        <dt id="transform">
+          transform
+        </dt>
+        <dd>
+          <p>
+            To alter a <a href="#reducing-function">reducing function</a> by &quot;wrapping&quot; it in one or more <a href="#transducer">transducers</a>.
+          </p>
+        </dd>
+      </dl>
+    </section><br>
+    <h2>
+      License
+    </h2>
+    <p></p>
+    <p>
+      This program and the accompanying materials are made available under the terms of the <a href="https://opensource.org/license/MIT">MIT License</a>.
+    </p>
+    <p></p>
+    <p id="page-footer">
+      Copyright © 2024–2026 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 06.<span id="uuid"><br>
+      294419b4-984b-4fdb-bd80-9737707339c6</span>
+    </p>
+  </body>
+</html>

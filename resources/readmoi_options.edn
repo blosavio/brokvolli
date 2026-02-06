@@ -1,0 +1,38 @@
+{:sections [{:section-name "Setup"}
+            ;;{:section-name "API" :section-href "https://blosavio.github.io/brokvolli/index.html" :skip-section-load? true}
+            {:section-name "Changelog" :section-href "https://github.com/blosavio/brokvolli/blob/main/changelog.md" :skip-section-load? true}
+            ;;{:section-name "Introduction" :section-href "intro"}
+            ;;{:section-name "Mechanics"}
+            {:section-name "Quick reference" :section-href "quick"}
+            ;;{:section-name "Troubleshooting"}
+            {:section-name "Alternatives"}
+            {:section-name "Glossary"}
+            {:section-name "Contact" :section-href "https://github.com/blosavio" :skip-section-load? true}]
+
+ :clojars-badge? true
+ :copyright-holder "Brad Losavio"
+
+ ;; special directives to zprint on how to handle these functions
+ :fn-map-additions {"fn-name-1" :arg1
+                    "fn-name-2" :hang}
+
+ :project-description "A Clojure library exploring parallel transduce and transduce-kv"
+ :project-name-formatted "Brokvolli"
+
+ :preferred-project-metadata :lein
+
+ :readme-UUID #uuid "294419b4-984b-4fdb-bd80-9737707339c6"
+
+ :readme-html-directory "doc/"
+ :readme-html-filename "readme.html"
+
+ :readme-markdown-directory ""
+ :readme-markdown-filename "README.md"
+
+ :sections-directory "resources/readme_sections/"
+
+ :separator " => "
+ :wrap-at 80
+
+ :tidy-html? true}
+

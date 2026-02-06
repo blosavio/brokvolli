@@ -9,7 +9,6 @@
   * transient cat <conj! onto transient-ized v1 in a loop>
   * transducers into (into v1 conj v2)"
   (:require
-   [clojure.core.reducers :as r]
    [clojure.math :as math]
    [clojure.test :refer [are
                          deftest
@@ -17,7 +16,6 @@
                          run-test
                          run-tests
                          testing]]
-   [criterium.core :as crit]
    [fastester.define :refer [defbench]]
    [fastester.display :refer [generate-documents]]
    [fastester.measure :refer [range-pow-10

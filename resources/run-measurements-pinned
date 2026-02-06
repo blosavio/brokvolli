@@ -4,8 +4,7 @@
 
 set -eu
 
-# taskset --cpu-list 3 lein with-profiles default,benchmark run -m brokvolli.performance.measure-range/do-measurements :quick
-# taskset --cpu-list 3 lein with-profiles default,benchmark run -m brokvolli.performance.measure-zip/do-measurements :quick
+taskset --cpu-list 1-3 lein with-profiles default,benchmark run -m fastester.core :benchmarks ./resources/transductions_options.edn
 
 exit 0
 

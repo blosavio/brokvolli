@@ -1,0 +1,166 @@
+{:title "Transduction benchmarks"
+
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+
+ :copyright-holder "Brad Losavio"
+
+ :fastester-UUID #uuid "4575b7b7-5880-47d7-9b5d-7e26e1eed7aa"
+
+ :preferred-version-info :lein
+
+ :benchmarks {'brokvolli.performance.transductions #{'transductions-1
+                                                     'transductions-2
+                                                     'transductions-3
+                                                     'transductions-4}}
+
+ ;; output directories and filenames
+ :html-directory "doc/"
+ :html-filename "transductions_performance.html"
+ :img-subdirectory "transduction_img/"
+
+ :markdown-directory "doc/"
+ :markdown-filename "transduction_performance.md"
+
+ :results-url "https://github.com/blosavio/brokvolli/blob/main/"
+ :results-directory "resources/transduction_performance/"
+
+ :verbose? true
+ :testing-thoroughness :default
+ :parallel? false
+ :save-benchmark-fn-results? false
+
+ :sort-comparator compare #_#(> (Integer/parseInt %1) (Integer/parseInt %2))
+
+ :tidy-html? true
+
+ :preamble
+ [:div
+  [:p "Two of Brokvolli's goals are "
+   [:ol
+    [:li "Bring "
+     [:a {:href "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce"}
+      [:code "transduce"]]
+     "'s performance benefits to a "
+     [:code "reduce-kv"]
+     "-style processing."]
+    [:li "Extend "
+     [:a {:href "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core.reducers/fold"}
+      [:code "fold"]]
+     "'s multi-threading performance benefits to both "
+     [:code "transduce"]
+     " and "
+     [:code "transduce-kv"]
+     "."]
+    "So let's run some benchmarks to see if we can objectively measure any
+ performance improvements."]
+
+   [:p "We'll define our benchmarks "
+    [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/transductions.clj"}
+     "here"]
+    ". For each function, we'll test vectors of random floating point numbers,
+ increasing in length from one to one million, by powers of ten. We'll arrange
+ four different tests:"
+    [:ol
+     [:li "Increment each number."]
+     [:li "Increment, filter, and remove, 1X (three total operations)."]
+     [:li "Increment, filter, and remove, 2X (six total operations)."]
+     [:li "Increment, filter, and remove, 4X (twelve total operations)."]]
+    "For each test, we'll use the "
+    [:a {:href "https://github.com/hugoduncan/criterium/"}
+     "Criterium benchmarking library"]
+    " to measure the execution times of sixty repetitions of each condition.
+ Benchmarks were run on three pinned cores of my old, rusty computer."]]
+
+  [:p "The functions under examination are as follows:"
+   [:ul
+    [:li [:p [:code "clojure.core/reduce"]]]
+    [:li [:p [:code "clojure.core/reduce-kv"]]]
+    [:li [:p [:code "clojure.core/transduce"]]]
+    [:li [:p [:code "brokvolli.single/transduce-kv"]]]
+    [:li [:p [:code "brokvolli.multi/transduce"]]]
+    [:li [:p [:code "brokvolli.multi/transduce-kv"]]]]]
+
+  [:p "Overall, we observe that the execution times increase with increasing
+ vector lengths. The results are indistinguishable when the vector contains
+ one-hundred or fewer elements. When the vectors grow longer and the processing
+ stack is small (i.e., one or three transforms), the single-threaded functions
+ tend to perform slightly faster. However, when the vector lengths approach
+ one million elements and the processing stack involves more transforms, the
+ multi-threaded variants ("
+   [:code "fold"]
+   ", "
+   [:code "multi/transduce"]
+   ", and "
+   [:code "multi/transduce-kv"]
+   "), offer improvements that scale roughly with the number of processors."]
+
+  [:p "Brokvolli's multi-threaded "
+   [:code "transduce"]
+   " and "
+   [:code "transduce-kv"]
+   " may offer performance benefits over their single-threaded counterparts for
+ large collection sizes and deep transformer stacks. For smaller collections or
+ shallow transformer stacks, the single-threaded variants perform better, and
+ present a simpler interface."]]
+
+ :comments
+ {"01 transform: increment integer"
+  [:div
+   [:p "This test performs one operation per element: incrementing the element.
+ Since we're only doing one task, we can straightforwardly compare to "
+    [:code "reduce"]
+    " as well."]
+   [:p "Execution times increase with vector length, with the single-threaded
+ functions performing best for all vector lengths. With only one operation per
+ element, the overhead of multi-threading machinery results in slower times."]]
+
+  "03 transforms: Transduce with `map`+`filter`+`remove`, 1X"
+  [:div
+   [:p "This test involves three operations per element: incrementing the
+ number, filtering (keeping) if the result is less than a speficied targe, then
+ removing if the result is more than a different target."]
+
+   [:p "With a transform stack of this size, all functions performed similarly."]]
+
+  "06 transforms: Transduce with `map`+`filter`+`remove`, 2X"
+  [:div
+   [:p "This test is similar to the previous, except the three operations were
+ performed twice (with different filter/remove cutoffs), for a total of six
+ operations per element. With this transform stack, the multi-threaded variants
+ begin to offer faster performance (i.e., lower time) on vectors longer than
+ one thousand elements."]]
+
+  "12 transforms: Transduce with `map`+`filter`+`remove`, 4X"
+  [:div
+   [:p "Analogous to the previous examples, this test performs twelve operations
+ per element (four cycles of increment, filter, and remove). The multi-threaded
+ variants ("
+    [:code "fold"]
+    ", "
+    [:code "multi/transduce"]
+    ", and "
+    [:code "multi/transduce-kv"]
+    "), demonstrate improved performance (i.e., lower time) for vectors containing more than one thousand elements."]
+   [:p "Note the "
+    [:em "log-log"]
+    " scale, which may visually obscure the performance deltas. Click 'Show
+ details' to see a numeric chart of the measurements."]]}
+
+ :chart-settings
+ {"(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] ((tactics-2 (project-version-lein)) (vecs n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] ((tactics-3 (project-version-lein)) (vecs n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] ((tactics-4 (project-version-lein)) (vecs n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}}}
+

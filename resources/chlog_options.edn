@@ -1,0 +1,15 @@
+{:project-formatted-name "Brokvolli"
+ :copyright-holder "Brad Losavio"
+
+ :changelog-UUID #uuid "ee061c59-8a64-46ee-ad1c-2c111a5657bd"
+
+ :changelog-html-directory "doc/"
+ :changelog-html-filename "changelog.html"
+
+ :changelog-markdown-directory ""
+ :changelog-markdown-filename "changelog.md"
+
+ :changelog-entries-directory "resources/changelog_entries/"
+
+ :tidy-html? true}
+
