@@ -82,7 +82,7 @@
  present a simpler interface."]]
 
  :comments
- {"Construct hashmap of fifteen mathematical ops, per element"
+ {"Construct hashmap of eighteen mathematical ops, per element"
   [:div
    [:p "This test performs multiple mathematical operations per element, "
     [:code "sine"]

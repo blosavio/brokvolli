@@ -4,7 +4,7 @@
       Addendum: Benchmarking a single, deep transduction
     </h1>
     <div>
-      <a href="#group-0">Construct hashmap of fifteen mathematical ops, per element</a>
+      <a href="#group-0">Construct hashmap of eighteen mathematical ops, per element</a>
     </div>
     <div>
       <p>
@@ -68,7 +68,7 @@
     </div>
     <section>
       <h3 id="group-0">
-        Construct hashmap of fifteen mathematical ops, per element
+        Construct hashmap of eighteen mathematical ops, per element
       </h3>
       <div>
         <p>
@@ -289,7 +289,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 07.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 08.<span id="uuid"><br>
       1ff123be-d29c-42fc-8dbe-2bd794272c59</span>
     </p>
   </body>

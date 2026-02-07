@@ -33,7 +33,7 @@
  :fastester/metadata
  {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
   :date {:year 2026, :month "February", :day 7},
-  :group "Construct hashmap of fifteen mathematical ops, per element",
+  :group "Construct hashmap of eighteen mathematical ops, per element",
   :index 5,
   :ns "brokvolli.performance.deep",
   :UUIDv4 #uuid "703b911e-19b1-4197-a74a-c658c0a54000",

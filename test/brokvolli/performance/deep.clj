@@ -1,6 +1,6 @@
 (ns brokvolli.performance.deep
-  "Benchmark brokvolli's transduce/tranduce-kv with a single, deep task per
-  element."
+  "Benchmark brokvolli's transduce/tranduce-kv with a single, multi-operation
+  task per element."
   (:require
    [brokvolli.core :refer [tconj concatv]]
    [brokvolli.single :as single]
@@ -88,7 +88,7 @@
 
 (defbench
   deep-1
-  "Construct hashmap of fifteen mathmetical ops, per element"
+  "Construct hashmap of eighteen mathmetical ops, per element"
   (fn [n] ((tactics-1 (project-version-lein)) (vecs n)))
   (range-pow-10 max-power))
 
