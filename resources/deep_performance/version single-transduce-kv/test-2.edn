@@ -1,0 +1,61 @@
+{:overhead 7.190676315353768E-9,
+ :samples
+ (101048014 101830278 101453977 107104392 101503452 108467663),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [2.6970823611111115E-4 (2.642116644965278E-4 2.764010768229167E-4)],
+ :final-gc-time 72576430,
+ :execution-count 384,
+ :variance
+ [7.658957653182622E-11
+  (3.399716441552098E-11 1.0482124849565801E-10)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-168-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888867,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 9101925161,
+ :lower-q
+ [2.631458697916667E-4 (2.631458697916667E-4 2.642030651041667E-4)],
+ :warmup-executions 34217,
+ :sample-count 6,
+ :upper-q
+ [2.803072652994792E-4 (2.6507662695312504E-4 2.8246787239583337E-4)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
+  :date {:year 2026, :month "February", :day 7},
+  :group "Construct hashmap of fifteen mathematical ops, per element",
+  :index 2,
+  :ns "brokvolli.performance.deep",
+  :UUIDv4 #uuid "1ffc7d18-0181-4e3f-af01-6a7357c1e08a",
+  :name "deep-1",
+  :testing-thoroughness :quick,
+  :arg 100,
+  :version "single-transduce-kv",
+  :parallel? false},
+ :total-time 0.621407776,
+ :sample-variance [7.407528315047655E-11 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.190676315353768E-9},
+ :sample-mean
+ [2.6970823611111115E-4 (2.4388813641428023E-4 2.955283358079421E-4)],
+ :results :fastester/benchmark-fn-results-elided}

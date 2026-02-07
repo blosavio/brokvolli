@@ -1,0 +1,60 @@
+{:overhead 7.131286466469439E-9,
+ :samples
+ (267521363 212637468 153221000 142758276 100863030 130603895),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.009878480705882353 (0.007559485362745098 0.013051894529411764)],
+ :final-gc-time 174326799,
+ :execution-count 17,
+ :variance
+ [1.4413654715692787E-5 (3.9321276759714245E-6 2.437444437610962E-5)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-168-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.8210896389305832,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 9192271780,
+ :lower-q
+ [0.005933119411764705 (0.005933119411764705 0.007682582058823529)],
+ :warmup-executions 1381,
+ :sample-count 6,
+ :upper-q
+ [0.014896106919117646 (0.008936068205882353 0.01573655076470588)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
+  :date {:year 2026, :month "February", :day 7},
+  :group "Construct hashmap of fifteen mathematical ops, per element",
+  :index 4,
+  :ns "brokvolli.performance.deep",
+  :UUIDv4 #uuid "e0a2e13c-81df-4d49-99a8-9436ed6595dc",
+  :name "deep-1",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "multi-transduce",
+  :parallel? false},
+ :total-time 1.007605032,
+ :sample-variance [1.2912376556622417E-5 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.131286466469439E-9},
+ :sample-mean
+ [0.009878480705882353 (-9.016579300351721E-4 0.020658619341799876)],
+ :results :fastester/benchmark-fn-results-elided}

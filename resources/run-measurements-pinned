@@ -4,7 +4,9 @@
 
 set -eu
 
-taskset --cpu-list 1-3 lein with-profiles default,benchmark run -m fastester.core :benchmarks ./resources/transductions_options.edn
+# taskset --cpu-list 1-3 lein with-profiles default,benchmark run -m fastester.core :benchmarks ./resources/transductions_options.edn
+
+taskset --cpu-list 1-3 lein with-profiles default,benchmark run -m fastester.core :benchmarks ./resources/deep_options.edn
 
 exit 0
 

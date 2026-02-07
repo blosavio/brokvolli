@@ -74,6 +74,11 @@
             <code>brokvolli.multi/transduce-kv</code>
           </p>
         </li>
+        <li>
+          <p>
+            <code>a naive sequence implementation</code>
+          </p>
+        </li>
       </ul>
       <p></p>
       <p>
@@ -542,6 +547,32 @@
               <td>
                 <a href=
                 "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-20.edn">7.1e-02±4.7e-03</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                naive-seq
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-0.edn">1.1e-04±2.1e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-1.edn">1.1e-04±3.0e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-2.edn">1.2e-04±1.7e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-3.edn">2.0e-04±3.6e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-4.edn">9.6e-04±2.3e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-5.edn">9.0e-03±1.9e-04</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-6.edn">9.3e-02±7.0e-03</a>
               </td>
             </tr>
             <tr>
@@ -1022,7 +1053,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 06.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 07.<span id="uuid"><br>
       4575b7b7-5880-47d7-9b5d-7e26e1eed7aa</span>
     </p>
   </body>

@@ -9,10 +9,10 @@
 
  :preferred-version-info :lein
 
- :benchmarks {'brokvolli.performance.transductions #{'transductions-1
-                                                     'transductions-2
-                                                     'transductions-3
-                                                     'transductions-4}}
+ :benchmarks {'brokvolli.performance.transductions #{#_'transductions-1
+                                                     #_'transductions-2
+                                                     #_'transductions-3
+                                                     #_'transductions-4}}
 
  ;; output directories and filenames
  :html-directory "doc/"
@@ -20,7 +20,7 @@
  :img-subdirectory "transduction_img/"
 
  :markdown-directory "doc/"
- :markdown-filename "transduction_performance.md"
+ :markdown-filename "transductions_performance.md"
 
  :results-url "https://github.com/blosavio/brokvolli/blob/main/"
  :results-directory "resources/transduction_performance/"
@@ -53,24 +53,24 @@
      [:code "transduce-kv"]
      "."]
     "So let's run some benchmarks to see if we can objectively measure any
- performance improvements."]
+ performance improvements."]]
 
-   [:p "We'll define our benchmarks "
-    [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/transductions.clj"}
-     "here"]
-    ". For each function, we'll test vectors of random floating point numbers,
+  [:p "We'll define our benchmarks "
+   [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/transductions.clj"}
+    "here"]
+   ". For each function, we'll test vectors of random floating point numbers,
  increasing in length from one to one million, by powers of ten. We'll arrange
  four different tests:"
-    [:ol
-     [:li "Increment each number."]
-     [:li "Increment, filter, and remove, 1X (three total operations)."]
-     [:li "Increment, filter, and remove, 2X (six total operations)."]
-     [:li "Increment, filter, and remove, 4X (twelve total operations)."]]
-    "For each test, we'll use the "
-    [:a {:href "https://github.com/hugoduncan/criterium/"}
-     "Criterium benchmarking library"]
-    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my old, rusty computer."]]
+   [:ol
+    [:li "Increment each number."]
+    [:li "Increment, filter, and remove, 1X (three total operations)."]
+    [:li "Increment, filter, and remove, 2X (six total operations)."]
+    [:li "Increment, filter, and remove, 4X (twelve total operations)."]]
+   "For each test, we'll use the "
+   [:a {:href "https://github.com/hugoduncan/criterium/"}
+    "Criterium benchmarking library"]
+   " to measure the execution times of sixty repetitions of each condition.
+ Benchmarks were run on three pinned cores of my old, rusty computer."]
 
   [:p "The functions under examination are as follows:"
    [:ul
@@ -79,7 +79,8 @@
     [:li [:p [:code "clojure.core/transduce"]]]
     [:li [:p [:code "brokvolli.single/transduce-kv"]]]
     [:li [:p [:code "brokvolli.multi/transduce"]]]
-    [:li [:p [:code "brokvolli.multi/transduce-kv"]]]]]
+    [:li [:p [:code "brokvolli.multi/transduce-kv"]]]
+    [:li [:p [:code "a naive sequence implementation"]]]]]
 
   [:p "Overall, we observe that the execution times increase with increasing
  vector lengths. The results are indistinguishable when the vector contains

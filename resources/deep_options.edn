@@ -1,0 +1,104 @@
+{:title "Addendum: Benchmarking a single, deep transduction"
+
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+
+ :copyright-holder "Brad Losavio"
+
+ :fastester-UUID #uuid "1ff123be-d29c-42fc-8dbe-2bd794272c59"
+
+ :preferred-version-info :lein
+
+ :benchmarks {'brokvolli.performance.deep #{'deep-1}}
+
+ ;; output directories and filenames
+ :html-directory "doc/"
+ :html-filename "deep_performance.html"
+ :img-subdirectory "deep_img/"
+
+ :markdown-directory "doc/"
+ :markdown-filename "deep_performance.md"
+
+ :results-url "https://github.com/blosavio/brokvolli/blob/main/"
+ :results-directory "resources/deep_performance/"
+
+ :verbose? true
+ :testing-thoroughness :quick
+ :parallel? false
+ :save-benchmark-fn-results? false
+
+ :sort-comparator compare #_#(> (Integer/parseInt %1) (Integer/parseInt %2))
+
+ :tidy-html? true
+
+ :preamble
+ [:div
+  [:p "See also "
+   [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
+    "previous benchmarks"]
+   "."]
+
+  [:p "We'll define our benchmarks "
+   [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj"}
+    "here"]
+   ". For each function below, we'll test vectors of random floating point
+ numbers, increasing in length from one to one-hundred-thousand, by powers of
+ ten. For each number, We'll construct a hashmap of eighteen mathematical
+ operations on that number (trig ops, logarithms, etc.) that the JVM compiler
+ oughtn't be able to optimize. We'll use the "
+   [:a {:href "https://github.com/hugoduncan/criterium/"}
+    "Criterium benchmarking library"]
+   " to measure the execution times of sixty repetitions of each condition.
+ Benchmarks were run on three pinned cores of my old, rusty computer."]
+
+  [:p "The functions under examination are as follows:"
+   [:ul
+    [:li [:p [:code "clojure.core/reduce"]]]
+    [:li [:p [:code "clojure.core/reduce-kv"]]]
+    [:li [:p [:code "clojure.core/transduce"]]]
+    [:li [:p [:code "brokvolli.single/transduce-kv"]]]
+    [:li [:p [:code "brokvolli.multi/transduce"]]]
+    [:li [:p [:code "brokvolli.multi/transduce-kv"]]]]]
+
+  [:p "Overall, we observe that the execution times increase with increasing
+ vector lengths. The results are indistinguishable when the vector contains
+ one-hundred or fewer elements. When the vectors grow longer the three
+ multi-threaded variants ("
+   [:code "fold"]
+   ", "
+   [:code "multi/transduce"]
+   ", and "
+   [:code "multi/transduce-kv"]
+   "), offer improvements that scale roughly with the number of processors. The
+ other functions all perform very similarly. Not surprising, since they all
+ ultimiately delegate to the same underlying implementation, "
+   [:code "reduce/reduce-kv"]
+   ". Unfortunately, my computer was not capable of handling one-million element vectors."]
+
+  [:p "As with the previous benchmarks, the multi-threaded functions appear to
+ offer performance benefits over their single-threaded counterparts for large
+ collection sizes and heavy per-element operations. For smaller collections or
+ shallow transformer stacks, the single-threaded variants perform better, and
+ present a simpler interface."]]
+
+ :comments
+ {"Construct hashmap of fifteen mathematical ops, per element"
+  [:div
+   [:p "This test performs multiple mathematical operations per element, "
+    [:code "sine"]
+    ", "
+    [:em "square-root"]
+    ", "
+    [:code "logarithm"]
+    ", etc. "]
+
+   [:p "Execution times increase with vector length. The single- and
+ multi-threaded functions are indistinguisable for one-hundred elements or
+ fewer. When the vectors grow larger than that, the multi-threaded variants
+ demonstrate faster execution (i.e., lower times)."]]}
+
+ :chart-settings
+ {"(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}}}
+

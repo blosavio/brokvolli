@@ -1,0 +1,59 @@
+{:overhead 7.122112439625978E-9,
+ :samples
+ (160440714 157142188 171043404 155792294 129824918 143003507),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.02183921488095238 (0.020128874833333334 0.023073052404761905)],
+ :final-gc-time 162264846,
+ :execution-count 7,
+ :variance
+ [4.835309360514279E-6 (1.5352262244371734E-6 8.72038698102666E-6)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-168-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.3047918826167361,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5280030015,
+ :lower-q
+ [0.018546416857142856 (0.018546416857142856 0.020429072428571428)],
+ :warmup-executions 313,
+ :sample-count 6,
+ :upper-q [0.02424543825 (0.022448884 0.024434772)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
+  :date {:year 2026, :month "February", :day 7},
+  :group "Construct hashmap of fifteen mathematical ops, per element",
+  :index 4,
+  :ns "brokvolli.performance.deep",
+  :UUIDv4 #uuid "85e3ed25-e1b6-44a8-a0db-28be96415808",
+  :name "deep-1",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "core-transduce",
+  :parallel? false},
+ :total-time 0.917247025,
+ :sample-variance [4.25633911317331E-6 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.122112439625978E-9},
+ :sample-mean
+ [0.02183921488095238 (0.0156499457788241 0.02802848398308066)],
+ :results :fastester/benchmark-fn-results-elided}

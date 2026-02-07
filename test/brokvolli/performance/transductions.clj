@@ -112,12 +112,19 @@
                    (filter-kv (less-er 1.98))
                    (remove-kv (more-er 1.96))))
 
+
 (def fold-em-2 #(r/remove (more-er 1.96)
                           (r/filter (less-er 1.98)
                                     (r/map (inc-er 1.0) %))))
 
+
 (def tactics-2
-  {"fold"                (fn [v] (r/fold concatv conj (fold-em-2 v)))
+  {"naive-seq"           (fn [v] (->> v
+                                      (map (inc-er 1.0))
+                                      (filter (less-er 1.98))
+                                      (remove (more-er 1.96))
+                                      (doall)))
+   "fold"                (fn [v] (r/fold concatv conj (fold-em-2 v)))
    "core-transduce"      (fn [v] (transduce           xform-2  conj         v))
    "single-transduce-kv" (fn [v] (single/transduce-kv xform-2 tconj         v))
    "multi-transduce"     (fn [v] (multi/transduce     xform-2 tconj concatv v))
@@ -125,7 +132,8 @@
 
 
 (deftest verify-tactics-2
-  (are [v] (= ((tactics-2 "core-transduce")      v)
+  (are [v] (= ((tactics-2 "naive-seq")           v)
+              ((tactics-2 "core-transduce")      v)
               ((tactics-2 "single-transduce-kv") v)
               ((tactics-2 "multi-transduce")     v)
               ((tactics-2 "multi-transduce-kv")  v))

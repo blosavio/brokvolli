@@ -1,0 +1,61 @@
+{:overhead 7.0930010100923146E-9,
+ :samples
+ (106575808 100946745 100490718 100687505 101272347 107393763),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.1028996284387282E-4 (1.0802178688817436E-4 1.1271457466952485E-4)],
+ :final-gc-time 67863663,
+ :execution-count 933,
+ :variance
+ [1.212219669630655E-11
+  (1.117797733937664E-13 1.6117811213642733E-11)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-168-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5017965694,
+ :lower-q
+ [1.0770709324758843E-4 (1.0770709324758843E-4 1.078118131028939E-4)],
+ :warmup-executions 41371,
+ :sample-count 6,
+ :upper-q
+ [1.1428572990353699E-4 (1.0850122909967846E-4 1.1510585530546625E-4)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
+  :date {:year 2026, :month "February", :day 7},
+  :group "Construct hashmap of fifteen mathematical ops, per element",
+  :index 0,
+  :ns "brokvolli.performance.deep",
+  :UUIDv4 #uuid "a3af5692-2e72-4a40-8eeb-86b0d8775ac0",
+  :name "deep-1",
+  :testing-thoroughness :quick,
+  :arg 1,
+  :version "reduce",
+  :parallel? false},
+ :total-time 0.617366886,
+ :sample-variance [1.1687573504283235E-11 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.0930010100923146E-9},
+ :sample-mean
+ [1.1028347374062166E-4 (1.0002734574129613E-4 1.205396017399472E-4)],
+ :results :fastester/benchmark-fn-results-elided}
