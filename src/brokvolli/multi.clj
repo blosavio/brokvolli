@@ -128,14 +128,14 @@
    :no-doc true}
   [splitter-fn empty-pred]
   (fn tduce
-    [n xform f init combine coll]
+    [n combine xform f init coll]
     (combine
      (cond
        (empty-pred coll) (combine)
        (<= (count coll) n) (clojure.core/transduce xform f init coll)
        :else
        (let [[c1 c2 _] (splitter-fn coll)
-             fc (fn [child] #(tduce n xform f init combine child))]
+             fc (fn [child] #(tduce n combine xform f init child))]
          (fjinvoke
           #(let [f1 (fc c1)
                  t2 (fjtask (fc c2))]
@@ -163,14 +163,14 @@
    :no-doc true}
   [splitter-fn empty-pred]
   (fn tduce
-    [offset n xform f init combine coll]
+    [offset n combine xform f init coll]
     (combine
      (cond
        (empty-pred coll) (combine)
        (<= (count coll) n) (brokvolli.single/transduce-kv* offset xform f init coll)
        :else
        (let [[c1 c2 split] (splitter-fn coll)
-             fc (fn [child delta] #(tduce delta n xform f init combine child))]
+             fc (fn [child delta] #(tduce delta n combine xform f init child))]
          (fjinvoke
           #(let [f1 (fc c1 offset)
                  t2 (fjtask (fc c2 (if offset (+ offset split) offset)))]
@@ -179,22 +179,22 @@
 
 
 (defprotocol ^:no-doc PTransduce
-  (ptransduce [coll n xform f init combine])
+  (ptransduce [coll n combine xform f init])
 
-  (ptransduce-kv [coll n xform f init combine]))
+  (ptransduce-kv [coll n combine xform f init]))
 
 
 (multi-extend-protocol
  PTransduce
  clojure.lang.PersistentVector
- (ptransduce [v n xform f init combine] ((transduce- split-vector empty?) n xform f init combine v))
- (ptransduce-kv [v n xform f init combine] ((transduce-kv- split-vector empty?) 0 n xform f init combine v))
+ (ptransduce [v n combine xform f init] ((transduce- split-vector empty?) n combine xform f init v))
+ (ptransduce-kv [v n combine xform f init] ((transduce-kv- split-vector empty?) 0 n combine xform f init v))
 
  clojure.lang.PersistentArrayMap
  clojure.lang.PersistentHashMap
  clojure.lang.PersistentTreeMap
- (ptransduce [m n xform f init combine] ((transduce- split-hashmap empty?) n xform f init combine m))
- (ptransduce-kv [m n xform f init combine] ((transduce-kv- split-hashmap empty?) nil n xform f init combine m))
+ (ptransduce [m n combine xform f init] ((transduce- split-hashmap empty?) n combine xform f init m))
+ (ptransduce-kv [m n combine xform f init] ((transduce-kv- split-hashmap empty?) nil n combine xform f init m))
 
  clojure.lang.ArraySeq
  clojure.lang.Cycle
@@ -204,11 +204,11 @@
  clojure.lang.Range
  clojure.lang.Repeat
  clojure.lang.StringSeq
- (ptransduce [s n xform f init combine] ((transduce- split-seq #(not (seq %))) n xform f init combine s))
+ (ptransduce [s n combine xform f init] ((transduce- split-seq #(not (seq %))) n combine xform f init s))
 
  nil
- (ptransduce [_ _ _ _ _ combine] (combine))
- (ptransduce-kv [_ _ _ _ _ combine] (combine)))
+ (ptransduce [_ _ combine _ _ _] (combine))
+ (ptransduce-kv [_ _ combine _ _ _] (combine)))
 
 
 (defn transduce
@@ -253,7 +253,9 @@
     2. Compute (increment) on different threads, and
     3. Combine (concatenate):
   ```clojure
-  (transduce 2 (map inc) conj concatv [11 22 33]) ;; => [12 23 34]
+  (require '[brokvolli.core :refer [concatv]])
+
+  (transduce 2 concatv (map inc) conj [11 22 33]) ;; => [12 23 34]
   ```
   See [[concatv]] for a helper function that concatenates eagerly and
   efficiently.
@@ -261,11 +263,11 @@
   Example, 'stack of xforms':
   ```clojure
   (transduce 3
+             concatv
              (comp (map inc)
                    (filter even?)
                    (remove #(< 70 %)))
              conj
-             concatv
              [11 22 33 44 55 66 77 88])
   ;; => [12 34 56]
   ```
@@ -276,23 +278,23 @@
 
   Example, working with an associative collection (i.e., a hash-map):
   ```clojure
-  (transduce (comp (map #(update % 1 inc))
-                         (filter #(even? (second %)))
-                         (remove #(< 70 (second %))))
-                   (completing
-                    (fn
-                      ([] {})
-                      ([result value] (conj result value))))
-                   merge
-                   {:a 11 :b 22 :c 33 :d 44 :e 55 :f 66 :g 77 :h 88 :i 99})
+  (transduce merge
+             (comp (map #(update % 1 inc))
+                   (filter #(even? (second %)))
+                   (remove #(< 70 (second %))))
+             (completing
+              (fn
+                ([] {})
+                ([result value] (conj result value))))
+             {:a 11 :b 22 :c 33 :d 44 :e 55 :f 66 :g 77 :h 88 :i 99})
   ;; => {:e 56, :c 34, :a 12}
   ```
   See [[transduce-kv]] for a `transduce` variant that behaves like
   [reduce-kv](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/reduce-kv)."
   {:UUIDv4 #uuid "6ec6c582-e6f2-4320-ac0d-4fb69e3b6c0e"}
-  ([xform f coll] (transduce xform f f coll))
-  ([xform f combine coll] (transduce 512 xform f combine coll))
-  ([n xform f combine coll] (ptransduce coll n xform f (f) combine)))
+  ([xform f coll] (transduce f xform f coll))
+  ([combine xform f coll] (transduce 512 combine xform f coll))
+  ([n combine xform f coll] (ptransduce coll n combine xform f (f))))
 
 
 (defn transduce-kv
@@ -321,8 +323,8 @@
   (transduce-kv (map-kv (fn [keydex x] (+ x (inc keydex)))) tconj [11 22 33])
   ;; => [12 24 36]
 
-  ;; same result, but with explicit splitting into threads (must use a dedicated combining function, `concatv`)
-  (transduce-kv 2 (map-kv (fn [keydex x] (+ x (inc keydex)))) tconj concatv [11 22 33])
+  ;; same result, but with explicit splitting into threads (also, must use a dedicated combining function, e.g., `concatv`)
+  (transduce-kv 2 concatv (map-kv (fn [keydex x] (+ x (inc keydex)))) tconj [11 22 33])
   ;; => [12 24 36]
 
   ;; value  keydex  (+ value (inc keydex))  eval  result
@@ -333,7 +335,7 @@
 
   See also [[single/transduce-kv]] and [[multi/transduce]]."
   {:UUIDv4 #uuid "e9a2bb27-5d14-48e7-9bd9-ffa1f2ffb7d9"}
-  ([xform f coll] (transduce-kv xform f f coll))
-  ([xform f combine coll] (transduce-kv 512 xform f combine coll))
-  ([n xform f combine coll] (ptransduce-kv coll n xform f (f) combine)))
+  ([xform f coll] (transduce-kv f xform f coll))
+  ([combine xform f coll] (transduce-kv 512 combine xform f coll))
+  ([n combine xform f coll] (ptransduce-kv coll n combine xform f (f))))
 

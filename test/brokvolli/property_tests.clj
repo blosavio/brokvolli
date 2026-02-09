@@ -137,7 +137,6 @@
            (xduce (map-kv (fn [_ s] (str/lower-case s))) tconj)))))
 
 
-
 (clj-test/defspec
   test-round-trip-casing-kv
   n-checks
@@ -191,7 +190,6 @@
       (->> i
            (xduce (map-kv (fn [_ i] (inc i))) tconj)
            (xduce (map-kv (fn [_ i] (dec i))) tconj)))))
-
 
 
 (clj-test/defspec
@@ -563,10 +561,10 @@
                   33 :bar
                   55 :baz}]
     (=
-     (transduce           (replace-kv replacer)  conj [11 22 33 44 55])
-     (single/transduce-kv (replace-kv replacer) tconj [11 22 33 44 55])
-     (multi/transduce    2 (replace-kv replacer) tconj concatv [11 22 33 44 55])
-     (multi/transduce-kv 2 (replace-kv replacer) tconj concatv [11 22 33 44 55])))
+     (transduce                    (replace-kv replacer)  conj [11 22 33 44 55])
+     (single/transduce-kv          (replace-kv replacer) tconj [11 22 33 44 55])
+     (multi/transduce    2 concatv (replace-kv replacer) tconj [11 22 33 44 55])
+     (multi/transduce-kv 2 concatv (replace-kv replacer) tconj [11 22 33 44 55])))
 
 
 ;; vary:
@@ -618,10 +616,10 @@
    (let [{v :v
           n :n
           xform :xform} info]
-     (= (transduce             (apply comp xform)  conj         v)
-        (single/transduce-kv   (apply comp xform) tconj         v)
-        (multi/transduce     n (apply comp xform) tconj concatv v)
-        (multi/transduce-kv  n (apply comp xform) tconj concatv v)))))
+     (= (transduce                     (apply comp xform)  conj v)
+        (single/transduce-kv           (apply comp xform) tconj v)
+        (multi/transduce     n concatv (apply comp xform) tconj v)
+        (multi/transduce-kv  n concatv (apply comp xform) tconj v)))))
 
 
 #_(chk/quick-check n-checks integrated-props)
@@ -637,10 +635,10 @@
 ;;;; stateless transducers-kv properties
 
 
-(let [v [11 22 33]]
-  (=
-   (map inc v)
-   (transduce (map inc) conj v)))
+#_(let [v [11 22 33]]
+    (=
+     (map inc v)
+     (transduce (map inc) conj v)))
 
 
 (def gen-vec-and-splits
@@ -664,10 +662,10 @@
    (let [{v :v
           n :n} info]
      (= (mapv inc v)
-        (transduce             (map    inc)     conj         v)
-        (single/transduce-kv   (map-kv inc-er) tconj         v)
-        (multi/transduce     n (map-kv inc-er) tconj concatv v)
-        (multi/transduce-kv  n (map-kv inc-er) tconj concatv v)))))
+        (transduce                     (map    inc)     conj v)
+        (single/transduce-kv           (map-kv inc-er) tconj v)
+        (multi/transduce     n concatv (map-kv inc-er) tconj v)
+        (multi/transduce-kv  n concatv (map-kv inc-er) tconj v)))))
 
 
 (clj-test/defspec
@@ -682,10 +680,10 @@
    (let [{v :v
           n :n} info]
      (= (filterv even? v)
-        (transduce             (filter               even?)      conj         v)
-        (single/transduce-kv   (filter-kv (fn [_ x] (even? x))) tconj         v)
-        (multi/transduce     n (filter-kv            even?)     tconj concatv v)
-        (multi/transduce-kv  n (filter-kv (fn [_ x] (even? x))) tconj concatv v)))))
+        (transduce                     (filter               even?)      conj v)
+        (single/transduce-kv           (filter-kv (fn [_ x] (even? x))) tconj v)
+        (multi/transduce     n concatv (filter-kv            even?)     tconj v)
+        (multi/transduce-kv  n concatv (filter-kv (fn [_ x] (even? x))) tconj v)))))
 
 
 (clj-test/defspec
@@ -708,10 +706,10 @@
    (let [{vv :vv
           n :n} info]
      (= (apply concat vv)
-        (transduce             cat     conj         vv)
-        (single/transduce-kv   cat-kv tconj         vv)
-        (multi/transduce     n cat-kv tconj concatv vv)
-        (multi/transduce-kv  n cat-kv tconj concatv vv)))))
+        (transduce                     cat     conj vv)
+        (single/transduce-kv           cat-kv tconj vv)
+        (multi/transduce     n concatv cat-kv tconj vv)
+        (multi/transduce-kv  n concatv cat-kv tconj vv)))))
 
 
 (clj-test/defspec
@@ -726,10 +724,10 @@
    (let [{v :v
           n :n} info]
      (= (keep even? v)
-        (transduce             (keep               even?)      conj         v)
-        (single/transduce-kv   (keep-kv (fn [_ x] (even? x))) tconj         v)
-        (multi/transduce     n (keep-kv            even?)     tconj concatv v)
-        (multi/transduce-kv  n (keep-kv (fn [_ x] (even? x))) tconj concatv v)))))
+        (transduce                     (keep               even?)      conj v)
+        (single/transduce-kv           (keep-kv (fn [_ x] (even? x))) tconj v)
+        (multi/transduce     n concatv (keep-kv            even?)     tconj v)
+        (multi/transduce-kv  n concatv (keep-kv (fn [_ x] (even? x))) tconj v)))))
 
 
 (clj-test/defspec
@@ -744,10 +742,10 @@
    (let [{vv :vv
           n :n} info]
      (= (mapcat reverse vv)
-        (transduce             (mapcat               reverse)      conj         vv)
-        (single/transduce-kv   (mapcat-kv (fn [_ v] (reverse v))) tconj         vv)
-        (multi/transduce     n (mapcat-kv            reverse)     tconj concatv vv)
-        (multi/transduce-kv  n (mapcat-kv (fn [_ v] (reverse v))) tconj concatv vv)))))
+        (transduce                     (mapcat               reverse)      conj vv)
+        (single/transduce-kv           (mapcat-kv (fn [_ v] (reverse v))) tconj vv)
+        (multi/transduce     n concatv (mapcat-kv            reverse)     tconj vv)
+        (multi/transduce-kv  n concatv (mapcat-kv (fn [_ v] (reverse v))) tconj vv)))))
 
 
 (clj-test/defspec
@@ -765,10 +763,10 @@
    (let [{v :v
           n :n} info]
      (= (remove even? v)
-        (transduce             (remove               even?)      conj         v)
-        (single/transduce-kv   (remove-kv (fn [_ x] (even? x))) tconj         v)
-        (multi/transduce     n (remove-kv            even?)     tconj concatv v)
-        (multi/transduce-kv  n (remove-kv (fn [_ x] (even? x))) tconj concatv v)))))
+        (transduce                     (remove               even?)      conj v)
+        (single/transduce-kv           (remove-kv (fn [_ x] (even? x))) tconj v)
+        (multi/transduce     n concatv (remove-kv            even?)     tconj v)
+        (multi/transduce-kv  n concatv (remove-kv (fn [_ x] (even? x))) tconj v)))))
 
 
 (clj-test/defspec
@@ -784,10 +782,10 @@
           n :n
           replacements :replacements} info]
      (= (replace replacements v)
-        (transduce             (replace    replacements)  conj         v)
-        (single/transduce-kv   (replace-kv replacements) tconj         v)
-        (multi/transduce     n (replace-kv replacements) tconj concatv v)
-        (multi/transduce-kv  n (replace-kv replacements) tconj concatv v)))))
+        (transduce                     (replace    replacements)  conj v)
+        (single/transduce-kv           (replace-kv replacements) tconj v)
+        (multi/transduce     n concatv (replace-kv replacements) tconj v)
+        (multi/transduce-kv  n concatv (replace-kv replacements) tconj v)))))
 
 
 (clj-test/defspec

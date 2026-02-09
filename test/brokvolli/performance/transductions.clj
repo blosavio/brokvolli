@@ -52,10 +52,10 @@
     {"reduce"              (fn [v] (reduce    (fn [acc   x] (conj acc (inc-1_0 x))) [] v))
      "reduce-kv"           (fn [v] (reduce-kv (fn [acc _ x] (conj acc (inc-1_0 x))) [] v))
      "fold"                (fn [v] (r/fold concatv conj (r/map inc-1_0 v)))
-     "core-transduce"      (fn [v] (transduce           xform-1  conj         v))
-     "single-transduce-kv" (fn [v] (single/transduce-kv xform-1 tconj         v))
-     "multi-transduce"     (fn [v] (multi/transduce     xform-1 tconj concatv v))
-     "multi-transduce-kv"  (fn [v] (multi/transduce-kv  xform-1 tconj concatv v))}))
+     "core-transduce"      (fn [v] (transduce                   xform-1  conj v))
+     "single-transduce-kv" (fn [v] (single/transduce-kv         xform-1 tconj v))
+     "multi-transduce"     (fn [v] (multi/transduce     concatv xform-1 tconj v))
+     "multi-transduce-kv"  (fn [v] (multi/transduce-kv  concatv xform-1 tconj v))}))
 
 
 (deftest verify-tactics-1
@@ -125,10 +125,10 @@
                                       (remove (more-er 1.96))
                                       (doall)))
    "fold"                (fn [v] (r/fold concatv conj (fold-em-2 v)))
-   "core-transduce"      (fn [v] (transduce           xform-2  conj         v))
-   "single-transduce-kv" (fn [v] (single/transduce-kv xform-2 tconj         v))
-   "multi-transduce"     (fn [v] (multi/transduce     xform-2 tconj concatv v))
-   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  xform-2 tconj concatv v))})
+   "core-transduce"      (fn [v] (transduce                   xform-2  conj v))
+   "single-transduce-kv" (fn [v] (single/transduce-kv         xform-2 tconj v))
+   "multi-transduce"     (fn [v] (multi/transduce     concatv xform-2 tconj v))
+   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  concatv xform-2 tconj v))})
 
 
 (deftest verify-tactics-2
@@ -169,10 +169,10 @@
 
 (def tactics-3
   {"fold"                (fn [v] (r/fold concatv conj (fold-em-3 v)))
-   "core-transduce"      (fn [v] (transduce           xform-3  conj         v))
-   "single-transduce-kv" (fn [v] (single/transduce-kv xform-3 tconj         v))
-   "multi-transduce"     (fn [v] (multi/transduce     xform-3 tconj concatv v))
-   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  xform-3 tconj concatv v))})
+   "core-transduce"      (fn [v] (transduce                   xform-3  conj v))
+   "single-transduce-kv" (fn [v] (single/transduce-kv         xform-3 tconj v))
+   "multi-transduce"     (fn [v] (multi/transduce     concatv xform-3 tconj v))
+   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  concatv xform-3 tconj v))})
 
 
 (deftest verify-tactics-3
@@ -217,10 +217,10 @@
 
 (def tactics-4
   {"fold"                (fn [v] (r/fold concatv conj (fold-em-4 v)))
-   "core-transduce"      (fn [v] (transduce           xform-4  conj         v))
-   "single-transduce-kv" (fn [v] (single/transduce-kv xform-4 tconj         v))
-   "multi-transduce"     (fn [v] (multi/transduce     xform-4 tconj concatv v))
-   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  xform-4 tconj concatv v))})
+   "core-transduce"      (fn [v] (transduce                   xform-4  conj v))
+   "single-transduce-kv" (fn [v] (single/transduce-kv         xform-4 tconj v))
+   "multi-transduce"     (fn [v] (multi/transduce     concatv xform-4 tconj v))
+   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  concatv xform-4 tconj v))})
 
 
 (deftest verify-tactics-4

@@ -64,10 +64,10 @@
   {"reduce"              (fn [v] (reduce    (fn [acc   x] (conj acc (mapper x))) [] v))
    "reduce-kv"           (fn [v] (reduce-kv (fn [acc _ x] (conj acc (mapper x))) [] v))
    "fold"                (fn [v] (r/fold concatv conj (r/map mapper v)))
-   "core-transduce"      (fn [v] (transduce           xform-1  conj         v))
-   "single-transduce-kv" (fn [v] (single/transduce-kv xform-1 tconj         v))
-   "multi-transduce"     (fn [v] (multi/transduce     xform-1 tconj concatv v))
-   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  xform-1 tconj concatv v))})
+   "core-transduce"      (fn [v] (transduce                   xform-1  conj v))
+   "single-transduce-kv" (fn [v] (single/transduce-kv         xform-1 tconj v))
+   "multi-transduce"     (fn [v] (multi/transduce     concatv xform-1 tconj v))
+   "multi-transduce-kv"  (fn [v] (multi/transduce-kv  concatv xform-1 tconj v))})
 
 
 (deftest verify-tactics-1
