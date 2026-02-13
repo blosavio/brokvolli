@@ -57,8 +57,8 @@
         Overall, we observe that the execution times increase with increasing vector lengths. The results are indistinguishable when the vector contains
         one-hundred or fewer elements. When the vectors grow longer the three multi-threaded variants (<code>fold</code>, <code>multi/transduce</code>, and
         <code>multi/transduce-kv</code>), offer improvements that scale roughly with the number of processors. The other functions all perform very similarly.
-        Not surprising, since they all ultimiately delegate to the same underlying implementation, <code>reduce/reduce-kv</code>. Unfortunately, my computer
-        was not capable of handling one-million element vectors.
+        Not surprising, since they all ultimately delegate to the same underlying implementation, <code>reduce/reduce-kv</code>. Unfortunately, my computer was
+        not capable of handling one-million element vectors.
       </p>
       <p>
         As with the previous benchmarks, the multi-threaded functions appear to offer performance benefits over their single-threaded counterparts for large
@@ -75,7 +75,7 @@
           This test performs multiple mathematical operations per element, <code>sine</code>, <em>square-root</em>, <code>logarithm</code>, etc.
         </p>
         <p>
-          Execution times increase with vector length. The single- and multi-threaded functions are indistinguisable for one-hundred elements or fewer. When
+          Execution times increase with vector length. The single- and multi-threaded functions are indistinguishable for one-hundred elements or fewer. When
           the vectors grow larger than that, the multi-threaded variants demonstrate faster execution (i.e., lower times).
         </p>
       </div>
@@ -289,7 +289,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 08.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 13.<span id="uuid"><br>
       1ff123be-d29c-42fc-8dbe-2bd794272c59</span>
     </p>
   </body>

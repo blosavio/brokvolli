@@ -10,7 +10,7 @@
     " with all the previous elements. The "
     [:code "acc"]
     " in a reducing function's signatures, "
-    [:code "(fn [acc element] ...)"]
+    [:code "(fn [" [:strong "acc"] " element] ...)"]
     "."]]
 
   [:dt#combine "combine"]
@@ -32,6 +32,18 @@
     [:a {:href "#reducing-function"} "reducing function"]
     "."]]
 
+  [:dt#inner "inner function/predicate"]
+  [:dd
+   [:p "A function used by a transducer to do its work. The "
+    [:code "f"]
+    " in "
+    [:code "(map f)"]
+    ", or the "
+    [:code "pred"]
+    " in "
+    [:code "(filter pred)"]
+    "."]]
+
   [:dt#keydex "keydex"]
   [:dd [:p "Short-hand for "
         [:em "key/index"]
@@ -47,23 +59,34 @@
     " "
     [:code "f"]
     " in "
-    [:code "(reduce f coll)"]
-    ". The ultimate function at the \"bottom\" of the transducing "
+    [:code "(reduce " [:strong "f"] " coll)"]
+    ". In a transduce operation, the ultimate function at the \"bottom\" of the
+ transducing "
     [:a {:href "#stack"} "stack"]
+    ", i.e., the "
+    [:code "f"]
+    " in "
+    [:code "(transduce xform " [:strong "f"] " coll)"]
     "."]
 
    [:p "In a "
     [:code "reduce"]
-    "-style operation, "
+    " operation, "
     [:code "f"]
     "'s signature is "
-    [:code "(fn [acc element] ...)"]
+    [:code "(fn [acc element] ...)"]
     ". In a "
     [:code "reduce-kv"]
-    "-style operation, "
+    " operation, "
     [:code "f"]
     "'s signature is "
-    [:code "(fn [acc keydex element] ...)"]
+    [:code "(fn [acc keydex element] ...)"]
+    ". In a transduce (both \"plain\" and \""
+    [:code "-kv"]
+    "\") operation, "
+    [:code "f"]
+    "'s signature is "
+    [:code "(fn [acc result] ...)"]
     "."]]
 
   [:dt#reduce "reduce"]
@@ -85,9 +108,9 @@
     ". The "
     [:code "xform"]
     " in "
-    [:code "(transduce xform f coll)"]
+    [:code "(transduce " [:strong "xform"] " f coll)"]
     ". When discussing the mechanical execution of a transduction, may refer to "
-    [:code "(xform f)"]
+    [:code "(xform f)"]
     "."]]
 
   [:dt#transducer "transducer"]
@@ -97,18 +120,21 @@
     ". A function that modifies ("
     [:em "i.e., "]
     [:a {:href "#transform"} "\"transforms\""]
-    ") a reducing function or another transducer. Practically, a sequence
- function's "
+    ") a reducing function or another transducer. The "
+    [:code "xform"]
+    " in "
+    [:code "(transduce " [:strong "xform"] " f coll)"]
+    ". Practically, a sequence function's "
     [:code "coll"]
     "-omitted arity, e.g., "
     [:a {:href "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/map"}
-     "(map f)"]
+     "(map f)"]
     ", "
     [:a {:href "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/filter"}
-     "(filter pred)"]
+     "(filter pred)"]
     ", "
     [:a {:href "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/take"}
-     "(take n)"]
+     "(take n)"]
     ", etc."]]
 
   [:dt#transduce "transduce"]

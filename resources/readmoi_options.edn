@@ -1,10 +1,14 @@
 {:sections [{:section-name "Setup"}
-            ;;{:section-name "API" :section-href "https://blosavio.github.io/brokvolli/index.html" :skip-section-load? true}
+            {:section-name "API" :section-href "https://blosavio.github.io/brokvolli/index.html" :skip-section-load? true}
             {:section-name "Changelog" :section-href "https://github.com/blosavio/brokvolli/blob/main/changelog.md" :skip-section-load? true}
-            ;;{:section-name "Introduction" :section-href "intro"}
-            ;;{:section-name "Mechanics"}
+            {:section-name "Introduction" :section-href "intro"}
+            {:section-name "Review"}
+            {:section-name "Usage"}
             {:section-name "Quick reference" :section-href "quick"}
+            {:section-name "Performance"}
+            ;;{:section-name "Uber transducers: filter-kv"}
             ;;{:section-name "Troubleshooting"}
+            {:section-name "To don't" :section-href "dont"}
             {:section-name "Alternatives"}
             {:section-name "Glossary"}
             {:section-name "Contact" :section-href "https://github.com/blosavio" :skip-section-load? true}]

@@ -71,7 +71,7 @@
    [:code "multi/transduce-kv"]
    "), offer improvements that scale roughly with the number of processors. The
  other functions all perform very similarly. Not surprising, since they all
- ultimiately delegate to the same underlying implementation, "
+ ultimately delegate to the same underlying implementation, "
    [:code "reduce/reduce-kv"]
    ". Unfortunately, my computer was not capable of handling one-million element vectors."]
 
@@ -93,7 +93,7 @@
     ", etc. "]
 
    [:p "Execution times increase with vector length. The single- and
- multi-threaded functions are indistinguisable for one-hundred elements or
+ multi-threaded functions are indistinguishable for one-hundred elements or
  fewer. When the vectors grow larger than that, the multi-threaded variants
  demonstrate faster execution (i.e., lower times)."]]}
 

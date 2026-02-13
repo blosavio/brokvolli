@@ -119,8 +119,8 @@
   "03 transforms: Transduce with `map`+`filter`+`remove`, 1X"
   [:div
    [:p "This test involves three operations per element: incrementing the
- number, filtering (keeping) if the result is less than a speficied targe, then
- removing if the result is more than a different target."]
+ number, filtering (retaining) if the result is less than a specified target,
+ then removing if the result is more than a different target."]
 
    [:p "With a transform stack of this size, all functions performed similarly."]]
 

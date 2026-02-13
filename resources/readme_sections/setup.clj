@@ -23,7 +23,7 @@
  [:h3 "Require"]
  
  [:pre (print-form-then-eval
-        "(require '[brokvolli.core :refer [concatv tassoc]]
+        "(require '[brokvolli.core :refer [concatv tassoc tconj]]
                   '[brokvolli.single :refer [transduce-kv]]
                   '[brokvolli.transducers-kv :refer [map-kv filter-kv replace-kv]])")]]
 

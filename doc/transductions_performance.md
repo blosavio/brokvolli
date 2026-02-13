@@ -22,6 +22,7 @@
         measure any performance improvements.
         </li>
       </ol>
+      <p></p>
       <p>
         We&apos;ll define our benchmarks <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/transductions.clj">here</a>. For
         each function, we&apos;ll test vectors of random floating point numbers, increasing in length from one to one million, by powers of ten. We&apos;ll
@@ -38,7 +39,6 @@
         </li>
       </ol>For each test, we&apos;ll use the <a href="https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to measure the execution
       times of sixty repetitions of each condition. Benchmarks were run on three pinned cores of my old, rusty computer.
-      <p></p>
       <p></p>
       <p>
         The functions under examination are as follows:
@@ -372,7 +372,7 @@
       </h3>
       <div>
         <p>
-          This test involves three operations per element: incrementing the number, filtering (keeping) if the result is less than a speficied targe, then
+          This test involves three operations per element: incrementing the number, filtering (retaining) if the result is less than a specified target, then
           removing if the result is more than a different target.
         </p>
         <p>
@@ -1053,7 +1053,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 07.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 13.<span id="uuid"><br>
       4575b7b7-5880-47d7-9b5d-7e26e1eed7aa</span>
     </p>
   </body>
