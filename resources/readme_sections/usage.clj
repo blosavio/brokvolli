@@ -575,7 +575,7 @@
   [:code "transduce"]
   " and three args for "
   [:code "transduce-kv"]
-  "."]
+  ")."]
 
  [:p "The combining function is analogous to the transformer stack. The
  zero-argument arity is invoked to create the initial value of the combining
@@ -608,9 +608,9 @@
    [:td "reducing function, accumulating value + key/index + element"]
    [:td "n/a"]]]
 
- [:p "Practically, the transformer stacks and reducing functions are the same
- as we're used to, and the combining function is concatenation for sequential
- outputs or a merge for associative outputs."]
+ [:p "Practically, the transformer stacks and reducing functions are often the
+ same as we're used to, and the combining function is concatenation for
+ sequential outputs or a merging for associative outputs."]
 
  [:p "Let's see them in action. For simplicity, we'll start with plain
  transduce from the multi-threaded namespace."]
@@ -687,7 +687,13 @@
   (print-form-then-eval "(concatv [:foo :bar])") [:br]
   (print-form-then-eval "(concatv [:foo :bar] [:baz])")]
 
- [:p "We've got all the pieces, let's put them together and transduce,
+ [:p "We toss the three chunks at Machine "
+  [:code "D"]
+  ", and it concatenates."]
+
+ [:pre (print-form-then-eval "(reduce concatv [] [[11 22 33] [44 55] [66 77 88]])" )]
+
+ [:p "We've now peeked at the little machines inside. Let's transduce,
  multi-threaded."]
 
  [:pre (print-form-then-eval "(multi/transduce 3 concatv (map inc) conj [11 22 33 44 55 66 77 88])" 65 65)]

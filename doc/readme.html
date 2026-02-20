@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2026-02-20 15:36:11" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2026-02-20 15:51:58" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       Brokvolli — A Clojure library exploring parallel transduce and transduce-kv
@@ -435,7 +435,7 @@
         The transformer stacks and reducing functions are pretty much those we use with single-threaded <code>transduce</code> and <code>transduce-kv</code>.
         The only difference is that their scope is a partition of the input collection, not the whole; they reduce only part of the collection. The reducing
         function <code>f</code> supplies the initial value for reducing the partition (zero args), the 'completing' step (one arg), and the reducing step (two
-        args for regular <code>transduce</code> and three args for <code>transduce-kv</code>.
+        args for regular <code>transduce</code> and three args for <code>transduce-kv</code>).
       </p>
       <p>
         The combining function is analogous to the transformer stack. The zero-argument arity is invoked to create the initial value of the combining process,
@@ -501,8 +501,8 @@
         </tr>
       </table>
       <p>
-        Practically, the transformer stacks and reducing functions are the same as we're used to, and the combining function is concatenation for sequential
-        outputs or a merge for associative outputs.
+        Practically, the transformer stacks and reducing functions are often the same as we're used to, and the combining function is concatenation for
+        sequential outputs or a merging for associative outputs.
       </p>
       <p>
         Let's see them in action. For simplicity, we'll start with plain transduce from the multi-threaded namespace.
@@ -541,7 +541,12 @@
       </p>
       <pre><code>(concatv) ;; =&gt; []</code><br><code>(concatv [:foo :bar]) ;; =&gt; [:foo :bar]</code><br><code>(concatv [:foo :bar] [:baz]) ;; =&gt; [:foo :bar :baz]</code></pre>
       <p>
-        We've got all the pieces, let's put them together and transduce, multi-threaded.
+        We toss the three chunks at Machine <code>D</code>, and it concatenates.
+      </p>
+      <pre><code>(reduce concatv [] [[11 22 33] [44 55] [66 77 88]])
+;; =&gt; [11 22 33 44 55 66 77 88]</code></pre>
+      <p>
+        We've now peeked at the little machines inside. Let's transduce, multi-threaded.
       </p>
       <pre><code>(multi/transduce 3
                  concatv

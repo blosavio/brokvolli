@@ -428,7 +428,7 @@
         <code>transduce-kv</code>. The only difference is that their scope is a partition of the input &nbsp;collection, not the whole; they reduce only part
         of the collection. The &nbsp;reducing function <code>f</code> supplies the initial value for reducing the partition (zero args), the
         &nbsp;&apos;completing&apos; step (one arg), and the reducing step (two args for regular <code>transduce</code> and three args for
-        <code>transduce-kv</code>.
+        <code>transduce-kv</code>).
       </p>
       <p>
         The combining function is analogous to the transformer stack. The &nbsp;zero-argument arity is invoked to create the initial value of the combining
@@ -494,8 +494,8 @@
         </tr>
       </table>
       <p>
-        Practically, the transformer stacks and reducing functions are the same &nbsp;as we&apos;re used to, and the combining function is concatenation for
-        sequential &nbsp;outputs or a merge for associative outputs.
+        Practically, the transformer stacks and reducing functions are often the &nbsp;same as we&apos;re used to, and the combining function is concatenation
+        for &nbsp;sequential outputs or a merging for associative outputs.
       </p>
       <p>
         Let&apos;s see them in action. For simplicity, we&apos;ll start with plain &nbsp;transduce from the multi-threaded namespace.
@@ -534,7 +534,12 @@
       </p>
       <pre><code>(concatv) ;; =&gt; []</code><br><code>(concatv [:foo :bar]) ;; =&gt; [:foo :bar]</code><br><code>(concatv [:foo :bar] [:baz]) ;; =&gt; [:foo :bar :baz]</code></pre>
       <p>
-        We&apos;ve got all the pieces, let&apos;s put them together and transduce, &nbsp;multi-threaded.
+        We toss the three chunks at Machine <code>D</code>, and it concatenates.
+      </p>
+      <pre><code>(reduce concatv [] [[11 22 33] [44 55] [66 77 88]])
+;; =&gt; [11 22 33 44 55 66 77 88]</code></pre>
+      <p>
+        We&apos;ve now peeked at the little machines inside. Let&apos;s transduce, &nbsp;multi-threaded.
       </p>
       <pre><code>(multi/transduce 3
 &nbsp;                concatv
