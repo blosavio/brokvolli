@@ -18,6 +18,13 @@
    [:br]]
 
   [:li
+   [:p "clj-commons "
+    [:a {:href "https://github.com/clj-commons/claypoole"}
+     "claypoole"]]
+   [:p "Threadpool-based parallel versions of Clojure functions."]
+   [:br]]
+
+  [:li
    [:p "Sebastian Fedrau's "
     [:a {:href "https://github.com/20centaurifux/pold"}
      "pold"]]

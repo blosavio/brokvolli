@@ -20,6 +20,10 @@
  [:h3 "Signatures"]
  [:table
   [:tr
+   [:th "functions"]
+   [:th "signatures"]
+   [:th "mnemonic"]]
+  [:tr
    [:td
     [:pre
      [:code "clojure.core/transduce &"]
@@ -50,5 +54,5 @@
     [:br]
     [:code "[n combine xform f coll]"]]
    [:td
-    [:p [:em "Expands from right-to-left, roughly in order of importance."]]]]]]
+    [:p [:em "Expands from right-to-left, roughly in order of required-ness."]]]]]]
 

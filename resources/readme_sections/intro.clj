@@ -6,7 +6,7 @@
    "transducers"]
   " are nifty, and "
   [:code "transduce"]
-  " provides one of the crucial off-the-shelf transducing contexts. "
+  " provides one of the crucial, off-the-shelf transducing contexts. "
   [:code "transduce"]
   " "
   [:a {:href "#reduce"}
@@ -28,7 +28,7 @@
     [:p "It has no multi-threaded option, similar to "
      [:a {:href "https://clojure.org/reference/reducers#_reduce_and_fold"}
       "fold"]
-     " that reduces a collection with parallel reduce-combine strategy."]]]]
+     " that reduces a collection with a parallel reduce-combine strategy."]]]]
 
  [:p [:strong "The Brokvolli library provides both: a "
       [:code "transduce-kv"]

@@ -2,7 +2,7 @@
             {:section-name "API" :section-href "https://blosavio.github.io/brokvolli/index.html" :skip-section-load? true}
             {:section-name "Changelog" :section-href "https://github.com/blosavio/brokvolli/blob/main/changelog.md" :skip-section-load? true}
             {:section-name "Introduction" :section-href "intro"}
-            {:section-name "Review"}
+            ;;{:section-name "Review"}
             {:section-name "Usage"}
             {:section-name "Quick reference" :section-href "quick"}
             {:section-name "Performance"}
