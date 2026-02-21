@@ -14,7 +14,7 @@
     <a href="https://github.com/blosavio">Contact</a><br>
     <h1>
       Brokvolli
-    </h1><em>A Clojure library exploring parallel transduce and transduce-kv</em><br>
+    </h1><em>A Clojure library exploring transduce-kv and multi-threaded transduce &amp; transduce-kv</em><br>
     <section id="setup">
       <h2>
         Setup
@@ -30,9 +30,7 @@
       <h3>
         Require
       </h3>
-      <pre><code>(require &apos;[brokvolli.core :refer [concatv tassoc tconj]]
-&nbsp;        &apos;[brokvolli.single :refer [transduce-kv]]
-&nbsp;        &apos;[brokvolli.transducers-kv :refer [map-kv filter-kv replace-kv]])</code></pre>
+      <pre><code>(require &apos;[brokvolli.single :refer [transduce-kv]])</code></pre>
     </section>
     <section id="intro">
       <h2>
@@ -46,8 +44,8 @@
       <ol>
         <li>
           <p>
-            While <code>transduce</code> will pass an associative collection&apos;s elements as a <em>map entry</em> (i.e., the key and its value), it has no
-            <code>reduce-kv</code> counterpart that passes a sequential collection&apos;s index along with &nbsp;the value.
+            While <code>transduce</code> will pass an associative collection&apos;s elements as a <em>map entry</em> (i.e., a tuple of the key and its value),
+            it has no <code>reduce-kv</code> counterpart that passes a sequential collection&apos;s index along with &nbsp;the value.
           </p>
         </li>
         <li>
@@ -70,17 +68,14 @@
       <p>
         The Brokvolli utilities live at the intersection of <code>transduce</code>, <code>reduce-kv</code>, and <code>fold</code>. As much as possible, it
         adopts their idioms, adding or changing only what &nbsp;is absolutely necessary. Therefore, using the Brokvolli library leans on &nbsp;prior
-        understanding that trio. Our discussion here will also rely on basic &nbsp;<a href="https://clojure.org/reference/transducers">familiarity</a> of
-        <a href="https://clojuredocs.org/clojure.core/reduce-kv">their</a> <a href="https://clojure.org/reference/reducers">workings</a>.
+        understanding that trio. Our discussion here will also rely on <a href="https://clojure.org/reference/transducers">familiarity</a> of <a href=
+        "https://clojuredocs.org/clojure.core/reduce-kv">their</a> <a href="https://clojure.org/reference/reducers">workings</a>.
       </p>
       <h3 id="single-transduce-kv">
         <code>transduce-kv</code> (single-threaded)
       </h3>
-      <pre><code>(require &apos;[brokvolli.single :refer [transduce-kv]]
-&nbsp;        &apos;[brokvolli.transducers-kv :refer [map-kv filter-kv remove-kv]]
-&nbsp;        &apos;[brokvolli.stateful-transducers-kv :refer [take-kv take-while-kv]])</code></pre>
       <p>
-        The analogy to keep in mind is that <code>reduce</code> is to <code>reduce-kv</code> as <code>transduce</code> is to <code>transduce-kv</code>.
+        The analogy to keep in mind is that <code>transduce-kv</code> is to <code>transduce</code> as <code>reduce-kv</code> is to <code>reduce</code>.
       </p>
       <p>
         Let&apos;s assign ourselves an imaginary task: <em>Given a vector of integers, return a new vector with each element &nbsp;incremented.</em> Let&apos;s
@@ -92,10 +87,11 @@
       <p>
         Let&apos;s highlight a few points. We used the &apos;no-init&apos; form of <code>transduce</code>. That means <code>transduce</code> evaluated
         <code>(conj) ;; =&gt; []</code> to produce the initial value. Also, <code>conj</code>&apos;s one-argument arity provided the &apos;completing&apos;
-        phase of the transduction, in &nbsp;this case, identity. Finally, <code>inc</code> is a function of one argument, the incoming number.
+        phase of the transduction, in &nbsp;this case, identity. Finally, note that <code>inc</code> is a function of one argument, the incoming number.
       </p>
       <p>
-        Let&apos;s put that earlier analogy into motion by doing that same task with <code>transduce-kv</code>. It&apos;s signature is exactly the same.
+        Let&apos;s put that earlier analogy into motion by doing that same task with <code>transduce-kv</code>. It&apos;s <a href="#signatures">signature</a>
+        is exactly the same.
       </p>
       <pre><code>(transduce-kv <em>xform f coll</em>)</code><br><code>(transduce-kv <em>xform f init coll)</em></code></pre>
       <p>
@@ -103,9 +99,13 @@
         <code>transduce-kv</code> passes the key/index as well, so we&apos;ll need a transducer with an additional &nbsp;three-argument arity. Brokvolli
         provides such a transducer, <code>map-kv</code>, in its <code>transducers-kv</code> namespace.
       </p>
+      <pre><code>(require &apos;[brokvolli.transducers-kv :refer [map-kv]])</code></pre>
       <p>
-        Further, as we noted before, <code>inc</code> accepts only a single argument. But <code>transduce-kv</code> will be passing two arguments, the
-        key/index and the element. In this &nbsp;example, we won&apos;t be using the key/index, so we can simply drop it.
+        Further, as we noted before, <code>inc</code> accepts only a single argument. But <code>transduce-kv</code>, via <code>map-kv</code>, will be passing
+        two arguments, the key/index and the element. In this &nbsp;example, we won&apos;t be using the key/index, so we can simply drop it.
+      </p>
+      <p>
+        One way to designate an intentionally-ignored function argument is with &nbsp;the underscore sybol, <code>_</code>.
       </p>
       <pre><code>(def inc-kv (fn [_ element] (inc element)))</code></pre>
       <p>
@@ -121,14 +121,14 @@
 &nbsp;                 ([x] x)
 &nbsp;                 ([x _ z] (conj x z))))</code></pre>
       <p>
-        Called with zero args, it returns a vector, with one arg, it returns the &nbsp;arg. Called with three args, it conjoins the first and third, dropping
-        the &nbsp;second. And now our expression works correctly.
+        Called with zero arguments, it returns a vector; with one argument, it &nbsp;returns the argument itself. Called with three argumentss, it conjoins the
+        &nbsp;first and third, dropping the second. And now our transducing expression works &nbsp;correctly.
       </p>
       <pre><code>(transduce-kv (map-kv inc-kv) new-conj [11 22 33]) ;; =&gt; [12 23 34]</code></pre>
       <p>
         Our custom <code>new-conj</code> is so useful, Brokvolli provides it pre-made, named <code>tconj</code>.
       </p>
-      <pre><code>(transduce-kv (map-kv inc-kv) tconj [11 22 33]) ;; =&gt; [12 23 34]</code></pre>
+      <pre><code>(require &apos;[brokvolli.core :refer [tconj]])</code><br><br><code>(transduce-kv (map-kv inc-kv) tconj [11 22 33]) ;; =&gt; [12 23 34]</code></pre>
       <p>
         Let&apos;s extend our imaginary task: <em>Given a vector of numbers, increment each, retain only the evens, and &nbsp;stop after three.</em> With
         regular <code>transduce</code>, we&apos;d compose a transducer stack with <code>comp</code>.
@@ -144,7 +144,7 @@
         Again, we note that <code>inc</code> and <code>even?</code> are both functions of one argument.
       </p>
       <p>
-        We&apos;ll lengthen the input vector to better demonstrate the <code>take</code>-ing action.
+        We&apos;ll lengthen the input vector to nine elements to better demonstrate &nbsp;the <code>take</code>-ing action.
       </p>
       <pre><code>(transduce xform-1
 &nbsp;          conj
@@ -153,13 +153,18 @@
       <p>
         Now let&apos;s do the same with <code>transduce-kv</code>. Earlier, we had to use a special mapping transducer, <code>map-kv</code> because
         <code>transduce-kv</code> passed both the key/index and the element. Brokvolli provides counterparts &nbsp;to the others: <code>filter-kv</code> and
-        <code>take-kv</code>. Remember that in <code>-kv</code> land, those inner functions must handle two arguments. We made a special <code>inc-kv</code>
-        earlier, so let&apos;s make a special two-argument predicate for retaining evens &nbsp;that ignores the index.
+        <code>take-kv</code>.
+      </p>
+      <pre><code>(require &apos;[brokvolli.transducers-kv :refer [filter-kv]]
+&nbsp;        &apos;[brokvolli.stateful-transducers-kv :refer [take-kv]])</code></pre>
+      <p>
+        Remember that in <code>-kv</code> land, those inner mapping functions and predicates must handle two &nbsp;arguments. We made a special
+        <code>inc-kv</code> earlier, so let&apos;s make a special two-argument predicate for retaining evens &nbsp;that ignores the index.
       </p>
       <pre><code>(def even?-kv (fn [_ element] (even? element)))</code></pre>
       <p>
-        <code>take</code>, and by extension <code>take-kv</code>, isn&apos;t interested in the actual element value from the collection; they &nbsp;consume
-        only an integer argument. So we don&apos;t need to make special two-arg &nbsp;function for that.
+        <code>take</code>, and by extension <code>take-kv</code>, isn&apos;t interested in the element&apos;s value; they consume only an integer
+        &nbsp;argument. So we don&apos;t need to make special two-arg inner function for <code>take-kv</code>.
       </p>
       <p>
         Our <code>-kv</code> transducer stack looks like this.
@@ -175,15 +180,15 @@
 &nbsp;             [11 22 33 44 55 66 77 88 99])
 ;; =&gt; [12 34 56]</code></pre>
       <p>
-        Equivalent result. That&apos;s a relief.
+        Equivalent result to standard <code>transduce</code>. That&apos;s encouraging.
       </p>
       <p>
         But we&apos;ve been completely ignoring the index, which kinda obviates the &nbsp;entire purpose of using <code>transduce-kv</code>. So we&apos;ll
-        ignore them no longer.
+        ignore the indexes no longer.
       </p>
       <p>
-        Our new imaginary task is this: <em>Given a vector of numbers, increment each, retain the ones with odd <strong>indexes</strong>, and stop once the
-        <strong>index</strong> is greater than or equal to five.</em> Let&apos;s go piece by piece.
+        Our new imaginary task is this: <em>Given a vector of numbers, increment each, retain the elements with &nbsp;odd <strong>indexes</strong>, and stop
+        once the <strong>index</strong> is greater than or equal to five.</em> Let&apos;s go piece by piece.
       </p>
       <ul>
         <li>
@@ -194,16 +199,20 @@
         </li>
         <li>
           <p>
-            Filtering is a bit different. Instead of deciding based on the value of &nbsp;the element (the second argument), we decide based on the value of
-            the index &nbsp;(the first element). That looks like this:
+            Filtering is a bit different. Instead of deciding based on the value of &nbsp;the element (the second argument passed to the inner function), we
+            decide based &nbsp;on the value of the index (the first argument to the inner function). That &nbsp;looks like this:
           </p>
           <pre><code>(filter-kv (fn [idx _] (odd? idx)))</code></pre>
         </li>
         <li>
           <p>
             Instead of <code>take-kv</code>, we&apos;ll pull in its cousin, <code>take-while-kv</code>, which is the <code>-kv</code> variant of regular
-            <code>take-while</code>. Again, to decide where to stop, we&apos;ll consider only the index (the first argument) and ignore the element (the second
-            argument).
+            <code>take-while</code>.
+          </p>
+          <pre><code>(require &apos;[brokvolli.stateful-transducers-kv :refer [take-while-kv]])</code></pre>
+          <p>
+            Again, to decide where to stop, we&apos;ll consider only the index (the first &nbsp;argument to the inner predicate) and ignore the element (the
+            second argument to &nbsp;the inner predicate).
           </p>
           <pre><code>(take-while-kv (fn [idx _] (&lt;= idx 5)))</code></pre>
         </li>
@@ -236,21 +245,22 @@
 88     7      89           true          «stop»          [23 45 67]</code></pre>
       <p>
         For each element of the vector, <code>map-kv</code> increments the number. Then, <code>filter-kv</code> checks if the index is odd. If not, that step
-        ends. If the index <em>is</em> odd, then <code>take-while-kv</code> checks if the index is less than five. If it is, the element is conjoined.
-        &nbsp;Once the index exceeds five, the entire process is stopped without considering &nbsp;any more elements.
+        ends. If the index <em>is</em> odd, then <code>take-while-kv</code> checks if the index is less than five. If it is, <code>tconj</code> conjoins the
+        element. Once the index exceeds five, the entire transduction &nbsp;is stopped, considering no more elements. In this example, <code>transduce</code>
+        never considers element <code>99</code>.
       </p>
       <p>
         Keep in mind that if a <code>-kv</code> transducer passes an element to an inner function/predicate, such as <code>map-kv</code> or
-        <code>filter-kv</code>, it always also passes the key/index. However, when the <code>-kv</code> transducer does not have an inner function, such as
-        <code>take-kv</code>, that layer of the transducer stack also ignores the key/index. Regardless &nbsp;of whether or not a transducer has an inner
-        function, the key/index and &nbsp;element are always passed to the next layer of the transducer stack.
+        <code>filter-kv</code>, it always <em>also</em> passes the key/index. However, when the <code>-kv</code> transducer does not have an inner function,
+        such as <code>take-kv</code>, that layer of the transducer stack also ignores the key/index. Regardless &nbsp;of whether or not a transducer has an
+        inner function, the key/index and &nbsp;element are always passed to the next layer of the transducer stack.
       </p>
       <h3>
         Indexes propagate
       </h3>
       <p>
-        Before we leave sequential input collections, let&apos;s notice one other &nbsp;behavior: Indexes always refer to the location within the original,
-        input &nbsp;collection regardless of how many elements are removed or inserted. Here&apos;s &nbsp;a removal demonstration.
+        Before we leave our discussion of sequential input collections, let&apos;s &nbsp;notice one other behavior: Indexes always refer to the location within
+        the &nbsp;original, input collection regardless of how many elements are removed or &nbsp;inserted. Here&apos;s a removal demonstration.
       </p>
       <pre><code>(transduce-kv (comp (filter-kv (fn [idx _] (even? idx)))
 &nbsp;                   (map-kv (fn [idx x] {:index idx, :x x})))
@@ -298,13 +308,12 @@
       </p>
       <p>
         From before, we already know how to increment a value by assembling <code>map-kv</code> and <code>inc-kv</code>. We already pulled in
-        <code>filter-kv</code>, but we need a new predicate. That predicate takes to arguments, the key and &nbsp;the element. We only care about filtering on
-        the key, so we&apos;ll ignore the &nbsp;element&apos;s value. A set of <code>#{:b :d :f}</code> is a slick way to test if we should retain the
-        key+value pair. We assemble &nbsp;those two transducers with ordinary <code>comp</code>.
+        <code>filter-kv</code>, but we need a new predicate. That inner predicate takes two arguments, the &nbsp;key and the element. We only care about
+        filtering on the key, so we&apos;ll ignore &nbsp;the element&apos;s value. A set of <code>#{:b :d :f}</code> is a slick way to test if we should retain
+        the key+value pair. We assemble &nbsp;those two transducers with ordinary <code>comp</code>.
       </p>
-      <pre><code>(def xform-4
-&nbsp; (comp (map-kv inc-kv)
-&nbsp;       (filter-kv (fn [keyword _] (#{:b :d :f} keyword)))))</code></pre>
+      <pre><code>(def xform-4 (comp (map-kv inc-kv)
+&nbsp;                  (filter-kv (fn [k _] (#{:b :d :f} k)))))</code></pre>
       <p>
         Finally, we need to assemble the results. Earlier, when we were discussing &nbsp;sequential collections, <code>conj</code> (or its variants) served
         that role. Now, we&apos;re building up a hashmap, so we &nbsp;need a function that generates an empty hashmap, completes with an identity, &nbsp;and
@@ -318,6 +327,7 @@
         That&apos;s a pretty commonly-needed utility, so perhaps you won&apos;t be surprised &nbsp;that Brokvolli provides one pre-made, named
         <code>tassoc</code>.
       </p>
+      <pre><code>(require &apos;[brokvolli.core :refer [tassoc]])</code></pre>
       <p>
         Let&apos;s assemble all those parts and evaluate.
       </p>
@@ -336,9 +346,9 @@
         Other outputs
       </h3>
       <p>
-        We&apos;ve constructed sequential collections from sequential collections, and &nbsp;made associative collections from associative collections, but
-        <code>transduce-kv</code> is completely general. It will accept any collection that <code>reduce-kv</code> accepts, and it can build up any collection
-        type (not necessarily the input &nbsp;collection type) or scalar value.
+        We&apos;ve constructed sequential collections from sequential collections, and &nbsp;constructed associative collections from associative collections,
+        but <code>transduce-kv</code> is completely general. It will accept any collection that <code>reduce-kv</code> accepts, and it can build up any
+        collection type (not necessarily the input &nbsp;collection type) or scalar value.
       </p>
       <p>
         Observe: transducing a hashmap to construct a string.
@@ -353,19 +363,19 @@
       <p>
         Suppose someone handed us a transformer stack composed with no knowledge &nbsp;that <code>transduce‑kv</code> existed, and for some reason we wanted to
         plug in that stack without &nbsp;changing anything else. Brokvolli&apos;s <code>kv-ize</code> utility wraps a transformer so that the key/index is
-        diverted to dynamic &nbsp;var, passing only the element. That way, the stack can be used as-is.
+        diverted to a dynamic &nbsp;var, passing only the element. That way, the stack can be used as-is.
       </p>
       <p>
-        Standard transformer, incompatible with <code>transduce-kv</code>.
+        A standard transformer <code>(map inc)</code>, is incompatible with <code>transduce-kv</code>.
       </p>
       <pre><code>(transduce-kv (map inc) conj [11 22 33])</code><code>;; Unhandled clojure.lang.ArityException
 &nbsp; ;; Wrong number of args (2) passed to: clojure.core/inc</code></pre>
       <p>
-        Modified transformer.
+        However, that transformer, modified with <code>kv-ize</code> works.
       </p>
       <pre><code>(require &apos;[brokvolli.core :refer [kv-ize *keydex*]])</code><br><br><code>(transduce-kv (kv-ize (map inc)) conj [11 22 33]) ;; =&gt; [12 23 34]</code></pre>
       <p>
-        So, where did the index go? We can access it as <code>*keydex*</code> inside the inner function.
+        So, where did the index go? We can access it as <code>*keydex*</code> within the inner function.
       </p>
       <pre><code>(transduce-kv (kv-ize (map #(array-map :index *keydex* :value %)))
 &nbsp;             conj
@@ -381,7 +391,7 @@
         multi-threaded <code>transduce</code> &amp; <code>transduce-kv</code>
       </h3>
       <p>
-        If we can arrange our job so that the operations of each element is &nbsp;completely independent of all the others, Brokvolli can perform a neat trick.
+        If we can arrange our job so that the operations on each element is &nbsp;completely independent of all the others, Brokvolli can perform a neat trick.
         &nbsp;Let&apos;s pretend we want to increment the numbers contained in a super-big &nbsp;vector, say eight elements.
       </p>
       <pre><code>[11 22 33 44 55 66 77 88]</code></pre>
@@ -411,8 +421,8 @@
       <p>
         Brokvolli offers multi-threaded variants of <code>transduce</code> and <code>transduce-kv</code> to do that exact job. If we can arrange our job so
         that processing each &nbsp;element is completely independent from all the others, the multi-threaded &nbsp;transduce functions will partition the input
-        collection into roughly &nbsp;equal-sized chunks, process each chunk on a light-weight thread, and &nbsp;re-assembles the processed chunks. In
-        practice, Brokvolli closely follows the &nbsp;usage patterns established by <code>clojure.core.reducers/fold</code>.
+        collection into roughly &nbsp;equal-sized chunks, process each chunk on a light-weight thread, and &nbsp;re-assemble the processed chunks. In practice,
+        Brokvolli closely follows the &nbsp;usage patterns established by <code>clojure.core.reducers/fold</code>.
       </p>
       <p>
         The signatures of the multi-threaded transduce functions look like this.
@@ -420,7 +430,7 @@
       <pre><code>(transduce <em>          xform f coll)</em></code><br><code>(transduce <em>  combine xform f coll)</em></code><br><code>(transduce <em>n combine xform f coll)</em></code></pre>
       <p>
         The little machines we imagined correspond to the arguments. Machines&nbsp;<code>A</code>, <code>B</code>, and&nbsp;<code>C</code> are instances of
-        <code>(xform f)</code>, a transformer stack, <code>xform</code>, wrapping a reducing function, <code>f</code>. Machine&nbsp;<code>D</code> is
+        <code>(xform f)</code>, a transformer stack, <code>xform</code>, wrapping a reducing function, <code>f</code>. Machine&nbsp;<code>D</code> is a
         <em>combining function</em>, <code>combine</code>.
       </p>
       <p>
@@ -431,9 +441,9 @@
         <code>transduce-kv</code>).
       </p>
       <p>
-        The combining function is analogous to the transformer stack. The &nbsp;zero-argument arity is invoked to create the initial value of the combining
-        &nbsp;process, the one-argument arity is used for the completing step, and the two &nbsp;argument arity performs the combining the left and right
-        chunks. (There is &nbsp;no analogous three-argument arity because the key/index is not used in the &nbsp;combining process.)
+        While doing a different job, the combining function echoes the form &nbsp;reducing function. The zero-argument arity is invoked to create the initial
+        &nbsp;value of the combining process, the one-argument arity is used for the &nbsp;completing step, and the two argument arity performs the combining
+        the left and &nbsp;right chunks. (There is no analogous three-argument arity because the key/index &nbsp;is not used in the combining process.)
       </p>
       <p>
         That&apos;s a lot of words. Maybe a table is better.
@@ -494,11 +504,12 @@
         </tr>
       </table>
       <p>
-        Practically, the transformer stacks and reducing functions are often the &nbsp;same as we&apos;re used to, and the combining function is concatenation
-        for &nbsp;sequential outputs or a merging for associative outputs.
+        Practically, the transformer stacks and reducing functions are often the &nbsp;same as we&apos;re used to with single-threaded transductions, and the
+        combining &nbsp;function is concatenation for sequential outputs or a merging for associative &nbsp;outputs.
       </p>
       <p>
-        Let&apos;s see them in action. For simplicity, we&apos;ll start with plain &nbsp;transduce from the multi-threaded namespace.
+        Let&apos;s see them in action. For clarity, we&apos;ll start with the non<code>-kv</code>, element-only <code>transduce</code> from the multi-threaded
+        namespace.
       </p>
       <pre><code>(require &apos;[brokvolli.multi :as multi])</code></pre>
       <p>
@@ -507,34 +518,34 @@
       </p>
       <p>
         We want to peel off an element and increment it. That&apos;s a job for a <code>map</code> transducer. Since we&apos;re using the non<code>-kv</code>
-        variant, we may use Clojure&apos;s off-the-shelf transducer.
+        variant, we may use Clojure&apos;s off-the-shelf transducer and inner function.
       </p>
       <pre><code>(map inc)</code></pre>
       <p>
-        After incrementing, we want to conjoin the result onto the accumulating &nbsp;partition, a new vector. We can use <code>conj</code> to provide the
-        initial value (an empty vector), the completing function &nbsp;(identity), and the reducing function (conjoining the element).
+        After incrementing, we want to conjoin the result onto the accumulator, &nbsp;a new vector private to that partition. We can use <code>conj</code> to
+        provide the initial value (an empty vector), the completing function &nbsp;(identity), and the reducing function (conjoining the element).
       </p>
       <pre><code>(conj) ;; =&gt; []</code><br><code>(conj [:foo :bar]) ;; =&gt; [:foo :bar]</code><br><code>(conj [:foo :bar] :baz) ;; =&gt; [:foo :bar :baz]</code></pre>
       <p>
-        Let&apos;s break apart the input vector and calculate the chunks manually.
+        Let&apos;s manually break apart the input vector and calculate the chunks.
       </p>
       <pre><code>(transduce (map inc) conj [11 22 33]) ;; =&gt; [12 23 34]</code><br><code>(transduce (map inc) conj [44 55]) ;; =&gt; [45 56]</code><br><code>(transduce (map inc) conj [66 77 88]) ;; =&gt; [67 78 89]</code></pre>
       <p>
-        It&apos;s as if we could peek inside and observe what Machines&nbsp;<code>A</code>, <code>B</code>, and <code>C</code> were up to.
+        It&apos;s as if we peeked inside and observed what Machines&nbsp;<code>A</code>, <code>B</code>, and <code>C</code> were up to.
       </p>
       <p>
         Now we&apos;ve got three chunks: <code>[12 23 34]</code>, <code>[45 56]</code>, and <code>[67 78 89]</code>. To assemble, we run another reduction
-        across those three items, this time &nbsp;using <code>combine</code>. We need an initial value and a step function. Fortunately, <code>concat</code>
-        has multiple arities that suit our purposes.
+        across those three items, this time &nbsp;using <code>combine</code>. We need an initial value and a step function. <code>concat</code> has multiple
+        arities that would seem to suit our purposes.
       </p>
       <pre><code>(concat) ;; =&gt; ()</code><br><code>(concat [:foo :bar]) ;; =&gt; (:foo :bar)</code><br><code>(concat [:foo :bar] [:baz]) ;; =&gt; (:foo :bar :baz)</code></pre>
       <p>
         Hmm. <code>concat</code> returns a lazy sequence, which is kinda antithetical to <code>transduce</code>, which is eager. Whaddya know? Brokvolli
         provides an eager concatenating &nbsp;utility, <code>concatv</code>, that returns vectors.
       </p>
-      <pre><code>(concatv) ;; =&gt; []</code><br><code>(concatv [:foo :bar]) ;; =&gt; [:foo :bar]</code><br><code>(concatv [:foo :bar] [:baz]) ;; =&gt; [:foo :bar :baz]</code></pre>
+      <pre><code>(require &apos;[brokvolli.core :refer [concatv]])</code><br><br><code>(concatv) ;; =&gt; []</code><br><code>(concatv [:foo :bar]) ;; =&gt; [:foo :bar]</code><br><code>(concatv [:foo :bar] [:baz]) ;; =&gt; [:foo :bar :baz]</code></pre>
       <p>
-        We toss the three chunks at Machine <code>D</code>, and it concatenates.
+        To simulate Machine <code>D</code>&apos;s job, we manually concatenate the three chunks.
       </p>
       <pre><code>(reduce concatv [] [[11 22 33] [44 55] [66 77 88]])
 ;; =&gt; [11 22 33 44 55 66 77 88]</code></pre>
@@ -549,20 +560,21 @@
 ;; =&gt; [12 23 34 45 56 67 78 89]</code></pre>
       <p>
         On the surface, not too impressive: we did all the same work as regular, &nbsp;single-threaded transduce, but with extra arguments. Going to that
-        trouble &nbsp;becomes <a href="#performance">worth it</a> when the input collection grows large or when the per-element task is &nbsp;computationally
+        trouble &nbsp;becomes <a href="#performance">worth it</a> when the input collection grows large and when the per-element task is &nbsp;computationally
         expensive.
       </p>
       <p>
-        What does it look like to perform our more-involved job, <em>Increment each number, filter to retain even numbers, stop the process &nbsp;after three
-        elements</em>? We know how to increment and filter.
+        What does it look like to perform our three-step job from before, <em>Increment each number, filter to retain even numbers, stop the process
+        &nbsp;after three elements</em>? We already know how to increment and filter.
       </p>
       <p>
-        That third task, <em>Stop after three elements</em> is a show-stopper. <code>take</code> and friends belong to a class of transducers that are
-        stateful. <a href="#stateful-transducers">Stateful transducers</a> are unsafe to use in a multi-threaded transduction. There is currently no mechanism
-        to check and prevent us from using a stateful transducer here, but it&apos;s the Brokvolli library&apos;s strong recommendation to avoid it.
+        That third task, <em>Stop after three elements</em> is a show-stopper. <code>take</code> and friends belong to a group of transducers that are
+        stateful. <a href="#stateful-transducers">Stateful transducers</a> are unsafe to use in a multi-threaded transduction. There is currently no
+        &nbsp;mechanism to check and prevent us from using a stateful transducer in a &nbsp;multi-threaded job, but it&apos;s the Brokvolli library&apos;s
+        strong recommendation to &nbsp;avoid it.
       </p>
       <p>
-        But it&apos;d be kinda nice to have a three-transducer transformer stack for &nbsp;our demonstration, so let&apos;s pick a third from the safe set of
+        But it&apos;d be kinda nice to have a three-step transformer stack for our &nbsp;demonstration, so let&apos;s pick a third from the safe set of
         stateless &nbsp;transducers. Let&apos;s stipulate <em>Remove elements if they&apos;re greater than seventy</em>.
       </p>
       <p>
@@ -571,6 +583,10 @@
       <pre><code>(def xform-5 (comp (map inc)
 &nbsp;                  (filter even?)
 &nbsp;                  (remove #(&lt; 70 %))))</code></pre>
+      <p>
+        <code>map</code>, <code>filter</code>, and <code>remove</code> are all stateless transducers, and thus safe to use in a multi-threaded
+        &nbsp;transduction.
+      </p>
       <p>
         Let&apos;s try out that transduction.
       </p>
@@ -582,11 +598,11 @@
 ;; =&gt; [12 34 56]</code></pre>
       <p>
         All the elements were incremented, <code>23</code>, <code>45</code>, <code>67</code>, and <code>89</code> were not retained by <code>filter</code>
-        because they&apos;re odd, and <code>78</code> was removed by <code>remove</code> because it&apos;s greater than seventy. Behind the scenes, these tasks
-        were done &nbsp;by three light-weight threads, each having only a chunk of the input &nbsp;collection. Once the chunks returned,
-        <code>multi/transduce</code> stitched them together into the final output collection. We might visualize &nbsp;the process like this.
+        because they&apos;re not even, and <code>78</code> was removed by <code>remove</code> because it&apos;s greater than seventy. Behind the scenes, these
+        tasks were done &nbsp;by three light-weight threads, each having only a chunk of the input &nbsp;collection. Once the chunks returned,
+        <code>concatv</code> globbed them together into the final output collection. We might visualize &nbsp;the process like this.
       </p>
-      <pre><code>input     [11 22 33     44 55     66 77 88]</code><br><code>partition [11 22 33]   [44 55]   [66 77 88]</code><br><code>increment  12 23 34     45 56     67 78 89</code><br><code>filter     12    34        56        78</code><br><code>remove     12    34        56</code><br><code>init    [] 12    34     [] 56</code><br><code>conj      [12]   34       [56]</code><br><code>conj      [12 34]         [56]</code><br><code>init   [] [12 34]         [56]</code><br><code>concatv   [12 34]         [56]</code><br><code>concatv   [12 34 56]</code><br></pre>
+      <pre><code>input         [11 22 33      44 55      66 77 88]</code><br><code>partition     [11 22 33]    [44 55]    [66 77 88]</code><br><br><code>first          11            44         66</code><br><code>increment      12            45         67</code><br><code>filter         12</code><br><code>remove         12</code><br><code>init      []   12         []        []</code><br><code>conj      [12]            []        []</code><br><br><code>first     [12]    22      []    55  []     77</code><br><code>increment [12]    23      []    56  []     78</code><br><code>filter    [12]            []    56  []     78</code><br><code>remove    [12]            []    56  []</code><br><code>conj      [12]            [56]      []</code><br><br><code>first     [12]       33   [56]      []        88</code><br><code>increment [12]       34   [56]      []        89</code><br><code>filter    [12]       34   [56]      []</code><br><code>remove    [12]       34   [56]      []</code><br><code>conj      [12 34]         [56]      []</code><br><br><code>init   [] [12 34]         [56]      []</code><br><code>concatv   [12 34]         [56]      []</code><br><code>concatv   [12 34 56]                []</code><br><code>concatv   [12 34 56]</code><br></pre>
       <p>
         We can rest easy that the multi-threaded transducing functions preserve &nbsp;the ordering for sequential input collections.
       </p>
@@ -598,11 +614,12 @@
       </p>
       <p>
         Let&apos;s run through a quick demonstration. <em>Given a vector of numbers, increment each element, retain elements &nbsp;whose index is even, and
-        remove elements whose index is greater than six.</em>. We&apos;ll break down our job by assembling the argument list from right to &nbsp;left. The
+        remove elements whose index is greater than six</em>. We&apos;ll break down our job by assembling the argument list from right to &nbsp;left. The
         sub-reductions need to build up a sequential collection, so we&apos;ll &nbsp;rely on <code>tconj</code>. Our transformer stack performs three tasks on
-        each element, a mapping, a &nbsp;filtering, and a removing. Each needs to handle <code>-kv</code> inputs. Here&apos;s our stack.
+        each element, a mapping, a &nbsp;filtering, and a removing. Each needs to handle <code>-kv</code> inputs. Here&apos;s our stack, pulling in a new
+        stateless <code>-kv</code> transducer, <code>remove-kv</code>.
       </p>
-      <pre><code>(def xform-6
+      <pre><code>(require &apos;[brokvolli.transducers-kv :refer [remove-kv]])</code><br><br><code>(def xform-6
 &nbsp; (comp (map-kv (fn [_ x] (inc x)))
 &nbsp;       (filter-kv (fn [idx _] (even? idx)))
 &nbsp;       (remove-kv (fn [idx _] (&lt; 6 idx)))))</code></pre>
@@ -626,7 +643,7 @@
       <p>
         Behind the scenes, <code>multi/transduce-kv</code> partitioned the input vector into lengths of three or fewer, sent those &nbsp;pieces to a pool where
         light-weight threads performed the sub-transductions, &nbsp;then, once those results were finished, concatenated the results from the
-        &nbsp;sub-reductions. The final result is exactly as if we had used single-threaded <code>transduce-kv</code>.
+        &nbsp;sub-reductions. The final result is exactly as if we had used single-threaded <code>transduce-kv</code>. Observe.
       </p>
       <pre><code>(require &apos;[brokvolli.single :as single])</code><br><br><code>(single/transduce-kv xform-6
 &nbsp;                    tconj
@@ -635,8 +652,8 @@
 &nbsp; (= (test single/transduce-kv) (test multi/transduce-kv)))
 ;; =&gt; true</code></pre>
       <p>
-        Don&apos;t make any assumptions about where the multi-threaded transduce &nbsp;functions partition the input collection. That&apos;s an implementation
-        detail and &nbsp;subject to change without notice.
+        We shouldn&apos;t make any assumptions about where the multi-threaded transduce &nbsp;functions partition the input collection. That&apos;s an
+        implementation detail and &nbsp;subject to change without notice.
       </p>
       <h4 id="stateful-transducers">
         Multi-threaded transduction and stateful &nbsp;transducers
@@ -653,9 +670,9 @@
 &nbsp;                [11 22 33 44 55 66 77 88 99])
 ;; =&gt; [11 33 55 77]</code></pre>
       <p>
-        We intended to stop the transduction after collecting the first element. &nbsp;However, four threads took the first element of their individual
-        &nbsp;partitions, ignorant that the same thing was happening on sibling threads. &nbsp;Then, <code>transduce</code> dutifully concatenated all four
-        results, returning an unintended result: a &nbsp;vector with more than one element.
+        We intended to stop the transduction after collecting the first element. &nbsp;However, four threads took the first elements of their individual
+        partitions, &nbsp;ignorant that the same thing was happening on sibling threads. Then, <code>concatv</code> dutifully concatenated all four results,
+        returning a vector with more than &nbsp;one element. That&apos;s almost never what we intended.
       </p>
       <p>
         There is no mechanism to check or stop us from using stateful transducers &nbsp;with the multi-threaded transduce functions. We must rely on policy and
@@ -759,9 +776,9 @@
       </h4>
       <p>
         The multi-threaded transduce functions ultimately delegate their &nbsp;partitions to <code>reduce</code> and <code>reduce-kv</code>. There are two
-        mechanisms for breaking out of the transduction process: &nbsp;wrapping the return value in <code>reduced</code> is mostly for implementing a
-        transducing function, and the <code>halt-when</code> transducer, mostly for the user. The multi-threaded Brokvolli functions are &nbsp;not currently
-        able respect either early termination mechanism when the input &nbsp;collection is partitioned into multiple pieces.
+        mechanisms for breaking out of a transduction process: &nbsp;wrapping the return value in <code>reduced</code> is mostly for writing a transducing
+        function, and the <code>halt-when</code> transducer, mostly for using a transducing function. The multi-threaded &nbsp;Brokvolli functions are not
+        currently able respect either early termination &nbsp;mechanism when the input collection is partitioned into multiple pieces.
       </p>
       <h3 id="avoid">
         Avoids
@@ -783,7 +800,7 @@
       <h2>
         Quick reference
       </h2>
-      <table>
+      <table id="prototypes">
         <tr>
           <th>
             prototype
@@ -818,7 +835,7 @@
           </td>
         </tr>
       </table>
-      <h3>
+      <h3 id="signatures">
         Signatures
       </h3>
       <table>
@@ -920,7 +937,7 @@
         <li>
           <p>
             Brokvolli doesn&apos;t offer all possible permutations of function signatures. If we want to specify the multi-threaded partitioning size, we must
-            explicitly provide the combining function, even it is identical to the reducing function.
+            explicitly provide the combining function, even if it is identical to the reducing function.
           </p>
         </li>
         <li>
@@ -1029,8 +1046,8 @@
         </dt>
         <dd>
           <p>
-            Short-hand for <em>key/index</em>. A key &quot;locates&quot; an element contained in an associative collection, while an integer index do so within
-            a sequential collection.
+            Short-hand for <em>key/index</em>. A key &quot;locates&quot; an element contained in an associative collection, while an integer index does so
+            within a sequential collection.
           </p>
         </dd>
         <dt id="reducing-function">
@@ -1111,7 +1128,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 20.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 21.<span id="uuid"><br>
       294419b4-984b-4fdb-bd80-9737707339c6</span>
     </p>
   </body>

@@ -18,7 +18,7 @@
 
   [:li [:p "Brokvolli doesn't offer all possible permutations of function
  signatures. If we want to specify the multi-threaded partitioning size, we must
- explicitly provide the combining function, even it is identical to the
+ explicitly provide the combining function, even if it is identical to the
  reducing function."]]
 
   [:li [:p "Brokvolli aspires to cover only the one-element-at-a-time type of

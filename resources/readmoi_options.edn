@@ -20,7 +20,7 @@
  :fn-map-additions {"fn-name-1" :arg1
                     "fn-name-2" :hang}
 
- :project-description "A Clojure library exploring parallel transduce and transduce-kv"
+ :project-description "A Clojure library exploring transduce-kv and multi-threaded transduce & transduce-kv"
  :project-name-formatted "Brokvolli"
 
  :preferred-project-metadata :lein

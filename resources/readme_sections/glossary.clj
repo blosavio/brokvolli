@@ -48,7 +48,7 @@
   [:dd [:p "Short-hand for "
         [:em "key/index"]
         ". A key \"locates\" an element contained in an associative collection,
- while an integer index do so within a sequential collection."]]
+ while an integer index does so within a sequential collection."]]
 
   [:dt#reducing-function "reducing function"]
   [:dd

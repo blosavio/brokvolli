@@ -1,7 +1,7 @@
 [:section#quick
  [:h2 "Quick reference"]
 
- [:table
+ [:table#prototypes
   [:tr
    [:th "prototype"]
    [:th "single-threaded"]
@@ -17,7 +17,7 @@
    [:td [:code "brokvolli.single/transduce-kv"]]
    [:td [:code "brokvolli.multi/transduce-kv"]]]]
 
- [:h3 "Signatures"]
+ [:h3#signatures "Signatures"]
  [:table
   [:tr
    [:th "functions"]

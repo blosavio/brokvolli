@@ -18,6 +18,7 @@
                          *wrap-at*
                          print-form-then-eval]]))
 
+
 (defn adjust-hiccup-str
   "Given a hiccup `[:code ...]` block `h`, insert newlines and `n` spaces after
   occurences of `regexes`, a sequence of regular expressions or strings."

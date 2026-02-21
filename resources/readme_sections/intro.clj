@@ -19,8 +19,7 @@
      [:code "transduce"]
      " will pass an associative collection's elements as a "
      [:em "map entry"]
-     #_(transduce (map identity) (completing conj) {:a 11 :b 22 :c 33})
-     " (i.e., the key and its value), it has no "
+     " (i.e., a tuple of the key and its value), it has no "
      [:code "reduce-kv"]
      " counterpart that passes a sequential collection's index along with
  the value."]]
