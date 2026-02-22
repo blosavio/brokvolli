@@ -1,5 +1,5 @@
 (ns brokvolli.core
-  "Vars used from all namespaces, plus helper functions.")
+  "Vars used from other namespaces, plus helper functions.")
 
 
 (def ^{:no-doc true} *keydex*-docstring

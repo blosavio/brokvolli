@@ -2,7 +2,7 @@
   "Multi-threaded variants of [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
   and [[brokvolli.single/transduce-kv]].
 
-  **Warning:** Use stateful transducers only with utmost care."
+  **Warning:** Use stateful transducers only with extreme caution."
   (:refer-clojure :exclude [transduce])
   (:require
    [brokvolli.core]
@@ -226,7 +226,7 @@
   3. Two args is the step function, applying the function to the accumulating
   value and the next element.
 
-  **Warning:** Use stateful transducers with extreme caution.
+  **Warning:** Use stateful transducers only with extreme caution.
 
   `combine` is a function of three arities that governs how to gather the
   results of the sub-reductions:
@@ -300,8 +300,8 @@
 (defn transduce-kv
   "Multi-threaded variant of [[single/transduce-kv]]. `xform`, `f`, and
   `combine` are the similar to [[transduce]]. `xform` is a transducer stack,
-  `f` is a function of the accumulated value, the key/index, and the next
-  element of `coll`.
+  `f` is a reducing function with an additional arity three which consumes the
+  accumulated value, the key/index, and the next element of `coll`.
 
   As with [[single/transduce-kv]], when used with a transducer stack adapted
   with [[kv-ize]], the key/index is available as [[*keydex*]] at any \"layer\"
@@ -313,7 +313,7 @@
   defaulting to 512. When `n` does not divide evenly into `(size coll)`, the
   locations of the partition boundaries are an implementation detail.
 
-  **Warning:** Use stateful transducers with extreme caution.
+  **Warning:** Use stateful transducers only with extreme caution.
 
   Examples:
   ```clojure

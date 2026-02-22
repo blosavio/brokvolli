@@ -14,7 +14,7 @@
     <a href="https://github.com/blosavio">Contact</a><br>
     <h1>
       Brokvolli
-    </h1><em>A Clojure library exploring transduce-kv and multi-threaded transduce &amp; transduce-kv</em><br>
+    </h1><em>A Clojure library providing transduce-kv and multi-threaded transducing functions</em><br>
     <section id="setup">
       <h2>
         Setup
@@ -105,7 +105,7 @@
         two arguments, the key/index and the element. In this &nbsp;example, we won&apos;t be using the key/index, so we can simply drop it.
       </p>
       <p>
-        One way to designate an intentionally-ignored function argument is with &nbsp;the underscore sybol, <code>_</code>.
+        One way to designate an intentionally-ignored function argument is with &nbsp;the underscore symbol, <code>_</code>.
       </p>
       <pre><code>(def inc-kv (fn [_ element] (inc element)))</code></pre>
       <p>
@@ -121,7 +121,7 @@
 &nbsp;                 ([x] x)
 &nbsp;                 ([x _ z] (conj x z))))</code></pre>
       <p>
-        Called with zero arguments, it returns a vector; with one argument, it &nbsp;returns the argument itself. Called with three argumentss, it conjoins the
+        Called with zero arguments, it returns a vector; with one argument, it &nbsp;returns the argument itself. Called with three arguments, it conjoins the
         &nbsp;first and third, dropping the second. And now our transducing expression works &nbsp;correctly.
       </p>
       <pre><code>(transduce-kv (map-kv inc-kv) new-conj [11 22 33]) ;; =&gt; [12 23 34]</code></pre>
@@ -1128,7 +1128,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 21.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 22.<span id="uuid"><br>
       294419b4-984b-4fdb-bd80-9737707339c6</span>
     </p>
   </body>

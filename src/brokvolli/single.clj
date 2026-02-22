@@ -25,13 +25,14 @@
   "A '-kv' variant of `transduce`, reducing with a transducing stack. The
   analogy is
 
-  `reduce:reduce-kv::transduce:transduce-kv`.
+  `transduce-kv:transduce::reduce-kv:reduce`.
 
-  Somewhat differently than [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
-  , `xform` and `f` are functions of zero, one, two, and three arguments. The
-  [[brokvolli.transducers-kv]] and [[brokvolli.stateful-transducers-kv]]
-  namespaces provide such transducers (`map`, `filter`, etc.) appropriate for
-  use with `transduce-kv`.
+  Analogous to
+  [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce),
+  `xform` and `f` are functions of zero, one, and two arguments, but with an
+  additional arity accepting three arguments. The [[brokvolli.transducers-kv]]
+  and [[brokvolli.stateful-transducers-kv]] namespaces provide such transducers
+  (variants of `map`, `filter`, etc.) appropriate for use with `transduce-kv`.
 
   For exploratory work, or if the stack is constructed with `clojure.core`
   transducers or otherwise not under our control, [[kv-ize]] may be used to
@@ -41,13 +42,13 @@
 
   `coll` must implement `clojure.lang.IKVReduce`.
 
-  See [[tconj]] and [[tassoc]] for utilities that provide a bottom-level
-  reducing function that properly shuttles the key/indexes.
+  See [[tconj]] and [[tassoc]] for utilities that provide a reducing function
+  that properly shuttles the key/indexes.
 
-  Prepare the environment:
+  Prepare the environment for following examples:
   ```clojure
   (require '[brokvolli.core :refer [tconj]]
-           '[brokvolli.transducers-kv :refer [map-kv filter-kv]]
+           '[brokvolli.transducers-kv :refer [map-kv filter-kv remove-kv]]
            '[brokvolli.stateful-transducers-kv :refer [take-kv]])
   ```
 

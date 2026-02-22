@@ -1,5 +1,5 @@
 (defproject com.sagevisuals/brokvolli "0-SNAPSHOT0"
-  :description "A Clojure library exploring parallel transduce and transduce-kv"
+  :description "A Clojure library providing transduce-kv and multi-threaded transducing functions"
   :url "https://github.com/blosavio/brokvolli"
   :license {:name "MIT License"
             :url "https://opensource.org/license/mit"

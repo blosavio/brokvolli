@@ -94,7 +94,7 @@
  example, we won't be using the key/index, so we can simply drop it."]
 
  [:p "One way to designate an intentionally-ignored function argument is with
- the underscore sybol, "
+ the underscore symbol, "
   [:code "_"]
   "."]
 
@@ -118,7 +118,7 @@
       (adjust-hiccup-str ["[])" "x)"] 17))]
 
  [:p "Called with zero arguments, it returns a vector; with one argument, it
- returns the argument itself. Called with three argumentss, it conjoins the
+ returns the argument itself. Called with three arguments, it conjoins the
  first and third, dropping the second. And now our transducing expression works
  correctly."]
 
