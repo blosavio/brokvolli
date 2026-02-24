@@ -1,4 +1,10 @@
-(defproject com.sagevisuals/brokvolli "0-SNAPSHOT0"
+(defproject com.sagevisuals/brokvolli
+  #_"0-0"
+  #_"0-1"
+  #_"0-2"
+  #_"0-3"
+
+  #_"0-SNAPSHOT0"
   :description "A Clojure library providing transduce-kv and multi-threaded transducing functions"
   :url "https://github.com/blosavio/brokvolli"
   :license {:name "MIT License"
@@ -13,7 +19,7 @@
                                   [com.clojure-goes-fast/clj-memory-meter "0.4.0"]
                                   [com.hypirion/clj-xchart "0.2.0"]
                                   [com.sagevisuals/chlog "5"]
-                                  [com.sagevisuals/fastester "1-SNAPSHOT0"]
+                                  [com.sagevisuals/fastester "1"]
                                   [com.sagevisuals/readmoi "6"]
                                   [criterium "0.4.6"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]

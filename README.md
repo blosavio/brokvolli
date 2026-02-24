@@ -889,10 +889,10 @@
         additional overhead.
       </p>
       <p>
-        The multi-threaded transducing functions present a more <a href="">complicated</a> <a href="">performance</a> <a href="">story</a>. Even though
-        Brokvolli implements them with light-weight Fork/Join threads, that additional machinery imposes non-negligible overhead. The multi-threaded variants
-        almost always perform slightly worse on collections with fewer than one-thousand elements, and almost always slightly worse when the per-element task
-        is small (e.g., incrementing a number).
+        The multi-threaded transducing functions present a <a href="">more</a> <a href="">nuanced</a> <a href="">performance</a> <a href="">story</a>. Even
+        though Brokvolli implements them with light-weight Fork/Join threads, that additional machinery imposes non-negligible overhead. The multi-threaded
+        variants almost always perform slightly worse on collections with fewer than one-thousand elements, and almost always slightly worse when the
+        per-element task is small (e.g., incrementing a number).
       </p>
       <p>
         However, when the input collection grows beyond ten-thousand elements, or the transduction involves ten or more tasks per element, then the
@@ -1128,7 +1128,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 22.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 24.<span id="uuid"><br>
       294419b4-984b-4fdb-bd80-9737707339c6</span>
     </p>
   </body>

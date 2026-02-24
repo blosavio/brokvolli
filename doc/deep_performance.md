@@ -1,15 +1,27 @@
 
   <body>
     <h1>
-      Addendum: Benchmarking a single, deep transduction
+      Addendum 1: Benchmarking a single, deep transduction
     </h1>
     <div>
       <a href="#group-0">Construct hashmap of eighteen mathematical ops, per element</a>
     </div>
     <div>
       <p>
-        See also <a href="https://blosavio.github.io/brokvolli/transductions.html">previous benchmarks</a>.
+        See also:
       </p>
+      <ul>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/transductions.html">Main benchmarks</a>
+        </li>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/partitions.html">Addendum 2: Effect of partition size</a>
+        </li>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/processors.html">Addendum 3: Performance scaling with processors</a>
+        </li>
+      </ul>
+      <p></p>
       <p>
         We&apos;ll define our benchmarks <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj">here</a>. For each
         function below, we&apos;ll test vectors of random floating point numbers, increasing in length from one to one-hundred-thousand, by powers of ten. For
@@ -72,7 +84,7 @@
       </h3>
       <div>
         <p>
-          This test performs multiple mathematical operations per element, <code>sine</code>, <em>square-root</em>, <code>logarithm</code>, etc.
+          This test performs multiple mathematical operations per element, <em>sine</em>, <em>square-root</em>, <em>logarithm</em>, etc.
         </p>
         <p>
           Execution times increase with vector length. The single- and multi-threaded functions are indistinguishable for one-hundred elements or fewer. When
@@ -289,7 +301,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 13.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 24.<span id="uuid"><br>
       1ff123be-d29c-42fc-8dbe-2bd794272c59</span>
     </p>
   </body>

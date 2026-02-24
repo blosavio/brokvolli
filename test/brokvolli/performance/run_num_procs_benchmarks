@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# With CPU affinity explicitly pinned, runs Criterium benchmarks of Brokvolli's
+# multi-threaded transduce, ninety mathematical ops per element.
+
+# The version field of the Leiningen `project.clj` file must contain a valid
+# `taskset` cpu-list, e.g.,
+#     1
+#     1-3
+#     1-3, 5
+#     0-10:2
+
+# Example usage:
+# $ ./run_num_procs_benchmarks
+
+set -eu
+
+cpulist=`lein run -m brokvolli.performance.project-version/project-version-lein`
+
+taskset --cpu-list $cpulist lein with-profiles default,benchmark run -m fastester.core :benchmarks ./resources/processors_options.edn
+
+exit 0
+

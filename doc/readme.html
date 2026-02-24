@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2026-02-22 10:06:32" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2026-02-24 07:18:03" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       Brokvolli — A Clojure library providing transduce-kv and multi-threaded transducing functions
@@ -892,10 +892,10 @@
         additional overhead.
       </p>
       <p>
-        The multi-threaded transducing functions present a more <a href="">complicated</a> <a href="">performance</a> <a href="">story</a>. Even though
-        Brokvolli implements them with light-weight Fork/Join threads, that additional machinery imposes non-negligible overhead. The multi-threaded variants
-        almost always perform slightly worse on collections with fewer than one-thousand elements, and almost always slightly worse when the per-element task
-        is small (e.g., incrementing a number).
+        The multi-threaded transducing functions present a <a href="">more</a> <a href="">nuanced</a> <a href="">performance</a> <a href="">story</a>. Even
+        though Brokvolli implements them with light-weight Fork/Join threads, that additional machinery imposes non-negligible overhead. The multi-threaded
+        variants almost always perform slightly worse on collections with fewer than one-thousand elements, and almost always slightly worse when the
+        per-element task is small (e.g., incrementing a number).
       </p>
       <p>
         However, when the input collection grows beyond ten-thousand elements, or the transduction involves ten or more tasks per element, then the
@@ -1130,7 +1130,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 22.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2026 February 24.<span id="uuid"><br>
       294419b4-984b-4fdb-bd80-9737707339c6</span>
     </p>
   </body>

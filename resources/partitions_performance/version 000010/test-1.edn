@@ -1,0 +1,61 @@
+{:overhead 7.080242566928282E-9,
+ :samples
+ (101372759 102204607 101705853 107447843 101902678 108437259),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.5084581306306313E-4 (3.437106807432433E-4 3.6099139921171177E-4)],
+ :final-gc-time 73642433,
+ :execution-count 296,
+ :variance
+ [1.2112974149632214E-10
+  (1.8954652552669093E-12 1.5757765451409688E-10)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 7316267810,
+ :lower-q
+ [3.424755371621622E-4 (3.424755371621622E-4 3.4360085472972976E-4)],
+ :warmup-executions 21369,
+ :sample-count 6,
+ :upper-q
+ [3.6371005912162166E-4 (3.451583306587838E-4 3.6634209121621624E-4)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 1,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "bf842421-e562-4813-ae97-4ce5ed66efb7",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "000010",
+  :parallel? false},
+ :total-time 0.623070999,
+ :sample-variance [1.1692099533240393E-10 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.080242566928282E-9},
+ :sample-mean
+ [3.5082826520270276E-4 (3.183892615498216E-4 3.8326726885558386E-4)],
+ :results :fastester/benchmark-fn-results-elided}

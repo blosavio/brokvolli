@@ -1,0 +1,61 @@
+{:overhead 7.080242566928282E-9,
+ :samples
+ (100878288 101239289 101537272 101672662 100344478 100718725),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.386012981252858E-4 (1.3805589620484682E-4 1.3905864014631918E-4)],
+ :final-gc-time 67091765,
+ :execution-count 729,
+ :variance
+ [5.414928489585215E-13
+  (2.0329156349246712E-13 8.041433803293289E-13)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.1388888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5210090791,
+ :lower-q
+ [1.376467462277092E-4 (1.376467462277092E-4 1.3816011659807957E-4)],
+ :warmup-executions 34365,
+ :sample-count 6,
+ :upper-q
+ [1.39394362654321E-4 (1.3881229612482855E-4 1.3946867215363512E-4)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 0,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "cd8b5324-a947-407b-b22e-b96bc270dff1",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 1,
+  :version "000010",
+  :parallel? false},
+ :total-time 0.606390714,
+ :sample-variance [4.879526486800974E-13 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.080242566928282E-9},
+ :sample-mean
+ [1.3863527983539096E-4 (1.3653967160909462E-4 1.407308880616873E-4)],
+ :results :fastester/benchmark-fn-results-elided}

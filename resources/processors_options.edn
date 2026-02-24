@@ -1,0 +1,162 @@
+{:title "Addendum 3: Benchmarking with different processor counts"
+
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+
+ :copyright-holder "Brad Losavio"
+
+ :fastester-UUID #uuid "280ceca6-1559-4e0c-b032-a92d85dc411e"
+
+ :preferred-version-info :lein
+
+ :benchmarks {'brokvolli.performance.processors #{'processors-1}}
+
+ ;; output directories and filenames
+ :html-directory "doc/"
+ :html-filename "processors_performance.html"
+ :img-subdirectory "processors_img/"
+
+ :markdown-directory "doc/"
+ :markdown-filename "processors_performance.md"
+
+ :results-url "https://github.com/blosavio/brokvolli/blob/main/"
+ :results-directory "resources/processors_performance/"
+
+ :verbose? true
+ :testing-thoroughness :quick
+ :parallel? false
+ :save-benchmark-fn-results? false
+ :elide-machine-metadata? false
+
+ :sort-comparator compare
+
+ :tidy-html? true
+
+ :preamble
+ [:div
+  [:p "See also:"
+   [:ul
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
+          "Main benchmarks"]]
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/deep.html"}
+          "Addendum 1: Increased computations per element"]]
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions.html"}
+          "Addendum 3: Performance scaling with processors"]]]]
+
+  [:p "Benchmarks defined "
+   [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/processors.clj"}
+    "here"]
+   ", similar to "
+   [:a {:href ""} "before"]
+   ". For exploring the affects of partiton size, we'll consider only
+ multi-threaded "
+   [:code "transduce"]
+   ". We'll test vectors of random floating point numbers, increasing in length
+ from one to one-hundred-thousand, by powers of ten. For each number in the
+ vectors, we'll construct a hashmap of eighteen mathematical operations on that
+ number (trig ops, logarithms, etc.) that the JVM compiler oughtn't be able to
+ optimize. To amplify the computation requirements, we'll make that hashmap five
+ times for each element. We'll use the "
+   [:a {:href "https://github.com/hugoduncan/criterium/"}
+    "Criterium benchmarking library"]
+   " to measure the execution times of sixty repetitions of each condition.
+ Benchmarks were run on three pinned cores of my old, rusty computer."]
+
+  #_[:p "Overall, we observe that the execution times increase with increasing
+ vector lengths. The results are relatively indistinguishable when the vector
+ contains ten or fewer elements. When the partition is exactly the vector's
+ length, the transduction runs exactly as fast as single-threaded "
+   [:code "transduce"]
+   ", as expected. Once the vector length exceeds the partition size, we can see
+ performance benefits to the multi-threading. For every vector length
+ size one-hundred or larger, the when the partition size results in multiple
+ threads, the processing time is roughly twice as fast."]]
+
+ :comments
+ {"Construct hashmap of eighteen mathematical ops, per element"
+  [:div
+   [:p "This test performs the following mathematical operations per element: "
+    [:em "cube root"] ", "
+    [:em "ceiling"] ", "
+    [:em "cosine"] ", "
+    [:em "cubing"] ", "
+    [:em "decrement"] ", "
+    [:em "natural exponentiation"] ", "
+    [:em "exponentiation"] ", "
+    [:em "floor"] ", "
+    [:em "identity"] ", "
+    [:em "increment"] ", "
+    [:em "logarithm"] ", "
+    [:em "natural logarithm"] ", "
+    [:em "multiply by π"] ", "
+    [:em "negation"] ", "
+    [:em "round"] ", "
+    [:em "sine"] ", "
+    [:em "square-root"] ", and "
+    [:em "tangent"]
+    ". For each element, that group of operations was performed five times on
+ jittered values of the elements (i.e., "
+    [:code "(* 18 5) => 90"]
+    " operations per vector element). The partition values are the integers
+ following \"version\" in the chart legend."]
+
+   #_[:p "For vectors of one or ten elements, none of the partitioning limits are
+ distinguishable, as expected. For the one-hundred element vector, we can see
+ a performance benefit due to the multi-threading when the the vector is
+ partitioned into chunks of about ten (blue cirlces). For the one-thousand
+ element vectors, paritions of ten or one hundred chunks (gold diamonds) provide
+ performance improvements (i.e., shorter times). This pattern continues: when
+ the vector is partitioned into about ten chunks, we observed a factor of two
+ performance improvement."]
+
+   #_[:p "Notice that the performance improves when the partition size is one
+ decade smaller than the vector length."]
+
+   #_[:table
+    [:tr
+     [:th "vector length"]
+     [:th "best"]
+     [:th "worst"]
+     [:th "factor"]
+     [:th "chuck size at improvement"]]
+
+    [:tr
+     [:td "100"]
+     [:td "1.4e-3"]
+     [:td "2.7e-3"]
+     [:td "1.9×"]
+     [:td "10"]]
+
+    [:tr
+     [:td "1000"]
+     [:td "1.1e-2"]
+     [:td "2.9e-2"]
+     [:td "2.6×"]
+     [:td "10–100"]]
+
+    [:tr
+     [:td "10000"]
+     [:td "1.3e-1"]
+     [:td "3.2e-1"]
+     [:td "2.5×"]
+     [:td "100–1000"]]
+
+    [:tr
+     [:td "100000"]
+     [:td "1.6e0"]
+     [:td "2.9e0"]
+     [:td "1.8×"]
+     [:td "100–10000"]]]
+
+   #_[:p "Note that a one-hundred-thousand partition chunk (red triangles) is as
+ large as the largest tested vector. Therefore, red triangles represent no
+ chunking for any vector length tested, and the performance is what we would
+ observe with single-threaded "
+    [:code "transduce"]
+    "."]]}
+
+ :chart-settings
+ {"(fn [n] (multi/transduce n concatv xform-1 tconj (vecs n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}}}
+

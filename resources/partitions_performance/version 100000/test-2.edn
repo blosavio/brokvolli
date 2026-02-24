@@ -1,0 +1,60 @@
+{:overhead 7.080664559992421E-9,
+ :samples
+ (105198271 108352149 112089994 120236982 122485929 109570433),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.0024539834818840586 (0.002350584300724638 0.0025619791630434787)],
+ :final-gc-time 83617326,
+ :execution-count 46,
+ :variance
+ [2.591977310980575E-8 (1.2721845923340033E-8 3.800195051815929E-8)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.14986012527310413,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 8811897320,
+ :lower-q
+ [0.002286918934782609 (0.002286918934782609 0.002298799809782609)],
+ :warmup-executions 3907,
+ :sample-count 6,
+ :upper-q
+ [0.0026344877635869567 (0.0024298923668478263 0.002662737586956522)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 2,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "d3f587cf-301f-42f9-b153-8a35f7ba75c6",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 100,
+  :version "100000",
+  :parallel? false},
+ :total-time 0.677933758,
+ :sample-variance [2.24400341363678E-8 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.080664559992421E-9},
+ :sample-mean
+ [0.0024562817318840584 (0.00200688179059867 0.0029056816731694466)],
+ :results :fastester/benchmark-fn-results-elided}

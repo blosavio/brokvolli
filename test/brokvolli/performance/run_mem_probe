@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# With CPU affinity explicitly pinned, runs Criterium benchmarks with given vector
+# legnth `$1` and benchmark thoroughness `$2`.
+
+# `length` is an integer.
+# `thoroughness` is one of `:default`, `:quick`, or `:lightning`.
+
+# Example usage:
+# $ ./run_mem_probe 1000 :quick
+
+set -eu
+
+taskset --cpu-list 1-3 lein with-profiles default,benchmark run -m brokvolli.performance.probe-memory-limits $1 $2
+
+exit 0
+

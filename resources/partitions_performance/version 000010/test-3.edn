@@ -1,0 +1,59 @@
+{:overhead 7.080242566928282E-9,
+ :samples
+ (175653521 149136304 152904562 100123425 121463275 116827437),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.011282503694444447 (0.009605077069444445 0.01295333076388889)],
+ :final-gc-time 152105231,
+ :execution-count 12,
+ :variance
+ [6.436092559147773E-6 (2.6021243016626453E-6 1.017344886372265E-5)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.6437751300997664,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 6780624738,
+ :lower-q [0.00834361875 (0.00834361875 0.00973561975)],
+ :warmup-executions 755,
+ :sample-count 6,
+ :upper-q
+ [0.014361572406250002 (0.012139764614583335 0.014637793416666668)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 3,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "472510c6-22a2-49df-b77e-3a9d8efea8bb",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 1000,
+  :version "000010",
+  :parallel? false},
+ :total-time 0.816108524,
+ :sample-variance [5.412164782534944E-6 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.080242566928282E-9},
+ :sample-mean
+ [0.011334840611111114 (0.004355622671913735 0.018314058550308494)],
+ :results :fastester/benchmark-fn-results-elided}

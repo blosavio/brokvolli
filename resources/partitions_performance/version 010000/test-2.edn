@@ -1,0 +1,60 @@
+{:overhead 7.086368240244312E-9,
+ :samples
+ (115272970 106445094 101739980 103354950 109651935 105165438),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.002430418056818182 (0.0023605937310606064 0.0025346730303030304)],
+ :final-gc-time 85735450,
+ :execution-count 44,
+ :variance
+ [1.2734221490050962E-8 (2.361929462440223E-9 2.634615648077825E-8)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888862,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 10832492321,
+ :lower-q
+ [0.002312272272727273 (0.002312272272727273 0.0023489761363636365)],
+ :warmup-executions 4687,
+ :sample-count 6,
+ :upper-q
+ [0.002594761034090909 (0.0024155712954545454 0.002619840227272727)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 2,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "351fc6b4-d760-48e7-9a99-25c6cfae120c",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 100,
+  :version "010000",
+  :parallel? false},
+ :total-time 0.641630367,
+ :sample-variance [1.2404933754434243E-8 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.086368240244312E-9},
+ :sample-mean
+ [0.002430418056818182 (0.0020962857420237157 0.002764550371612648)],
+ :results :fastester/benchmark-fn-results-elided}

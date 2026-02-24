@@ -1,4 +1,4 @@
-{:title "Addendum: Benchmarking a single, deep transduction"
+{:title "Addendum 1: Benchmarking a single, deep transduction"
 
  :responsible {:name "Brad Losavio"
                :email "blosavio@sagevisuals.com"}
@@ -33,10 +33,14 @@
 
  :preamble
  [:div
-  [:p "See also "
-   [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
-    "previous benchmarks"]
-   "."]
+  [:p "See also:"
+   [:ul
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
+      "Main benchmarks"]]
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions.html"}
+          "Addendum 2: Effect of partition size"]]
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/processors.html"}
+          "Addendum 3: Performance scaling with processors"]]]]
 
   [:p "We'll define our benchmarks "
    [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj"}
@@ -85,11 +89,11 @@
  {"Construct hashmap of eighteen mathematical ops, per element"
   [:div
    [:p "This test performs multiple mathematical operations per element, "
-    [:code "sine"]
+    [:em "sine"]
     ", "
     [:em "square-root"]
     ", "
-    [:code "logarithm"]
+    [:em "logarithm"]
     ", etc. "]
 
    [:p "Execution times increase with vector length. The single- and

@@ -11,6 +11,21 @@
     </div>
     <div>
       <p>
+        See also:
+      </p>
+      <ul>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/deep.html">Addendum 1: Increased computations per element</a>
+        </li>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/partitions.html">Addendum 2: Effect of partition size</a>
+        </li>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/processors.html">Addendum 3: Performance scaling with processors</a>
+        </li>
+      </ul>
+      <p></p>
+      <p>
         Two of Brokvolli&apos;s goals are
       </p>
       <ol>
@@ -1053,7 +1068,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 13.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 24.<span id="uuid"><br>
       4575b7b7-5880-47d7-9b5d-7e26e1eed7aa</span>
     </p>
   </body>

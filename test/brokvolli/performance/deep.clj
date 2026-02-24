@@ -88,7 +88,7 @@
 
 (defbench
   deep-1
-  "Construct hashmap of eighteen mathmetical ops, per element"
+  "Construct hashmap of eighteen mathematical ops, per element"
   (fn [n] ((tactics-1 (project-version-lein)) (vecs n)))
   (range-pow-10 max-power))
 

@@ -36,6 +36,15 @@
 
  :preamble
  [:div
+  [:p "See also:"
+   [:ul
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/deep.html"}
+          "Addendum 1: Increased computations per element"]]
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions.html"}
+          "Addendum 2: Effect of partition size"]]
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/processors.html"}
+          "Addendum 3: Performance scaling with processors"]]]]
+
   [:p "Two of Brokvolli's goals are "
    [:ol
     [:li "Bring "

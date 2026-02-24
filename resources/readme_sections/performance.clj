@@ -9,8 +9,10 @@
   [:em "O(1)"]
   " sprinkling of additional overhead."]
 
- [:p "The multi-threaded transducing functions present a more "
-  [:a {:href ""} "complicated"]
+ [:p "The multi-threaded transducing functions present a "
+  [:a {:href ""} "more"]
+  " "
+  [:a {:href ""} "nuanced"]
   " "
   [:a {:href ""} "performance"]
   " "

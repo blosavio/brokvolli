@@ -1,0 +1,59 @@
+{:overhead 7.123335121311023E-9,
+ :samples (101167124 95605362 95711545 105762112 94762313 102416836),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.741587710691824E-4 (3.633460389937107E-4 3.879763025157233E-4)],
+ :final-gc-time 77238444,
+ :execution-count 265,
+ :variance
+ [3.160884237349811E-10 (1.520749517774562E-10 4.921673872850164E-10)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 7156479840,
+ :lower-q
+ [3.5759363396226416E-4 (3.5759363396226416E-4 3.6077495094339625E-4)],
+ :warmup-executions 19963,
+ :sample-count 6,
+ :upper-q
+ [3.9693486226415097E-4 (3.8176273207547176E-4 3.991023094339623E-4)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 1,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "f7d2e173-15fe-4814-b9da-e734d87c05ef",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "001000",
+  :parallel? false},
+ :total-time 0.595425292,
+ :sample-variance [2.9064940325138724E-10 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.123335121311023E-9},
+ :sample-mean
+ [3.744813157232705E-4 (3.233359872047979E-4 4.256266442417431E-4)],
+ :results :fastester/benchmark-fn-results-elided}

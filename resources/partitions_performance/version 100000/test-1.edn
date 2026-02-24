@@ -1,0 +1,60 @@
+{:overhead 7.080664559992421E-9,
+ :samples (108579536 106528279 100044007 106636111 99364032 101907867),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.4",
+  :java-version "11.0.30",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.3819326818675355E-4 (3.2972858631921827E-4 3.4689211292073836E-4)],
+ :final-gc-time 65680236,
+ :execution-count 307,
+ :variance
+ [1.8345169519320954E-10
+  (9.994003020328704E-11 2.5784308295927807E-10)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 3,
+  :name "Linux",
+  :version "5.15.0-170-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 6767700621,
+ :lower-q
+ [3.23661342019544E-4 (3.23661342019544E-4 3.258762442996743E-4)],
+ :warmup-executions 20657,
+ :sample-count 6,
+ :upper-q
+ [3.5284406799674273E-4 (3.451163762214984E-4 3.5367927035830624E-4)],
+ :fastester/metadata
+ {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
+  :date {:year 2026, :month "February", :day 23},
+  :group "Construct hashmap of eighteen mathematical ops, per element",
+  :index 1,
+  :ns "brokvolli.performance.partitions",
+  :UUIDv4 #uuid "078059c4-8c90-4e2c-92d2-b895d1bba2c8",
+  :name "partitions-1",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "100000",
+  :parallel? false},
+ :total-time 0.623059832,
+ :sample-variance [1.606069177876674E-10 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 7.080664559992421E-9},
+ :sample-mean
+ [3.382518089033659E-4 (3.0023257350746395E-4 3.7627104429926794E-4)],
+ :results :fastester/benchmark-fn-results-elided}
