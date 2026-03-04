@@ -1,13 +1,4 @@
-(defproject com.sagevisuals/brokvolli
-  #_"0-0"
-  #_"0-1"
-  #_"0-3"
-  #_"0-7"
-  #_"0-15"
-  #_"0-31"
-  #_"0-63"
-
-  #_"0-SNAPSHOT0"
+(defproject com.sagevisuals/brokvolli "0-SNAPSHOT0"
   :description "A Clojure library providing transduce-kv and multi-threaded transducing functions"
   :url "https://github.com/blosavio/brokvolli"
   :license {:name "MIT License"

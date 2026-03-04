@@ -75,9 +75,10 @@
 
 (def tactics-1
   {"reduce" (fn [v] (reduce (fn [acc x] (conj acc (mapper x))) [] v))
-   "multi-transduce" (fn [v] (multi/transduce (->(project-version-lein)
-                                                 trim-leading-zeros
-                                                 parse-long)
+   "multi-transduce" (fn [v] (multi/transduce (or (-> (project-version-lein)
+                                                      trim-leading-zeros
+                                                      parse-long)
+                                                  512)
                                               concatv
                                               xform-1
                                               tconj

@@ -1,0 +1,74 @@
+{:overhead 1.434314862112025E-9,
+ :samples
+ (103261558 101863113 106738544 103530593 106894346 101049664),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :vm-version "25.0.2+10-Debian-1deb13u2",
+  :name "7671@ip-172-31-19-161",
+  :clojure-version-string "1.12.4",
+  :java-runtime-version "25.0.2+10-Debian-1deb13u2",
+  :java-version "25.0.2",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Debian",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "25",
+  :sun-arch-data-model "64",
+  :input-arguments
+  ["-Dfile.encoding=UTF-8"
+   "-Djdk.attach.allowAttachSelf"
+   "-XX:+UnlockDiagnosticVMOptions"
+   "-XX:+DebugNonSafepoints"
+   "-Dclj-async-profiler.output-dir=./resources/profiler_data/"
+   "-XX:+TieredCompilation"
+   "-XX:TieredStopAtLevel=4"
+   "-Dclojure.compile.path=/home/admin/brokvolli/target/classes"
+   "-Dbrokvolli.version=0-0"
+   "-Dclojure.debug=false"]},
+ :mean
+ [0.0014044693783783785 (0.0013823133220720722 0.0014290152432432433)],
+ :final-gc-time 110394758,
+ :execution-count 74,
+ :variance
+ [1.230407307442058E-9 (3.4870022617932806E-10 1.663516322431165E-9)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "6.12.48+deb13-cloud-amd64"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888873,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 7287953072,
+ :lower-q [0.001365536 (0.001365536 0.00137889079222973)],
+ :warmup-executions 5188,
+ :sample-count 6,
+ :upper-q
+ [0.001442412756756757 (0.0013986076165540542 0.0014445181891891894)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (multi/transduce partition-at concatv xform-1 tconj (vecs n)))",
+  :date {:year 2026, :month "March", :day 4},
+  :group "Ninety mathematical operations per element",
+  :index 2,
+  :ns "brokvolli.performance.processors",
+  :UUIDv4 #uuid "8020e0de-a154-4355-b826-7ecc6f106f2e",
+  :name "processors-1",
+  :testing-thoroughness :quick,
+  :arg 100,
+  :version "0-0",
+  :parallel? false},
+ :total-time 0.623337818,
+ :sample-variance [1.089853515588361E-9 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.434314862112025E-9},
+ :sample-mean
+ [0.0014039140045045047 (0.0013048752159401484 0.001502952793068861)],
+ :results :fastester/benchmark-fn-results-elided}

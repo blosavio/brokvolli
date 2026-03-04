@@ -1,0 +1,71 @@
+{:overhead 1.7221578202860639E-9,
+ :samples
+ (330107632 317536367 543775144 327581332 421999409 455793146),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :vm-version "25.0.2+10-Debian-1deb13u2",
+  :name "8404@ip-172-31-19-161",
+  :clojure-version-string "1.12.4",
+  :java-runtime-version "25.0.2+10-Debian-1deb13u2",
+  :java-version "25.0.2",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Debian",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 4, :qualifier nil},
+  :spec-version "25",
+  :sun-arch-data-model "64",
+  :input-arguments
+  ["-Dfile.encoding=UTF-8"
+   "-Djdk.attach.allowAttachSelf"
+   "-XX:+UnlockDiagnosticVMOptions"
+   "-XX:+DebugNonSafepoints"
+   "-Dclj-async-profiler.output-dir=./resources/profiler_data/"
+   "-XX:+TieredCompilation"
+   "-XX:TieredStopAtLevel=4"
+   "-Dclojure.compile.path=/home/admin/brokvolli/target/classes"
+   "-Dbrokvolli.version=0-7"
+   "-Dclojure.debug=false"]},
+ :mean [0.39988655500000003 (0.3408114565 0.4738558996666667)],
+ :final-gc-time 1867643439,
+ :execution-count 1,
+ :variance
+ [0.00916994489226073 (0.0035144718863092616 0.013805163051009164)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 8,
+  :name "Linux",
+  :version "6.12.48+deb13-cloud-amd64"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.646483321991358,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5465453793,
+ :lower-q [0.31753636700000004 (0.31753636700000004 0.3278971195)],
+ :warmup-executions 15,
+ :sample-count 6,
+ :upper-q [0.528553177125 (0.410512936875 0.543775144)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (multi/transduce partition-at concatv xform-1 tconj (vecs n)))",
+  :date {:year 2026, :month "March", :day 4},
+  :group "Ninety mathematical operations per element",
+  :index 5,
+  :ns "brokvolli.performance.processors",
+  :UUIDv4 #uuid "588556eb-60d2-401e-85a0-f98eb89e57f4",
+  :name "processors-1",
+  :testing-thoroughness :quick,
+  :arg 100000,
+  :version "0-7",
+  :parallel? false},
+ :total-time 2.39679303,
+ :sample-variance [0.008239216881363505 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.7221578202860639E-9},
+ :sample-mean [0.399465505 (0.12715510870145333 0.6717759012985467)],
+ :results :fastester/benchmark-fn-results-elided}
