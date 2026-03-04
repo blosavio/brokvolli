@@ -1,6 +1,5 @@
-{:overhead 7.0930010100923146E-9,
- :samples
- (103819361 101850684 101630702 107888927 101756665 108740705),
+{:overhead 7.897503424150052E-9,
+ :samples (99784322 104304713 110955623 115980113 99177325 106387062),
  :runtime-details
  {:spec-vendor "Oracle Corporation",
   :spec-name "Java Virtual Machine Specification",
@@ -13,40 +12,41 @@
   :spec-version "11",
   :sun-arch-data-model "64"},
  :mean
- [2.6666369352088665E-4 (2.61099231884058E-4 2.735506240409207E-4)],
- :final-gc-time 78754453,
- :execution-count 391,
+ [2.9154772252747255E-4 (2.796233598901099E-4 3.065877916666667E-4)],
+ :final-gc-time 141580200,
+ :execution-count 364,
  :variance
- [7.13249253640954E-11 (8.355480351002402E-12 9.206726101444856E-11)],
+ [3.4562528129107005E-10
+  (1.0073652611963346E-10 6.243332972317973E-10)],
  :os-details
  {:arch "amd64",
-  :available-processors 3,
+  :available-processors 4,
   :name "Linux",
-  :version "5.15.0-168-generic"},
+  :version "5.15.0-171-generic"},
  :tail-quantile 0.025,
- :outlier-variance 0.1388888888888887,
+ :outlier-variance 0.14887649744393422,
  :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
- :warmup-time 5510030863,
+ :warmup-time 5573377836,
  :lower-q
- [2.5992506905370843E-4 (2.5992506905370843E-4 2.6024722506393864E-4)],
- :warmup-executions 21337,
+ [2.724651785714286E-4 (2.724651785714286E-4 2.7422595741758245E-4)],
+ :warmup-executions 19519,
  :sample-count 6,
  :upper-q
- [2.765359002557545E-4 (2.6489328996163683E-4 2.781092199488491E-4)],
+ [3.153323671016484E-4 (2.915570559752747E-4 3.186266840659341E-4)],
  :fastester/metadata
  {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
-  :date {:year 2026, :month "February", :day 7},
+  :date {:year 2026, :month "March", :day 3},
   :group "Construct hashmap of eighteen mathematical ops, per element",
   :index 2,
   :ns "brokvolli.performance.deep",
-  :UUIDv4 #uuid "88b0eab5-1689-449e-aee7-28b69f18cd75",
+  :UUIDv4 #uuid "d7ad5205-ab0a-4aad-b4d0-1a2a2821cf0c",
   :name "deep-1",
   :testing-thoroughness :quick,
   :arg 100,
   :version "reduce",
   :parallel? false},
- :total-time 0.625687044,
- :sample-variance [6.857882778095913E-11 (0.0 0.0)],
+ :total-time 0.636589158,
+ :sample-variance [3.2047815145955496E-10 (0.0 0.0)],
  :options
  {:max-gc-attempts 100,
   :samples 6,
@@ -54,7 +54,7 @@
   :warmup-jit-period 5000000000,
   :tail-quantile 0.025,
   :bootstrap-size 500,
-  :overhead 7.0930010100923146E-9},
+  :overhead 7.897503424150052E-9},
  :sample-mean
- [2.6670376982097186E-4 (2.4186006941164008E-4 2.9154747023030366E-4)],
+ [2.914785521978022E-4 (2.377728414852905E-4 3.451842629103139E-4)],
  :results :fastester/benchmark-fn-results-elided}

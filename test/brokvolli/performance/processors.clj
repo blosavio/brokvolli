@@ -26,12 +26,12 @@
 
 
 (def transductions-benchmark-options-filename "./resources/processors_options.edn")
-(def n 500)
+(def partition-at 500)
 (def max-power 5)
 
 
 (def vecs
-  (reduce (fn [m n] (assoc m n (vec (repeatedly n #(rand)))))
+  (reduce (fn [m n] (assoc m n (into [] (repeatedly n #(rand)))))
           {}
           (range-pow-10 max-power)))
 
@@ -63,14 +63,13 @@
         (range 1 max-mapper)))
 
 
-
 (def xform-1 (map-kv mapper))
 
 
 (defbench
   processors-1
   "Ninety mathematical operations per element"
-  (fn [n] (multi/transduce n concatv xform-1 tconj (vecs n)))
+  (fn [n] (multi/transduce partition-at concatv xform-1 tconj (vecs n)))
   (range-pow-10 max-power))
 
 

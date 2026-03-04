@@ -42,8 +42,8 @@
 
 
 (def vecs
-  (reduce (fn [m n] (assoc m n {:left (vec (repeatedly n #(rand-int 8))) 
-                                :right (vec (repeatedly n #(rand-int 8)))}))
+  (reduce (fn [m n] (assoc m n {:left (into [] (repeatedly n #(rand-int 8))) 
+                                :right (into [] (repeatedly n #(rand-int 8)))}))
           {}
           (range-pow-10 max-power)))
 

@@ -30,7 +30,7 @@
 
 
 (def vecs
-  (reduce (fn [m n] (assoc m n (vec (repeatedly n #(rand)))))
+  (reduce (fn [m n] (assoc m n (into [] (repeatedly n #(rand)))))
           {}
           (range-pow-10 max-power)))
 

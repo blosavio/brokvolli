@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+    <meta charset="utf-8" compile-date="2026-03-04 05:56:24" content="width=device-width, initial-scale=1" name="viewport">
+    <script src="jquery-3.7.1.min.js" type="text/javascript"></script>
+    <script src="fastester.js" type="text/javascript"></script>
+    <link href="project.css" rel="stylesheet" type="text/css">
+    <title>
+      Addendum 2: Benchmarking with different partitions
+    </title>
+  </head>
+  <body>
+    <h1>
+      Addendum 2: Benchmarking with different partitions
+    </h1>
+    <div>
+      <a href="#group-0">Construct hashmap of eighteen mathematical ops, per element</a>
+    </div>
+    <div>
+      <p>
+        See also:
+      </p>
+      <ul>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/transductions.html">Main benchmarks</a>
+        </li>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/deep.html">Addendum 1: Increased computations per element</a>
+        </li>
+        <li>
+          <a href="https://blosavio.github.io/brokvolli/partitions.html">Addendum 3: Performance scaling with processors</a>
+        </li>
+      </ul>
+      <p></p>
+      <p>
+        Benchmarks defined <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/partitions.clj">here</a>, similar to <a href=
+        "">before</a>. For exploring the affects of partiton size, we'll consider only multi-threaded <code>transduce</code>. We'll test vectors of random
+        floating point numbers, increasing in length from one to one-hundred-thousand, by powers of ten. For each number in the vectors, we'll construct a
+        hashmap of eighteen mathematical operations on that number (trig ops, logarithms, etc.) that the JVM compiler oughtn't be able to optimize. To amplify
+        the computation requirements, we'll make that hashmap five times for each element. We'll use the <a href=
+        "https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to measure the execution times of sixty repetitions of each condition.
+        Benchmarks were run on three pinned cores of my antique desktop computer.
+      </p>
+      <p>
+        Overall, we observe that the execution times increase with increasing vector lengths. The results are relatively indistinguishable when the vector
+        contains ten or fewer elements. When the partition is exactly the vector's length, the transduction runs exactly as fast as single-threaded
+        <code>transduce</code>, as expected. Once the vector length exceeds the partition size, we can see performance benefits to the multi-threading. For
+        every vector length size one-hundred or larger, the when the partition size results in multiple threads, the processing time is roughly twice as fast.
+      </p>
+    </div>
+    <section>
+      <h3 id="group-0">
+        Construct hashmap of eighteen mathematical ops, per element
+      </h3>
+      <div>
+        <p>
+          This test performs the following mathematical operations per element: <em>cube root</em>, <em>ceiling</em>, <em>cosine</em>, <em>cubing</em>,
+          <em>decrement</em>, <em>natural exponentiation</em>, <em>exponentiation</em>, <em>floor</em>, <em>identity</em>, <em>increment</em>,
+          <em>logarithm</em>, <em>natural logarithm</em>, <em>multiply by π</em>, <em>negation</em>, <em>round</em>, <em>sine</em>, <em>square-root</em>, and
+          <em>tangent</em>. For each element, that group of operations was performed five times on jittered values of the elements (i.e., <code>(* 18 5) =&gt;
+          90</code> operations per vector element). The partition values are the integers following "version" in the chart legend.
+        </p>
+        <p>
+          For vectors of one or ten elements, none of the partitioning limits are distinguishable, as expected. For the one-hundred element vector, we can see
+          a performance benefit due to the multi-threading when the the vector is partitioned into chunks of about ten (blue cirlces). For the one-thousand
+          element vectors, paritions of ten or one hundred chunks (gold diamonds) provide performance improvements (i.e., shorter times). This pattern
+          continues: when the vector is partitioned into about ten chunks, we observed a factor of two performance improvement.
+        </p>
+        <p>
+          Notice that the performance improves when the partition size is one decade smaller than the vector length.
+        </p>
+        <table>
+          <tr>
+            <th>
+              vector length
+            </th>
+            <th>
+              best
+            </th>
+            <th>
+              worst
+            </th>
+            <th>
+              factor
+            </th>
+            <th>
+              chuck size at improvement
+            </th>
+          </tr>
+          <tr>
+            <td>
+              100
+            </td>
+            <td>
+              1.4e-3
+            </td>
+            <td>
+              2.7e-3
+            </td>
+            <td>
+              1.9×
+            </td>
+            <td>
+              10
+            </td>
+          </tr>
+          <tr>
+            <td>
+              1000
+            </td>
+            <td>
+              1.1e-2
+            </td>
+            <td>
+              2.9e-2
+            </td>
+            <td>
+              2.6×
+            </td>
+            <td>
+              10–100
+            </td>
+          </tr>
+          <tr>
+            <td>
+              10000
+            </td>
+            <td>
+              1.3e-1
+            </td>
+            <td>
+              3.2e-1
+            </td>
+            <td>
+              2.5×
+            </td>
+            <td>
+              100–1000
+            </td>
+          </tr>
+          <tr>
+            <td>
+              100000
+            </td>
+            <td>
+              1.6e0
+            </td>
+            <td>
+              2.9e0
+            </td>
+            <td>
+              1.8×
+            </td>
+            <td>
+              100–10000
+            </td>
+          </tr>
+        </table>
+        <p>
+          Note that a one-hundred-thousand partition chunk (red triangles) is as large as the largest tested vector. Therefore, red triangles represent no
+          chunking for any vector length tested, and the performance is what we would observe with single-threaded <code>transduce</code>.
+        </p>
+      </div>
+      <div>
+        <h4 id="group-0-fexpr-0">
+          (fn [n] ((tactics-1 "multi-transduce") (vecs n)))
+        </h4><img alt=
+        "Benchmark measurements for expression `(fn [n] ((tactics-1 &quot;multi-transduce&quot;) (vecs n)))`, time versus &apos;n&apos; arguments, comparing different versions."
+        src="partitions_img/group-0-fexpr-0.svg"><button class="collapser" type="button">Show details</button>
+        <div class="collapsable">
+          <table>
+            <caption>
+              times in seconds, <em>mean±std</em>
+            </caption>
+            <thead>
+              <tr>
+                <td></td>
+                <th colspan="6">
+                  arg, n
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  version
+                </th>
+                <th>
+                  1
+                </th>
+                <th>
+                  10
+                </th>
+                <th>
+                  100
+                </th>
+                <th>
+                  1000
+                </th>
+                <th>
+                  10000
+                </th>
+                <th>
+                  100000
+                </th>
+              </tr>
+            </thead>
+            <tr>
+              <td>
+                000010
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000010/test-0.edn">1.6e-04±7.8e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000010/test-1.edn">3.7e-04±2.2e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000010/test-2.edn">1.3e-03±1.7e-04</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000010/test-3.edn">1.1e-02±2.0e-03</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000010/test-4.edn">1.2e-01±3.3e-02</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000010/test-5.edn">1.4e+00±2.0e-01</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                000100
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000100/test-0.edn">1.6e-04±7.4e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000100/test-1.edn">4.0e-04±5.6e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000100/test-2.edn">2.6e-03±2.1e-04</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000100/test-3.edn">1.2e-02±2.5e-03</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000100/test-4.edn">1.5e-01±4.1e-02</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 000100/test-5.edn">1.3e+00±9.4e-02</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                001000
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 001000/test-0.edn">1.6e-04±9.1e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 001000/test-1.edn">4.4e-04±6.9e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 001000/test-2.edn">2.6e-03±2.0e-04</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 001000/test-3.edn">2.9e-02±4.2e-03</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 001000/test-4.edn">1.2e-01±2.1e-02</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 001000/test-5.edn">1.6e+00±2.1e-01</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                010000
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 010000/test-0.edn">1.6e-04±8.3e-06</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 010000/test-1.edn">4.0e-04±5.4e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 010000/test-2.edn">2.6e-03±2.0e-04</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 010000/test-3.edn">2.7e-02±3.1e-03</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 010000/test-4.edn">3.1e-01±3.0e-02</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 010000/test-5.edn">1.7e+00±2.4e-01</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                100000
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 100000/test-0.edn">1.8e-04±1.9e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 100000/test-1.edn">4.0e-04±2.5e-05</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 100000/test-2.edn">2.7e-03±2.7e-04</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 100000/test-3.edn">3.0e-02±5.9e-03</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 100000/test-4.edn">3.0e-01±5.2e-02</a>
+              </td>
+              <td>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/partitions_performance/version 100000/test-5.edn">3.1e+00±2.2e-01</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <hr>
+    </section>
+    <p id="page-footer">
+      Copyright © 2024–2026 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/fastester">Fastester</a> on 2026 March 04.<span id="uuid"><br>
+      a6c8dda8-19a4-4db5-929e-853a28b86017</span>
+    </p>
+  </body>
+</html>

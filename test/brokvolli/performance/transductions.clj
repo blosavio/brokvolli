@@ -28,7 +28,7 @@
 
 
 (def vecs
-  (reduce (fn [m n] (assoc m n (vec (repeatedly n #(rand)))))
+  (reduce (fn [m n] (assoc m n (into [] (repeatedly n #(rand)))))
           {}
           (range-pow-10 max-power)))
 
@@ -224,7 +224,8 @@
 
 
 (deftest verify-tactics-4
-  (are [v] (= ((tactics-4 "core-transduce")      v)
+  (are [v] (= ((tactics-4 "fold")                v)
+              ((tactics-4 "core-transduce")      v)
               ((tactics-4 "single-transduce-kv") v)
               ((tactics-4 "multi-transduce")     v)
               ((tactics-4 "multi-transduce-kv")  v))

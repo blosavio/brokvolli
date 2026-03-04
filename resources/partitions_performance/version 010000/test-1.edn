@@ -1,6 +1,5 @@
-{:overhead 7.086368240244312E-9,
- :samples
- (101476977 101856914 101017574 108630913 101200567 109013853),
+{:overhead 7.907694056499373E-9,
+ :samples (99775931 105488904 141199329 110874176 103990261 107648345),
  :runtime-details
  {:spec-vendor "Oracle Corporation",
   :spec-name "Java Virtual Machine Specification",
@@ -13,41 +12,40 @@
   :spec-version "11",
   :sun-arch-data-model "64"},
  :mean
- [3.405430573770492E-4 (3.3246588469945356E-4 3.5242514699453554E-4)],
- :final-gc-time 76785474,
- :execution-count 305,
+ [3.9948594464285714E-4 (3.7315044642857145E-4 4.615758470238096E-4)],
+ :final-gc-time 157662455,
+ :execution-count 280,
  :variance
- [1.6094044056990703E-10
-  (1.1117656610918116E-12 1.9684778275367253E-10)],
+ [2.9544053952624175E-9 (1.100310254636157E-10 6.158355778138646E-9)],
  :os-details
  {:arch "amd64",
-  :available-processors 3,
+  :available-processors 4,
   :name "Linux",
-  :version "5.15.0-170-generic"},
+  :version "5.15.0-171-generic"},
  :tail-quantile 0.025,
- :outlier-variance 0.13888888888888876,
- :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
- :warmup-time 6799574988,
+ :outlier-variance 0.3177033258412069,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 1},
+ :warmup-time 5610419757,
  :lower-q
- [3.3120516065573773E-4 (3.3120516065573773E-4 3.3180513770491806E-4)],
- :warmup-executions 20413,
+ [3.563426107142857E-4 (3.563426107142857E-4 3.713937892857143E-4)],
+ :warmup-executions 14683,
  :sample-count 6,
  :upper-q
- [3.561669278688525E-4 (3.3380138319672137E-4 3.5742246885245906E-4)],
+ [4.893052000000001E-4 (3.8445837500000003E-4 5.042833178571429E-4)],
  :fastester/metadata
  {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
-  :date {:year 2026, :month "February", :day 23},
+  :date {:year 2026, :month "March", :day 4},
   :group "Construct hashmap of eighteen mathematical ops, per element",
   :index 1,
   :ns "brokvolli.performance.partitions",
-  :UUIDv4 #uuid "b1028383-7408-455f-a2e0-ab1b35fb6457",
+  :UUIDv4 #uuid "f85ffe68-5f17-4264-a191-3d323e4674a9",
   :name "partitions-1",
   :testing-thoroughness :quick,
   :arg 10,
   :version "010000",
   :parallel? false},
- :total-time 0.623196798,
- :sample-variance [1.5945543134842046E-10 (0.0 0.0)],
+ :total-time 0.668976946,
+ :sample-variance [2.875663788962212E-9 (0.0 0.0)],
  :options
  {:max-gc-attempts 100,
   :samples 6,
@@ -55,7 +53,7 @@
   :warmup-jit-period 5000000000,
   :tail-quantile 0.025,
   :bootstrap-size 500,
-  :overhead 7.086368240244312E-9},
+  :overhead 7.907694056499373E-9},
  :sample-mean
- [3.405446983606558E-4 (3.0266199937898627E-4 3.784273973423253E-4)],
+ [3.982005630952381E-4 (2.37324915153544E-4 5.590762110369323E-4)],
  :results :fastester/benchmark-fn-results-elided}

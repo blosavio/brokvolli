@@ -79,7 +79,7 @@
    [:a {:href "https://github.com/hugoduncan/criterium/"}
     "Criterium benchmarking library"]
    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my old, rusty computer."]
+ Benchmarks were run on three pinned cores of my rusty desktop computer."]
 
   [:p "The functions under examination are as follows:"
    [:ul

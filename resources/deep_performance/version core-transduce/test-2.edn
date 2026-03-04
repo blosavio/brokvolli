@@ -1,6 +1,6 @@
-{:overhead 7.122112439625978E-9,
+{:overhead 7.977081801196957E-9,
  :samples
- (101701967 101128211 102549975 103927831 108947388 102764223),
+ (100472965 103412343 109661065 111683220 100503511 101549490),
  :runtime-details
  {:spec-vendor "Oracle Corporation",
   :spec-name "Java Virtual Machine Specification",
@@ -13,41 +13,40 @@
   :spec-version "11",
   :sun-arch-data-model "64"},
  :mean
- [2.6816213428324697E-4 (2.6426459844559587E-4 2.762012029360967E-4)],
- :final-gc-time 75771166,
- :execution-count 386,
+ [2.904086083333334E-4 (2.809790671296297E-4 3.0037446111111116E-4)],
+ :final-gc-time 137185612,
+ :execution-count 360,
  :variance
- [5.660731870342408E-11
-  (4.133233172520055E-12 1.2310302751213925E-10)],
+ [2.062963879399613E-10 (9.145306743408551E-11 2.893191975108358E-10)],
  :os-details
  {:arch "amd64",
-  :available-processors 3,
+  :available-processors 4,
   :name "Linux",
-  :version "5.15.0-168-generic"},
+  :version "5.15.0-171-generic"},
  :tail-quantile 0.025,
- :outlier-variance 0.13888888888888865,
- :outliers {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
- :warmup-time 7293295443,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5164626379,
  :lower-q
- [2.619901839378238E-4 (2.619901839378238E-4 2.634765984455959E-4)],
- :warmup-executions 27415,
+ [2.790915694444445E-4 (2.790915694444445E-4 2.794653628472223E-4)],
+ :warmup-executions 17421,
  :sample-count 6,
  :upper-q
- [2.802447988989637E-4 (2.661591761658031E-4 2.8224711917098445E-4)],
+ [3.07359334375E-4 (2.8660968437500004E-4 3.102311666666667E-4)],
  :fastester/metadata
  {:fexpr "(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))",
-  :date {:year 2026, :month "February", :day 7},
+  :date {:year 2026, :month "March", :day 3},
   :group "Construct hashmap of eighteen mathematical ops, per element",
   :index 2,
   :ns "brokvolli.performance.deep",
-  :UUIDv4 #uuid "18287687-15a3-4b0c-83db-bb7dd98bc6de",
+  :UUIDv4 #uuid "e5c18a8f-e737-42a4-901a-f61224b1a6d1",
   :name "deep-1",
   :testing-thoroughness :quick,
   :arg 100,
   :version "core-transduce",
   :parallel? false},
- :total-time 0.621019595,
- :sample-variance [5.3906457109002735E-11 (0.0 0.0)],
+ :total-time 0.627282594,
+ :sample-variance [1.856471818455462E-10 (0.0 0.0)],
  :options
  {:max-gc-attempts 100,
   :samples 6,
@@ -55,7 +54,7 @@
   :warmup-jit-period 5000000000,
   :tail-quantile 0.025,
   :bootstrap-size 500,
-  :overhead 7.122112439625978E-9},
+  :overhead 7.977081801196957E-9},
  :sample-mean
- [2.6814317573402416E-4 (2.461168706879883E-4 2.9016948078006003E-4)],
+ [2.904086083333334E-4 (2.4953288648515173E-4 3.31284330181515E-4)],
  :results :fastester/benchmark-fn-results-elided}

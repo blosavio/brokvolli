@@ -53,7 +53,7 @@
         <li>Increment, filter, and remove, 4X (twelve total operations).
         </li>
       </ol>For each test, we&apos;ll use the <a href="https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to measure the execution
-      times of sixty repetitions of each condition. Benchmarks were run on three pinned cores of my old, rusty computer.
+      times of sixty repetitions of each condition. Benchmarks were run on three pinned cores of my rusty desktop computer.
       <p></p>
       <p>
         The functions under examination are as follows:
@@ -174,31 +174,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-21.edn">1.1e-04±2.5e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-21.edn">1.2e-04±2.1e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-22.edn">1.1e-04±1.1e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-22.edn">1.2e-04±6.9e-07</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-23.edn">1.1e-04±1.0e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-23.edn">1.3e-04±1.2e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-24.edn">1.5e-04±2.2e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-24.edn">1.8e-04±1.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-25.edn">5.0e-04±1.1e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-25.edn">6.6e-04±1.0e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-26.edn">4.5e-03±1.7e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-26.edn">5.8e-03±1.2e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-27.edn">4.9e-02±3.9e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-27.edn">6.1e-02±3.7e-03</a>
               </td>
             </tr>
             <tr>
@@ -206,25 +206,25 @@
                 fold
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-21.edn">1.1e-04±9.8e-07</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-21.edn">1.3e-04±2.2e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-22.edn">1.1e-04±1.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-22.edn">1.3e-04±1.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-23.edn">1.1e-04±1.4e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-23.edn">1.3e-04±7.1e-07</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-24.edn">1.6e-04±1.8e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-24.edn">2.1e-04±1.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-25.edn">5.7e-04±1.3e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-25.edn">6.8e-04±1.8e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-26.edn">5.2e-03±2.0e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-26.edn">5.8e-03±1.3e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-27.edn">5.9e-02±5.1e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-27.edn">6.4e-02±5.2e-03</a>
               </td>
             </tr>
             <tr>
@@ -233,31 +233,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-21.edn">1.1e-04±1.0e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-21.edn">1.3e-04±2.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-22.edn">1.1e-04±4.3e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-22.edn">1.3e-04±2.7e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-23.edn">1.2e-04±1.7e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-23.edn">1.3e-04±2.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-24.edn">1.8e-04±1.2e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-24.edn">2.2e-04±7.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-25.edn">6.4e-04±1.7e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-25.edn">7.2e-04±6.0e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-26.edn">5.9e-03±2.0e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-26.edn">5.9e-03±1.6e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-27.edn">6.8e-02±5.3e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-27.edn">7.2e-02±7.0e-03</a>
               </td>
             </tr>
             <tr>
@@ -266,31 +266,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-21.edn">1.1e-04±6.3e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-21.edn">1.3e-04±3.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-22.edn">1.1e-04±6.3e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-22.edn">1.3e-04±2.1e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-23.edn">1.2e-04±1.4e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-23.edn">1.3e-04±2.0e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-24.edn">1.8e-04±2.6e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-24.edn">2.2e-04±9.1e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-25.edn">6.3e-04±1.4e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-25.edn">7.3e-04±3.3e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-26.edn">5.7e-03±2.2e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-26.edn">6.2e-03±2.1e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-27.edn">6.5e-02±5.4e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-27.edn">7.0e-02±6.6e-03</a>
               </td>
             </tr>
             <tr>
@@ -298,25 +298,25 @@
                 reduce
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-0.edn">1.1e-04±2.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-0.edn">1.2e-04±2.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-1.edn">1.1e-04±2.3e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-1.edn">1.2e-04±1.2e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-2.edn">1.1e-04±2.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-2.edn">1.3e-04±1.2e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-3.edn">1.5e-04±2.4e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-3.edn">1.7e-04±2.7e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-4.edn">4.7e-04±9.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-4.edn">5.5e-04±1.5e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-5.edn">4.3e-03±2.0e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-5.edn">4.8e-03±1.2e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-6.edn">4.5e-02±4.4e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce/test-6.edn">5.0e-02±3.0e-03</a>
               </td>
             </tr>
             <tr>
@@ -324,25 +324,25 @@
                 reduce-kv
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-0.edn">1.1e-04±1.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-0.edn">1.2e-04±2.6e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-1.edn">1.1e-04±2.0e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-1.edn">1.2e-04±7.6e-07</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-2.edn">1.1e-04±1.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-2.edn">1.3e-04±1.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-3.edn">1.4e-04±1.8e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-3.edn">1.6e-04±2.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-4.edn">4.1e-04±9.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-4.edn">5.0e-04±8.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-5.edn">3.6e-03±1.7e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-5.edn">4.3e-03±1.4e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-6.edn">4.0e-02±3.2e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version reduce-kv/test-6.edn">4.5e-02±2.9e-03</a>
               </td>
             </tr>
             <tr>
@@ -351,31 +351,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-21.edn">1.1e-04±1.6e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-21.edn">1.2e-04±2.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-22.edn">1.1e-04±1.4e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-22.edn">1.2e-04±2.0e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-23.edn">1.2e-04±8.1e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-23.edn">1.3e-04±9.8e-07</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-24.edn">1.5e-04±1.4e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-24.edn">1.7e-04±2.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-25.edn">4.6e-04±9.7e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-25.edn">5.4e-04±8.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-26.edn">4.2e-03±1.8e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-26.edn">4.6e-03±1.6e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-27.edn">4.5e-02±3.9e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-27.edn">4.9e-02±3.1e-03</a>
               </td>
             </tr>
           </table>
@@ -445,31 +445,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-14.edn">1.1e-04±1.7e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-14.edn">1.3e-04±2.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-15.edn">1.1e-04±1.3e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-15.edn">1.3e-04±1.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-16.edn">1.2e-04±1.2e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-16.edn">1.3e-04±1.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-17.edn">1.8e-04±2.5e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-17.edn">2.1e-04±3.3e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-18.edn">7.7e-04±1.1e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-18.edn">9.7e-04±1.0e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-19.edn">7.4e-03±2.4e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-19.edn">9.0e-03±1.4e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-20.edn">7.6e-02±5.5e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-20.edn">9.4e-02±4.4e-03</a>
               </td>
             </tr>
             <tr>
@@ -477,25 +477,25 @@
                 fold
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-14.edn">1.1e-04±8.4e-07</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-14.edn">1.3e-04±2.2e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-15.edn">1.1e-04±1.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-15.edn">1.3e-04±9.9e-07</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-16.edn">1.2e-04±1.4e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-16.edn">1.4e-04±7.0e-07</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-17.edn">1.8e-04±3.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-17.edn">2.4e-04±3.4e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-18.edn">6.8e-04±1.7e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-18.edn">8.1e-04±2.6e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-19.edn">6.1e-03±1.8e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-19.edn">6.9e-03±2.6e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-20.edn">6.8e-02±6.0e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-20.edn">8.4e-02±6.1e-03</a>
               </td>
             </tr>
             <tr>
@@ -504,31 +504,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-14.edn">1.1e-04±1.7e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-14.edn">1.3e-04±5.0e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-15.edn">1.1e-04±1.8e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-15.edn">1.3e-04±2.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-16.edn">1.2e-04±1.1e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-16.edn">1.4e-04±2.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-17.edn">1.9e-04±1.4e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-17.edn">2.4e-04±5.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-18.edn">7.4e-04±1.7e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-18.edn">8.0e-04±3.1e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-19.edn">7.1e-03±2.1e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-19.edn">6.8e-03±2.8e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-20.edn">7.9e-02±5.5e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-20.edn">7.8e-02±8.8e-03</a>
               </td>
             </tr>
             <tr>
@@ -537,31 +537,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-14.edn">1.1e-04±6.8e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-14.edn">1.3e-04±2.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-15.edn">1.1e-04±1.4e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-15.edn">1.3e-04±2.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-16.edn">1.2e-04±6.5e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-16.edn">1.3e-04±2.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-17.edn">1.9e-04±2.4e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-17.edn">2.4e-04±5.4e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-18.edn">7.2e-04±1.7e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-18.edn">8.3e-04±3.2e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-19.edn">6.5e-03±2.0e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-19.edn">7.0e-03±1.8e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-20.edn">7.1e-02±4.7e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-20.edn">8.4e-02±8.0e-03</a>
               </td>
             </tr>
             <tr>
@@ -569,25 +569,25 @@
                 naive-seq
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-0.edn">1.1e-04±2.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-0.edn">1.3e-04±1.7e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-1.edn">1.1e-04±3.0e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-1.edn">1.3e-04±1.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-2.edn">1.2e-04±1.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-2.edn">1.4e-04±2.0e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-3.edn">2.0e-04±3.6e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-3.edn">2.4e-04±2.4e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-4.edn">9.6e-04±2.3e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-4.edn">1.3e-03±4.8e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-5.edn">9.0e-03±1.9e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-5.edn">1.2e-02±2.4e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-6.edn">9.3e-02±7.0e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version naive-seq/test-6.edn">1.3e-01±8.0e-03</a>
               </td>
             </tr>
             <tr>
@@ -596,31 +596,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-14.edn">1.1e-04±7.0e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-14.edn">1.3e-04±2.2e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-15.edn">1.1e-04±8.2e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-15.edn">1.2e-04±9.1e-07</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-16.edn">1.2e-04±1.1e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-16.edn">1.3e-04±1.2e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-17.edn">1.8e-04±1.9e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-17.edn">2.0e-04±2.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-18.edn">7.7e-04±1.3e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-18.edn">8.6e-04±1.6e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-19.edn">7.1e-03±2.4e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-19.edn">8.0e-03±1.5e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-20.edn">7.5e-02±5.5e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-20.edn">8.3e-02±5.0e-03</a>
               </td>
             </tr>
           </table>
@@ -688,31 +688,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-7.edn">1.1e-04±8.7e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-7.edn">1.3e-04±2.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-8.edn">1.1e-04±1.3e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-8.edn">1.3e-04±5.3e-07</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-9.edn">1.2e-04±2.7e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-9.edn">1.4e-04±1.9e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-10.edn">2.2e-04±4.5e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-10.edn">2.9e-04±1.9e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-11.edn">1.1e-03±2.2e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-11.edn">1.8e-03±2.3e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-12.edn">1.2e-02±2.5e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-12.edn">1.7e-02±2.5e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-13.edn">1.2e-01±7.1e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-13.edn">1.8e-01±5.4e-03</a>
               </td>
             </tr>
             <tr>
@@ -720,25 +720,25 @@
                 fold
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-7.edn">1.1e-04±1.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-7.edn">1.3e-04±4.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-8.edn">1.1e-04±1.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-8.edn">1.3e-04±2.4e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-9.edn">1.2e-04±1.3e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-9.edn">1.5e-04±2.8e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-10.edn">2.0e-04±4.9e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-10.edn">3.1e-04±3.0e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-11.edn">8.4e-04±2.9e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-11.edn">1.1e-03±1.3e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-12.edn">7.8e-03±2.7e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-12.edn">9.3e-03±4.8e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-13.edn">8.3e-02±6.4e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-13.edn">1.1e-01±8.4e-03</a>
               </td>
             </tr>
             <tr>
@@ -747,31 +747,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-7.edn">1.1e-04±2.8e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-7.edn">1.3e-04±1.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-8.edn">1.1e-04±1.4e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-8.edn">1.3e-04±3.3e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-9.edn">1.3e-04±2.3e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-9.edn">1.4e-04±2.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-10.edn">2.3e-04±7.8e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-10.edn">3.1e-04±2.5e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-11.edn">1.0e-03±4.8e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-11.edn">1.2e-03±1.6e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-12.edn">9.5e-03±6.5e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-12.edn">1.0e-02±8.7e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-13.edn">1.0e-01±1.0e-02</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-13.edn">1.1e-01±1.6e-02</a>
               </td>
             </tr>
             <tr>
@@ -780,31 +780,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-7.edn">1.1e-04±6.2e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-7.edn">1.3e-04±3.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-8.edn">1.1e-04±9.2e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-8.edn">1.3e-04±3.1e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-9.edn">1.2e-04±6.2e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-9.edn">1.4e-04±2.9e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-10.edn">2.2e-04±3.3e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-10.edn">2.7e-04±3.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-11.edn">8.7e-04±2.8e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-11.edn">1.0e-03±8.1e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-12.edn">7.8e-03±2.5e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-12.edn">9.1e-03±7.8e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-13.edn">8.4e-02±4.7e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-13.edn">9.6e-02±1.1e-02</a>
               </td>
             </tr>
             <tr>
@@ -813,31 +813,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-7.edn">1.1e-04±9.2e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-7.edn">1.3e-04±2.0e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-8.edn">1.1e-04±4.6e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-8.edn">1.3e-04±1.0e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-9.edn">1.2e-04±1.3e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-9.edn">1.4e-04±1.3e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-10.edn">2.1e-04±2.1e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-10.edn">2.4e-04±4.3e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-11.edn">1.1e-03±1.7e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-11.edn">1.3e-03±2.0e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-12.edn">1.1e-02±2.3e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-12.edn">1.2e-02±2.1e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-13.edn">1.1e-01±7.1e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-13.edn">1.3e-01±5.7e-03</a>
               </td>
             </tr>
           </table>
@@ -909,31 +909,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-0.edn">1.1e-04±1.2e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-0.edn">1.3e-04±2.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-1.edn">1.1e-04±1.9e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-1.edn">1.3e-04±8.7e-07</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-2.edn">1.3e-04±1.8e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-2.edn">1.5e-04±1.2e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-3.edn">3.1e-04±6.5e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-3.edn">3.7e-04±1.9e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-4.edn">2.1e-03±6.1e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-4.edn">2.6e-03±2.8e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-5.edn">2.1e-02±4.6e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-5.edn">2.6e-02±3.4e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-6.edn">2.2e-01±7.9e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version core-transduce/test-6.edn">2.7e-01±1.0e-02</a>
               </td>
             </tr>
             <tr>
@@ -941,25 +941,25 @@
                 fold
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-0.edn">1.1e-04±1.6e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-0.edn">1.3e-04±2.8e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-1.edn">1.1e-04±1.9e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-1.edn">1.3e-04±1.2e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-2.edn">1.3e-04±2.9e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-2.edn">1.5e-04±3.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-3.edn">2.8e-04±1.3e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-3.edn">3.5e-04±4.7e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-4.edn">1.3e-03±1.2e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-4.edn">1.4e-03±1.4e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-5.edn">1.1e-02±5.4e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-5.edn">1.2e-02±8.1e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-6.edn">1.1e-01±6.3e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version fold/test-6.edn">1.4e-01±1.5e-02</a>
               </td>
             </tr>
             <tr>
@@ -968,31 +968,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-0.edn">1.1e-04±2.5e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-0.edn">1.3e-04±2.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-1.edn">1.1e-04±1.9e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-1.edn">1.3e-04±1.3e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-2.edn">1.3e-04±2.2e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-2.edn">1.5e-04±2.2e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-3.edn">2.9e-04±2.5e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-3.edn">3.6e-04±5.6e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-4.edn">1.3e-03±8.8e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-4.edn">1.3e-03±3.7e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-5.edn">1.2e-02±5.6e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-5.edn">1.1e-02±6.5e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-6.edn">1.2e-01±8.0e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce/test-6.edn">1.3e-01±1.4e-02</a>
               </td>
             </tr>
             <tr>
@@ -1001,31 +1001,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-0.edn">1.1e-04±1.0e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-0.edn">1.3e-04±2.9e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-1.edn">1.1e-04±5.1e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-1.edn">1.3e-04±2.7e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-2.edn">1.3e-04±7.4e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-2.edn">1.5e-04±3.8e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-3.edn">2.7e-04±5.6e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-3.edn">3.3e-04±2.0e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-4.edn">1.2e-03±6.9e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-4.edn">1.3e-03±1.1e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-5.edn">1.1e-02±3.1e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-5.edn">1.1e-02±7.0e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-6.edn">1.1e-01±5.9e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version multi-transduce-kv/test-6.edn">1.2e-01±1.3e-02</a>
               </td>
             </tr>
             <tr>
@@ -1034,31 +1034,31 @@
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-0.edn">1.1e-04±8.4e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-0.edn">1.3e-04±2.7e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-1.edn">1.1e-04±8.3e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-1.edn">1.3e-04±9.8e-07</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-2.edn">1.3e-04±9.2e-07</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-2.edn">1.5e-04±1.1e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-3.edn">2.9e-04±2.7e-06</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-3.edn">3.4e-04±2.5e-06</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-4.edn">1.9e-03±1.6e-05</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-4.edn">2.2e-03±1.9e-05</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-5.edn">1.9e-02±3.0e-04</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-5.edn">2.2e-02±2.7e-04</a>
               </td>
               <td>
                 <a href=
-                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-6.edn">2.0e-01±8.2e-03</a>
+                "https://github.com/blosavio/brokvolli/blob/main/resources/transduction_performance/version single-transduce-kv/test-6.edn">2.3e-01±8.0e-03</a>
               </td>
             </tr>
           </table>
@@ -1068,7 +1068,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 February 24.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 03.<span id="uuid"><br>
       4575b7b7-5880-47d7-9b5d-7e26e1eed7aa</span>
     </p>
   </body>

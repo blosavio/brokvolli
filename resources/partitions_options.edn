@@ -60,7 +60,7 @@
    [:a {:href "https://github.com/hugoduncan/criterium/"}
     "Criterium benchmarking library"]
    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my old, rusty computer."]
+ Benchmarks were run on three pinned cores of my antique desktop computer."]
 
   [:p "Overall, we observe that the execution times increase with increasing
  vector lengths. The results are relatively indistinguishable when the vector

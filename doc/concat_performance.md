@@ -135,25 +135,25 @@
                 basic-into
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-0.edn">1.2e-04±1.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-0.edn">1.2e-04±1.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-1.edn">1.2e-04±1.6e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-1.edn">1.2e-04±1.8e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-2.edn">1.2e-04±1.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-2.edn">1.2e-04±1.4e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-3.edn">1.4e-04±1.6e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-3.edn">1.4e-04±1.8e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-4.edn">3.2e-04±3.3e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-4.edn">3.3e-04±1.7e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-5.edn">2.1e-03±1.9e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-5.edn">2.2e-03±3.1e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-6.edn">2.2e-02±6.7e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version basic-into/test-6.edn">2.2e-02±3.4e-04</a>
               </td>
             </tr>
             <tr>
@@ -161,25 +161,25 @@
                 realized-concat
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-0.edn">1.2e-04±2.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-0.edn">1.2e-04±2.6e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-1.edn">1.3e-04±2.8e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-1.edn">1.2e-04±2.3e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-2.edn">1.3e-04±3.2e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-2.edn">1.3e-04±2.3e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-3.edn">1.6e-04±4.5e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-3.edn">1.6e-04±2.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-4.edn">5.1e-04±1.6e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-4.edn">5.2e-04±6.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-5.edn">4.4e-03±1.7e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-5.edn">4.4e-03±1.0e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-6.edn">4.2e-02±1.9e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version realized-concat/test-6.edn">4.4e-02±1.6e-03</a>
               </td>
             </tr>
             <tr>
@@ -187,25 +187,25 @@
                 transducer-cat
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-0.edn">1.2e-04±1.9e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-0.edn">1.2e-04±1.1e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-1.edn">1.2e-04±1.6e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-1.edn">1.2e-04±9.9e-07</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-2.edn">1.2e-04±1.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-2.edn">1.2e-04±9.4e-07</a>
               </td>
               <td>
                 <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-3.edn">1.4e-04±1.5e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-4.edn">3.0e-04±3.9e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-4.edn">2.7e-04±1.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-5.edn">1.9e-03±2.4e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-5.edn">1.6e-03±2.6e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-6.edn">1.9e-02±3.4e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transducer-cat/test-6.edn">1.6e-02±3.6e-04</a>
               </td>
             </tr>
             <tr>
@@ -213,25 +213,25 @@
                 transient-cat
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-0.edn">1.3e-04±2.1e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-0.edn">1.3e-04±1.0e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-1.edn">1.6e-04±2.8e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-1.edn">1.5e-04±2.4e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-2.edn">4.3e-04±9.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-2.edn">4.1e-04±9.9e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-3.edn">3.2e-03±1.0e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-3.edn">3.0e-03±8.8e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-4.edn">3.1e-02±1.2e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-4.edn">2.9e-02±7.1e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-5.edn">3.1e-01±3.2e-02</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-5.edn">2.8e-01±7.2e-03</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-6.edn">3.0e+00±4.1e-02</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version transient-cat/test-6.edn">2.9e+00±4.3e-02</a>
               </td>
             </tr>
             <tr>
@@ -239,25 +239,25 @@
                 vectored-concat
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-0.edn">1.2e-04±3.9e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-0.edn">1.2e-04±2.6e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-1.edn">1.3e-04±2.0e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-1.edn">1.2e-04±1.5e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-2.edn">1.4e-04±1.7e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-2.edn">1.3e-04±1.6e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-3.edn">2.1e-04±2.6e-06</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-3.edn">2.0e-04±2.7e-06</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-4.edn">8.9e-04±2.4e-05</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-4.edn">8.6e-04±1.1e-05</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-5.edn">7.9e-03±1.3e-04</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-5.edn">7.9e-03±1.2e-04</a>
               </td>
               <td>
-                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-6.edn">7.9e-02±2.8e-03</a>
+                <a href="https://github.com/blosavio/brokvolli/blob/main/resources/concat_performance/version vectored-concat/test-6.edn">8.0e-02±3.4e-03</a>
               </td>
             </tr>
           </table>
@@ -267,7 +267,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 January 28.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 03.<span id="uuid"><br>
       1b5101d1-6b60-4868-830b-09d396f19bf3</span>
     </p>
   </body>

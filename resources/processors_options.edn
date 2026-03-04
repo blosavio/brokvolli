@@ -28,7 +28,11 @@
  :save-benchmark-fn-results? false
  :elide-machine-metadata? false
 
- :sort-comparator compare
+ :sort-comparator
+ (fn [v1 v2]
+   (let [get-nproc #(parse-long (clojure.string/replace % #"0-" ""))]
+     (< (get-nproc v1)
+        (get-nproc v2))))
 
  :tidy-html? true
 
@@ -60,7 +64,7 @@
    [:a {:href "https://github.com/hugoduncan/criterium/"}
     "Criterium benchmarking library"]
    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my old, rusty computer."]
+ Benchmarks were run on three pinned cores of my feeble desktop computer."]
 
   #_[:p "Overall, we observe that the execution times increase with increasing
  vector lengths. The results are relatively indistinguishable when the vector
@@ -156,7 +160,7 @@
     "."]]}
 
  :chart-settings
- {"(fn [n] (multi/transduce n concatv xform-1 tconj (vecs n)))"
+ {"(fn [n] (multi/transduce partition-at concatv xform-1 tconj (vecs n)))"
   {:x-axis-logarithmic? true
    :y-axis-logarithmic? true}}}
 

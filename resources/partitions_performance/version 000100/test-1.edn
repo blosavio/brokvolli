@@ -1,6 +1,6 @@
-{:overhead 7.3334086805749395E-9,
+{:overhead 7.933552189659815E-9,
  :samples
- (105112640 107291400 112321839 104040989 109874898 101616918),
+ (100977216 106562635 124049766 105989319 104717347 139792508),
  :runtime-details
  {:spec-vendor "Oracle Corporation",
   :spec-name "Java Virtual Machine Specification",
@@ -13,41 +13,40 @@
   :spec-version "11",
   :sun-arch-data-model "64"},
  :mean
- [3.44139385483871E-4 (3.3473803494623656E-4 3.544325026881721E-4)],
- :final-gc-time 82467916,
- :execution-count 310,
+ [4.0203893227326267E-4 (3.7224407714958775E-4 4.465824199057715E-4)],
+ :final-gc-time 156678440,
+ :execution-count 283,
  :variance
- [1.8053090125553232E-10
-  (6.522653908708603E-11 3.139235769306375E-10)],
+ [3.0938840751985305E-9 (8.186602256094277E-10 4.860998749525018E-9)],
  :os-details
  {:arch "amd64",
-  :available-processors 3,
+  :available-processors 4,
   :name "Linux",
-  :version "5.15.0-170-generic"},
+  :version "5.15.0-171-generic"},
  :tail-quantile 0.025,
- :outlier-variance 0.1388888888888886,
+ :outlier-variance 0.31821658263121266,
  :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
- :warmup-time 7622539196,
+ :warmup-time 5663213281,
  :lower-q
- [3.277965096774194E-4 (3.277965096774194E-4 3.3561609354838714E-4)],
- :warmup-executions 22961,
+ [3.5680995053003536E-4 (3.5680995053003536E-4 3.670010061837456E-4)],
+ :warmup-executions 14887,
  :sample-count 6,
  :upper-q
- [3.603001100806452E-4 (3.4522275806451617E-4 3.6232851290322584E-4)],
+ [4.7928895362190813E-4 (3.762931819787986E-4 4.939664593639577E-4)],
  :fastester/metadata
  {:fexpr "(fn [n] ((tactics-1 \"multi-transduce\") (vecs n)))",
-  :date {:year 2026, :month "February", :day 23},
+  :date {:year 2026, :month "March", :day 4},
   :group "Construct hashmap of eighteen mathematical ops, per element",
   :index 1,
   :ns "brokvolli.performance.partitions",
-  :UUIDv4 #uuid "7214110e-11f4-4cb4-9594-a12e8b445285",
+  :UUIDv4 #uuid "8895735b-7c8c-4d15-974a-41370cd5ec21",
   :name "partitions-1",
   :testing-thoroughness :quick,
   :arg 10,
   :version "000100",
   :parallel? false},
- :total-time 0.640258684,
- :sample-variance [1.6121124855385517E-10 (0.0 0.0)],
+ :total-time 0.682088791,
+ :sample-variance [2.8490515226824933E-9 (0.0 0.0)],
  :options
  {:max-gc-attempts 100,
   :samples 6,
@@ -55,7 +54,7 @@
   :warmup-jit-period 5000000000,
   :tail-quantile 0.025,
   :bootstrap-size 500,
-  :overhead 7.3334086805749395E-9},
+  :overhead 7.933552189659815E-9},
  :sample-mean
- [3.4422509892473123E-4 (3.0613440141228477E-4 3.8231579643717775E-4)],
+ [4.017012903415784E-4 (2.4157176869068963E-4 5.618308119924671E-4)],
  :results :fastester/benchmark-fn-results-elided}

@@ -25,7 +25,23 @@
   Watching the real-time resource statistics suggests that the machine is
   merely running out of resources.
 
-  https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/memleaks002.html"
+  https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/memleaks002.html
+
+  * AWS EC2 t3.micro memory exhausted running `fn-in` unit tests; no further
+    testing
+
+  * AWS EC2 m7i-flex.large, `:lightning`
+  1E3 okay
+  1E4 OutOfMemoryError
+
+  * AWS EC2 m7i-flex.large, `:quick`
+  1E3 okay
+  1E4 OutOfMemoryError
+
+  *AWS EC3 c6i.4xlarge, `:lightning`
+  1E3 okay
+  1E4 okay
+  1E5 OutOfMemoryError"
   (:require
    [brokvolli.core :refer [tconj concatv]]
    [brokvolli.multi :as multi]
@@ -63,7 +79,7 @@
         (range 1 max-mapper)))
 
 
-(def xform-1 (map-kv mapper))
+(def xform (map-kv mapper))
 
 
 (defn -main
@@ -76,10 +92,10 @@
   [length thoroughness]
   (let [_ (println "thoroughness:" thoroughness ", vec length:" length)
         n (parse-long length)
-        V (vec (repeatedly n #(rand)))
+        V (into [] (repeatedly n #(rand)))
         msg #(println "vec length" n "completed successfully.")]
     (run-manual-benchmark
-     (fn [v] (multi/transduce 100 concatv xform-1 tconj v))
+     (fn [v] (multi/transduce 100 concatv xform tconj v))
      V
      (keyword thoroughness))
     (msg)))
