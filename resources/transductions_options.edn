@@ -36,6 +36,17 @@
 
  :preamble
  [:div
+  [:h2 "How do Brokvolli's "
+   [:code "transduce"]
+   " variants perform compared to Clojure's "
+   [:code "reduce"]
+   ", "
+   [:em "et al."]
+   "?"]
+
+  [:p [:em "Observations: The single-threaded variants perform similarly, while the
+ multi-threaded variants are faster for large vectors and heavier computations."]]
+
   [:p "See also:"
    [:ul
     [:li [:a {:href "https://blosavio.github.io/brokvolli/deep.html"}
@@ -50,7 +61,7 @@
     [:li "Bring "
      [:a {:href "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce"}
       [:code "transduce"]]
-     "'s performance benefits to a "
+     "'s performance benefits to "
      [:code "reduce-kv"]
      "-style processing."]
     [:li "Extend "
@@ -60,26 +71,28 @@
      [:code "transduce"]
      " and "
      [:code "transduce-kv"]
-     "."]
-    "So let's run some benchmarks to see if we can objectively measure any
- performance improvements."]]
+     "."]]
+   "So let's run some benchmarks to see if we can objectively measure any
+ performance improvements. "]
 
   [:p "We'll define our benchmarks "
    [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/transductions.clj"}
     "here"]
-   ". For each function, we'll test vectors of random floating point numbers,
- increasing in length from one to one million, by powers of ten. We'll arrange
- four different tests:"
+   ". For each function, we'll test vectors increasing in length from one
+ element to one‑million elements, by powers of ten. We'll arrange four different
+ tests:"
    [:ol
-    [:li "Increment each number."]
-    [:li "Increment, filter, and remove, 1X (three total operations)."]
-    [:li "Increment, filter, and remove, 2X (six total operations)."]
-    [:li "Increment, filter, and remove, 4X (twelve total operations)."]]
+    [:li "Increment each element, a pre-generated, random floating point
+ number."]
+    [:li "Increment, filter, and remove, 1× (three total operations)."]
+    [:li "Increment, filter, and remove, 2× (six total operations)."]
+    [:li "Increment, filter, and remove, 4× (twelve total operations)."]]
    "For each test, we'll use the "
    [:a {:href "https://github.com/hugoduncan/criterium/"}
     "Criterium benchmarking library"]
    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my rusty desktop computer."]
+ Benchmarks were run on three explicitly-pinned cores of my rusty desktop
+ computer."]
 
   [:p "The functions under examination are as follows:"
    [:ul
@@ -93,10 +106,10 @@
 
   [:p "Overall, we observe that the execution times increase with increasing
  vector lengths. The results are indistinguishable when the vector contains
- one-hundred or fewer elements. When the vectors grow longer and the processing
+ one‑hundred or fewer elements. When the vectors grow longer and the processing
  stack is small (i.e., one or three transforms), the single-threaded functions
  tend to perform slightly faster. However, when the vector lengths approach
- one million elements and the processing stack involves more transforms, the
+ one‑million elements and the processing stack involves more transforms, the
  multi-threaded variants ("
    [:code "fold"]
    ", "
@@ -117,29 +130,36 @@
  :comments
  {"01 transform: increment integer"
   [:div
-   [:p "This test performs one operation per element: incrementing the element.
- Since we're only doing one task, we can straightforwardly compare to "
+   [:p "This test performs one operation per element: incrementing the number.
+ Since we're only doing one operation, we can straightforwardly compare to "
     [:code "reduce"]
+    " and "
+    [:code "reduce-kv"]
     " as well."]
    [:p "Execution times increase with vector length, with the single-threaded
  functions performing best for all vector lengths. With only one operation per
- element, the overhead of multi-threading machinery results in slower times."]]
+ element, the overhead of multi-threading machinery results in slower times."]
+
+   [:p "The lines aren't perfectly straight because Clojure requires some
+ non-zero time to reduce over an empty or nearly-empty vector. On this machine,
+ that non-zero time is about 120 microseconds."]]
 
   "03 transforms: Transduce with `map`+`filter`+`remove`, 1X"
   [:div
    [:p "This test involves three operations per element: incrementing the
- number, filtering (retaining) if the result is less than a specified target,
- then removing if the result is more than a different target."]
+ number, filtering (retaining) if the result is less than a specified cutoff,
+ then removing if the result is greater than a different specified cutoff."]
 
-   [:p "With a transform stack of this size, all functions performed similarly."]]
+   [:p "With a transform stack of this size, all functions performed roughly
+ similarly."]]
 
   "06 transforms: Transduce with `map`+`filter`+`remove`, 2X"
   [:div
    [:p "This test is similar to the previous, except the three operations were
  performed twice (with different filter/remove cutoffs), for a total of six
- operations per element. With this transform stack, the multi-threaded variants
- begin to offer faster performance (i.e., lower time) on vectors longer than
- one thousand elements."]]
+ operations per element. With this deeper transform stack, the multi-threaded
+ variants begin to offer faster performance (i.e., lower time) on vectors longer
+ than one thousand elements."]]
 
   "12 transforms: Transduce with `map`+`filter`+`remove`, 4X"
   [:div
@@ -151,11 +171,15 @@
     [:code "multi/transduce"]
     ", and "
     [:code "multi/transduce-kv"]
-    "), demonstrate improved performance (i.e., lower time) for vectors containing more than one thousand elements."]
+    "), demonstrate noticeably improved performance (i.e., lower time) for
+ vectors containing more than one thousand elements."]
+
    [:p "Note the "
     [:em "log-log"]
     " scale, which may visually obscure the performance deltas. Click 'Show
- details' to see a numeric chart of the measurements."]]}
+ details' to see a numeric chart of the measurements. For example, the
+ multi-threaded variants handle the one-million element vectors about twice as
+ fast as the single-threaded variants."]]}
 
  :chart-settings
  {"(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))"

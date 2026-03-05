@@ -7,6 +7,12 @@
       <a href="#group-0">Construct hashmap of eighteen mathematical ops, per element</a>
     </div>
     <div>
+      <h2>
+        Do Brokvolli&apos;s <code>transduce</code> benchmarks change with a heavier per-element task?
+      </h2>
+      <p>
+        <em>Observations: The multi-threaded variants&apos; performance improvements increase when the tasks are heavier.</em>
+      </p>
       <p>
         See also:
       </p>
@@ -23,54 +29,43 @@
       </ul>
       <p></p>
       <p>
-        We&apos;ll define our benchmarks <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj">here</a>. For each
-        function below, we&apos;ll test vectors of random floating point numbers, increasing in length from one to one-hundred-thousand, by powers of ten. For
-        each number, We&apos;ll construct a hashmap of eighteen mathematical operations on that number (trig ops, logarithms, etc.) that the JVM compiler
-        oughtn&apos;t be able to optimize. We&apos;ll use the <a href="https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to measure
-        the execution times of sixty repetitions of each condition. Benchmarks were run on three pinned cores of my geriatric desktop computer.
-      </p>
-      <p>
-        The functions under examination are as follows:
+        We&apos;ll define our benchmarks <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj">here</a>. For each of
+        these functions,
       </p>
       <ul>
         <li>
-          <p>
-            <code>clojure.core/reduce</code>
-          </p>
+          <code>clojure.core/reduce</code>
         </li>
         <li>
-          <p>
-            <code>clojure.core/reduce-kv</code>
-          </p>
+          <code>clojure.core/reduce-kv</code>
         </li>
         <li>
-          <p>
-            <code>clojure.core/transduce</code>
-          </p>
+          <code>clojure.core.reducers/fold</code> (multi-threaded)
         </li>
         <li>
-          <p>
-            <code>brokvolli.single/transduce-kv</code>
-          </p>
+          <code>clojure.core/transduce</code>
         </li>
         <li>
-          <p>
-            <code>brokvolli.multi/transduce</code>
-          </p>
+          <code>brokvolli.single/transduce-kv</code>
         </li>
         <li>
-          <p>
-            <code>brokvolli.multi/transduce-kv</code>
-          </p>
+          <code>brokvolli.multi/transduce</code> (multi-threaded)
         </li>
-      </ul>
+        <li>
+          <code>brokvolli.multi/transduce-kv</code> (multi-threaded)
+        </li>
+      </ul>We&apos;ll test vectors increasing in length from one element to one-hundred-thousand elements, by powers of ten. For each element, a pre-generated
+      random floating point number, we&apos;ll construct a hashmap of eighteen mathematical operations on that number (trig ops, logarithms, etc.) that the JVM
+      compiler oughtn&apos;t be able to optimize. We&apos;ll use the <a href="https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to
+      measure the execution times of sixty repetitions of each condition. Benchmarks were run on three explicitly-pinned cores of my geriatric desktop
+      computer.
       <p></p>
       <p>
         Overall, we observe that the execution times increase with increasing vector lengths. The results are indistinguishable when the vector contains
-        one-hundred or fewer elements. When the vectors grow longer the three multi-threaded variants (<code>fold</code>, <code>multi/transduce</code>, and
-        <code>multi/transduce-kv</code>), offer improvements that scale roughly with the number of processors. The other functions all perform very similarly.
-        Not surprising, since they all ultimately delegate to the same underlying implementation, <code>reduce/reduce-kv</code>. Unfortunately, my computer was
-        not capable of handling one-million element vectors.
+        one-hundred or fewer elements. When the vectors grow longer, the three multi-threaded variants (<code>fold</code>, <code>multi/transduce</code>, and
+        <code>multi/transduce‑kv</code>), offer improvements that scale roughly with the number of processors. The single-threaded functions all perform very
+        similarly. Not surprising, since they all ultimately delegate to the same underlying implementation, <code>reduce/reduce-kv</code>. Unfortunately, my
+        computer was not capable of handling one-million element vectors and I was compelled to stop measuring at one-hundred-thousand elements.
       </p>
       <p>
         As with the previous benchmarks, the multi-threaded functions appear to offer performance benefits over their single-threaded counterparts for large
@@ -84,11 +79,12 @@
       </h3>
       <div>
         <p>
-          This test performs multiple mathematical operations per element, <em>sine</em>, <em>square-root</em>, <em>logarithm</em>, etc.
+          This test performs multiple mathematical operations per element, <em>sine</em>, <em>square-root</em>, <em>logarithm</em>, <a href=
+          "https://github.com/blosavio/brokvolli/blob/accd4a2f4fec60092beb6cff27a2d2414ed67033/test/brokvolli/performance/deep.clj#L37-L57">etc</a>.
         </p>
         <p>
           Execution times increase with vector length. The single- and multi-threaded functions are indistinguishable for one-hundred elements or fewer. When
-          the vectors grow larger than that, the multi-threaded variants demonstrate faster execution (i.e., lower times).
+          the vectors grow larger than that, the multi-threaded variants demonstrate faster execution (i.e., lower times), roughly by a factor of two.
         </p>
       </div>
       <div>
@@ -301,7 +297,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 03.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 05.<span id="uuid"><br>
       1ff123be-d29c-42fc-8dbe-2bd794272c59</span>
     </p>
   </body>

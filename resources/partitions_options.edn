@@ -34,6 +34,13 @@
 
  :preamble
  [:div
+  [:h2 "How do Brokvolli's multi-threaded "
+   [:code "transduce"]
+   " benchmarks vary with different partition sizes?"]
+
+  [:p [:em "Observations: Partitions must be significantly smaller than the
+ input vector to realize a performance improvement."]]
+
   [:p "See also:"
    [:ul
     [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
@@ -48,19 +55,21 @@
     "here"]
    ", similar to "
    [:a {:href ""} "before"]
-   ". For exploring the affects of partiton size, we'll consider only
+   ". For exploring the affects of partition size, we'll consider only
  multi-threaded "
    [:code "transduce"]
-   ". We'll test vectors of random floating point numbers, increasing in length
- from one to one-hundred-thousand, by powers of ten. For each number in the
- vectors, we'll construct a hashmap of eighteen mathematical operations on that
- number (trig ops, logarithms, etc.) that the JVM compiler oughtn't be able to
- optimize. To amplify the computation requirements, we'll make that hashmap five
- times for each element. We'll use the "
+   ". We'll test vectors increasing in length from one element to
+ one-hundred-thousand elements, by powers of ten. For each element, a
+ pre-generated random floating point number, we'll construct a hashmap of
+ eighteen mathematical operations on that number (trig ops, logarithms, etc.)
+ that the JVM compiler oughtn't be able to optimize. To amplify the
+ computation requirements, we'll construct variations of that hashmap five times
+ for each element. We'll use the "
    [:a {:href "https://github.com/hugoduncan/criterium/"}
     "Criterium benchmarking library"]
    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my antique desktop computer."]
+ Benchmarks were run on three explicitly-pinned cores of my antique desktop
+ computer."]
 
   [:p "Overall, we observe that the execution times increase with increasing
  vector lengths. The results are relatively indistinguishable when the vector
@@ -68,8 +77,8 @@
  length, the transduction runs exactly as fast as single-threaded "
    [:code "transduce"]
    ", as expected. Once the vector length exceeds the partition size, we can see
- performance benefits to the multi-threading. For every vector length
- size one-hundred or larger, the when the partition size results in multiple
+ performance benefits to the multi-threading. When the vector length is
+ one-hundred elements or more and when the partition size results in multiple
  threads, the processing time is roughly twice as fast."]]
 
  :comments
@@ -97,17 +106,17 @@
     ". For each element, that group of operations was performed five times on
  jittered values of the elements (i.e., "
     [:code "(* 18 5) => 90"]
-    " operations per vector element). The partition values are the integers
- following \"version\" in the chart legend."]
+    " operations per vector element). The partition values are the zero-padded
+ integers following \"version\" in the chart legend."]
 
    [:p "For vectors of one or ten elements, none of the partitioning limits are
  distinguishable, as expected. For the one-hundred element vector, we can see
  a performance benefit due to the multi-threading when the the vector is
- partitioned into chunks of about ten (blue cirlces). For the one-thousand
- element vectors, paritions of ten or one hundred chunks (gold diamonds) provide
- performance improvements (i.e., shorter times). This pattern continues: when
- the vector is partitioned into about ten chunks, we observed a factor of two
- performance improvement."]
+ partitioned into chunks of about ten (blue circles). For the one-thousand
+ element vectors, partitions of ten or one hundred chunks (gold diamonds)
+ provide performance improvements (i.e., shorter times). This pattern continues:
+ when the vector is partitioned into about ten chunks, we observed a factor of
+ two performance improvement."]
 
    [:p "Notice that the performance improves when the partition size is one
  decade smaller than the vector length."]
@@ -118,33 +127,33 @@
      [:th "best"]
      [:th "worst"]
      [:th "factor"]
-     [:th "chuck size at improvement"]]
+     [:th "chunk size at improvement"]]
 
     [:tr
      [:td "100"]
-     [:td "1.4e-3"]
-     [:td "2.7e-3"]
+     [:td "1.4E-3"]
+     [:td "2.7E-3"]
      [:td "1.9×"]
      [:td "10"]]
 
     [:tr
      [:td "1000"]
-     [:td "1.1e-2"]
-     [:td "2.9e-2"]
+     [:td "1.1E-2"]
+     [:td "2.9E-2"]
      [:td "2.6×"]
      [:td "10–100"]]
 
     [:tr
      [:td "10000"]
-     [:td "1.3e-1"]
-     [:td "3.2e-1"]
+     [:td "1.3E-1"]
+     [:td "3.2E-1"]
      [:td "2.5×"]
      [:td "100–1000"]]
 
     [:tr
      [:td "100000"]
-     [:td "1.6e0"]
-     [:td "2.9e0"]
+     [:td "1.6E0"]
+     [:td "2.9E0"]
      [:td "1.8×"]
      [:td "100–10000"]]]
 

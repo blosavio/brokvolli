@@ -10,6 +10,13 @@
       <a href="#group-3">12 transforms: Transduce with `map`+`filter`+`remove`, 4X</a>
     </div>
     <div>
+      <h2>
+        How do Brokvolli&apos;s <code>transduce</code> variants perform compared to Clojure&apos;s <code>reduce</code>, <em>et al.</em>?
+      </h2>
+      <p>
+        <em>Observations: The single-threaded variants perform similarly, while the multi-threaded variants are faster for large vectors and heavier
+        computations.</em>
+      </p>
       <p>
         See also:
       </p>
@@ -30,30 +37,29 @@
       </p>
       <ol>
         <li>Bring <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce"><code>transduce</code></a>&apos;s performance
-        benefits to a <code>reduce-kv</code>-style processing.
+        benefits to <code>reduce-kv</code>-style processing.
         </li>
         <li>Extend <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core.reducers/fold"><code>fold</code></a>&apos;s multi-threading
-        performance benefits to both <code>transduce</code> and <code>transduce-kv</code>.So let&apos;s run some benchmarks to see if we can objectively
-        measure any performance improvements.
+        performance benefits to both <code>transduce</code> and <code>transduce-kv</code>.
         </li>
-      </ol>
+      </ol>So let&apos;s run some benchmarks to see if we can objectively measure any performance improvements.
       <p></p>
       <p>
         We&apos;ll define our benchmarks <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/transductions.clj">here</a>. For
-        each function, we&apos;ll test vectors of random floating point numbers, increasing in length from one to one million, by powers of ten. We&apos;ll
-        arrange four different tests:
+        each function, we&apos;ll test vectors increasing in length from one element to one‑million elements, by powers of ten. We&apos;ll arrange four
+        different tests:
       </p>
       <ol>
-        <li>Increment each number.
+        <li>Increment each element, a pre-generated, random floating point number.
         </li>
-        <li>Increment, filter, and remove, 1X (three total operations).
+        <li>Increment, filter, and remove, 1× (three total operations).
         </li>
-        <li>Increment, filter, and remove, 2X (six total operations).
+        <li>Increment, filter, and remove, 2× (six total operations).
         </li>
-        <li>Increment, filter, and remove, 4X (twelve total operations).
+        <li>Increment, filter, and remove, 4× (twelve total operations).
         </li>
       </ol>For each test, we&apos;ll use the <a href="https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to measure the execution
-      times of sixty repetitions of each condition. Benchmarks were run on three pinned cores of my rusty desktop computer.
+      times of sixty repetitions of each condition. Benchmarks were run on three explicitly-pinned cores of my rusty desktop computer.
       <p></p>
       <p>
         The functions under examination are as follows:
@@ -98,8 +104,8 @@
       <p></p>
       <p>
         Overall, we observe that the execution times increase with increasing vector lengths. The results are indistinguishable when the vector contains
-        one-hundred or fewer elements. When the vectors grow longer and the processing stack is small (i.e., one or three transforms), the single-threaded
-        functions tend to perform slightly faster. However, when the vector lengths approach one million elements and the processing stack involves more
+        one‑hundred or fewer elements. When the vectors grow longer and the processing stack is small (i.e., one or three transforms), the single-threaded
+        functions tend to perform slightly faster. However, when the vector lengths approach one‑million elements and the processing stack involves more
         transforms, the multi-threaded variants (<code>fold</code>, <code>multi/transduce</code>, and <code>multi/transduce-kv</code>), offer improvements that
         scale roughly with the number of processors.
       </p>
@@ -115,12 +121,16 @@
       </h3>
       <div>
         <p>
-          This test performs one operation per element: incrementing the element. Since we&apos;re only doing one task, we can straightforwardly compare to
-          <code>reduce</code> as well.
+          This test performs one operation per element: incrementing the number. Since we&apos;re only doing one operation, we can straightforwardly compare to
+          <code>reduce</code> and <code>reduce-kv</code> as well.
         </p>
         <p>
           Execution times increase with vector length, with the single-threaded functions performing best for all vector lengths. With only one operation per
           element, the overhead of multi-threading machinery results in slower times.
+        </p>
+        <p>
+          The lines aren&apos;t perfectly straight because Clojure requires some non-zero time to reduce over an empty or nearly-empty vector. On this machine,
+          that non-zero time is about 120&nbsp;microseconds.
         </p>
       </div>
       <div>
@@ -387,11 +397,11 @@
       </h3>
       <div>
         <p>
-          This test involves three operations per element: incrementing the number, filtering (retaining) if the result is less than a specified target, then
-          removing if the result is more than a different target.
+          This test involves three operations per element: incrementing the number, filtering (retaining) if the result is less than a specified cutoff, then
+          removing if the result is greater than a different specified cutoff.
         </p>
         <p>
-          With a transform stack of this size, all functions performed similarly.
+          With a transform stack of this size, all functions performed roughly similarly.
         </p>
       </div>
       <div>
@@ -633,8 +643,8 @@
       <div>
         <p>
           This test is similar to the previous, except the three operations were performed twice (with different filter/remove cutoffs), for a total of six
-          operations per element. With this transform stack, the multi-threaded variants begin to offer faster performance (i.e., lower time) on vectors longer
-          than one thousand elements.
+          operations per element. With this deeper transform stack, the multi-threaded variants begin to offer faster performance (i.e., lower time) on vectors
+          longer than one thousand elements.
         </p>
       </div>
       <div>
@@ -850,12 +860,12 @@
       <div>
         <p>
           Analogous to the previous examples, this test performs twelve operations per element (four cycles of increment, filter, and remove). The
-          multi-threaded variants (<code>fold</code>, <code>multi/transduce</code>, and <code>multi/transduce-kv</code>), demonstrate improved performance
-          (i.e., lower time) for vectors containing more than one thousand elements.
+          multi-threaded variants (<code>fold</code>, <code>multi/transduce</code>, and <code>multi/transduce-kv</code>), demonstrate noticeably improved
+          performance (i.e., lower time) for vectors containing more than one thousand elements.
         </p>
         <p>
           Note the <em>log-log</em> scale, which may visually obscure the performance deltas. Click &apos;Show details&apos; to see a numeric chart of the
-          measurements.
+          measurements. For example, the multi-threaded variants handle the one-million element vectors about twice as fast as the single-threaded variants.
         </p>
       </div>
       <div>
@@ -1068,7 +1078,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 03.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 05.<span id="uuid"><br>
       4575b7b7-5880-47d7-9b5d-7e26e1eed7aa</span>
     </p>
   </body>

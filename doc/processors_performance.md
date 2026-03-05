@@ -7,6 +7,12 @@
       <a href="#group-0">Ninety mathematical operations per element</a>
     </div>
     <div>
+      <h2>
+        How do Brokvolli&apos;s multi-threaded <code>transduce</code> benchmarks change with additional CPUs?
+      </h2>
+      <p>
+        <em>Observations: Performance improves roughly linearly with more CPUs.</em>
+      </p>
       <p>
         See also:
       </p>
@@ -18,24 +24,161 @@
           <a href="https://blosavio.github.io/brokvolli/deep.html">Addendum 1: Increased computations per element</a>
         </li>
         <li>
-          <a href="https://blosavio.github.io/brokvolli/partitions.html">Addendum 3: Performance scaling with processors</a>
+          <a href="https://blosavio.github.io/brokvolli/partitions.html">Addendum 2: Performance scaling with partitions</a>
         </li>
       </ul>
       <p></p>
       <p>
         Benchmarks defined <a href="https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/processors.clj">here</a>, similar to <a href=
-        "">before</a>. For exploring the affects of partiton size, we&apos;ll consider only multi-threaded <code>transduce</code>. We&apos;ll test vectors of
-        random floating point numbers, increasing in length from one to one-hundred-thousand, by powers of ten. For each number in the vectors, we&apos;ll
-        construct a hashmap of eighteen mathematical operations on that number (trig ops, logarithms, etc.) that the JVM compiler oughtn&apos;t be able to
-        optimize. To amplify the computation requirements, we&apos;ll make that hashmap five times for each element. We&apos;ll use the <a href=
-        "https://github.com/hugoduncan/criterium/">Criterium benchmarking library</a> to measure the execution times of sixty repetitions of each condition.
-        Benchmarks were run on three pinned cores of my feeble desktop computer.
+        "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj">before</a>.
+      </p>
+      <p>
+        We&apos;ll test vectors increasing in length from one element to one-hundred-thousand elements, by powers of ten. For each element, a pre-generated
+        random floating point number, we&apos;ll construct a hashmap of eighteen mathematical operations on that number (trig ops, logarithms, etc.) that the
+        JVM compiler oughtn&apos;t be able to optimize. To amplify the computation requirements, we&apos;ll make that hashmap five times for each element,
+        giving a total of ninety computations per element of the vector. We&apos;ll use the <a href="https://github.com/hugoduncan/criterium/">Criterium
+        benchmarking library</a> to measure the execution times of sixty repetitions of each condition. Benchmarks were run on a 64-CPU machine with 128 GiB of
+        memory (an Amazon Elastic Cloud Compute <code>c6i.16xlarge</code> instance). The <a href=
+        "https://github.com/util-linux/util-linux"><code>taskset</code></a> utility explicitly assigns the process affinity to exactly 1, 2, 4, 8, 16, 32, or
+        64 CPUs.
+      </p>
+      <p>
+        Overall, we observe that the execution times increase with increasing vector lengths. When the vector is short, the single-threaded transduction is
+        slightly faster. Once the vector grows to a few thousand elements, adding processors (i.e., more resources to compute a thread&apos;s task) decreases
+        the computation time, roughly proportional to the number of processors. Brokvolli&apos;s multi-threaded <code>transduce</code> and its companion
+        multi-threaded <code>transduce-kv</code> therefore offer improved performance when executing compute-heavy tasks on large quantities of elements in a
+        collection.
       </p>
     </div>
     <section>
       <h3 id="group-0">
         Ninety mathematical operations per element
       </h3>
+      <div>
+        <p>
+          This test performs the following mathematical operations per element: <em>cube root</em>, <em>ceiling</em>, <em>cosine</em>, <em>cubing</em>,
+          <em>decrement</em>, <em>natural exponentiation</em>, <em>exponentiation</em>, <em>floor</em>, <em>identity</em>, <em>increment</em>,
+          <em>logarithm</em>, <em>natural logarithm</em>, <em>multiply by π</em>, <em>negation</em>, <em>round</em>, <em>sine</em>, <em>square-root</em>, and
+          <em>tangent</em>. For each element, that group of operations was performed five times on jittered values of the elements (i.e., <code>(* 18 5) =&gt;
+          90</code> operations per vector element). The &quot;version&quot; labels in the chart legend correspond to the <code>taskset --cpu-list</code>
+          directives: <code>0-3</code> pins the benchmark to processors zero through three (i.e., four processors), <code>0-31</code> pins the benchmark to
+          processors zero through thirty-one (i.e., thirty-two processors), etc.
+        </p>
+        <p>
+          When the sample vector contains one hundred or fewer elements, the 1-processor benchmarks (a proxy for single-threaded <code>transduce</code>) runs
+          slightly faster (blue circles), likely due to the minimal overhead of managing the threads running on a single CPU. Above one thousand elements, the
+          multi-processor (i.e., &gt;1 CPU) tests demonstrate a speedup. For vectors containing ten- or one-hundred-thousand elements, the evaluation times
+          decrease with increasing numbers of processors/threads. (Note that the logarithmic scale may disguise the magnitude of the speedups; select the
+          &quot;Show details&quot; button to see the measured times).
+        </p>
+        <p>
+          Here&apos;s a rough summary of the speedups for one-hundred-thousand-element vectors.
+        </p>
+        <table>
+          <tr>
+            <th>
+              number<br>
+              of<br>
+              processors
+            </th>
+            <th>
+              speedup
+            </th>
+            <th>
+              naive<br>
+              expected<br>
+              speedup
+            </th>
+          </tr>
+          <tr>
+            <td>
+              1
+            </td>
+            <td>
+              1×
+            </td>
+            <td>
+              —
+            </td>
+          </tr>
+          <tr>
+            <td>
+              2
+            </td>
+            <td>
+              1.6×
+            </td>
+            <td>
+              80%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              4
+            </td>
+            <td>
+              3.7×
+            </td>
+            <td>
+              93%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              8
+            </td>
+            <td>
+              6.5×
+            </td>
+            <td>
+              75%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              16
+            </td>
+            <td>
+              11×
+            </td>
+            <td>
+              69%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              32
+            </td>
+            <td>
+              22×
+            </td>
+            <td>
+              69%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              64
+            </td>
+            <td>
+              24×
+            </td>
+            <td>
+              38%
+            </td>
+          </tr>
+        </table>
+        <p>
+          For this synthetic workload, recruiting up to thirty-two processors increased multi-threaded <code>transduce</code>&apos;s ability roughly
+          proportionately. Two CPUs could chew through same partitions 1.6×&nbsp;as fast as one CPU; four CPUs could do the job 3.7×&nbsp;as fast as one CPU,
+          etc. In general, the speedups are two-thirds to three-quarters times the number of CPUs. In other words, 8&nbsp;CPUs give us about a 6×&nbsp;speedup,
+          while 16&nbsp;CPUs give us about an 11×&nbsp;speedup.
+        </p>
+        <p>
+          An anomalous limit emerges somewhere between thirty-two (gold circles) and sixty-four (magenta diamonds) CPUs where the performance does not improve
+          proportionally. Investigating this phenomenon is beyond the scope of this report.
+        </p>
+      </div>
       <div>
         <h4 id="group-0-fexpr-0">
           (fn [n] (multi/transduce partition-at concatv xform-1 tconj (vecs n)))
@@ -246,7 +389,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 04.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 05.<span id="uuid"><br>
       280ceca6-1559-4e0c-b032-a92d85dc411e</span>
     </p>
   </body>

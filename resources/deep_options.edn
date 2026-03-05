@@ -33,10 +33,17 @@
 
  :preamble
  [:div
+  [:h2 "Do Brokvolli's "
+   [:code "transduce"]
+   " benchmarks change with a heavier per-element task?"]
+
+  [:p [:em "Observations: The multi-threaded variants' performance improvements
+ increase when the tasks are heavier."]]
+
   [:p "See also:"
    [:ul
     [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
-      "Main benchmarks"]]
+          "Main benchmarks"]]
     [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions.html"}
           "Addendum 2: Effect of partition size"]]
     [:li [:a {:href "https://blosavio.github.io/brokvolli/processors.html"}
@@ -45,39 +52,42 @@
   [:p "We'll define our benchmarks "
    [:a {:href "https://github.com/blosavio/brokvolli/blob/main/test/brokvolli/performance/deep.clj"}
     "here"]
-   ". For each function below, we'll test vectors of random floating point
- numbers, increasing in length from one to one-hundred-thousand, by powers of
- ten. For each number, We'll construct a hashmap of eighteen mathematical
- operations on that number (trig ops, logarithms, etc.) that the JVM compiler
- oughtn't be able to optimize. We'll use the "
+   ". For each of these functions,"
+   [:ul
+    [:li [:code "clojure.core/reduce"]]
+    [:li [:code "clojure.core/reduce-kv"]]
+    [:li [:code "clojure.core.reducers/fold"] " (multi-threaded)"]
+    [:li [:code "clojure.core/transduce"]]
+    [:li [:code "brokvolli.single/transduce-kv"]]
+    [:li [:code "brokvolli.multi/transduce"] " (multi-threaded)"]
+    [:li [:code "brokvolli.multi/transduce-kv"] " (multi-threaded)"]]
+   "We'll test vectors increasing in length from one element to
+ one-hundred-thousand elements, by powers of ten. For each element, a
+ pre-generated random floating point number, we'll construct a hashmap of
+ eighteen mathematical operations on that number (trig ops, logarithms, etc.)
+ that the JVM compiler oughtn't be able to optimize. We'll use the "
    [:a {:href "https://github.com/hugoduncan/criterium/"}
     "Criterium benchmarking library"]
    " to measure the execution times of sixty repetitions of each condition.
- Benchmarks were run on three pinned cores of my geriatric desktop computer."]
-
-  [:p "The functions under examination are as follows:"
-   [:ul
-    [:li [:p [:code "clojure.core/reduce"]]]
-    [:li [:p [:code "clojure.core/reduce-kv"]]]
-    [:li [:p [:code "clojure.core/transduce"]]]
-    [:li [:p [:code "brokvolli.single/transduce-kv"]]]
-    [:li [:p [:code "brokvolli.multi/transduce"]]]
-    [:li [:p [:code "brokvolli.multi/transduce-kv"]]]]]
+ Benchmarks were run on three explicitly-pinned cores of my geriatric desktop
+ computer."]
 
   [:p "Overall, we observe that the execution times increase with increasing
  vector lengths. The results are indistinguishable when the vector contains
- one-hundred or fewer elements. When the vectors grow longer the three
+ one-hundred or fewer elements. When the vectors grow longer, the three
  multi-threaded variants ("
    [:code "fold"]
    ", "
    [:code "multi/transduce"]
    ", and "
-   [:code "multi/transduce-kv"]
+   [:code "multi/transduce‑kv"]
    "), offer improvements that scale roughly with the number of processors. The
- other functions all perform very similarly. Not surprising, since they all
- ultimately delegate to the same underlying implementation, "
+ single-threaded functions all perform very similarly. Not surprising, since
+ they all ultimately delegate to the same underlying implementation, "
    [:code "reduce/reduce-kv"]
-   ". Unfortunately, my computer was not capable of handling one-million element vectors."]
+   ". Unfortunately, my computer was not capable of handling one-million element
+ vectors and I was compelled to stop measuring at one-hundred-thousand
+ elements."]
 
   [:p "As with the previous benchmarks, the multi-threaded functions appear to
  offer performance benefits over their single-threaded counterparts for large
@@ -94,12 +104,16 @@
     [:em "square-root"]
     ", "
     [:em "logarithm"]
-    ", etc. "]
+    ", "
+    [:a {:href "https://github.com/blosavio/brokvolli/blob/accd4a2f4fec60092beb6cff27a2d2414ed67033/test/brokvolli/performance/deep.clj#L37-L57"}
+     "etc"]
+    "."]
 
    [:p "Execution times increase with vector length. The single- and
  multi-threaded functions are indistinguishable for one-hundred elements or
  fewer. When the vectors grow larger than that, the multi-threaded variants
- demonstrate faster execution (i.e., lower times)."]]}
+ demonstrate faster execution (i.e., lower times), roughly by a factor of
+ two."]]}
 
  :chart-settings
  {"(fn [n] ((tactics-1 (project-version-lein)) (vecs n)))"
