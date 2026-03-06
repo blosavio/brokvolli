@@ -25,6 +25,14 @@
    [:br]]
 
   [:li
+   [:p "Chris Nuernberger's "
+    [:a {:href "https://github.com/cnuernber/ham-fisted"}
+     "ham-fisted"]]
+   [:p "Clojure-style immutable collections (and mutable counterparts), together
+ with some operations, all aimed at high performance."]
+   [:br]]
+
+  [:li
    [:p "Sebastian Fedrau's "
     [:a {:href "https://github.com/20centaurifux/pold"}
      "pold"]]

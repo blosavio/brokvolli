@@ -987,6 +987,14 @@
         </li>
         <li>
           <p>
+            Chris Nuernberger&apos;s <a href="https://github.com/cnuernber/ham-fisted">ham-fisted</a>
+          </p>
+          <p>
+            Clojure-style immutable collections (and mutable counterparts), together with some operations, all aimed at high performance.
+          </p><br>
+        </li>
+        <li>
+          <p>
             Sebastian Fedrau&apos;s <a href="https://github.com/20centaurifux/pold">pold</a>
           </p>
           <p>
