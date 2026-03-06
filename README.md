@@ -894,12 +894,12 @@
         additional overhead.
       </p>
       <p>
-        The multi-threaded transducing functions present a <a href="https://blosavio.github.io/chlog/transductions_performance.html">more</a> <a href=
-        "https://blosavio.github.io/chlog/deep_performance.html">nuanced</a> <a href=
-        "https://blosavio.github.io/chlog/partitions_performance.html">performance</a> <a href=
-        "https://blosavio.github.io/chlog/processors_performance.html">story</a>. Even though Brokvolli implements them with light-weight Fork/Join threads,
-        that additional machinery, plus the partitioning and combining, imposes non-negligible overhead. The multi-threaded variants almost always perform
-        slightly worse on collections with fewer than one-thousand elements, and almost always slightly worse when the per-element task is small (e.g.,
+        The multi-threaded transducing functions present a <a href="https://blosavio.github.io/brokvolli/transductions_performance.html">more</a> <a href=
+        "https://blosavio.github.io/brokvolli/deep_performance.html">nuanced</a> <a href=
+        "https://blosavio.github.io/brokvolli/partitions_performance.html">performance</a> <a href=
+        "https://blosavio.github.io/brokvolli/processors_performance.html">story</a>. Even though Brokvolli implements them with light-weight Fork/Join
+        threads, that additional machinery, plus the partitioning and combining, imposes non-negligible overhead. The multi-threaded variants almost always
+        perform slightly worse on collections with fewer than one-thousand elements, and almost always slightly worse when the per-element task is small (e.g.,
         incrementing a number).
       </p>
       <p>

@@ -18,13 +18,13 @@
       </p>
       <ul>
         <li>
-          <a href="https://blosavio.github.io/brokvolli/transductions.html">Main benchmarks</a>
+          <a href="https://blosavio.github.io/brokvolli/transductions_performance.html">Main benchmarks</a>
         </li>
         <li>
-          <a href="https://blosavio.github.io/brokvolli/deep.html">Addendum 1: Increased computations per element</a>
+          <a href="https://blosavio.github.io/brokvolli/deep_performance.html">Addendum 1: Increased computations per element</a>
         </li>
         <li>
-          <a href="https://blosavio.github.io/brokvolli/partitions.html">Addendum 2: Performance scaling with partitions</a>
+          <a href="https://blosavio.github.io/brokvolli/partitions_performance.html">Addendum 2: Performance scaling with partitions</a>
         </li>
       </ul>
       <p></p>
@@ -389,7 +389,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2026 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 05.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2026 March 06.<span id="uuid"><br>
       280ceca6-1559-4e0c-b032-a92d85dc411e</span>
     </p>
   </body>

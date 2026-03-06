@@ -10,16 +10,16 @@
   " sprinkling of additional overhead."]
 
  [:p "The multi-threaded transducing functions present a "
-  [:a {:href "https://blosavio.github.io/chlog/transductions_performance.html"}
+  [:a {:href "https://blosavio.github.io/brokvolli/transductions_performance.html"}
    "more"]
   " "
-  [:a {:href "https://blosavio.github.io/chlog/deep_performance.html"}
+  [:a {:href "https://blosavio.github.io/brokvolli/deep_performance.html"}
    "nuanced"]
   " "
-  [:a {:href "https://blosavio.github.io/chlog/partitions_performance.html"}
+  [:a {:href "https://blosavio.github.io/brokvolli/partitions_performance.html"}
    "performance"]
   " "
-  [:a {:href "https://blosavio.github.io/chlog/processors_performance.html"}
+  [:a {:href "https://blosavio.github.io/brokvolli/processors_performance.html"}
    "story"]
   ". Even though Brokvolli implements them with light-weight Fork/Join
  threads, that additional machinery, plus the partitioning and combining,

@@ -47,11 +47,11 @@
 
   [:p "See also:"
    [:ul
-    [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions_performance.html"}
           "Main benchmarks"]]
-    [:li [:a {:href "https://blosavio.github.io/brokvolli/deep.html"}
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/deep_performance.html"}
           "Addendum 1: Increased computations per element"]]
-    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions.html"}
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions_performance.html"}
           "Addendum 2: Performance scaling with partitions"]]]]
 
   [:p "Benchmarks defined "

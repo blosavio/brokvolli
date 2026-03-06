@@ -42,11 +42,11 @@
 
   [:p "See also:"
    [:ul
-    [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions.html"}
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/transductions_performance.html"}
           "Main benchmarks"]]
-    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions.html"}
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/partitions_performance.html"}
           "Addendum 2: Effect of partition size"]]
-    [:li [:a {:href "https://blosavio.github.io/brokvolli/processors.html"}
+    [:li [:a {:href "https://blosavio.github.io/brokvolli/processors_performance.html"}
           "Addendum 3: Performance scaling with processors"]]]]
 
   [:p "We'll define our benchmarks "
