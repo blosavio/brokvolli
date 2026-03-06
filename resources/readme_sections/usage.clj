@@ -66,7 +66,7 @@
   " is exactly the same."]
 
  [:pre
-  [:code "(transduce-kv " [:em "xform f coll"] ")"]
+  [:code "(transduce-kv " [:em "xform f      coll"] ")"]
   [:br]
   [:code "(transduce-kv " [:em "xform f init coll" ")"]]]
 
@@ -94,7 +94,7 @@
  example, we won't be using the key/index, so we can simply drop it."]
 
  [:p "One way to designate an intentionally-ignored function argument is with
- the underscore symbol, "
+ the underscore symbol, "
   [:code "_"]
   "."]
 
@@ -136,6 +136,12 @@
   [:br]
   (print-form-then-eval "(transduce-kv (map-kv inc-kv) tconj [11 22 33])")]
 
+ [:p "Now we've replicated "
+  [:code "transduce"]
+  "'s output with "
+  [:code "transduce-kv"]
+  "."]
+
  [:p "Let's extend our imaginary task: "
   [:em "Given a vector of numbers, increment each, retain only the evens, and
  stop after three."]
@@ -158,7 +164,7 @@
   [:code "filter"]
   " retains only the even results. Finally, "
   [:code "take"]
-  " stops the process after the prescribed count of elements."]
+  " stops the process after the prescribed three elements."]
 
  [:p "Again, we note that "
   [:code "inc"]
@@ -195,8 +201,8 @@
   " land, those inner mapping functions and predicates must handle two
  arguments. We made a special "
   [:code "inc-kv"]
-  " earlier, so let's make a special two-argument predicate for retaining evens
- that ignores the index."]
+  " earlier, so let's make a special two-argument predicate for retaining even
+ numbers while ignoring the index."]
 
  [:pre (print-form-then-eval "(def even?-kv (fn [_ element] (even? element)))")]
 
@@ -207,6 +213,8 @@
   ", isn't interested in the element's value; they consume only an integer
  argument. So we don't need to make special two-arg inner function for "
   [:code "take-kv"]
+  "; we merely supply it with a plain integer, "
+  [:code "3"]
   "."]
 
  [:p "Our "
@@ -222,7 +230,7 @@
  [:pre (print-form-then-eval
         "(transduce-kv xform-2 tconj [11 22 33 44 55 66 77 88 99])" 55 55)]
 
- [:p "Equivalent result to standard "
+ [:p "We see an equivalent result to standard "
   [:code "transduce"]
   ". That's encouraging."]
 
@@ -306,7 +314,7 @@
   [:code "tconj"]
   " conjoins the element. Once the index exceeds five, the entire transduction
  is stopped, considering no more elements. In this example, "
-  [:code "transduce"]
+  [:code "transduce-kv"]
   " never considers element "
   [:code "99"]
   "."]
@@ -343,9 +351,9 @@
 
  [:p "This principle holds for an expansive transduction as well. We can use "
   [:code "mapcat-kv"]
-  " with "
+  " with a "
   [:code "repeat"]
-  " to construct an expanding transducing stack."]
+  " inner function to construct an expanding transducing stack."]
 
  [:pre
   (print-form-then-eval "(require '[brokvolli.transducers-kv :refer [mapcat-kv]])")
@@ -354,8 +362,9 @@
   (print-form-then-eval "(transduce-kv (comp (mapcat-kv (fn [_ x] (repeat 3 x)))
                                              (map-kv (fn [idx x] {:index idx :x x}))) tconj [11 22 33])" 75 35)]
 
- [:p "Even though the transduction expanded from three elements to nine, each
- index reflects the location within the original, input collection."]
+ [:p "Even though the transduction expanded from three elements to nine, each "
+  [:code ":index"]
+  " reflects the location within the original, input collection."]
 
  [:h3 [:code "transduce-kv"] " and associative collections"]
 
@@ -398,10 +407,10 @@
  [:p "Finally, we need to assemble the results. Earlier, when we were discussing
  sequential collections, "
   [:code "conj"]
-  " (or its variants) served that role. Now, we're building up a hashmap, so we
- need a function that generates an empty hashmap, completes with an identity,
- and associates a key and a value to the accumulating hashmap. Such a function
- might look like this."]
+  " (or its variants) served that assembling role. Now, we're building up a
+ hashmap, so we need a function that generates an empty hashmap, completes with
+ an identity, and associates a key and a value to the accumulating hashmap. Such
+ a function might look like this."]
 
  [:pre [:code
         "(fn
@@ -452,11 +461,10 @@
 
  [:h3#kv-ize [:code "kv-ize"] ": a last resort"]
 
- [:p "Suppose someone handed us a transformer stack composed with no knowledge
- that "
+ [:p "Suppose someone with no knowledge that "
   [:code "transduce‑kv"]
-  " existed, and for some reason we wanted to plug in that stack without
- changing anything else. Brokvolli's "
+  " exists hands us a transformer stack, and for some reason we want to plug in
+ that stack without changing anything else. Brokvolli's "
   [:code "kv-ize"]
   "  utility wraps a transformer so that the key/index is diverted to a dynamic
  var, passing only the element. That way, the stack can be used as-is."]
@@ -469,9 +477,10 @@
 
  [:pre
   [:code "(transduce-kv (map inc) conj [11 22 33])"]
+  [:br]
   [:code
-   ";; Unhandled clojure.lang.ArityException
-  ;; Wrong number of args (2) passed to: clojure.core/inc"]]
+   ";; => Unhandled clojure.lang.ArityException
+;;    Wrong number of args (2) passed to: clojure.core/inc"]]
 
  [:p "However, that transformer, modified with "
   [:code "kv-ize"]
@@ -490,11 +499,16 @@
  [:pre
   (print-form-then-eval "(transduce-kv (kv-ize (map #(array-map :index *keydex* :value %))) conj [11 22 33])")]
 
- [:p "This usage is a hack, and really only should be used as a last resort
- when, for some reason out of our control, we can't adjust our transducing
- functions to handle keys/indexes."]
+ [:p "This "
+  [:code "kv-ize"]
+  " usage is a hack, and really only should be used as a last resort when, for
+ some reason out of our control, we can't adjust our transducing functions to
+ handle keys/indexes."]
 
- [:h3#multi-transduce "multi-threaded "[:code "transduce"] " & " [:code "transduce-kv"]]
+ [:h3#multi-transduce "multi-threaded "
+  [:code "transduce"]
+  " & "
+  [:code "transduce-kv"]]
 
  [:p "If we can arrange our job so that the operations on each element is
  completely independent of all the others, Brokvolli can perform a neat trick.
@@ -594,15 +608,15 @@
   [:code "C"]
   " are instances of "
   [:code "(xform f)"]
-  ", a transformer stack, "
+  ", a transformer stack "
   [:code "xform"]
-  ", wrapping a reducing function, "
+  " wrapping a reducing function "
   [:code "f"]
   ". Machine "
   [:code "D"]
   " is a "
   [:em "combining function"]
-  ", "
+  " "
   [:code "combine"]
   "."]
 
@@ -622,12 +636,12 @@
   [:code "transduce-kv"]
   ")."]
 
- [:p "While doing a different job, the combining function echoes the form
+ [:p "Even though it does a different job, the combining function echoes the
  reducing function. The zero-argument arity is invoked to create the initial
  value of the combining process, the one-argument arity is used for the
  completing step, and the two argument arity performs the combining the left and
- right chunks. (There is no analogous three-argument arity because the key/index
- is not used in the combining process.)"]
+ right chunks. There is no analogous three-argument arity because the key/index
+ is not used in the combining process."]
 
  [:p "That's a lot of words. Maybe a table is better."]
 
@@ -668,18 +682,20 @@
 
  [:p "We'll assign ourselves the standard job, incrementing a vector of
  numbers. Normally, the multi-threaded transducing functions would partition
- at about 512 elements, but for demonstration purposes, we'll specify three."]
+ at about 512 elements, but for demonstration purposes, we'll specify
+ partitioning at three elements."]
 
  [:p "We want to peel off an element and increment it. That's a job for a "
   [:code "map"]
   " transducer. Since we're using the non"
   [:code "-kv"]
-  " variant, we may use Clojure's off-the-shelf transducer and inner function."]
+  " variant, we may use Clojure's off-the-shelf transducer and inner
+ functions."]
 
  [:pre [:code "(map inc)"]]
 
  [:p "After incrementing, we want to conjoin the result onto the accumulator,
- a new vector private to that partition. We can use  "
+ a new vector, private to that partition. We can use  "
   [:code "conj"]
   " to provide the initial value (an empty vector), the completing function
  (identity), and the reducing function (conjoining the element)."]
@@ -689,7 +705,8 @@
   (print-form-then-eval "(conj [:foo :bar])") [:br]
   (print-form-then-eval "(conj [:foo :bar] :baz)")]
 
- [:p "Let's manually break apart the input vector and calculate the chunks."]
+ [:p "Let's manually break apart the input vector into chunks of three, two, and
+ three elements, and increment the elements of each chunk."]
 
  [:pre
   (print-form-then-eval "(transduce (map inc) conj [11 22 33])") [:br]
@@ -751,8 +768,9 @@
  [:pre (print-form-then-eval "(multi/transduce 3 concatv (map inc) conj [11 22 33 44 55 66 77 88])" 65 65)]
 
  [:p "On the surface, not too impressive: we did all the same work as regular,
- single-threaded transduce, but with extra arguments. Going to that trouble
- becomes "
+ single-threaded "
+  [:code "transduce"]
+  ", but with extra arguments. Going to that trouble becomes "
   [:a {:href "#performance"} "worth it"]
   " when the input collection grows large and when the per-element task is
  computationally expensive."]
@@ -856,7 +874,7 @@
   [:code "transduce-kv"]
   " and multi-threaded "
   [:code "transduce"]
-  ". The reducing function, "
+  ". The reducing function "
   [:code "f"]
   " and transformer stack "
   [:code "xform"]
@@ -906,15 +924,15 @@
   " ripped the elements like this."]
 
  [:pre
-           [:code "index   element   inc   result"] [:br]
+           [:code "index   element   inc   result"]    [:br]
   [:strong [:code "0       11        12    retained"]] [:br]
-           [:code "1       22        23    filtered"] [:br]
+           [:code "1       22        23    filtered"]  [:br]
   [:strong [:code "2       33        34    retained"]] [:br]
-           [:code "3       44        45    filtered"] [:br]
+           [:code "3       44        45    filtered"]  [:br]
   [:strong [:code "4       55        56    retained"]] [:br]
-           [:code "5       66        67    filtered"] [:br]
+           [:code "5       66        67    filtered"]  [:br]
   [:strong [:code "6       77        78    retained"]] [:br]
-           [:code "7       88        89    removed"] [:br]
+           [:code "7       88        89    removed"]   [:br]
            [:code "8       99        100   removed"]]
 
  [:p "Behind the scenes, "
@@ -981,35 +999,35 @@
    [:th "stateless"]
    [:th "stateful"]]
   [:tr
-   [:td "cat"]
-   [:td "dedupe"]]
+   [:td [:code "cat"]]
+   [:td [:code "dedupe"]]]
   [:tr
-   [:td "filter"]
-   [:td "distinct"]]
+   [:td [:code "filter"]]
+   [:td [:code "distinct"]]]
   [:tr
-   [:td "keep"]
-   [:td "drop"]]
+   [:td [:code "keep"]]
+   [:td [:code "drop"]]]
   [:tr
-   [:td "map"]
-   [:td "drop-while"]]
+   [:td [:code "map"]]
+   [:td [:code "drop-while"]]]
   [:tr
-   [:td "mapcat"]
-   [:td "interpose"]]
+   [:td [:code "mapcat"]]
+   [:td [:code "interpose"]]]
   [:tr
-   [:td "random-sample"]
-   [:td "partition-all"]]
+   [:td [:code "random-sample"]]
+   [:td [:code "partition-all"]]]
   [:tr
-   [:td "remove"]
-   [:td "partition-by"]]
+   [:td [:code "remove"]]
+   [:td [:code "partition-by"]]]
   [:tr
-   [:td "replace"]
-   [:td "take"]]
-  [:tr
-   [:td ""]
-   [:td "take-nth"]]
+   [:td [:code "replace"]]
+   [:td [:code "take"]]]
   [:tr
    [:td ""]
-   [:td "take-while"]]]
+   [:td [:code "take-nth"]]]
+  [:tr
+   [:td ""]
+   [:td [:code "take-while"]]]]
 
  [:p "Brokvolli's "
   [:code "-kv"]

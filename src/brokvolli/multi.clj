@@ -2,7 +2,14 @@
   "Multi-threaded variants of [`transduce`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/transduce)
   and [[brokvolli.single/transduce-kv]].
 
-  **Warning:** Use stateful transducers only with extreme caution."
+  **Warning:** Use stateful transducers only with extreme caution.
+
+  Rules of thumb for using multi-threaded transducing functions in this
+  namespace:
+
+  * Collections contain more than 100,000 elements.
+  * Per-element task involves more than ten computations.
+  * Partition threshold selected to induce at least ten partitions."
   (:refer-clojure :exclude [transduce])
   (:require
    [brokvolli.core]
